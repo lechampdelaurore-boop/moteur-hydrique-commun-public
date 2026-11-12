@@ -1,0 +1,204 @@
+{
+ "version": "0.1",
+ "date": "2026-11-07",
+ "source": "module OTF, fichier moteur v1.0 et code a9ea3e8",
+ "tolerance": 0.01,
+ "cas": [
+  {
+   "id": "O01",
+   "titre": "ETM : facteurs combinés",
+   "decision": "ETM (partie OTF)",
+   "statut": "écrit à la main d'après le fichier moteur v1.0, non exécuté",
+   "entrees": {
+    "et0": 5,
+    "kc": 1.0,
+    "abri": true,
+    "k_abri": 0.8,
+    "paillage": true,
+    "ombrage_taux": 0.36
+   },
+   "attendu": {
+    "plein_champ": 5.0,
+    "sous_abri": 4.0,
+    "sous_abri_paillage": 3.6,
+    "sous_abri_paillage_ombrage": 2.88
+   },
+   "note": "K_abri 0,8 ; K_paillage 0,9 ; K_ombrage = √(1 − 0,36) = 0,8."
+  },
+  {
+   "id": "O02",
+   "titre": "Sol : RFU de labo et cailloux",
+   "decision": "sol (§5)",
+   "statut": "écrit à la main d'après le fichier moteur v1.0, non exécuté",
+   "entrees": {
+    "rfu_labo_mm_par_m": 62,
+    "cailloux_pct": 18
+   },
+   "attendu": {
+    "rfu_sol_mm_par_m": 51
+   },
+   "note": "62 × 0,82 = 50,84, arrondi à 51."
+  },
+  {
+   "id": "O03",
+   "titre": "Capacité et seuil",
+   "decision": "seuil (MC-03)",
+   "statut": "écrit à la main d'après le fichier moteur v1.0, non exécuté",
+   "entrees": {
+    "rfu_sol": 51,
+    "profondeur_m": 0.3,
+    "p": 0.5,
+    "part_reference": 0.6666666666666666,
+    "seuil_ferme_pct": 50
+   },
+   "attendu": {
+    "capacite_mm": 15.3,
+    "seuil_selon_culture_mm": 3.825,
+    "seuil_ferme_mm": 7.65,
+    "RU_mm": 22.95,
+    "RAW_mm": 11.475
+   },
+   "note": "Valeurs non arrondies ; comparer avec la tolérance de 0,01, n'arrondir qu'à l'affichage. RAW = capacité − seuil = 15,3 − 3,825 = 11,475 mm = p × RU."
+  },
+  {
+   "id": "O04",
+   "titre": "Journalier : plancher, la remontée repart de 0",
+   "decision": "plancher (MC-02)",
+   "statut": "écrit à la main d'après le fichier moteur v1.0, non exécuté",
+   "entrees": {
+    "capacite": 15.3,
+    "jour1": {
+     "etat_veille": 3,
+     "conso": 5,
+     "pluie": 0
+    },
+    "jour2": {
+     "conso": 0,
+     "pluie": 4
+    }
+   },
+   "attendu": {
+    "etat_fin_jour1": 0,
+    "etat_fin_jour2": 4
+   },
+   "note": "Le déficit de 2 mm du jour 1 n'est pas retenu : sans plancher (Tlaloc), le jour 2 donnerait un état de 2 mm. Même cas en manque Dr (MC-04) : Dr = capacité − état, soit 12,3 ; 15,3 (plancher) ; 11,3.",
+   "attendu_en_manque_Dr": {
+    "Dr_veille": 12.3,
+    "Dr_fin_jour1": 15.3,
+    "Dr_fin_jour2": 11.3
+   }
+  },
+  {
+   "id": "O05",
+   "titre": "Jour d'une observation à midi",
+   "decision": "observation (§6.1)",
+   "statut": "écrit à la main d'après le fichier moteur v1.0, non exécuté",
+   "entrees": {
+    "capacite": 15.3,
+    "observation_pct": 60,
+    "heure": "12:00",
+    "duree_jour_h": 24,
+    "conso": 5,
+    "pluie": 4
+   },
+   "attendu": {
+    "etat_apres_observation": 9.18,
+    "fraction": 0.5,
+    "etat_fin": 8.68
+   },
+   "note": "Pluie et consommation ×0,5 ; 9,18 + 2 − 2,5 = 8,68."
+  },
+  {
+   "id": "O06",
+   "titre": "Changement de capacité : le % du plein est conservé",
+   "decision": "capacité (§6.3)",
+   "statut": "écrit à la main d'après le fichier moteur v1.0 §6.4 ; code non relu ligne à ligne",
+   "entrees": {
+    "etat": 9.18,
+    "capacite_avant": 15.3,
+    "capacite_apres": 30
+   },
+   "attendu": {
+    "etat_apres": 18.0,
+    "etat_apres_conservation_pourcent": 18.0,
+    "etat_apres_conservation_manque": 23.88,
+    "pourcent_du_plein_apres_conservation_manque": 79.6
+   },
+   "note": "60 % de 15,3 = 9,18 mm ; 60 % de 30 = 18 mm. Variante Tlaloc (conservation = manque) : le manque de 6,12 mm reste 6,12 mm, soit un état de 23,88 mm = 79,6 % du plein (relecture de Nicolas, 8 novembre)."
+  },
+  {
+   "id": "O07",
+   "titre": "Jour inconnu puis redémarrage par remplissage",
+   "decision": "jour inconnu (§6.4)",
+   "statut": "écrit à la main d'après `restart: 'inflow'` ; relu par Nicolas le 8 novembre",
+   "entrees": {
+    "capacite": 15.3,
+    "jour1": {
+     "et0": null
+    },
+    "jour2": {
+     "apports": 16
+    }
+   },
+   "attendu": {
+    "etat_jour1": null,
+    "etat_jour2": 15.3,
+    "drainage_jour2": null
+   },
+   "note": "Jour 1 : état inconnu. Jour 2 : apports 16 ≥ capacité 15,3 → plein. Le drainage du jour 2 est inconnu (null) : l'état de la veille l'est, donc l'excès aussi. « Inconnu, jamais zéro »."
+  },
+  {
+   "id": "O08",
+   "titre": "Pénurie : surface mouillée inconnue",
+   "decision": "surface inconnue (§7)",
+   "statut": "cible, pas le comportement actuel d'OTF",
+   "entrees": {
+    "planches": [
+     "A (surface connue)",
+     "B (aspersion sans passe-pied)"
+    ],
+    "budget_m3": 10
+   },
+   "attendu": {
+    "B": "à part, raison « surface mouillée inconnue »",
+    "A": "partage calculé sans compter B"
+   },
+   "note": "Comportement CIBLE. Le code actuel compte 0 m³ pour B (défaut connu, à corriger en 3.9)."
+  },
+  {
+   "id": "O09",
+   "titre": "Sol nu : évaporation de surface",
+   "decision": "sol nu (§6)",
+   "statut": "écrit à la main d'après le fichier moteur v1.0, non exécuté",
+   "entrees": {
+    "TEW": 14,
+    "REW": 7,
+    "De_veille": 10,
+    "et0": 5,
+    "k_abri": 1,
+    "part_etat": 1,
+    "fraction": 1
+   },
+   "attendu": {
+    "Kr": 0.57,
+    "E_mm": 3.43
+   },
+   "note": "E = 1 × 0,571 × 1,2 × 5 = 3,43 ≤ TEW − De = 4."
+  },
+  {
+   "id": "O10",
+   "titre": "Eau arrosée en trop (journalier)",
+   "decision": "eau perdue (§6)",
+   "statut": "écrit à la main d'après le fichier moteur v1.0, non exécuté",
+   "entrees": {
+    "drainage": 6,
+    "pluie": 4,
+    "irrigation": 6
+   },
+   "attendu": {
+    "eau_perdue": 3.6
+   },
+   "note": "6 × 6/10 = 3,6 mm."
+  }
+ ]
+}

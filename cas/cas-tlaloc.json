@@ -1,0 +1,234 @@
+{
+ "version": "0.1.1",
+ "date": "2026-11-08",
+ "source": "Tlaloc v184, implémentation de référence ref-tlaloc.mjs",
+ "cas": [
+  {
+   "id": "T01",
+   "titre": "Journée sèche, aucun apport",
+   "decision": "bilan",
+   "entrees": {
+    "Dr0": 5,
+    "etc": 4,
+    "taw": 60
+   },
+   "attendu": {
+    "Dr": 9,
+    "perteIrrigation": 0,
+    "drainagePluie": 0
+   },
+   "note": "Dr = Dr0 + ETc. Même résultat en journalier."
+  },
+  {
+   "id": "T02",
+   "titre": "Arrosage de 6 mm à 6 h, sol à 2 mm de manque",
+   "decision": "pas de temps (MC-04)",
+   "entrees": {
+    "Dr0": 2,
+    "etc": 4.8,
+    "taw": 60,
+    "apports": [
+     {
+      "f": 0.25,
+      "mm": 6,
+      "type": "irrigation"
+     }
+    ]
+   },
+   "attendu": {
+    "Dr_horaire": 3.6,
+    "perte_horaire": 2.8,
+    "Dr_journalier": 0.8,
+    "perte_journalier": 0
+   },
+   "note": "À 6 h, le manque n'est que de 2 + 1,2 = 3,2 mm : 2,8 mm partent sous les racines. En journalier, la consommation du jour compense : aucune perte. C'est l'écart le plus important entre les deux modes."
+  },
+  {
+   "id": "T03",
+   "titre": "Pluie utile de 20 mm à 15 h, manque de 10 mm",
+   "decision": "eau perdue",
+   "entrees": {
+    "Dr0": 10,
+    "etc": 3,
+    "taw": 60,
+    "apports": [
+     {
+      "f": 0.625,
+      "mm": 20,
+      "type": "pluie"
+     }
+    ]
+   },
+   "attendu": {
+    "Dr": 1.13,
+    "perteIrrigation": 0,
+    "drainagePluie": 8.13
+   },
+   "note": "L'excès de pluie draine, mais n'est jamais compté comme eau arrosée en trop."
+  },
+  {
+   "id": "T04",
+   "titre": "Averse : 2, 30 puis 3 mm en trois heures",
+   "decision": "pluie utile (MC-05)",
+   "entrees": {
+    "heures": [
+     2,
+     30,
+     3
+    ]
+   },
+   "attendu": {
+    "Pe_jeuTlaloc": 25.5,
+    "ruissellement_jeuTlaloc": 7.5,
+    "Pe_jeuOTF": 35
+   },
+   "note": "Jeu Tlaloc : 50 % de ce qui dépasse 15 mm/h ruisselle, 2 mm interceptés. Jeu OTF : pluie brute."
+  },
+  {
+   "id": "T05",
+   "titre": "Pluie prévue de 8 mm, modèles en désaccord puis d'accord",
+   "decision": "pluie utile (MC-05)",
+   "entrees": {
+    "prevue": 8,
+    "modeles_desaccord": [
+     8,
+     0,
+     3
+    ],
+    "modeles_accord": [
+     8,
+     6,
+     7
+    ]
+   },
+   "attendu": {
+    "Pe_desaccord_Tlaloc": 2,
+    "Pe_sure_Tlaloc": 3.8,
+    "Pe_OTF": 8
+   },
+   "note": "Jeu Tlaloc : 50 % − 2 mm, ou 80 % du plus faible − 1 mm si tous les modèles annoncent au moins 1 mm. Jeu OTF : R2 = 100 %."
+  },
+  {
+   "id": "T06",
+   "titre": "6 jours secs (ETc 5 mm), puis 15 mm de pluie ; RU 48 mm, RFU de labo 32 mm",
+   "decision": "plancher (MC-02)",
+   "entrees": {
+    "Dr0": 30,
+    "etc": 5,
+    "taw": 48,
+    "plancher_OTF": 32
+   },
+   "attendu": {
+    "Dr_secTlaloc": 48,
+    "Dr_secOTF": 32,
+    "Dr_apresPluieTlaloc": 33,
+    "Dr_apresPluieOTF": 17
+   },
+   "note": "Sans plancher (Tlaloc), le déficit au-delà de la RFU de labo est gardé : après la pluie, il manque encore 33 mm. Avec plancher (OTF), la jauge est remontée à 17 mm."
+  },
+  {
+   "id": "T07",
+   "titre": "Part facile p ajustée à la chaleur",
+   "decision": "p (à trancher)",
+   "entrees": {
+    "pTab": 0.4,
+    "etc": [
+     2,
+     5,
+     7,
+     12
+    ]
+   },
+   "attendu": {
+    "p_etc2": 0.52,
+    "p_etc5": 0.4,
+    "p_etc7": 0.32,
+    "p_etc12": 0.12
+   },
+   "note": "Option ; désactivée, p reste celui du tableau (jeu OTF)."
+  },
+  {
+   "id": "T08",
+   "titre": "Test du poing « Correct » (50–75 % de RU)",
+   "decision": "observation poing (option)",
+   "entrees": {
+    "calcul_RU": [
+     40,
+     60
+    ],
+    "incertitude_RU": 15,
+    "erreurLecture": 8
+   },
+   "attendu": {
+    "mu_si_calcul40": 54.73,
+    "sd_si_calcul40": 8.66,
+    "mu_si_calcul60": 61.62,
+    "sd_si_calcul60": 8.89
+   },
+   "note": "Si le calcul est déjà dans la classe (60 %), il bouge peu ; s'il est dehors (40 %), il est ramené vers elle sans sauter au centre (62,5 %)."
+  },
+  {
+   "id": "T09",
+   "titre": "Trois prises notées dans l'heure : Correct, Correct, Sec",
+   "decision": "observation poing (option)",
+   "entrees": {
+    "calcul_RU": 40,
+    "incertitude_RU": 15
+   },
+   "attendu": {
+    "mu": 51.75,
+    "sd": 5.43
+   },
+   "note": "Les prises à moins de 60 min d'écart comptent ensemble : la vraisemblance est le produit des trois."
+  },
+  {
+   "id": "T10",
+   "titre": "Consommation apprise après le relevé de T08 (calcul à 40 %)",
+   "decision": "consommation apprise (option)",
+   "entrees": {
+    "taw": 60,
+    "DrAvant": 36,
+    "DrApres": 27.161104168904874,
+    "consoDepuisAncrage": 20,
+    "kf0": 1
+   },
+   "attendu": {
+    "kf": 0.91
+   },
+   "note": "Le relevé dit plus humide que le calcul : la consommation est revue à la baisse, d'une part du décalage (0,3 × ce que le relevé apprend), bornée à ± 15 % par relevé, de 0,6 à 1,6 au total."
+  },
+  {
+   "id": "T11",
+   "titre": "Tensiomètre à 30 kPa, seuils 10 et 60 kPa, RAW 20 mm",
+   "decision": "observation tensiomètre",
+   "entrees": {
+    "T": 30,
+    "bas": 10,
+    "haut": 60,
+    "raw": 20
+   },
+   "attendu": {
+    "Dr": 10.4,
+    "Dr_5kPa": 2,
+    "Dr_80kPa": 21
+   },
+   "note": "Correspondance linéaire de Tlaloc, à caler sur les relevés (Watermark) : point ouvert."
+  },
+  {
+   "id": "T12",
+   "titre": "Journée sans débordement : horaire et journalier égaux",
+   "decision": "pas de temps (MC-04)",
+   "entrees": {
+    "Dr0": 20,
+    "etc": 4,
+    "irrigation": 5,
+    "pluie": 3
+   },
+   "attendu": {
+    "Dr_horaire": 16,
+    "Dr_journalier": 16
+   },
+   "note": "Condition pour « résultats identiques » : aucun apport n'arrive sur un sol plein dans la journée. Sinon, le contrat doit dire lequel des deux fait foi pour le jeu OTF (proposition : le journalier, ordre « tout le jour en une fois »)."
+  }
+ ]
+}
