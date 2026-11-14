@@ -1,14 +1,14 @@
 {
- "version": "0.1",
- "date": "2026-11-07",
- "source": "module OTF, fichier moteur v1.0 et code a9ea3e8",
+ "version": "0.2",
+ "date": "2026-11-14",
+ "source": "module OTF, fichier moteur v1.0 et code a9ea3e8 ; exécutés le 14 novembre 2026 sur le code du module (commit 360a73e) par scripts/shared-engine-cases.ts (D-116)",
  "tolerance": 0.01,
  "cas": [
   {
    "id": "O01",
    "titre": "ETM : facteurs combinés",
    "decision": "ETM (partie OTF)",
-   "statut": "écrit à la main d'après le fichier moteur v1.0, non exécuté",
+   "statut": "exécuté sur le code OTF le 14 novembre 2026 (commit 360a73e du module), conforme",
    "entrees": {
     "et0": 5,
     "kc": 1.0,
@@ -29,7 +29,7 @@
    "id": "O02",
    "titre": "Sol : RFU de labo et cailloux",
    "decision": "sol (§5)",
-   "statut": "écrit à la main d'après le fichier moteur v1.0, non exécuté",
+   "statut": "exécuté sur le code OTF le 14 novembre 2026 (commit 360a73e du module), conforme",
    "entrees": {
     "rfu_labo_mm_par_m": 62,
     "cailloux_pct": 18
@@ -43,7 +43,7 @@
    "id": "O03",
    "titre": "Capacité et seuil",
    "decision": "seuil (MC-03)",
-   "statut": "écrit à la main d'après le fichier moteur v1.0, non exécuté",
+   "statut": "exécuté sur le code OTF le 14 novembre 2026 (commit 360a73e du module), conforme",
    "entrees": {
     "rfu_sol": 51,
     "profondeur_m": 0.3,
@@ -58,13 +58,13 @@
     "RU_mm": 22.95,
     "RAW_mm": 11.475
    },
-   "note": "Valeurs non arrondies ; comparer avec la tolérance de 0,01, n'arrondir qu'à l'affichage. RAW = capacité − seuil = 15,3 − 3,825 = 11,475 mm = p × RU."
+   "note": "Valeurs non arrondies ; comparer avec la tolérance de 0,01, n'arrondir qu'à l'affichage. RAW = capacité − seuil = 15,3 − 3,825 = 11,475 mm = p × RU. La RU et la RAW ne sont pas des grandeurs du code OTF : déduites de ses sorties (capacité ÷ part de référence ; capacité − seuil)."
   },
   {
    "id": "O04",
    "titre": "Journalier : plancher, la remontée repart de 0",
    "decision": "plancher (MC-02)",
-   "statut": "écrit à la main d'après le fichier moteur v1.0, non exécuté",
+   "statut": "exécuté sur le code OTF le 14 novembre 2026 (commit 360a73e du module), conforme",
    "entrees": {
     "capacite": 15.3,
     "jour1": {
@@ -81,7 +81,7 @@
     "etat_fin_jour1": 0,
     "etat_fin_jour2": 4
    },
-   "note": "Le déficit de 2 mm du jour 1 n'est pas retenu : sans plancher (Tlaloc), le jour 2 donnerait un état de 2 mm. Même cas en manque Dr (MC-04) : Dr = capacité − état, soit 12,3 ; 15,3 (plancher) ; 11,3.",
+   "note": "Le déficit de 2 mm du jour 1 n'est pas retenu : sans plancher (Tlaloc), le jour 2 donnerait un état de 2 mm. Même cas en manque Dr (MC-04) : Dr = capacité − état, soit 12,3 ; 15,3 (plancher) ; 11,3. Le manque Dr n'est pas tenu par le code OTF : déduit de ses sorties (capacité − état).",
    "attendu_en_manque_Dr": {
     "Dr_veille": 12.3,
     "Dr_fin_jour1": 15.3,
@@ -92,7 +92,7 @@
    "id": "O05",
    "titre": "Jour d'une observation à midi",
    "decision": "observation (§6.1)",
-   "statut": "écrit à la main d'après le fichier moteur v1.0, non exécuté",
+   "statut": "exécuté sur le code OTF le 14 novembre 2026 (commit 360a73e du module), conforme",
    "entrees": {
     "capacite": 15.3,
     "observation_pct": 60,
@@ -112,7 +112,7 @@
    "id": "O06",
    "titre": "Changement de capacité : le % du plein est conservé",
    "decision": "capacité (§6.3)",
-   "statut": "écrit à la main d'après le fichier moteur v1.0 §6.4 ; code non relu ligne à ligne",
+   "statut": "exécuté sur le code OTF le 14 novembre 2026 (commit 360a73e du module), conforme",
    "entrees": {
     "etat": 9.18,
     "capacite_avant": 15.3,
@@ -130,7 +130,7 @@
    "id": "O07",
    "titre": "Jour inconnu puis redémarrage par remplissage",
    "decision": "jour inconnu (§6.4)",
-   "statut": "écrit à la main d'après `restart: 'inflow'` ; relu par Nicolas le 8 novembre",
+   "statut": "exécuté sur le code OTF le 14 novembre 2026 (commit 360a73e du module) ; corrigé : drainage_jour2 valait null",
    "entrees": {
     "capacite": 15.3,
     "jour1": {
@@ -143,33 +143,35 @@
    "attendu": {
     "etat_jour1": null,
     "etat_jour2": 15.3,
-    "drainage_jour2": null
+    "drainage_jour2": 0.7
    },
-   "note": "Jour 1 : état inconnu. Jour 2 : apports 16 ≥ capacité 15,3 → plein. Le drainage du jour 2 est inconnu (null) : l'état de la veille l'est, donc l'excès aussi. « Inconnu, jamais zéro »."
+   "note": "Jour 1 : état inconnu. Jour 2 : apports 16 ≥ capacité 15,3 → plein. Jeu OTF : le drainage du jour 2 vaut apports − capacité = 0,7 mm, compté depuis la capacité, sans la consommation ni l'état de la veille, inconnus ; c'est un minimum (le vrai drainage est au moins de 0,7 mm). La version 0.1 écrivait null : le code OTF compte 0,7 mm, et la pastille « eau arrosée en trop » le lit quand l'apport est un arrosage. Un autre jeu peut le dire inconnu (paramètre)."
   },
   {
    "id": "O08",
    "titre": "Pénurie : surface mouillée inconnue",
    "decision": "surface inconnue (§7)",
-   "statut": "cible, pas le comportement actuel d'OTF",
+   "statut": "exécuté sur le code OTF le 14 novembre 2026 (commit 360a73e du module), conforme : comportement actuel d'OTF depuis la correction du point 63 (D-097)",
    "entrees": {
     "planches": [
-     "A (surface connue)",
-     "B (aspersion sans passe-pied)"
+     "31 planches A (surface connue)",
+     "1 planche B (aspersion sans passe-pied)"
     ],
-    "budget_m3": 10
+    "besoin_mm_par_planche": 20,
+    "surface_mouillee_m2_par_planche": 16,
+    "budget_m3": 5
    },
    "attendu": {
     "B": "à part, raison « surface mouillée inconnue »",
     "A": "partage calculé sans compter B"
    },
-   "note": "Comportement CIBLE. Le code actuel compte 0 m³ pour B (défaut connu, à corriger en 3.9)."
+   "note": "Version 0.1 : budget 10 m³ sans besoins ni surfaces ; sur la ferme d'essai d'OTF, 10 m³ couvrent la demande connue (9,92 m³) : pas de pénurie. Version 0.2 : 32 planches à 20 mm sur 16 m², budget 5 m³, demande connue 31 × 0,32 = 9,92 m³ > 5 : pénurie ; B hors du partage (motif « volume inconnu en pénurie »), jamais comptée 0 m³."
   },
   {
    "id": "O09",
    "titre": "Sol nu : évaporation de surface",
    "decision": "sol nu (§6)",
-   "statut": "écrit à la main d'après le fichier moteur v1.0, non exécuté",
+   "statut": "exécuté sur le code OTF le 14 novembre 2026 (commit 360a73e du module), conforme",
    "entrees": {
     "TEW": 14,
     "REW": 7,
@@ -183,13 +185,13 @@
     "Kr": 0.57,
     "E_mm": 3.43
    },
-   "note": "E = 1 × 0,571 × 1,2 × 5 = 3,43 ≤ TEW − De = 4."
+   "note": "E = 1 × 0,571 × 1,2 × 5 = 3,43 ≤ TEW − De = 4. Kr n'est pas rendu par le code OTF : déduit de E (E ÷ (part × 1,2 × ET0 × K_abri × fraction), E n'étant pas bornée)."
   },
   {
    "id": "O10",
    "titre": "Eau arrosée en trop (journalier)",
    "decision": "eau perdue (§6)",
-   "statut": "écrit à la main d'après le fichier moteur v1.0, non exécuté",
+   "statut": "exécuté sur le code OTF le 14 novembre 2026 (commit 360a73e du module), conforme",
    "entrees": {
     "drainage": 6,
     "pluie": 4,
@@ -199,6 +201,226 @@
     "eau_perdue": 3.6
    },
    "note": "6 × 6/10 = 3,6 mm."
+  }
+ ],
+ "cas_limites_note": "Cas limites du contrat de fusion (§ 5), jeu OTF ; sol de 51 mm/m, culture à 30 cm, capacité 15,3 mm, plein champ sauf mention, jours de 24 heures (juin 2026).",
+ "cas_limites": [
+  {
+   "id": "L1",
+   "titre": "Jour inconnu puis remplissage",
+   "decision": "jour inconnu (MC-22)",
+   "statut": "écrit pour le script des cas de test du module (contrat docs/shared-engine-cases-contract.md, D-116), exécuté sur le code OTF le 14 novembre 2026 (commit 360a73e), conforme",
+   "entrees": {
+    "jour1": {
+     "observation_pct": 100,
+     "heure": "00:00",
+     "etm": 3,
+     "pluie": 0
+    },
+    "jour2": {
+     "etm": 3,
+     "pluie": null
+    },
+    "jour3": {
+     "etm": 3,
+     "pluie": 10
+    },
+    "jour4": {
+     "etm": 3,
+     "pluie": 20
+    }
+   },
+   "attendu": {
+    "jour1_etat": 12.3,
+    "jour2_etat": null,
+    "jour2_raison": "pluie manquante",
+    "jour3_etat": null,
+    "jour3_raison": "pluie manquante",
+    "jour4_etat": 15.3,
+    "jour4_depart": "apport"
+   },
+   "note": "10 mm < capacité : la jauge reste inconnue ; 20 mm ≥ capacité : elle repart pleine à la fin du jour."
+  },
+  {
+   "id": "L2",
+   "titre": "Observation à midi, arrosages avant et après",
+   "decision": "observation (§6.1)",
+   "statut": "écrit pour le script des cas de test du module (contrat docs/shared-engine-cases-contract.md, D-116), exécuté sur le code OTF le 14 novembre 2026 (commit 360a73e), conforme",
+   "entrees": {
+    "observation_pct": 50,
+    "heure": "12:00",
+    "etm": 4,
+    "pluie": 0,
+    "arrosages": [
+     {
+      "de": "08:00",
+      "a": "09:00",
+      "mm": 10
+     },
+     {
+      "de": "18:00",
+      "a": "19:00",
+      "mm": 5
+     }
+    ]
+   },
+   "attendu": {
+    "fraction": 0.5,
+    "depart": 7.65,
+    "irrigation_comptee": 5,
+    "etat_fin": 10.65
+   },
+   "note": "Seul l'arrosage après l'observation compte ; 7,65 + 5 − 4 × 0,5 = 10,65."
+  },
+  {
+   "id": "L3",
+   "titre": "Changement de capacité par le stade (hausse), % du plein conservé",
+   "decision": "conservation pourcent (MC-11)",
+   "statut": "écrit pour le script des cas de test du module (contrat docs/shared-engine-cases-contract.md, D-116), exécuté sur le code OTF le 14 novembre 2026 (commit 360a73e), conforme",
+   "entrees": {
+    "jour1": {
+     "observation_pct": 60,
+     "heure": "00:00",
+     "profondeur_m": 0.3,
+     "etm": 0
+    },
+    "jour2": {
+     "profondeur_m": 0.6,
+     "etm": 0
+    }
+   },
+   "attendu": {
+    "jour1_etat": 9.18,
+    "jour2_capacite": 30.6,
+    "jour2_depart": 18.36,
+    "jour2_etat": 18.36
+   }
+  },
+  {
+   "id": "L3 bis",
+   "titre": "Changement de capacité par le stade (baisse), % du plein conservé",
+   "decision": "conservation pourcent (MC-11)",
+   "statut": "écrit pour le script des cas de test du module (contrat docs/shared-engine-cases-contract.md, D-116), exécuté sur le code OTF le 14 novembre 2026 (commit 360a73e), conforme",
+   "entrees": {
+    "jour1": {
+     "observation_pct": 60,
+     "heure": "00:00",
+     "profondeur_m": 0.6,
+     "etm": 0
+    },
+    "jour2": {
+     "profondeur_m": 0.3,
+     "etm": 0
+    }
+   },
+   "attendu": {
+    "jour1_etat": 18.36,
+    "jour2_depart": 9.18
+   }
+  },
+  {
+   "id": "L4",
+   "titre": "Arrosage proposé un jour prévu",
+   "decision": "natures d'arrosage (partie OTF §2)",
+   "statut": "écrit pour le script des cas de test du module (contrat docs/shared-engine-cases-contract.md, D-116), exécuté sur le code OTF le 14 novembre 2026 (commit 360a73e), conforme",
+   "entrees": {
+    "aujourdhui": true,
+    "observation_pct": 100,
+    "heure": "00:00",
+    "etm": 4,
+    "pluie": 0,
+    "arrosages": [
+     {
+      "nature": "proposed",
+      "mm": 3
+     },
+     {
+      "nature": "planned",
+      "mm": 2
+     }
+    ]
+   },
+   "attendu": {
+    "nature": "prévu",
+    "irrigation": 5,
+    "etat_fin": 15.3,
+    "drainage": 1
+   }
+  },
+  {
+   "id": "L5",
+   "titre": "Abri sans pluie",
+   "decision": "pluie (partie OTF §6.6)",
+   "statut": "écrit pour le script des cas de test du module (contrat docs/shared-engine-cases-contract.md, D-116), exécuté sur le code OTF le 14 novembre 2026 (commit 360a73e), conforme",
+   "entrees": {
+    "abri": true,
+    "jour1": {
+     "observation_pct": 100,
+     "heure": "00:00",
+     "etm": 2,
+     "pluie_pluviometre": 20
+    },
+    "jour2": {
+     "etm": 2,
+     "pluie": null
+    }
+   },
+   "attendu": {
+    "jour1_pluie_comptee": 0,
+    "jour1_etat": 13.3,
+    "jour2_etat": 11.3,
+    "jour2_raison": null
+   },
+   "note": "Sous abri, la pluie vaut 0 et n'est pas lue : un jour sans pluie enregistrée ne rend pas la jauge inconnue."
+  },
+  {
+   "id": "L6",
+   "titre": "ET0 hors bornes",
+   "decision": "ETM (partie OTF §3)",
+   "statut": "écrit pour le script des cas de test du module (contrat docs/shared-engine-cases-contract.md, D-116), exécuté sur le code OTF le 14 novembre 2026 (commit 360a73e), conforme",
+   "entrees": {
+    "et0": [
+     12,
+     12.5,
+     -0.1
+    ],
+    "kc": 1
+   },
+   "attendu": {
+    "et0_12": "calculée",
+    "et0_12_5": "jour bloqué, message qui nomme l'ET0",
+    "et0_moins_0_1": "jour bloqué, message qui nomme l'ET0",
+    "jauge_etat": null,
+    "jauge_raison": "bloqué"
+   },
+   "note": "Bornes comprises : 0 ≤ ET0 ≤ 12 mm/j."
+  },
+  {
+   "id": "L7",
+   "titre": "Plancher atteint puis pluie",
+   "decision": "plancher (MC-02)",
+   "statut": "écrit pour le script des cas de test du module (contrat docs/shared-engine-cases-contract.md, D-116), exécuté sur le code OTF le 14 novembre 2026 (commit 360a73e), conforme",
+   "entrees": {
+    "jour0_etat": 2,
+    "jour1": {
+     "etm": 5,
+     "pluie": 0
+    },
+    "jour2": {
+     "etm": 5,
+     "pluie": 0
+    },
+    "jour3": {
+     "etm": 1,
+     "pluie": 3
+    }
+   },
+   "attendu": {
+    "jour1_etat": 0,
+    "jour2_etat": 0,
+    "jour3_etat": 2
+   },
+   "note": "Rien du déficit n'est retenu sous le plancher."
   }
  ]
 }
