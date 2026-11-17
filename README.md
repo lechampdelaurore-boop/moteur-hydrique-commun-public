@@ -8,6 +8,7 @@ Dépôt commun à François (module d'irrigation OTF) et Nicolas (Tlaloc). Le bu
 - `docs/sources/proposition-tlaloc-v0.1.md` : proposition de Nicolas (7 novembre 2026).
 - `docs/sources/moteur-otf-v1.0.md` : description du moteur d'OTF (commit 64c2e87).
 - `docs/contrat-moteur.md` : ébauche du contrat côté Tlaloc (v0.1.1).
+- `docs/contrat-moteur-fusionne.md` : **contrat fusionné v0.2** (structure, jeux de réglages, décisions MC-16 à MC-33) ; les formules restent dans les deux contrats ci-dessous.
 - `docs/contrat-moteur-partie-otf.md` : partie OTF du contrat (v0.1) et corrections de glossaire proposées.
 - `cas/cas-tlaloc.json`, `cas/cas-otf.json` : cas de test chiffrés de chaque côté.
 - `docs/ref-tlaloc/` : implémentation de référence de Tlaloc (sert à calculer les sorties attendues ; `node docs/ref-tlaloc/cas.mjs` réécrit `cas/cas-tlaloc.json`).
