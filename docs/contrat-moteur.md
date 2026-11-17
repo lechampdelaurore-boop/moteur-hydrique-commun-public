@@ -1,6 +1,6 @@
 # Contrat du moteur hydrique commun : ébauche côté Tlaloc
 
-Version 0.1.1, 8 novembre 2026 (0.1 du 7 novembre ; journal au § 12). Rédigée par Nicolas (Tlaloc) avec Claude, pour le dépôt commun.
+Version 0.1.2, 17 novembre 2026 (0.1 du 7 novembre ; journal au § 12). Rédigée par Nicolas (Tlaloc) avec Claude, pour le dépôt commun.
 
 **Ce que couvre cette ébauche** :
 - le glossaire ;
@@ -324,3 +324,4 @@ Fichier : `cas/cas-tlaloc.json`. Chaque cas contient les entrées, la sortie att
 |---|---|---|---|
 | 0.1 | 2026-11-07 | Nicolas (Tlaloc), avec Claude | Ébauche. |
 | 0.1.1 | 2026-11-08 | Nicolas (Tlaloc), avec Claude | Vocabulaire de la partie OTF § 1 : RU, RFU de labo, RAW (« RFU » n'est plus employé pour p × RU) ; numérotation MC-xx ; § 4.4 jours voisins = avant seulement (MC-14) ; § 11 point 7 tranché (MC-15) ; chemin des cas de test. **Aucune valeur de cas ne change.** |
+| 0.1.2 | 2026-11-17 | Nicolas (Tlaloc), avec Claude | Cas T01 à T12 exécutés sur le vrai code de Tlaloc v458 (test `tests/moteur-commun/moteur-commun-T.mjs` du dépôt Tlaloc) : tous conformes à 0,01 près ; statut ajouté à chaque cas dans `cas/cas-tlaloc.json` (v0.2), avec les précisions sur T03, T10 et T11. **Aucune valeur attendue ne change.** |
