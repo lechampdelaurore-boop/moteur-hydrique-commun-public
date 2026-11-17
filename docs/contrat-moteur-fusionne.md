@@ -35,6 +35,8 @@ Partie qui change par rapport à Tlaloc § 9 ; le reste du tableau reste celui d
 | p ajusté à la chaleur | **non** | oui | MC-21 |
 | « % du plein » se rapporte à | capacité suivie (RFU de labo × profondeur) ; conversion côté OTF ; incertitude après observation 0,05 × RU | non utilisé | MC-22 |
 | Jour inconnu | état « inconnu » jusqu'au remplissage ou à une observation | moyenne des 3 jours connus précédents (MC-14) + incertitude | MC-23 |
+| `drainage_au_redemarrage` | `depuis_capacite` | `inconnu` | MC-32 |
+| Bassinage court (10 min ou moins) : part comptée | 1 | 0,25 | MC-34 |
 | K_abri par défaut | 0,8 (MC-06) | 0,7 | inchangé |
 | Pluie prévue / pluie sûre | 100 % / non | 50 % / oui | inchangé (MC-05) |
 | Association sur une planche | max (MC-10) | moyenne | inchangé |
@@ -55,7 +57,9 @@ Partie qui change par rapport à Tlaloc § 9 ; le reste du tableau reste celui d
 | MC-24 | Kc du CRIIAM : rien ne change ; la question de l'ETP est posée au CRIIAM par François | 8 |
 | MC-25 | Répartition : François et Claude écrivent moteur et adaptateur OTF ; Nicolas relit et branche Tlaloc | 9 |
 | MC-26 | Gouvernance : semver (un résultat qui change = majeure), réponse sous 7 jours, publication par celui qui fusionne après relecture de l'autre | 10 |
-| MC-27 | Étapes 0 et 1 d'abord ; moteur et adaptateur en Opus 5.5 · Max quand la place de code est libre ; aucune date promise | 11 |
+| MC-34 | Bassinage dans le moteur : type d'événement « bassinage » avec un coefficient d'efficacité (0,25 pour 10 min ou moins dans le jeu Tlaloc, 1 dans le jeu OTF : aucun résultat OTF ne change) ; la part non comptée n'entre pas dans la réserve et ne compte ni en drainage ni en eau perdue (tranché par Nicolas le 15/11, accepté par François le 17/11) | § 5 point 3 |
+| MC-35 | Tensiomètre : côté Tlaloc ; l'option reste dans le moteur, désactivée dans le jeu OTF (MC-20) ; la conversion de Shock (1998) viendra par une PR de Nicolas (accepté par François le 17/11) | § 5 point 4 |
+| MC-27 | Étapes 0 et 1 d'abord ; moteur et adaptateur quand la place de code est libre ; aucune date promise | 11 |
 
 MC-25 et MC-26 : **acceptées par Nicolas le 16/11** (« d'accord avec les points 1 à 5 »). MC-27 : aucune date promise.
 
@@ -93,12 +97,12 @@ MC-31 à MC-33 (numéros donnés par cette PR) : voir § 5 points 8 et 4 bis (ba
 
 ## 5. Ce qui reste à écrire ou trancher avant la v1.0
 
-1. [À FAIRE] **Exécuter les cas** O01 à O10 sur le code OTF réel et corriger le contrat là où la main s'est trompée ; ajouter les cas limites listés au § 5 du contrat de fusion. Fait côté OTF le 14/11 : 17 cas conformes, O07 et O08 corrigés (cas v0.2, PR n° 3).
+1. [FAIT] **Exécuter les cas** O01 à O10 sur le code OTF réel et corriger le contrat là où la main s'est trompée ; ajouter les cas limites listés au § 5 du contrat de fusion. Fait côté OTF le 14/11 : 17 cas conformes, O07 et O08 corrigés (cas v0.2, PR n° 3). Côté Tlaloc, T01 à T12 exécutés sur le vrai code (v421 puis v458), tous conformes (PR n° 5).
 2. [À FAIRE] Compléter les durées de stade et jeux de saison (partie OTF § 4, déjà marqués non relus) : utile seulement pour la phase suivante (module Kc).
-3. [À TRANCHER avec Nicolas] Bassinage court sous serre compté à 25 % : dans le moteur ou dans la décision (Tlaloc § 11, point 6).
-4. [À TRANCHER avec Nicolas] Calage du tensiomètre : sans objet chez OTF, relève de Tlaloc.
+3. [TRANCHÉ : MC-34] Bassinage court sous serre : dans le moteur, avec coefficient d'efficacité (0,25 Tlaloc, 1 OTF).
+4. [TRANCHÉ : MC-35] Calage du tensiomètre : côté Tlaloc, désactivé chez OTF.
 5. [À TRANCHER] Origine de l'objectif rejoué sur le banc (ETM proposée adoptée chaque lundi, D-065) ; recommandation : cette origine, dite avec les résultats. Agronomique : à François quand le banc arrive.
-6. [À FAIRE] Vérifier que les contrats sources et ce document ne se contredisent pas : le glossaire de Tlaloc § 11 point 1 (« résultats identiques ») est à reformuler comme dans leur proposition, le jeu OTF journalier reproduit OTF à l'identique.
+6. [FAIT côté Tlaloc, PR n° 5 : § 11 de `contrat-moteur.md` mis à jour ; à relire côté OTF] Vérifier que les contrats sources et ce document ne se contredisent pas : le glossaire de Tlaloc § 11 point 1 (« résultats identiques ») est à reformuler comme dans leur proposition, le jeu OTF journalier reproduit OTF à l'identique.
 7. Réponse du CRIIAM sur l'ETP (message envoyé par François le 14/11) : **reçue le 16/11** (capture transmise par François). Faits rapportés : (a) le CRIIAM calcule son ETP avec la formule FAO (Penman-Monteith) ; (b) ses Kc ont été établis avec d'autres formules d'ETP, sont jugés « pas très précis », et ne sont pas corrigés selon la formule d'ETP utilisée ; le coefficient de correction n'est pas connu ; (c) Météo-France n'utilise Penman-Monteith FAO-56 que depuis mars-mai 2026 (avant : Penman ou Penman-Monteith selon les produits) ; ses stations, très dégagées (aéroports), donnent souvent des ETP plus élevées que des stations de bord de parcelle ; (d) pour le CRIIAM, l'ETM ne donne qu'une indication, la précision vient des sondes. **Conséquence pour la phase 1 : aucune** (Kc et ETM hors du moteur, MC-17, MC-23). [À TRANCHER par François, agronomique, PR « Kc » à part] : faut-il une correction des Kc du CRIIAM selon la source d'ET0 d'OTF (Open-Meteo, Visual Crossing), et la comparaison ETP/ET0 sur une saison prévue à la question 8 reste-t-elle utile ? Rien n'est décidé.
 
 8. [TRANCHÉ par François le 16/11 à 17 h 56 : les deux acceptées, **MC-31 (nature `borne_basse`) et MC-32 (paramètre `drainage_au_redemarrage`)** ; proposé par Nicolas le 16/11 en approuvant la PR n° 3 du dépôt commun] **Drainage au redémarrage (O07)** : les 0,7 mm sont un minimum que rien ne signale dans la sortie. Proposition : (a) une nature `borne_basse` sur ce drainage (MC-09 appliquée aux minimums) ; (b) un paramètre `drainage_au_redemarrage` : `depuis_capacite` (jeu OTF, comportement actuel, marqué borne basse) ou `inconnu` (jeu Tlaloc). Recommandation : accepter les deux ; rien ne change dans le chiffre affiché chez OTF.
@@ -107,6 +111,7 @@ MC-31 à MC-33 (numéros donnés par cette PR) : voir § 5 points 8 et 4 bis (ba
 
 | Version | Date | Ce qui change |
 |---|---|---|
+| 0.2.1 | 2026-11-17 | MC-34 (bassinage) et MC-35 (tensiomètre) ; table des réglages : `drainage_au_redemarrage` et bassinage court ; § 5 points 1, 3, 4, 6 mis à jour ; MC-27 sans mention d'outil. Aucune formule ni valeur de cas ne change. |
 | 0.2 | 2026-11-16 | Publication de la v0.2 : MC-17 à MC-30 inscrites, MC-25 et MC-26 acceptées par Nicolas, MC-31 et MC-32 (borne basse, drainage au redémarrage), MC-33 (ET0 du banc), réponse du CRIIAM (§ 5 point 7). Aucune formule ni valeur de cas ne change. |
 | 0.2.1 brouillon | 2026-11-14 | Réponse de Nicolas, tickets 1 et 2 ; MC-16 de Nicolas conservé, mes décisions renumérotées MC-17 à MC-27 ; MC-28 à MC-30 proposées. |
 | 0.2 brouillon | 2026-11-14 | Structure fusionnée, jeux de réglages à jour, MC-17 à MC-27. Aucune formule recopiée. |
