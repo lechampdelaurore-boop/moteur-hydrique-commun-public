@@ -308,12 +308,12 @@ Fichier : `cas/cas-tlaloc.json`. Chaque cas contient les entrées, la sortie att
 
 ## 11. Points à trancher
 
-1. § 4.2 : sens exact de « résultats identiques » (proposition : le jeu OTF en journalier reproduit OTF à l'identique).
-2. § 4.4 : que devient l'état après un jour sans ET0 ou sans pluie connue (le jeu Tlaloc reste à valider ; « jours voisins » = avant seulement, MC-14).
-3. § 6 : p ajusté à la chaleur, en option ou non.
-4. § 7.2 : à quoi se rapporte « % du plein », et l'incertitude après cette observation.
-5. § 7.3 : calage du tensiomètre (Watermark) sur des relevés.
-6. Bassinages courts sous serre comptés en partie : dans le moteur (efficacité d'application) ou dans la décision.
+1. ~~§ 4.2 : sens exact de « résultats identiques »~~ : tranché, le jeu OTF en journalier reproduit OTF à 0,01 mm près (non-régression) ; le 1 % ne sert qu'à comparer les deux moteurs au banc **[MC-29, MC-30]**.
+2. ~~§ 4.4 : état après un jour sans ET0 ou sans pluie connue~~ : tranché, jeu OTF « inconnu » jusqu'au remplissage ou à une observation **[MC-23]** ; jeu Tlaloc : moyenne des 3 derniers jours connus avant, avec incertitude **[MC-14]**.
+3. ~~§ 6 : p ajusté à la chaleur~~ : tranché, option, activée dans le jeu Tlaloc, désactivée dans le jeu OTF **[MC-21]**.
+4. ~~§ 7.2 : « % du plein »~~ : tranché, capacité suivie, incertitude 0,05 × RU (jeu OTF) ; non utilisé dans le jeu Tlaloc **[MC-22]**.
+5. § 7.3 : calage du tensiomètre (Watermark) : **côté Tlaloc** (Nicolas, ticket n° 1, 15/11) ; l'option reste dans le moteur, désactivée dans le jeu OTF (MC-20) ; la conversion de Shock (1998) avec correction de température remplacera la conversion linéaire par une PR de Nicolas **[numéro à donner : MC-35 proposé]**.
+6. Bassinages courts sous serre : **dans le moteur** (Nicolas, ticket n° 1, 15/11), type d'événement « bassinage » avec un coefficient d'efficacité : 0,25 pour 10 min ou moins (jeu Tlaloc), 1 (jeu OTF, aucun résultat ne change) ; la part non comptée n'entre pas dans la réserve et ne compte ni en drainage ni en eau perdue **[numéro à donner : MC-34 proposé]**.
 7. ~~Ordre des apports à la même heure~~ : tranché, pluie d'abord puis arrosage **[MC-15]**.
 
 ---
@@ -324,4 +324,4 @@ Fichier : `cas/cas-tlaloc.json`. Chaque cas contient les entrées, la sortie att
 |---|---|---|---|
 | 0.1 | 2026-11-07 | Nicolas (Tlaloc), avec Claude | Ébauche. |
 | 0.1.1 | 2026-11-08 | Nicolas (Tlaloc), avec Claude | Vocabulaire de la partie OTF § 1 : RU, RFU de labo, RAW (« RFU » n'est plus employé pour p × RU) ; numérotation MC-xx ; § 4.4 jours voisins = avant seulement (MC-14) ; § 11 point 7 tranché (MC-15) ; chemin des cas de test. **Aucune valeur de cas ne change.** |
-| 0.1.2 | 2026-11-17 | Nicolas (Tlaloc), avec Claude | Cas T01 à T12 exécutés sur le vrai code de Tlaloc v458 (test `tests/moteur-commun/moteur-commun-T.mjs` du dépôt Tlaloc) : tous conformes à 0,01 près ; statut ajouté à chaque cas dans `cas/cas-tlaloc.json` (v0.2), avec les précisions sur T03, T10 et T11. **Aucune valeur attendue ne change.** |
+| 0.1.2 | 2026-11-17 | Nicolas (Tlaloc), avec Claude | Cas T01 à T12 exécutés sur le vrai code de Tlaloc v458 (test `tests/moteur-commun/moteur-commun-T.mjs` du dépôt Tlaloc) : tous conformes à 0,01 près ; statut ajouté à chaque cas dans `cas/cas-tlaloc.json` (v0.2), avec les précisions sur T03, T10 et T11 ; § 11 mis à jour avec les décisions MC-14 à MC-30 et les réponses de Nicolas du 15/11 (bassinage, tensiomètre). **Aucune valeur attendue ne change.** |
