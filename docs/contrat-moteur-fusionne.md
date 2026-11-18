@@ -57,9 +57,10 @@ Partie qui change par rapport à Tlaloc § 9 ; le reste du tableau reste celui d
 | MC-24 | Kc du CRIIAM : rien ne change ; la question de l'ETP est posée au CRIIAM par François | 8 |
 | MC-25 | Répartition : François et Claude écrivent moteur et adaptateur OTF ; Nicolas relit et branche Tlaloc | 9 |
 | MC-26 | Gouvernance : semver (un résultat qui change = majeure), réponse sous 7 jours, publication par celui qui fusionne après relecture de l'autre | 10 |
+| MC-27 | Étapes 0 et 1 d'abord ; moteur et adaptateur quand la place de code est libre ; aucune date promise | 11 |
 | MC-34 | Bassinage dans le moteur : type d'événement « bassinage » avec un coefficient d'efficacité (0,25 pour 10 min ou moins dans le jeu Tlaloc, 1 dans le jeu OTF : aucun résultat OTF ne change) ; la part non comptée n'entre pas dans la réserve et ne compte ni en drainage ni en eau perdue (tranché par Nicolas le 15/11, accepté par François le 17/11) | § 5 point 3 |
 | MC-35 | Tensiomètre : côté Tlaloc ; l'option reste dans le moteur, désactivée dans le jeu OTF (MC-20) ; la conversion de Shock (1998) viendra par une PR de Nicolas (accepté par François le 17/11) | § 5 point 4 |
-| MC-27 | Étapes 0 et 1 d'abord ; moteur et adaptateur quand la place de code est libre ; aucune date promise | 11 |
+| MC-36 | Banc d'essai allégé : 3 saisons représentatives au lieu de toutes ; **une saison = une année de maraîchage entière (environ de début janvier à fin décembre), pas seulement l'été** ; 3 saisons = 3 années complètes (une sèche, une humide, une moyenne), choisies ensemble avec les données disponibles ; le banc passe après la Tranche 4 d'OTF s'il traîne ; MC-30 et MC-33 inchangées (accepté par Nicolas le 18/11, issue n° 7 ; proposé par François le 17/11) | § 4 bis, § 5 point 5 |
 
 MC-25 et MC-26 : **acceptées par Nicolas le 16/11** (« d'accord avec les points 1 à 5 »). MC-27 : aucune date promise.
 
@@ -111,7 +112,8 @@ MC-31 à MC-33 (numéros donnés par cette PR) : voir § 5 points 8 et 4 bis (ba
 
 | Version | Date | Ce qui change |
 |---|---|---|
+| 0.2.2 | 2026-11-18 | MC-36 (banc allégé, définition de la saison) ; MC-34 et MC-35 remises après MC-27 au § 4 ; ancienne ligne « 0.2.1 brouillon » renommée « 0.1.9 brouillon ». Aucune formule ni valeur de cas ne change. |
 | 0.2.1 | 2026-11-17 | MC-34 (bassinage) et MC-35 (tensiomètre) ; table des réglages : `drainage_au_redemarrage` et bassinage court ; § 5 points 1, 3, 4, 6 mis à jour ; MC-27 sans mention d'outil. Aucune formule ni valeur de cas ne change. |
 | 0.2 | 2026-11-16 | Publication de la v0.2 : MC-17 à MC-30 inscrites, MC-25 et MC-26 acceptées par Nicolas, MC-31 et MC-32 (borne basse, drainage au redémarrage), MC-33 (ET0 du banc), réponse du CRIIAM (§ 5 point 7). Aucune formule ni valeur de cas ne change. |
-| 0.2.1 brouillon | 2026-11-14 | Réponse de Nicolas, tickets 1 et 2 ; MC-16 de Nicolas conservé, mes décisions renumérotées MC-17 à MC-27 ; MC-28 à MC-30 proposées. |
+| 0.1.9 brouillon | 2026-11-14 | Réponse de Nicolas, tickets 1 et 2 ; MC-16 de Nicolas conservé, mes décisions renumérotées MC-17 à MC-27 ; MC-28 à MC-30 proposées. |
 | 0.2 brouillon | 2026-11-14 | Structure fusionnée, jeux de réglages à jour, MC-17 à MC-27. Aucune formule recopiée. |
