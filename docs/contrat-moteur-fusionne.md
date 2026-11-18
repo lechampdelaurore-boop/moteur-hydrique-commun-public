@@ -111,6 +111,7 @@ MC-31 à MC-33 (numéros donnés par cette PR) : voir § 5 points 8 et 4 bis (ba
 
 | Version | Date | Ce qui change |
 |---|---|---|
+| 0.2.2 brouillon | 2026-11-18 | Côté Tlaloc : le pas de calcul MC-29 écrit en module autonome (`src/pas-horaire.ts`, `docs/pas-horaire.md`), avec 18 tests. Le jeu journalier reproduit OTF à 0,01 mm près. Aucune formule ni valeur de cas ne change. |
 | 0.2.1 | 2026-11-17 | MC-34 (bassinage) et MC-35 (tensiomètre) ; table des réglages : `drainage_au_redemarrage` et bassinage court ; § 5 points 1, 3, 4, 6 mis à jour ; MC-27 sans mention d'outil. Aucune formule ni valeur de cas ne change. |
 | 0.2 | 2026-11-16 | Publication de la v0.2 : MC-17 à MC-30 inscrites, MC-25 et MC-26 acceptées par Nicolas, MC-31 et MC-32 (borne basse, drainage au redémarrage), MC-33 (ET0 du banc), réponse du CRIIAM (§ 5 point 7). Aucune formule ni valeur de cas ne change. |
 | 0.2.1 brouillon | 2026-11-14 | Réponse de Nicolas, tickets 1 et 2 ; MC-16 de Nicolas conservé, mes décisions renumérotées MC-17 à MC-27 ; MC-28 à MC-30 proposées. |
