@@ -2,7 +2,7 @@
 
 Dépôt commun à François (module d'irrigation OTF) et Nicolas (Tlaloc). Le but : un seul moteur de calcul de l'eau (consommation des cultures, état du sol, drainage, eau perdue, projection), enrichi à deux. Chaque logiciel garde sa propre couche de décision.
 
-**État : phase contrat. Aucun code pour l'instant.** Licence : PolyForm Shield 1.0.0 (voir `LICENSE` et `NOTICE`).
+**État : phase contrat. Premier code : le pas de calcul horaire et journalier (`src/pas-horaire.ts`, MC-29).** Licence : PolyForm Shield 1.0.0 (voir `LICENSE` et `NOTICE`).
 
 ## Contenu
 - `docs/sources/proposition-tlaloc-v0.1.md` : proposition de Nicolas (7 novembre 2026).
@@ -12,6 +12,7 @@ Dépôt commun à François (module d'irrigation OTF) et Nicolas (Tlaloc). Le bu
 - `docs/contrat-moteur-partie-otf.md` : partie OTF du contrat (v0.1) et corrections de glossaire proposées.
 - `cas/cas-tlaloc.json`, `cas/cas-otf.json` : cas de test chiffrés de chaque côté.
 - `docs/ref-tlaloc/` : implémentation de référence de Tlaloc (sert à calculer les sorties attendues ; `node docs/ref-tlaloc/cas.mjs` réécrit `cas/cas-tlaloc.json`).
+- `src/pas-horaire.ts`, `tests/pas-horaire.test.ts`, `docs/pas-horaire.md` : le pas de calcul d'un jour, en mode horaire (jeu Tlaloc) et journalier (jeu OTF), MC-29. Tests : `node --test --experimental-strip-types tests/pas-horaire.test.ts`.
 - `docs/sources/comparaison-kc-gel-tlaloc-otf.md` : comparaison des Kc (CRIIAM, FAO-56, Tlaloc) et des seuils de gel (fiche FRAB), document de travail côté Tlaloc.
 
 ## Règle pour ne rien écrire de contradictoire
