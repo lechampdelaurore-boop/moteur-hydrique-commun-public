@@ -645,7 +645,9 @@ test('Pluie utile : mêmes résultats que la référence de Tlaloc, jeux Tlaloc 
     proche(t.ruissellement_mm, rt.ruissellement, 'ruissellement, Tlaloc');
     proche(M.pluieUtileMesuree(heures, OTF.pluie).utile_mm, REF.pluieUtileMesuree(heures, { interception: 0, seuilRuiss: 15, partRuiss: 0 }).Pe, 'mesurée, OTF');
     const total = heures.reduce((s, h) => s + h, 0);
-    proche(M.pluieUtileDuJour(total, TLALOC.pluie).utile_mm, Math.max(0, total - 2), 'total du jour, Tlaloc : interception seule');
+    // Choix 1 (tranché par Nicolas) : dans le jeu Tlaloc, un total du jour ruisselle comme une seule heure de pluie, comme Tlaloc.
+    proche(M.pluieUtileDuJour(total, TLALOC.pluie).utile_mm, REF.pluieUtileMesuree([total], { interception: 2, seuilRuiss: 15, partRuiss: 0.5 }).Pe, 'total du jour, Tlaloc : une seule heure');
+    proche(M.pluieUtileDuJour(total, { ...TLALOC.pluie, ruissellement_sans_heure: false }).utile_mm, Math.max(0, total - 2), 'total du jour, Tlaloc sans le réglage : interception seule');
     proche(M.pluieUtileDuJour(total, OTF.pluie).utile_mm, total, 'total du jour, OTF');
     const prevue = hasard() * 20;
     const modeles = hasard() < 0.2 ? null : Array.from({ length: Math.floor(hasard() * 4) }, () => hasard() * 10);
@@ -658,6 +660,23 @@ test('Pluie utile : mêmes résultats que la référence de Tlaloc, jeux Tlaloc 
   assert.equal(M.pluieUtile({ type: 'heures', heures: [] }, TLALOC.pluie).utile_mm, 0);
   assert.throws(() => M.pluieUtileDuJour(-1, OTF.pluie), RangeError);
   assert.throws(() => M.pluieUtilePrevue(3, [2, -1], TLALOC.pluie), RangeError);
+});
+
+test('Pluie sans heure (choix 1) : dans le jeu Tlaloc, un total du jour ruisselle comme une seule heure, à 15 h', () => {
+  // 30 mm d'un coup : ruissellement (30 − 15) × 0,5 = 7,5 ; interception 2 ; utiles 30 − 7,5 − 2 = 20,5 (Nicolas, PR n° 11).
+  const trente = (jeu: JeuDeReglages) => suivre({ etat_initial: { dr_mm: 40, dmax_mm: 100 }, jours: [jour(0, { sol: solRU(100), pluie: { type: 'jour', mm: 30 } })] }, jeu)[0];
+  const tlaloc = trente(TLALOC);
+  proche(tlaloc.pluie_mm, 20.5, 'Tlaloc : pluie utile');
+  proche(tlaloc.dr_mm, 40 - 20.5, 'Tlaloc : manque du soir');
+  const sansReglage = trente({ ...TLALOC, pluie: { ...TLALOC.pluie, ruissellement_sans_heure: false } });
+  proche(sansReglage.pluie_mm, 28, 'Tlaloc sans le réglage : interception seule');
+  // OTF : ni ruissellement ni interception, quel que soit le réglage (sans effet chez lui).
+  proche(trente(OTF).pluie_mm, 30, 'OTF');
+  proche(trente({ ...OTF, pluie: { ...OTF.pluie, ruissellement_sans_heure: true } }).pluie_mm, 30, 'OTF, réglage forcé');
+  // Mesurée heure par heure, la même pluie étalée sur trois heures ne ruisselle pas : 30 − 2 = 28.
+  const etalee = suivre({ etat_initial: { dr_mm: 40, dmax_mm: 100 }, jours: [jour(0, { sol: solRU(100), pluie: { type: 'heures', heures: [10, 10, 10].map((mm, h) => ({ instant: a(D0, 14 + h), mm })) } })] }, TLALOC)[0];
+  proche(etalee.pluie_mm, 28, 'Tlaloc : mesurée heure par heure');
+  assert.throws(() => M.verifierJeu({ ...TLALOC, pluie: { ...TLALOC.pluie, ruissellement_sans_heure: undefined as unknown as boolean } }), RangeError);
 });
 
 test('Entrées et jeux mal formés : refusés (erreur de programme), jamais lus comme 0', () => {

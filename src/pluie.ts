@@ -6,8 +6,9 @@
  *   heure par heure, l'interception une fois par jour, et le rapport
  *   pluie utile / pluie brute s'applique à chaque heure (§ 5.1) ;
  * - `jour` : un total du jour sans heure (pluviomètre, réanalyse, prévision
- *   enregistrée d'un jour passé chez OTF) ; sans heures, pas de
- *   ruissellement : seule l'interception est retirée ;
+ *   enregistrée d'un jour passé chez OTF) ; il ruisselle comme une seule heure
+ *   de pluie si le jeu le dit (`ruissellement_sans_heure`, comme Tlaloc),
+ *   sinon seule l'interception est retirée ;
  * - `prevue` : la prévision ; part prévue (R2 chez OTF) puis interception,
  *   et la règle de la pluie sûre si le jeu l'active (§ 5.2).
  *
@@ -58,10 +59,15 @@ export function pluieUtileMesuree(heures_mm: readonly number[], r: ReglagesPluie
   return retirerInterception(brute, ruissellement, r);
 }
 
-/** Total du jour sans heure : pas de ruissellement (il se compte heure par heure), l'interception seule. */
+/**
+ * Total du jour sans heure : comme une seule heure de pluie si le jeu le dit
+ * (`ruissellement_sans_heure`, choix 1, comme Tlaloc) ; sinon pas de
+ * ruissellement (il se compte heure par heure), l'interception seule.
+ */
 export function pluieUtileDuJour(mm: number, r: ReglagesPluie): PluieUtile {
   verifierMm(mm, 'pluie du jour');
   if (mm <= 0) return { brute_mm: 0, ruissellement_mm: 0, interception_mm: 0, utile_mm: 0 };
+  if (r.ruissellement_sans_heure) return pluieUtileMesuree([mm], r);
   return retirerInterception(mm, 0, r);
 }
 

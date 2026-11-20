@@ -1,4 +1,4 @@
-/* Moteur hydrique commun (OTF et Tlaloc) v0.2.0. Licence PolyForm Shield 1.0.0 (LICENSE, NOTICE).
+/* Moteur hydrique commun (OTF et Tlaloc) v0.3.0. Licence PolyForm Shield 1.0.0 (LICENSE, NOTICE).
    Types du module ES, construits depuis src/ par scripts/construire.mjs : ne pas les modifier à la main. */
 /**
  * La pluie utile (contrat Tlaloc § 5, MC-05 ; partie OTF § 2 et § 6 point 6).
@@ -8,8 +8,9 @@
  *   heure par heure, l'interception une fois par jour, et le rapport
  *   pluie utile / pluie brute s'applique à chaque heure (§ 5.1) ;
  * - `jour` : un total du jour sans heure (pluviomètre, réanalyse, prévision
- *   enregistrée d'un jour passé chez OTF) ; sans heures, pas de
- *   ruissellement : seule l'interception est retirée ;
+ *   enregistrée d'un jour passé chez OTF) ; il ruisselle comme une seule heure
+ *   de pluie si le jeu le dit (`ruissellement_sans_heure`, comme Tlaloc),
+ *   sinon seule l'interception est retirée ;
  * - `prevue` : la prévision ; part prévue (R2 chez OTF) puis interception,
  *   et la règle de la pluie sûre si le jeu l'active (§ 5.2).
  *
@@ -46,7 +47,11 @@ export type PluieUtile = {
 };
 /** § 5.1 : pluie mesurée heure par heure. */
 export declare function pluieUtileMesuree(heures_mm: readonly number[], r: ReglagesPluie): PluieUtile;
-/** Total du jour sans heure : pas de ruissellement (il se compte heure par heure), l'interception seule. */
+/**
+ * Total du jour sans heure : comme une seule heure de pluie si le jeu le dit
+ * (`ruissellement_sans_heure`, choix 1, comme Tlaloc) ; sinon pas de
+ * ruissellement (il se compte heure par heure), l'interception seule.
+ */
 export declare function pluieUtileDuJour(mm: number, r: ReglagesPluie): PluieUtile;
 /** § 5.2 : pluie prévue, avec la règle de la pluie sûre si le jeu l'active. */
 export declare function pluieUtilePrevue(prevue_mm: number, modeles: readonly number[] | null | undefined, r: ReglagesPluie): PluieUtile & {

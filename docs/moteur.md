@@ -55,6 +55,7 @@ Un jeu est un objet figé. Pour changer une valeur pour une ferme (R2 chez OTF),
 | `pluie` : interception, ruissellement | 0 ; aucun | 2 mm par jour ; au-delà de 15 mm/h, la moitié | MC-05 |
 | `pluie` : part de la prévue, pluie sûre | 1 (R2) ; non | 0,5 ; oui | MC-05 |
 | `pluie.f_sans_heure` | 15 h (sans effet en journalier) | 15 h | contrat Tlaloc § 4.1 |
+| `pluie.ruissellement_sans_heure` | non (sans effet : aucun ruissellement) | oui : un total du jour ruisselle comme une seule heure de pluie (30 mm : 20,5 utiles) | choix 1, tranché par Nicolas (PR n° 11) |
 | `p_ajuste_chaleur` | non | oui | MC-21 |
 | `jour_inconnu` | `inconnu` | `moyenne_3_jours` | MC-23, MC-14 |
 | `drainage_au_redemarrage` | `depuis_capacite` (borne basse) | `inconnu` | MC-32, MC-31 |
@@ -117,12 +118,12 @@ Tlaloc charge `dist/moteur-hydrique.js` par une balise `<script>` (page ouverte 
 
 ```text
 npm ci                       # esbuild, TypeScript, types de Node : versions figées, développement seulement
-npm run controles            # types, dist/ à jour, 62 tests
+npm run controles            # types, dist/ à jour, 63 tests
 npm run cas -- --dist        # rapport valeur par valeur des cas partagés, et les deux fichiers construits
 ```
 
 - `tests/pas-horaire.test.ts` (Nicolas, 18 tests) : le pas d'un jour.
-- `tests/moteur.test.ts` (39 tests) : les règles ci-dessus, le poing en fourchette (T08, T09) contre la référence de Tlaloc, la pluie utile et p ajusté aussi (`docs/ref-tlaloc/ref-tlaloc.mjs`), les entrées refusées.
+- `tests/moteur.test.ts` (40 tests) : les règles ci-dessus, le poing en fourchette (T08, T09) contre la référence de Tlaloc, la pluie utile et p ajusté aussi (`docs/ref-tlaloc/ref-tlaloc.mjs`), les entrées refusées.
 - `tests/cas.test.ts` (5 tests) : aucun cas en écart, plus rien à venir ; les deux fichiers construits donnent les mêmes résultats que `src/` ; le script classique ne pose que `MoteurHydrique` ; la version est la même partout ; les types de `dist/` déclarent chaque valeur du module ES.
 - Comparaison avec la jauge d'OTF, depuis une copie du module : `node --experimental-strip-types --no-warnings --import ./tests/support/register.mjs <dépôt commun>/scripts/comparer-jauge-otf.ts [graine] [suites]`.
 
@@ -132,14 +133,14 @@ npm run cas -- --dist        # rapport valeur par valeur des cas partagés, et l
 
 **v0.1.0**
 
-1. **Total de pluie sans heure : pas de ruissellement.** Le ruissellement se compte heure par heure (§ 5.1) ; un total du jour ne garde que l'interception. Seul le jeu Tlaloc est concerné, quand la pluie n'a pas d'heures.
-2. **Pluie inconnue dans le jeu Tlaloc : le jour est inconnu.** MC-14 ne parle que de la consommation ; le § 11 point 2 du contrat Tlaloc reste ouvert pour la pluie.
-3. **Redémarrage par remplissage en horaire : manque 0 à la fin du jour**, comme chez OTF (§ 4.4), sans la consommation qui suit le dernier apport. Rare chez Tlaloc, où la consommation d'un jour inconnu est estimée (MC-14) : le suivi n'y repart ainsi qu'au début, ou après un trou de pluie, de sol ou d'apport.
+1. **Total de pluie sans heure : un réglage du jeu, depuis la v0.3.0.** Le ruissellement se compte heure par heure (§ 5.1). Dans le jeu Tlaloc, un total du jour ruisselle comme une seule heure de pluie, à 15 h, comme Tlaloc aujourd'hui (30 mm : 7,5 ruisselés, 2 interceptés, 20,5 utiles) ; sans le réglage (`ruissellement_sans_heure`), l'interception seule. Sans effet chez OTF. **Tranché par Nicolas (PR n° 11)** : le côté prudent, moins de pluie comptée, donc un arrosage plus tôt plutôt que trop tard.
+2. **Pluie inconnue dans le jeu Tlaloc : le jour est inconnu.** MC-14 ne parle que de la consommation. **Tranché par Nicolas (PR n° 11) : comme le moteur** (MC-09, « inconnu, jamais zéro ») ; l'adaptateur de Tlaloc passera la pluie de la météo (prévision ou archive) quand il l'a. Le § 11 point 2 du contrat Tlaloc est noté tranché par Nicolas.
+3. **Redémarrage par remplissage en horaire : manque 0 à la fin du jour**, comme chez OTF (§ 4.4), sans la consommation qui suit le dernier apport. Rare chez Tlaloc, où la consommation d'un jour inconnu est estimée (MC-14) : le suivi n'y repart ainsi qu'au début, ou après un trou de pluie, de sol ou d'apport. D'accord (Nicolas, PR n° 11).
 4. **Jour d'une observation : il ne compte qu'après elle, dans les deux modes** (partie OTF § 6 point 1 ; contrat Tlaloc § 7.2). La partie d'avant sert au journal des ancrages, et depuis la v0.2.0 à l'a priori du poing, à l'incertitude et à la consommation apprise.
-5. **MC-14 avec moins de 3 jours connus : la moyenne de ceux qu'il y a ; aucun : inconnu.** Une consommation estimée n'entre pas dans les moyennes suivantes.
+5. **MC-14 avec moins de 3 jours connus : la moyenne de ceux qu'il y a ; aucun : inconnu.** Une consommation estimée n'entre pas dans les moyennes suivantes. D'accord (Nicolas, PR n° 11).
 6. **Un arrosage à cheval sur l'heure d'une observation est coupé au prorata**, comme à minuit (OTF `irrigationBetween`). Un apport à l'instant exact de l'observation compte après elle.
 7. **Drainage d'un jour inconnu : `null`** (MC-09). OTF affiche 0 ; son adaptateur gardera cet affichage.
-8. **MC-13 et le choix 2 de `docs/pas-horaire.md` se contredisent.** La partie OTF § 8 point 1 (MC-13) découpe un arrosage en tranches horaires en mode horaire ; le pas de Nicolas le compte d'un coup, à son début, comme Tlaloc aujourd'hui (le cas T02 en dépend). Le moteur suit le pas fusionné. Aucun chiffre d'OTF n'en dépend (journalier). À trancher ensemble.
+8. **MC-13 et le choix 2 de `docs/pas-horaire.md` se contredisent.** La partie OTF § 8 point 1 (MC-13) découpe un arrosage en tranches horaires en mode horaire ; le pas de Nicolas le compte d'un coup, à son début, comme Tlaloc aujourd'hui (le cas T02 en dépend). Le moteur suit le pas fusionné. Aucun chiffre d'OTF n'en dépend (journalier). **Tranché par Nicolas (PR n° 11) : tout l'arrosage compté à son début**, comme Tlaloc aujourd'hui, le pas fusionné et le moteur ; le cas T02 ne change pas.
 9. **Version du moteur distincte de celle du contrat** (0.2.x). Semver du code (MC-26) ; proposition : 1.0.0 avec le contrat v1.0.
 10. **`dist/` est versionné**, pour que Tlaloc ouvre le fichier sans outil de construction ; un contrôle vérifie qu'il est à jour, fins de ligne LF partout (`.gitattributes`).
 11. **Dépendances de développement seulement**, versions figées ; aucun paquet dans les fichiers construits.
@@ -149,7 +150,7 @@ npm run cas -- --dist        # rapport valeur par valeur des cas partagés, et l
 **v0.2.0 (options de Tlaloc)**
 
 14. **Plusieurs observations un même jour : chacune recale à son heure, dans l'ordre.** Le jour ne compte qu'après la dernière, comme chez OTF (rien ne change pour lui : 0 écart contre sa jauge) ; le journal les garde toutes. `ancrage` (v0.1.0) devient `ancrages`, une liste.
-15. **Prises du poing groupées : à moins de 60 min de la première prise**, pas de proche en proche, pour que toutes les prises d'un groupe soient à moins de 60 min les unes des autres. Le groupe est daté de sa dernière prise et compte le jour de celle-ci, même à cheval sur minuit.
+15. **Prises du poing groupées : à moins de 60 min de la première prise**, pas de proche en proche, pour que toutes les prises d'un groupe soient à moins de 60 min les unes des autres. Le groupe est daté de sa dernière prise et compte le jour de celle-ci, même à cheval sur minuit. D'accord (Nicolas, PR n° 12) : le code de Tlaloc suivra le moteur.
 16. **Poing en fourchette sur un état inconnu : a priori plat** (la vraisemblance des prises seule). Sans fourchette : le centre de la classe de chaque prise, chacune seule, sans regroupement.
 17. **Tensiomètre** : « moins de 12 h » reste à l'appelant, qui ne passe que les mesures à prendre ; « relevé de terrain » = une prise du poing ou un manque observé, dans les 48 h avant la mesure (même instant compris) ; une mesure sans RAW connue (p inconnu) est ignorée.
 18. **Incertitude** : calculée dans les deux jeux (OTF ne l'affiche pas, MC-20) ; les erreurs de consommation s'additionnent, comme une erreur de Kc, qui ne se compense pas d'un jour à l'autre ; 0 après un redémarrage par remplissage (plein le soir, quel que soit le départ) ; inchangée quand Dmax change (MC-11) ; inconnue avec l'état. Une incertitude passée au départ vaut sdR ; l'erreur de consommation repart de 0.
@@ -160,3 +161,7 @@ npm run cas -- --dist        # rapport valeur par valeur des cas partagés, et l
 
 21. **Couverts : le bilan au moteur.** MC-18 range « sol nu et couverts » hors moteur : OTF y garde leurs modèles (les deux compartiments du sol nu, le Kc d'un couvert et sa consommation). Le bilan d'un couvert est celui d'une culture (un compartiment, D-053 d'OTF) : OTF le fait faire au moteur plutôt que d'en garder une seconde copie. Rien ne change dans le moteur ni dans le jeu Tlaloc ; chez OTF, aucun écart avec l'ancienne jauge sur 20 000 planches tirées au hasard (cultures, couverts et sol nu mêlés). Lu autrement, MC-18 laisserait ce bilan chez OTF.
 22. **Les types dans `dist/`** : `dist/moteur-hydrique.d.mts` et `dist/types/`, construits par le compilateur TypeScript du dépôt depuis `src/`, imports en `.js` ; `build:check` les vérifie comme les deux fichiers. OTF, en TypeScript, copie ainsi tout de `dist/` ; Tlaloc n'en a pas besoin.
+
+**v0.3.0 (réglage de la pluie sans heure)**
+
+23. **Version 0.3.0** : un résultat du jeu Tlaloc change (un total du jour au-delà de 15 mm ruisselle désormais), comme Tlaloc le fait aujourd'hui ; aucun résultat d'OTF ne change. En 0.x, la version mineure (MC-26, choix 20). Un jeu écrit à la main doit ajouter `ruissellement_sans_heure` à sa pluie : `verifierJeu` le refuse sinon ; une copie de `JEU_OTF` ou de `JEU_TLALOC` le reçoit d'elle-même.

@@ -1,4 +1,4 @@
-/* Moteur hydrique commun (OTF et Tlaloc) v0.2.0. Licence PolyForm Shield 1.0.0 (LICENSE, NOTICE).
+/* Moteur hydrique commun (OTF et Tlaloc) v0.3.0. Licence PolyForm Shield 1.0.0 (LICENSE, NOTICE).
    Types du module ES, construits depuis src/ par scripts/construire.mjs : ne pas les modifier à la main. */
 /**
  * Les jeux de réglages complets du moteur (contrat fusionné § 3, contrat
@@ -23,6 +23,13 @@ export type ReglagesPluie = {
     regle_pluie_sure: boolean;
     /** Fraction du jour où l'on place une pluie sans heure, en mode horaire (15 h sur 24). */
     f_sans_heure: number;
+    /**
+     * Une pluie sans heure (un total du jour) ruisselle comme une seule heure de
+     * pluie, celle de `f_sans_heure`, comme Tlaloc aujourd'hui (choix 1, tranché
+     * par Nicolas sur la PR n° 11) ; sinon, pas de ruissellement, l'interception
+     * seule.
+     */
+    ruissellement_sans_heure: boolean;
 };
 export type JeuDeReglages = Reglages & {
     nom: string;

@@ -1,4 +1,4 @@
-/* Moteur hydrique commun (OTF et Tlaloc) v0.2.0. Licence PolyForm Shield 1.0.0 (LICENSE, NOTICE).
+/* Moteur hydrique commun (OTF et Tlaloc) v0.3.0. Licence PolyForm Shield 1.0.0 (LICENSE, NOTICE).
    Types du module ES, construits depuis src/ par scripts/construire.mjs : ne pas les modifier à la main. */
 /**
  * Moteur hydrique commun (OTF et Tlaloc) : point d'entrée.
@@ -11,7 +11,7 @@
  * Chaque logiciel fige la version qu'il utilise (contrat § 2, MC-26 :
  * semver, un résultat qui change = version majeure).
  */
-export declare const VERSION_MOTEUR = "0.2.0";
+export declare const VERSION_MOTEUR = "0.3.0";
 export { suivre, pAjuste, conserver } from './bilan.js';
 export type { EntreeSuivi, JourDonnees, SolDuJour, ArrosageDuJour, Observation, JourSortie, RaisonInconnu, CodeInconnu, Ancrage, } from './bilan.js';
 export { pluieUtile, pluieUtileMesuree, pluieUtileDuJour, pluieUtilePrevue } from './pluie.js';

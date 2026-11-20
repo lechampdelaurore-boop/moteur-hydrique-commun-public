@@ -1,4 +1,4 @@
-/* Moteur hydrique commun (OTF et Tlaloc) v0.2.0. Licence PolyForm Shield 1.0.0 (LICENSE, NOTICE).
+/* Moteur hydrique commun (OTF et Tlaloc) v0.3.0. Licence PolyForm Shield 1.0.0 (LICENSE, NOTICE).
    Fichier construit depuis src/moteur.ts par scripts/construire.mjs : ne pas le modifier à la main. */
 "use strict";
 var MoteurHydrique = (() => {
@@ -340,6 +340,7 @@ var MoteurHydrique = (() => {
   function pluieUtileDuJour(mm, r) {
     verifierMm(mm, "pluie du jour");
     if (mm <= 0) return { brute_mm: 0, ruissellement_mm: 0, interception_mm: 0, utile_mm: 0 };
+    if (r.ruissellement_sans_heure) return pluieUtileMesuree([mm], r);
     return retirerInterception(mm, 0, r);
   }
   function pluieUtilePrevue(prevue_mm, modeles, r) {
@@ -378,7 +379,9 @@ var MoteurHydrique = (() => {
       part_ruisselee: 0,
       part_prevue: 1,
       regle_pluie_sure: false,
-      f_sans_heure: QUINZE_HEURES
+      f_sans_heure: QUINZE_HEURES,
+      // Sans effet : aucun ruissellement chez OTF.
+      ruissellement_sans_heure: false
     }),
     p_ajuste_chaleur: false,
     jour_inconnu: "inconnu",
@@ -399,7 +402,8 @@ var MoteurHydrique = (() => {
       part_ruisselee: 0.5,
       part_prevue: 0.5,
       regle_pluie_sure: true,
-      f_sans_heure: QUINZE_HEURES
+      f_sans_heure: QUINZE_HEURES,
+      ruissellement_sans_heure: true
     }),
     p_ajuste_chaleur: true,
     jour_inconnu: "moyenne_3_jours",
@@ -428,6 +432,7 @@ var MoteurHydrique = (() => {
     if (!entre(p.part_prevue, 0, 1)) throw new RangeError("pluie.part_prevue entre 0 et 1");
     if (typeof p.regle_pluie_sure !== "boolean") throw new RangeError("pluie.regle_pluie_sure : vrai ou faux");
     if (!entre(p.f_sans_heure, 0, 1)) throw new RangeError("pluie.f_sans_heure entre 0 et 1");
+    if (typeof p.ruissellement_sans_heure !== "boolean") throw new RangeError("pluie.ruissellement_sans_heure : vrai ou faux");
     if (jeu.jour_inconnu !== "inconnu" && jeu.jour_inconnu !== "moyenne_3_jours") throw new RangeError("jour_inconnu : inconnu ou moyenne_3_jours");
     if (jeu.drainage_au_redemarrage !== "depuis_capacite" && jeu.drainage_au_redemarrage !== "inconnu") {
       throw new RangeError("drainage_au_redemarrage : depuis_capacite ou inconnu");
@@ -795,6 +800,6 @@ var MoteurHydrique = (() => {
   }
 
   // src/moteur.ts
-  var VERSION_MOTEUR = "0.2.0";
+  var VERSION_MOTEUR = "0.3.0";
   return __toCommonJS(moteur_exports);
 })();
