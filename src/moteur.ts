@@ -10,7 +10,7 @@
  * semver, un résultat qui change = version majeure).
  */
 
-export const VERSION_MOTEUR = '0.1.0';
+export const VERSION_MOTEUR = '0.2.0';
 
 export { suivre, pAjuste, conserver } from './bilan.ts';
 export type {
@@ -22,7 +22,15 @@ export { pluieUtile, pluieUtileMesuree, pluieUtileDuJour, pluieUtilePrevue } fro
 export type { PluieDuJour, PluieUtile } from './pluie.ts';
 
 export { JEU_OTF, JEU_TLALOC, verifierJeu } from './reglages.ts';
-export type { JeuDeReglages, ReglagesPluie } from './reglages.ts';
+export type { JeuDeReglages, ReglagesPluie, ReglagesPoing, ReglagesTensiometre } from './reglages.ts';
+
+// Les observations de Tlaloc, l'incertitude et la consommation apprise : les
+// formules seules (contrat Tlaloc § 7 et § 8), aussi utiles à l'affichage.
+export {
+  poingFourchette, kfApres, tensioVersDr, incertitudeMm, enPoints, etatEnPoints, manqueDepuisPoints,
+  CLASSES_POING, CENTRE_CLASSE, INCERTITUDE, CONSOMMATION_APPRISE,
+} from './observations.ts';
+export type { ClassePoing } from './observations.ts';
 
 // Le pas d'un jour (MC-29) et les aides pour le temps : ses jeux réduits
 // (pas et bassinage) sont contenus dans les jeux complets ci-dessus.

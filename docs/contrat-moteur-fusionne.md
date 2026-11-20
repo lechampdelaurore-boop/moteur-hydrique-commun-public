@@ -1,6 +1,6 @@
-# Contrat du moteur hydrique commun : version fusionnée v0.2
+# Contrat du moteur hydrique commun : version fusionnée v0.2.6 (brouillon)
 
-16 novembre 2026. Aucun code. Rédigé côté OTF (François et Claude), à relire par Nicolas. Fusionne `contrat-moteur.md` (Tlaloc v0.1.1) et `contrat-moteur-partie-otf.md` (OTF v0.1.1) du dépôt commun, et y inscrit les décisions MC-17 à MC-30 et MC-31 à MC-33. **Les formules et valeurs ne sont pas recopiées ici** : elles restent dans les deux contrats sources, cités par section, tant que les cas de test ne sont pas exécutés (risque de faute de recopie). Ce document fixe la structure, les paramètres et les décisions.
+16 novembre 2026 (v0.2), tenu à jour depuis (journal, § 6) ; le code du moteur est dans `src/`, son mode d'emploi dans `docs/moteur.md`. Rédigé côté OTF (François et Claude), à relire par Nicolas. Fusionne `contrat-moteur.md` (Tlaloc v0.1.1) et `contrat-moteur-partie-otf.md` (OTF v0.1.1) du dépôt commun, et y inscrit les décisions MC-17 à MC-30 et MC-31 à MC-33. **Les formules et valeurs ne sont pas recopiées ici** : elles restent dans les deux contrats sources, cités par section, tant que les cas de test ne sont pas exécutés (risque de faute de recopie). Ce document fixe la structure, les paramètres et les décisions.
 
 Marques : **[MC-nn]** décision ; **[À FAIRE]** à écrire ou vérifier avant la v1.0 ; **[À TRANCHER]** question ouverte.
 
@@ -92,7 +92,7 @@ MC-31 à MC-33 (numéros donnés par cette PR) : voir § 5 points 8 et 4 bis (ba
 2. K_paillage : passer à un effet sur l'évaporation du sol (Ke) plutôt que sur toute l'ETM ; lié au sol nu (FAO-56 chap. 7), phase ultérieure ; agronomique.
 3. Kc locaux : risque de double compte si un Kc calibré pour l'aspersion (BRL) est multiplié par K_paillage ; **chez OTF le Kc vient du CRIIAM ou de la FAO, pas de BRL** (à confirmer dans les sources) ; la question de l'ETP du CRIIAM reste ouverte (message envoyé).
 4. Watermark (formule de Shock 1998) et erreur du poing 8/12/15 points : **côté Tlaloc**, hors OTF (MC-19).
-5. Bassinage comme événement distinct : compatible avec P2 (type d'événement) ; la règle du bassinage court à 25 % reste à trancher avec Nicolas (point 3 du § 5).
+5. Bassinage comme événement distinct : compatible avec P2 (type d'événement) ; [TRANCHÉ : MC-34] le bassinage court est dans le moteur, compté à 25 % dans le jeu Tlaloc et en entier dans le jeu OTF (point 3 du § 5).
 6. Fraction du volume mouillé en goutte-à-goutte : chez OTF la surface mouillée existe déjà ; hors phase 1.
 7. **Validation externe** par pyfao56 (CC0) et PyEt (MIT) pour l'ET0 et le bilan journalier : recommandé, en plus des cas internes, en phase banc ; vérifier les équations contre les PDF d'origine avant tout codage.
 8. FAO-56 2e édition (2025) : à lire avant de toucher aux tables Kc et p ; hors phase 1.
@@ -110,12 +110,13 @@ MC-31 à MC-33 (numéros donnés par cette PR) : voir § 5 points 8 et 4 bis (ba
 8. [TRANCHÉ par François le 16/11 à 17 h 56 : les deux acceptées, **MC-31 (nature `borne_basse`) et MC-32 (paramètre `drainage_au_redemarrage`)** ; proposé par Nicolas le 16/11 en approuvant la PR n° 3 du dépôt commun] **Drainage au redémarrage (O07)** : les 0,7 mm sont un minimum que rien ne signale dans la sortie. Proposition : (a) une nature `borne_basse` sur ce drainage (MC-09 appliquée aux minimums) ; (b) un paramètre `drainage_au_redemarrage` : `depuis_capacite` (jeu OTF, comportement actuel, marqué borne basse) ou `inconnu` (jeu Tlaloc). Recommandation : accepter les deux ; rien ne change dans le chiffre affiché chez OTF.
 
 9. [À TRANCHER, Nicolas et OTF] **Arrosage en intervalle, mode horaire** : MC-13 (partie OTF § 8 point 1) le découpe en tranches horaires au prorata de la durée ; le pas de calcul fusionné (`docs/pas-horaire.md`, choix 2) le compte d'un coup, à son début, comme Tlaloc aujourd'hui (le cas T02 en dépend). Le moteur v0.1.0 suit le pas fusionné. Aucun chiffre d'OTF n'en dépend (journalier).
-10. [À RELIRE par Nicolas] Les choix du moteur v0.1.0 (`docs/moteur.md`, « Choix à relire »).
+10. [À RELIRE par Nicolas] Les choix du moteur v0.1.0 et v0.2.0 (`docs/moteur.md`, « Choix à relire », points 1 à 13 puis 14 à 20 pour les options de Tlaloc).
 
 ## 6. Journal
 
 | Version | Date | Ce qui change |
 |---|---|---|
+| 0.2.6 brouillon | 2026-11-20 | Moteur v0.2.0 : les options de Tlaloc (poing en fourchette ou au centre de sa classe, tensiomètre, incertitude, consommation apprise ; contrat Tlaloc § 7 et § 8, MC-07, MC-20, MC-22, MC-35), désactivées dans le jeu OTF ; cas T08 à T11 exécutés, tous les cas O, L et T le sont désormais ; § 5 point 10 étendu ; titre, en-tête et § 4 bis point 5 (MC-34) mis à jour (remarques de Nicolas sur la PR n° 11) ; contrat Tlaloc § 8 précisé : le kf appris sert dès le lendemain du relevé, projection comprise, comme Tlaloc (relecture de Nicolas sur la PR n° 12). Aucune formule ni valeur de cas ne change. |
 | 0.2.5 brouillon | 2026-11-20 | Moteur v0.1.0, le cœur du bilan (`src/`, `docs/moteur.md`), ses deux fichiers construits (MC-28) et ses contrôles ; MC-37 acceptée par Nicolas (PR n° 10) ; § 5 points 9 et 10 ajoutés. Aucune formule ni valeur de cas ne change. |
 | 0.2.4 brouillon | 2026-11-20 | MC-37 proposée : borne haute de l'ET0 de 12 à 15 mm/j (partie OTF § 3, cas L6 avec les limites 11,9 / 12,1 / 14,9 / 15,1). Aucune formule ne change ; une seule valeur de cas change (L6). |
 | 0.2.3 brouillon | 2026-11-18 | Côté Tlaloc : le pas de calcul MC-29 écrit en module autonome (`src/pas-horaire.ts`, `docs/pas-horaire.md`), avec 18 tests. Le jeu journalier reproduit OTF à 0,01 mm près. Aucune formule ni valeur de cas ne change. |

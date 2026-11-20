@@ -4,7 +4,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import * as M from '../src/moteur.ts';
-import type { ArrosageDuJour, EntreeSuivi, JeuDeReglages, JourDonnees, JourSortie, Observation, SolDuJour } from '../src/moteur.ts';
+import type { ArrosageDuJour, ClassePoing, EntreeSuivi, JeuDeReglages, JourDonnees, JourSortie, Observation, SolDuJour } from '../src/moteur.ts';
 // @ts-expect-error : implémentation de référence en JavaScript, sans types
 import * as REF from '../docs/ref-tlaloc/ref-tlaloc.mjs';
 
@@ -26,7 +26,10 @@ const jour = (i: number, j: Partial<JourDonnees> = {}): JourDonnees => ({
 });
 const suivre = (e: Partial<EntreeSuivi> & Pick<EntreeSuivi, 'jours'>, jeu: JeuDeReglages): JourSortie[] =>
   M.suivre({ aujourdhui: '2026-12-31', ...e }, jeu);
+const m = (jour: string, minutes: number) => new Date(M.bornesDuJour(jour).debut + minutes * 60_000).toISOString();
 const manque = (instant: string, dr_mm: number): Observation => ({ instant, type: 'manque', dr_mm });
+const poing = (instant: string, classe: ClassePoing): Observation => ({ instant, type: 'poing', classe });
+const tensio = (instant: string, kpa: number, bas_kpa = 10, haut_kpa = 60): Observation => ({ instant, type: 'tensio', kpa, bas_kpa, haut_kpa });
 const arrosage = (debut: string, fin: string | null, mm: number | null, extra: Partial<ArrosageDuJour> = {}): ArrosageDuJour => ({ debut, fin, mm, ...extra });
 
 const proche = (x: number | null | undefined, attendu: number, quoi: string) => {
@@ -221,9 +224,9 @@ test('Observation, jeu OTF : le jour ne compte qu\'après son heure, les arrosag
   assert.equal(s.redemarrage, 'observation');
   assert.equal(s.nature, 'estime', 'OTF ne dit jamais « observé »');
   // Journal des ancrages : avant 12 h, 12 + 2 − 3 − (3 + 2) = 6 calculés, 5 observés.
-  assert.equal(s.ancrage?.instant, a(D0, 12));
-  proche(s.ancrage?.dr_observe_mm, 5, 'ancrage observé');
-  proche(s.ancrage?.dr_calcule_mm, 6, 'ancrage calculé');
+  assert.equal(s.ancrages[0]?.instant, a(D0, 12));
+  proche(s.ancrages[0]?.dr_observe_mm, 5, 'ancrage observé');
+  proche(s.ancrages[0]?.dr_calcule_mm, 6, 'ancrage calculé');
 });
 
 test('Observation : bornée à Dmax ; la plus récente du jour l\'emporte ; à instant égal, la dernière de la liste', () => {
@@ -244,10 +247,10 @@ test('Observation : redémarre un état inconnu ; à minuit, l\'ancrage compare 
   inconnu(s[0], 'etc_inconnue', D0);
   // Jour 1 : 9 + 2 × 9/24 = 9,75 ; ancrage sans calcul (état d'avant inconnu).
   proche(s[1].dr_mm, 9.75, 'jour 1');
-  assert.equal(s[1].ancrage?.dr_calcule_mm, null);
+  assert.equal(s[1].ancrages[0]?.dr_calcule_mm, null);
   // Jour 2 à minuit : fraction 1, ancrage calculé = manque de la veille, 9,75.
   proche(s[2].fraction, 1, 'fraction');
-  proche(s[2].ancrage?.dr_calcule_mm, 9.75, 'ancrage à minuit');
+  proche(s[2].ancrages[0]?.dr_calcule_mm, 9.75, 'ancrage à minuit');
   proche(s[2].dr_mm, 5, 'jour 2');
 });
 
@@ -265,6 +268,226 @@ test('Nature : estimé avant aujourd\'hui, prévu ensuite ; « observé » le jo
   assert.deepEqual(t.map((s) => s.nature), ['observe', 'prevu', 'prevu']);
   const o = suivre({ aujourdhui: date(1), etat_initial: { dr_mm: 5, dmax_mm: 30 }, jours, observations }, OTF);
   assert.deepEqual(o.map((s) => s.nature), ['estime', 'prevu', 'prevu']);
+});
+
+test('Plusieurs observations un même jour : chacune recale à son heure, le journal les garde toutes ; le jour ne compte qu\'après la dernière', () => {
+  const entree = { etat_initial: { dr_mm: 10, dmax_mm: 30 }, jours: [jour(0, { etc_mm: 4.8 })], arrosages: [arrosage(m(D0, 600), null, 3)] };
+  const [deux] = suivre({ ...entree, observations: [manque(m(D0, 360), 12), manque(m(D0, 720), 8)] }, OTF);
+  const [une] = suivre({ ...entree, observations: [manque(m(D0, 720), 8)] }, OTF);
+  for (const k of ['dr_mm', 'dr_depart_mm', 'fraction', 'etc_mm', 'pluie_mm', 'arrosage_mm', 'drainage_mm', 'eau_perdue_mm'] as const) {
+    assert.equal(deux[k], une[k], `${k} : seule la dernière observation compte pour le jour (règle d'OTF)`);
+  }
+  assert.deepEqual(deux.ancrages.map((x) => x.instant), [m(D0, 360), m(D0, 720)]);
+  // Avant 6 h : 10 + 4,8 × 0,25 = 11,2. De 6 h à midi, depuis 12 : 12 + 1,2 − 3 (à 10 h) = 10,2.
+  proche(deux.ancrages[0].dr_calcule_mm, 11.2, 'calcul à 6 h');
+  proche(deux.ancrages[1].dr_calcule_mm, 10.2, 'calcul à midi, depuis l\'observation de 6 h');
+  // Seule, l'observation de midi compare au calcul depuis minuit : 10 + 2,4 − 3 = 9,4.
+  proche(une.ancrages[0].dr_calcule_mm, 9.4, 'calcul à midi, depuis minuit');
+  // Incertitude après un manque observé : 0,05 × RU (MC-22), RU = 45 ; puis + 0,2 × 2,4.
+  proche(deux.ancrages[1].incertitude_apres_mm, 2.25, '0,05 × RU');
+  proche(deux.incertitude_mm, Math.hypot(2.25, 0.48), 'le soir');
+});
+
+/* ------------------------------------------------------------------ */
+/* Options de Tlaloc : poing, tensiomètre, incertitude, kf (§ 7, § 8)   */
+/* ------------------------------------------------------------------ */
+
+test('Poing en fourchette (§ 7.1) : l\'a posteriori du calcul juste avant et de la classe ; T08 et T09 par le suivi, comparés à la référence de Tlaloc', () => {
+  const cas: [number, ClassePoing[]][] = [[40, ['correct']], [60, ['correct']], [40, ['correct', 'correct', 'sec']]];
+  for (const [calcul, classes] of cas) {
+    const [s] = suivre({
+      etat_initial: { dr_mm: (1 - calcul / 100) * 60, dmax_mm: 60, incertitude_mm: 9 }, // 15 points de RU
+      jours: [jour(0, { sol: solRU(60) })],
+      observations: classes.map((c, i) => poing(m(D0, 20 * i), c)),
+    }, TLALOC);
+    const ref = REF.poingFourchette(calcul, 15, classes);
+    assert.equal(s.ancrages.length, 1, 'les prises de l\'heure : une seule observation');
+    const x = s.ancrages[0];
+    assert.equal(x.type, 'poing');
+    assert.equal(x.prises, classes.length);
+    proche(x.dr_calcule_mm, (1 - calcul / 100) * 60, 'calcul juste avant');
+    proche(x.incertitude_avant_mm, 9, 'incertitude juste avant');
+    proche(100 * (1 - x.dr_observe_mm / 60), ref.mu, `μ, calcul à ${calcul} %, ${classes.length} prise(s)`);
+    proche(x.incertitude_apres_mm / 60 * 100, ref.sd, `sd, calcul à ${calcul} %, ${classes.length} prise(s)`);
+    proche(s.dr_depart_mm, x.dr_observe_mm, 'le départ du jour');
+    proche(s.incertitude_mm, x.incertitude_apres_mm, 'rien consommé ensuite');
+  }
+});
+
+test('Poing en fourchette au milieu du jour : l\'a priori est le calcul à son heure, et l\'incertitude repart de l\'a posteriori', () => {
+  const [s] = suivre({
+    etat_initial: { dr_mm: 36, dmax_mm: 60, incertitude_mm: 9 },
+    jours: [jour(0, { sol: solRU(60), etc_mm: 4.8 })],
+    observations: [poing(m(D0, 720), 'frais')],
+  }, TLALOC);
+  // À midi : 36 + 2,4 = 38,4 ; incertitude √(9² + (0,2 × 2,4)²).
+  const x = s.ancrages[0];
+  const sdAvant = Math.hypot(9, 0.48);
+  proche(x.dr_calcule_mm, 38.4, 'calcul à midi');
+  proche(x.incertitude_avant_mm, sdAvant, 'incertitude à midi');
+  const post = M.poingFourchette({ um: 100 * (1 - 38.4 / 60), sdU: sdAvant / 60 * 100 }, ['frais'], 8);
+  proche(x.dr_observe_mm, (1 - post.mu / 100) * 60, 'a posteriori');
+  proche(x.incertitude_apres_mm, post.sd * 0.6, 'son incertitude');
+  // Le soir : + 2,4 ; incertitude √(sd² + 0,48²).
+  proche(s.dr_mm, x.dr_observe_mm + 2.4, 'manque au soir');
+  proche(s.incertitude_mm, Math.hypot(x.incertitude_apres_mm, 0.48), 'incertitude au soir');
+  proche(s.fraction, 0.5, 'le jour compte après le relevé');
+  assert.equal(s.nature, 'observe');
+});
+
+test('Poing en fourchette : les prises à moins de 60 min de la première comptent ensemble, à l\'heure de la dernière', () => {
+  const groupes = (minutes: number[]) => suivre({
+    etat_initial: { dr_mm: 36, dmax_mm: 60 },
+    jours: [jour(0, { sol: solRU(60) }), jour(1, { sol: solRU(60) })],
+    observations: minutes.map((x) => poing(m(D0, x), 'correct')),
+  }, TLALOC).flatMap((j) => j.ancrages.map((x) => `${x.prises} à ${x.instant}`));
+  assert.deepEqual(groupes([480, 500, 539]), [`3 à ${m(D0, 539)}`]);
+  assert.deepEqual(groupes([480, 540]), [`1 à ${m(D0, 480)}`, `1 à ${m(D0, 540)}`], '60 min pile : deux observations');
+  assert.deepEqual(groupes([480, 520, 560]), [`2 à ${m(D0, 520)}`, `1 à ${m(D0, 560)}`], 'la fenêtre part de la première prise');
+  assert.deepEqual(groupes([500, 480]), [`2 à ${m(D0, 500)}`], 'notées dans le désordre');
+  assert.deepEqual(groupes([1430, 1450]), [`2 à ${m(D0, 1450)}`], 'à cheval sur minuit : le jour de la dernière prise');
+});
+
+test('Poing sans fourchette (option coupée, jeu OTF) : le centre de la classe, incertitude 0,15 × RU ; chaque prise compte seule', () => {
+  const sansFourchette: JeuDeReglages = { ...TLALOC, poing: { ...TLALOC.poing, fourchette: false } };
+  const [s] = suivre({
+    etat_initial: { dr_mm: 36, dmax_mm: 60 },
+    jours: [jour(0, { sol: solRU(60) })],
+    observations: [poing(m(D0, 480), 'sec'), poing(m(D0, 500), 'frais')],
+  }, sansFourchette);
+  assert.deepEqual(s.ancrages.map((x) => x.prises), [1, 1]);
+  proche(s.ancrages[0].dr_observe_mm, 37.5, 'centre de « sec » : 37,5 % de 60');
+  proche(s.ancrages[1].dr_observe_mm, 7.5, 'centre de « frais » : 87,5 % de 60');
+  proche(s.dr_mm, 7.5, 'la dernière l\'emporte');
+  proche(s.incertitude_mm, 9, '0,15 × RU');
+  // Jeu OTF, plancher 30 (RU 45) : le centre de « très sec » (12,5 %) est borné à Dmax.
+  const [o] = suivre({ etat_initial: { dr_mm: 5, dmax_mm: 30 }, jours: [jour(0)], observations: [poing(m(D0, 480), 'tres_sec')] }, OTF);
+  proche(o.dr_depart_mm, 30, 'borné à Dmax');
+  proche(o.incertitude_mm, 6.75, '0,15 × 45');
+  assert.equal(o.kf_apres, null);
+});
+
+test('Poing en fourchette sur un état inconnu : a priori plat, rien à comparer', () => {
+  const [s] = suivre({ jours: [jour(0, { sol: solRU(60) })], observations: [poing(m(D0, 480), 'correct'), poing(m(D0, 490), 'frais')] }, TLALOC);
+  const plat = M.poingFourchette(null, ['correct', 'frais'], 8);
+  const x = s.ancrages[0];
+  assert.equal(x.dr_calcule_mm, null);
+  assert.equal(x.incertitude_avant_mm, null);
+  proche(x.dr_observe_mm, (1 - plat.mu / 100) * 60, 'a posteriori plat');
+  proche(x.incertitude_apres_mm, plat.sd * 0.6, 'son incertitude');
+  assert.equal(s.redemarrage, 'observation');
+  assert.ok(Math.abs(plat.mu - 75) < 1, `entre les deux classes, près de leur limite de 75 % : ${plat.mu}`);
+});
+
+test('Tensiomètre (§ 7.3, MC-35) : recale par la conversion de Tlaloc, incertitude 0,1 × RAW ; ignoré sans RAW, après un relevé de terrain de moins de 48 h, et dans le jeu OTF', () => {
+  // RU 40, p 0,5 (ETc 5 : p ajusté inchangé, MC-21), donc RAW 20.
+  const jours = [0, 1, 2, 3].map((i) => jour(i, { sol: solRU(40, 0.5), etc_mm: 5 }));
+  const t = (observations: Observation[], jeu = TLALOC) => suivre({ etat_initial: { dr_mm: 0, dmax_mm: 40 }, jours, observations }, jeu);
+  const [s] = t([tensio(m(D0, 360), 30)]);
+  // À 6 h : 30 kPa entre 10 et 60 → 0,2 × 20 + 0,8 × 20 × 20/50 = 10,4 ; calculé 0 + 5 × 0,25 = 1,25.
+  const x = s.ancrages[0];
+  assert.equal(x.type, 'tensio');
+  proche(x.dr_calcule_mm, 1.25, 'calcul à 6 h');
+  proche(x.dr_observe_mm, 10.4, 'tensiomètre');
+  proche(x.incertitude_apres_mm, 2, '0,1 × RAW');
+  proche(s.dr_mm, 10.4 + 3.75, 'le soir');
+  proche(s.incertitude_mm, Math.hypot(2, 0.75), 'incertitude le soir');
+  assert.deepEqual(t([tensio(m(D0, 360), 30)], OTF)[0].ancrages, [], 'jeu OTF : pas de tensiomètre (MC-20)');
+  // Un poing la veille à 20 h (10 h avant) : ignoré ; 48 h pile après le poing : il compte.
+  const r = t([poing(m(D0, 1200), 'correct'), tensio(m(date(1), 360), 30), tensio(m(date(2), 1200), 30)]);
+  assert.deepEqual(r.map((j) => j.ancrages.map((y) => y.type)), [['poing'], [], ['tensio'], []]);
+  assert.deepEqual(t([manque(m(D0, 1200), 5), tensio(m(date(1), 360), 30)])[1].ancrages, [], 'un manque observé est aussi un relevé de terrain');
+  const sansP = suivre({ etat_initial: { dr_mm: 0, dmax_mm: 40 }, jours: [jour(0, { sol: solRU(40), etc_mm: 5 })], observations: [tensio(m(D0, 360), 30)] }, TLALOC)[0];
+  assert.deepEqual(sansP.ancrages, [], 'RAW inconnue : rien à convertir');
+  assert.equal(sansP.redemarrage, null);
+});
+
+test('Incertitude (§ 7.4) : 0,35 × RU au départ, + 0,2 × la consommation depuis le dernier ancrage, + 0,5 × un jour estimé (MC-14) ; 0,05 × RU après un manque observé (MC-22)', () => {
+  const s = suivre({
+    etat_initial: { dr_mm: 10, dmax_mm: 50 },
+    jours: [
+      jour(0, { sol: solRU(50), etc_mm: 5 }), // sdR = 0,35 × 50 = 17,5 ; E = 1
+      jour(1, { sol: solRU(50), etc_mm: null }), // estimée 5 (MC-14) : E = 1 + 2,5
+      jour(2, { sol: solRU(50), etc_mm: 4 }), // E = 3,5 + 0,8
+      jour(3, { sol: solRU(50), etc_mm: 3 }), // manque observé à minuit : sdR = 2,5 ; E = 0,6
+    ],
+    observations: [manque(m(date(3), 0), 20)],
+  }, TLALOC);
+  proche(s[0].incertitude_mm, Math.hypot(17.5, 1), 'jour 0');
+  proche(s[1].incertitude_mm, Math.hypot(17.5, 3.5), 'jour 1, consommation estimée');
+  proche(s[2].incertitude_mm, Math.hypot(17.5, 4.3), 'jour 2');
+  proche(s[3].ancrages[0].incertitude_avant_mm, Math.hypot(17.5, 4.3), 'juste avant l\'observation');
+  proche(s[3].ancrages[0].incertitude_apres_mm, 2.5, '0,05 × RU');
+  proche(s[3].incertitude_mm, Math.hypot(2.5, 0.6), 'jour 3');
+  const donnee = suivre({ etat_initial: { dr_mm: 10, dmax_mm: 50, incertitude_mm: 3 }, jours: [jour(0, { sol: solRU(50), etc_mm: 5 })] }, TLALOC);
+  proche(donnee[0].incertitude_mm, Math.hypot(3, 1), 'donnée au départ');
+});
+
+test('Incertitude, jeu OTF (MC-20 : calculée, pas affichée) : nulle après un remplissage, inconnue avec l\'état', () => {
+  const s = suivre({
+    jours: [jour(0, { etc_mm: 2 }), jour(1, { etc_mm: 2, pluie: { type: 'jour', mm: 40 } }), jour(2, { etc_mm: 3 }), jour(3, { etc_mm: null })],
+  }, OTF);
+  assert.equal(s[0].incertitude_mm, null, 'pas commencé');
+  assert.equal(s[1].redemarrage, 'remplissage');
+  assert.equal(s[1].incertitude_mm, 0, 'plein le soir, quel que soit le départ');
+  proche(s[2].incertitude_mm, 0.6, '0,2 × 3');
+  assert.equal(s[3].incertitude_mm, null, 'inconnue avec l\'état');
+  // Au départ : 0,35 × RU (45), pas × Dmax (30).
+  const [d] = suivre({ etat_initial: { dr_mm: 10, dmax_mm: 30 }, jours: [jour(0, { etc_mm: 5 })] }, OTF);
+  proche(d.incertitude_mm, Math.hypot(0.35 * 45, 1), 'départ');
+});
+
+test('Consommation apprise (§ 8) : ETc = ETM × kf ; un relevé en fourchette ajuste kf s\'il suit un ancrage de l\'appel, plus de 2 mm consommés depuis, et le dernier relevé qui a appris', () => {
+  // Manque observé 16 à minuit (incertitude 0,05 × 60 = 3), 4 jours à 5 mm : 36 au soir du jour 3 ; poing « correct » le jour 4 à minuit.
+  const jours = [0, 1, 2, 3, 4].map((i) => jour(i, { sol: solRU(60), etc_mm: 5 }));
+  const observations = [manque(m(date(0), 0), 16), poing(m(date(4), 0), 'correct')];
+  const s = suivre({ jours, observations }, TLALOC);
+  const x = s[4].ancrages[0];
+  proche(x.dr_calcule_mm, 36, 'calcul au relevé');
+  proche(x.incertitude_avant_mm, 5, '√(3² + (0,2 × 20)²)');
+  const kf = M.kfApres(1, { dr_avant_mm: 36, dr_apres_mm: x.dr_observe_mm, conso_mm: 20, sd_avant: 5, sd_apres: x.incertitude_apres_mm });
+  assert.ok(kf < 1, 'le relevé dit plus humide que le calcul : la consommation baisse');
+  assert.deepEqual(s[4].kf_apres, { valeur: kf, depuis: m(date(4), 0) });
+  assert.deepEqual(s.slice(0, 4).map((j) => j.kf_apres), [null, null, null, null]);
+  // ETc = ETM × kf reçu, jusqu'au jour du relevé qui apprend.
+  const k = suivre({ jours, observations, kf: { valeur: 0.8, depuis: null } }, TLALOC);
+  proche(k[1].etc_mm, 4, 'ETM 5 × 0,8');
+  proche(k[3].dr_mm, 32, '16 + 4 × 4');
+  assert.equal(suivre({ jours, observations, kf: { valeur: 1, depuis: m(date(4), 0) } }, TLALOC)[4].kf_apres, null, 'relevé déjà appris');
+  assert.equal(suivre({ etat_initial: { dr_mm: 16, dmax_mm: 60 }, jours, observations: [observations[1]] }, TLALOC)[4].kf_apres, null, 'aucun ancrage avant lui dans l\'appel');
+  assert.equal(suivre({ jours, observations: [manque(m(date(0), 0), 16), poing(m(date(0), 570), 'correct')] }, TLALOC)[0].kf_apres, null, '2 mm ou moins consommés');
+  // Deux relevés dans l'appel : le second part du kf appris au premier.
+  const deux = suivre({ jours, observations: [...observations, poing(m(date(4), 720), 'sec')] }, TLALOC);
+  const y = deux[4].ancrages[1];
+  const kf2 = M.kfApres(kf, { dr_avant_mm: y.dr_calcule_mm as number, dr_apres_mm: y.dr_observe_mm, conso_mm: 2.5, sd_avant: y.incertitude_avant_mm as number, sd_apres: y.incertitude_apres_mm });
+  assert.deepEqual(deux[4].kf_apres, { valeur: kf2, depuis: m(date(4), 720) });
+  // Jeu OTF : ni kf, ni apprentissage (MC-20).
+  const o = suivre({ jours, observations, kf: { valeur: 0.8, depuis: null } }, OTF);
+  proche(o[1].etc_mm, 5, 'kf sans effet');
+  assert.ok(o.every((j) => j.kf_apres === null));
+});
+
+test('Consommation apprise (§ 8) : le kf appris à un relevé sert dès le lendemain, jour inconnu (MC-14) et projection compris, comme Tlaloc', () => {
+  // Manque observé 16 le jour 0 à minuit, ETM 5 mm/j, ETM inconnue le jour 7 ; poing « correct » le jour 5 à midi ; projection à partir du jour 10.
+  const jours = Array.from({ length: 15 }, (_, i) => jour(i, { sol: solRU(60), etc_mm: i === 7 ? null : 5 }));
+  const observations = [manque(m(date(0), 0), 16), poing(m(date(5), 720), 'correct')];
+  for (const recu of [1, 0.8]) {
+    const s = suivre({ aujourdhui: date(10), jours, observations, kf: { valeur: recu, depuis: null } }, TLALOC);
+    const appris = s[5].kf_apres;
+    assert.ok(appris !== null && appris.valeur !== recu, `kf ${recu} : le relevé du jour 5 apprend`);
+    const kf = appris.valeur;
+    for (let i = 1; i < 5; i += 1) proche(s[i].etc_mm, 5 * recu, `kf ${recu}, jour ${i} : le kf reçu`);
+    proche(s[5].etc_mm, 5 * recu * 0.5, `kf ${recu}, jour du relevé : le kf reçu, calculé au début du jour, après midi`);
+    proche(s[6].etc_mm, 5 * kf, `kf ${recu}, lendemain du relevé : le kf appris`);
+    proche(s[6].dr_mm, Math.min(60, (s[5].dr_mm as number) + 5 * kf), `kf ${recu}, manque du lendemain`);
+    assert.equal(s[7].etc_estimee, true);
+    proche(s[7].etc_mm, 5 * kf, `kf ${recu}, jour inconnu : moyenne des 3 dernières ETM × le kf appris`);
+    for (let i = 10; i < 15; i += 1) {
+      assert.equal(s[i].nature, 'prevu');
+      proche(s[i].etc_mm, 5 * kf, `kf ${recu}, projection, jour ${i}`);
+    }
+    assert.ok(s.every((j, i) => i === 5 || j.kf_apres === null), 'un seul relevé appris');
+  }
 });
 
 /* ------------------------------------------------------------------ */
@@ -288,7 +511,7 @@ test('Horaire avec observation : la pluie avant l\'observation ne compte pas, ce
   proche(s.apres_apports[0].dr, 8.35, 'manque après l\'apport');
   assert.equal(s.nature, 'observe');
   // Avant 12 h : 20 + 0,2 × 8 = 21,6 ; − 3,75 = 17,85 ; + 0,2 × 4 = 18,65.
-  proche(s.ancrage?.dr_calcule_mm, 18.65, 'ancrage calculé');
+  proche(s.ancrages[0]?.dr_calcule_mm, 18.65, 'ancrage calculé');
 });
 
 test('Horaire : une pluie sans heure tombe à 15 h (contrat Tlaloc § 4.1)', () => {
@@ -454,10 +677,17 @@ test('Entrées et jeux mal formés : refusés (erreur de programme), jamais lus 
   assert.throws(e({}, { arrosages: [arrosage(a(D0, 8), null, -1)] }), RangeError);
   assert.throws(e({}, { arrosages: [arrosage(a(D0, 8), null, 1, { type: 'goutte' as 'arrosage' })] }), RangeError);
   assert.throws(e({}, { arrosages: [arrosage('hier', null, 1)] }), RangeError);
-  assert.throws(e({}, { observations: [{ instant: a(D0, 8), type: 'poing' as 'manque', dr_mm: 3 }] }), RangeError);
+  assert.throws(e({}, { observations: [{ instant: a(D0, 8), type: 'sonde' as 'manque', dr_mm: 3 }] }), RangeError);
+  assert.throws(e({}, { observations: [poing(a(D0, 8), 'humide' as ClassePoing)] }), RangeError);
+  assert.throws(e({}, { observations: [tensio(a(D0, 8), 30, 0, 60)] }), RangeError);
+  assert.throws(e({}, { observations: [tensio(a(D0, 8), 30, 60, 60)] }), RangeError);
+  assert.throws(e({}, { observations: [tensio(a(D0, 8), Number.NaN)] }), RangeError);
   assert.throws(e({}, { observations: [manque('ce matin', 3)] }), RangeError);
   assert.throws(e({}, { observations: [manque(a(D0, 8), -1)] }), RangeError);
   assert.throws(e({}, { etat_initial: { dr_mm: 3, dmax_mm: 0 } }), RangeError);
+  assert.throws(e({}, { etat_initial: { dr_mm: 3, dmax_mm: 30, incertitude_mm: -1 } }), RangeError);
+  assert.throws(e({}, { kf: { valeur: 2, depuis: null } }), RangeError, 'kf de 0,6 à 1,6');
+  assert.throws(e({}, { kf: { valeur: 1, depuis: 'hier' } }), RangeError);
   const jeu = (modif: Partial<JeuDeReglages>) => () => suivre({ jours: [jour(0)] }, { ...OTF, ...modif });
   assert.throws(jeu({ pluie: { ...OTF.pluie, part_prevue: 2 } }), RangeError);
   assert.throws(jeu({ jour_inconnu: 'zero' as 'inconnu' }), RangeError);
@@ -465,6 +695,10 @@ test('Entrées et jeux mal formés : refusés (erreur de programme), jamais lus 
   assert.throws(jeu({ drainage_au_redemarrage: 'zero' as 'inconnu' }), RangeError);
   assert.throws(jeu({ pas: 'minute' as 'horaire' }), RangeError, 'refusé avant tout calcul, même un jour inconnu');
   assert.throws(jeu({ bassinage: { duree_max_s: 600, part_comptee: 1.5 } }), RangeError);
+  assert.throws(jeu({ poing: { ...OTF.poing, sigma_lecture: 0 } }), RangeError);
+  assert.throws(jeu({ poing: { ...OTF.poing, fourchette: 'oui' as unknown as boolean } }), RangeError);
+  assert.throws(jeu({ tensiometre: { actif: true, releve_prioritaire_h: -1 } }), RangeError);
+  assert.throws(jeu({ consommation_apprise: undefined as unknown as boolean }), RangeError);
   assert.doesNotThrow(() => M.verifierJeu(OTF));
   assert.doesNotThrow(() => M.verifierJeu(TLALOC));
   assert.deepEqual(suivre({ jours: [] }, OTF), []);
@@ -473,6 +707,11 @@ test('Entrées et jeux mal formés : refusés (erreur de programme), jamais lus 
 test('Les jeux de réglages sont figés et contiennent les jeux du pas de calcul', () => {
   assert.ok(Object.isFrozen(OTF) && Object.isFrozen(OTF.pluie) && Object.isFrozen(OTF.bassinage));
   assert.ok(Object.isFrozen(TLALOC) && Object.isFrozen(TLALOC.pluie) && Object.isFrozen(TLALOC.bassinage));
+  for (const j of [OTF, TLALOC]) assert.ok(Object.isFrozen(j.poing) && Object.isFrozen(j.tensiometre), `${j.nom} : options figées`);
+  // MC-20 : aucune option de Tlaloc dans le jeu OTF.
+  assert.deepEqual([OTF.poing.fourchette, OTF.tensiometre.actif, OTF.consommation_apprise], [false, false, false]);
+  assert.deepEqual([TLALOC.poing.fourchette, TLALOC.tensiometre.actif, TLALOC.consommation_apprise], [true, true, true]);
+  assert.deepEqual([TLALOC.poing.sigma_lecture, TLALOC.poing.regroupement_min, TLALOC.tensiometre.releve_prioritaire_h], [8, 60, 48]);
   assert.equal(OTF.pas, 'journalier');
   assert.equal(TLALOC.pas, 'horaire');
   assert.equal(OTF.bassinage.part_comptee, 1);

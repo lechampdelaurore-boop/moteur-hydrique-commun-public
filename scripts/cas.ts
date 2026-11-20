@@ -7,9 +7,9 @@
  *
  * Chaque valeur reçoit un verdict : « conforme », « écart », « hors moteur »
  * (ETM, sol de labo, seuils, pénurie, sol nu : MC-03, MC-16, MC-18) ou
- * « à venir » (options de Tlaloc : poing en fourchette, consommation apprise,
- * tensiomètre, PR suivante). Une valeur fausse se corrige dans le contrat
- * ou dans le moteur après discussion, jamais en touchant le cas en silence.
+ * « à venir » (une règle pas encore dans le moteur ; aucune depuis la v0.2.0).
+ * Une valeur fausse se corrige dans le contrat ou dans le moteur après
+ * discussion, jamais en touchant le cas en silence.
  */
 
 import { readFileSync } from 'node:fs';
@@ -17,7 +17,7 @@ import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { createContext, runInContext } from 'node:vm';
 import * as SRC from '../src/moteur.ts';
-import type { EntreeSuivi, JeuDeReglages, JourDonnees, JourSortie, SolDuJour } from '../src/moteur.ts';
+import type { ClassePoing, EntreeSuivi, JeuDeReglages, JourDonnees, JourSortie, SolDuJour } from '../src/moteur.ts';
 
 export type Moteur = typeof SRC;
 type Verdict = 'conforme' | 'écart' | 'hors moteur' | 'à venir';
@@ -72,7 +72,6 @@ const depart = (s: JourSortie) => (s.dr_depart_mm === null || s.dmax_mm === null
 
 type Mesures = Record<string, unknown | { horsMoteur: string } | { aVenir: string }>;
 const hors = (raison: string) => ({ horsMoteur: raison });
-const aVenir = (raison: string) => ({ aVenir: raison });
 
 function casOTF(M: Moteur): Record<string, (e: any) => Mesures> {
   const { a, solOTF, solCapacite, jour, suivre } = outils(M);
@@ -217,7 +216,31 @@ function casTlaloc(M: Moteur): Record<string, (e: any) => Mesures> {
   const T = M.JEU_TLALOC, O = M.JEU_OTF;
   const unJour = (e: { Dr0: number; etc: number; taw: number }, jeu: JeuDeReglages, extra: Partial<EntreeSuivi> = {}, j: Partial<JourDonnees> = {}) =>
     suivre({ etat_initial: { dr_mm: e.Dr0, dmax_mm: e.taw }, jours: [jour(0, { sol: solRU(e.taw), etc_mm: e.etc, ...j })], ...extra }, jeu)[0];
-  const option = aVenir('option de Tlaloc, PR suivante');
+  /**
+   * Un relevé du poing (une ou plusieurs prises, de minuit à 40 min) sur un
+   * calcul à `calcul` % de la RU, d'incertitude `incertitude` points (§ 7.1) :
+   * l'ancrage du jour, en points de RU. La RU n'y change rien ; 60 mm comme T10.
+   */
+  const RU_POING = 60;
+  const poing = (calcul: number, incertitude: number, classes: ClassePoing[], sigma: number) => {
+    const [s] = suivre({
+      etat_initial: { dr_mm: (1 - calcul / 100) * RU_POING, dmax_mm: RU_POING, incertitude_mm: incertitude / 100 * RU_POING },
+      jours: [jour(0, { sol: solRU(RU_POING) })],
+      observations: classes.map((classe, i) => ({ instant: a(D1, i / 3), type: 'poing' as const, classe })),
+    }, { ...T, poing: { ...T.poing, sigma_lecture: sigma } });
+    if (s.ancrages.length !== 1 || s.ancrages[0].prises !== classes.length) throw new Error('poing : prises non groupées');
+    const x = s.ancrages[0];
+    return { mu: M.etatEnPoints(x.dr_observe_mm, RU_POING), sd: M.enPoints(x.incertitude_apres_mm, RU_POING), dr: x.dr_observe_mm };
+  };
+  /** Un tensiomètre à minuit, RAW donnée : RU = 2 × RAW, p = 0,5 (ETc 5 mm, p ajusté inchangé, MC-21). */
+  const tensio = (kpa: number, bas: number, haut: number, raw: number) => {
+    const [s] = suivre({
+      jours: [jour(0, { sol: solRU(2 * raw, null, 0.5), etc_mm: 5 })],
+      observations: [{ instant: a(D1, 0), type: 'tensio', kpa, bas_kpa: bas, haut_kpa: haut }],
+    }, T);
+    if (Math.abs((s.raw_mm ?? NaN) - raw) > 1e-9) throw new Error('T11 : RAW du jour d\'essai');
+    return s.ancrages[0]?.dr_observe_mm ?? null;
+  };
   return {
     T01: (e) => {
       const s = unJour(e, T);
@@ -256,10 +279,25 @@ function casTlaloc(M: Moteur): Record<string, (e: any) => Mesures> {
       const p = (etc: number) => unJour({ Dr0: 0, etc, taw: 60 }, T, {}, { sol: solRU(60, null, e.pTab) }).p;
       return { p_etc2: p(2), p_etc5: p(5), p_etc7: p(7), p_etc12: p(12) };
     },
-    T08: () => ({ mu_si_calcul40: option, sd_si_calcul40: option, mu_si_calcul60: option, sd_si_calcul60: option }),
-    T09: () => ({ mu: option, sd: option }),
-    T10: () => ({ kf: option }),
-    T11: () => ({ Dr: option, Dr_5kPa: option, Dr_80kPa: option }),
+    T08: (e) => {
+      const [c40, c60] = e.calcul_RU.map((c: number) => poing(c, e.incertitude_RU, ['correct'], e.erreurLecture));
+      return { mu_si_calcul40: c40.mu, sd_si_calcul40: c40.sd, mu_si_calcul60: c60.mu, sd_si_calcul60: c60.sd };
+    },
+    T09: (e) => {
+      const g = poing(e.calcul_RU, e.incertitude_RU, ['correct', 'correct', 'sec'], T.poing.sigma_lecture);
+      return { mu: g.mu, sd: g.sd };
+    },
+    T10: (e) => {
+      // Le relevé de T08 (calcul à 40 %, incertitude 15 points), passé par le moteur ; la formule du § 8 sur ses valeurs.
+      const r = poing(100 * (1 - e.DrAvant / e.taw), 15, ['correct'], T.poing.sigma_lecture);
+      if (Math.abs(r.dr - e.DrApres) > 1e-6) throw new Error('T10 : manque après le relevé de T08');
+      return { kf: M.kfApres(e.kf0, { dr_avant_mm: e.DrAvant, dr_apres_mm: r.dr, conso_mm: e.consoDepuisAncrage, sd_avant: 15, sd_apres: r.sd }) };
+    },
+    T11: (e) => ({
+      Dr: tensio(e.T, e.bas, e.haut, e.raw),
+      Dr_5kPa: tensio(5, e.bas, e.haut, e.raw),
+      Dr_80kPa: tensio(80, e.bas, e.haut, e.raw),
+    }),
     T12: (e) => {
       const arrosages = [{ debut: a(D1, 6), fin: null, mm: e.irrigation }];
       const pluie = { type: 'heures' as const, heures: [{ instant: a(D1, 0.6 * 24), mm: e.pluie }] };
