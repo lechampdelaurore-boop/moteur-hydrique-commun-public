@@ -1,6 +1,6 @@
 # Contrat du moteur hydrique commun : ébauche côté Tlaloc
 
-Version 0.1.2, 20 novembre 2026 (0.1 du 7 novembre, 0.1.1 du 8 novembre ; journal au § 12). Rédigée par Nicolas (Tlaloc) avec Claude, pour le dépôt commun.
+Version 0.1.3, 20 novembre 2026 (0.1 du 7 novembre, 0.1.1 du 8 novembre, 0.1.2 du 20 novembre ; journal au § 12). Rédigée par Nicolas (Tlaloc) avec Claude, pour le dépôt commun.
 
 **Ce que couvre cette ébauche** :
 - le glossaire ;
@@ -153,6 +153,8 @@ sous abri : Pe = 0
 Cas T04 : 2, 30 puis 3 mm → jeu Tlaloc 25,5 mm (7,5 ruisselés, 2 interceptés) ; jeu OTF 35 mm.
 
 Chaque heure de pluie utile est un apport placé à son heure. Le coefficient Pe / P s'applique à chaque heure.
+
+Un total du jour sans heure (pluie connue sans ses heures) se compte comme une seule heure de pluie, à 15 h (§ 4.1), ruissellement compté : 30 mm → 20,5 mm utiles dans le jeu Tlaloc. C'est le comportement actuel de Tlaloc, retenu comme réglage du jeu (`ruissellement_sans_heure`, choix 1 du moteur, tranché par Nicolas sur la PR n° 11) ; sans lui, l'interception seule.
 
 ### 5.2 Pluie prévue
 
@@ -326,3 +328,4 @@ Fichier : `cas/cas-tlaloc.json`. Chaque cas contient les entrées, la sortie att
 | 0.1 | 2026-11-07 | Nicolas (Tlaloc), avec Claude | Ébauche. |
 | 0.1.1 | 2026-11-08 | Nicolas (Tlaloc), avec Claude | Vocabulaire de la partie OTF § 1 : RU, RFU de labo, RAW (« RFU » n'est plus employé pour p × RU) ; numérotation MC-xx ; § 4.4 jours voisins = avant seulement (MC-14) ; § 11 point 7 tranché (MC-15) ; chemin des cas de test. **Aucune valeur de cas ne change.** |
 | 0.1.2 | 2026-11-20 | François (OTF), avec Claude, sur la relecture de Nicolas (PR n° 12) | § 8 : le kf appris à un relevé sert dès le lendemain du relevé, comme dans le code de Tlaloc. **Aucune valeur de cas ne change.** |
+| 0.1.3 | 2026-11-20 | François (OTF), avec Claude, sur la décision de Nicolas (PR n° 11, choix 1) | § 5.1 : un total du jour sans heure se compte comme une seule heure de pluie, à 15 h, ruissellement compté, comme Tlaloc aujourd'hui (réglage du jeu). **Aucune valeur de cas ne change.** |

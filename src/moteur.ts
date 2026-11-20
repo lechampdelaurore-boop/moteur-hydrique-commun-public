@@ -10,7 +10,7 @@
  * semver, un résultat qui change = version majeure).
  */
 
-export const VERSION_MOTEUR = '0.2.0';
+export const VERSION_MOTEUR = '0.3.0';
 
 export { suivre, pAjuste, conserver } from './bilan.ts';
 export type {

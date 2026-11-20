@@ -1,4 +1,4 @@
-/* Moteur hydrique commun (OTF et Tlaloc) v0.2.0. Licence PolyForm Shield 1.0.0 (LICENSE, NOTICE).
+/* Moteur hydrique commun (OTF et Tlaloc) v0.3.0. Licence PolyForm Shield 1.0.0 (LICENSE, NOTICE).
    Types du module ES, construits depuis src/ par scripts/construire.mjs : ne pas les modifier à la main. */
 /**
  * Les observations de terrain de Tlaloc, l'incertitude et la consommation

@@ -1,4 +1,4 @@
-# Contrat du moteur hydrique commun : version fusionnée v0.2.7 (brouillon)
+# Contrat du moteur hydrique commun : version fusionnée v0.2.8 (brouillon)
 
 16 novembre 2026 (v0.2), tenu à jour depuis (journal, § 6) ; le code du moteur est dans `src/`, son mode d'emploi dans `docs/moteur.md`. Rédigé côté OTF (François et Claude), à relire par Nicolas. Fusionne `contrat-moteur.md` (Tlaloc v0.1.1) et `contrat-moteur-partie-otf.md` (OTF v0.1.1) du dépôt commun, et y inscrit les décisions MC-17 à MC-30 et MC-31 à MC-33. **Les formules et valeurs ne sont pas recopiées ici** : elles restent dans les deux contrats sources, cités par section, tant que les cas de test ne sont pas exécutés (risque de faute de recopie). Ce document fixe la structure, les paramètres et les décisions.
 
@@ -116,6 +116,7 @@ MC-31 à MC-33 (numéros donnés par cette PR) : voir § 5 points 8 et 4 bis (ba
 
 | Version | Date | Ce qui change |
 |---|---|---|
+| 0.2.8 brouillon | 2026-11-20 | Moteur v0.3.0 : le réglage `ruissellement_sans_heure` du jeu Tlaloc (choix 1 tranché par Nicolas sur la PR n° 11 : un total du jour sans heure ruisselle comme une seule heure, à 15 h, comme Tlaloc aujourd'hui ; contrat Tlaloc § 5.1, v0.1.3) ; choix 2, 3, 5, 8 et 15 tranchés (PR n° 11 et 12). Le jeu OTF ne change pas ; aucune valeur de cas ne change. |
 | 0.2.7 brouillon | 2026-11-20 | `dist/` porte aussi les types du module ES (`moteur-hydrique.d.mts`, `types/`), construits et vérifiés avec les deux fichiers (MC-28), pour OTF ; `docs/moteur.md` : l'adaptateur d'OTF tel qu'il est écrit (couverts : bilan au moteur, consommation chez OTF ; sol nu chez OTF ; sol à 0 mm/m = sol absent), choix 21 et 22 à relire. Aucune formule ni valeur de cas ne change. |
 | 0.2.6 brouillon | 2026-11-20 | Moteur v0.2.0 : les options de Tlaloc (poing en fourchette ou au centre de sa classe, tensiomètre, incertitude, consommation apprise ; contrat Tlaloc § 7 et § 8, MC-07, MC-20, MC-22, MC-35), désactivées dans le jeu OTF ; cas T08 à T11 exécutés, tous les cas O, L et T le sont désormais ; § 5 point 10 étendu ; titre, en-tête et § 4 bis point 5 (MC-34) mis à jour (remarques de Nicolas sur la PR n° 11) ; contrat Tlaloc § 8 précisé : le kf appris sert dès le lendemain du relevé, projection comprise, comme Tlaloc (relecture de Nicolas sur la PR n° 12). Aucune formule ni valeur de cas ne change. |
 | 0.2.5 brouillon | 2026-11-20 | Moteur v0.1.0, le cœur du bilan (`src/`, `docs/moteur.md`), ses deux fichiers construits (MC-28) et ses contrôles ; MC-37 acceptée par Nicolas (PR n° 10) ; § 5 points 9 et 10 ajoutés. Aucune formule ni valeur de cas ne change. |

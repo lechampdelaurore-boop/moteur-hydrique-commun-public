@@ -23,6 +23,13 @@ export type ReglagesPluie = {
   regle_pluie_sure: boolean;
   /** Fraction du jour où l'on place une pluie sans heure, en mode horaire (15 h sur 24). */
   f_sans_heure: number;
+  /**
+   * Une pluie sans heure (un total du jour) ruisselle comme une seule heure de
+   * pluie, celle de `f_sans_heure`, comme Tlaloc aujourd'hui (choix 1, tranché
+   * par Nicolas sur la PR n° 11) ; sinon, pas de ruissellement, l'interception
+   * seule.
+   */
+  ruissellement_sans_heure: boolean;
 };
 
 export type JeuDeReglages = Reglages & {
@@ -72,6 +79,8 @@ export const JEU_OTF: JeuDeReglages = Object.freeze({
     part_prevue: 1,
     regle_pluie_sure: false,
     f_sans_heure: QUINZE_HEURES,
+    // Sans effet : aucun ruissellement chez OTF.
+    ruissellement_sans_heure: false,
   }),
   p_ajuste_chaleur: false,
   jour_inconnu: 'inconnu',
@@ -95,6 +104,7 @@ export const JEU_TLALOC: JeuDeReglages = Object.freeze({
     part_prevue: 0.5,
     regle_pluie_sure: true,
     f_sans_heure: QUINZE_HEURES,
+    ruissellement_sans_heure: true,
   }),
   p_ajuste_chaleur: true,
   jour_inconnu: 'moyenne_3_jours',
@@ -126,6 +136,7 @@ export function verifierJeu(jeu: JeuDeReglages): void {
   if (!entre(p.part_prevue, 0, 1)) throw new RangeError('pluie.part_prevue entre 0 et 1');
   if (typeof p.regle_pluie_sure !== 'boolean') throw new RangeError('pluie.regle_pluie_sure : vrai ou faux');
   if (!entre(p.f_sans_heure, 0, 1)) throw new RangeError('pluie.f_sans_heure entre 0 et 1');
+  if (typeof p.ruissellement_sans_heure !== 'boolean') throw new RangeError('pluie.ruissellement_sans_heure : vrai ou faux');
   if (jeu.jour_inconnu !== 'inconnu' && jeu.jour_inconnu !== 'moyenne_3_jours') throw new RangeError('jour_inconnu : inconnu ou moyenne_3_jours');
   if (jeu.drainage_au_redemarrage !== 'depuis_capacite' && jeu.drainage_au_redemarrage !== 'inconnu') {
     throw new RangeError('drainage_au_redemarrage : depuis_capacite ou inconnu');
