@@ -108,8 +108,9 @@ export type EntreeSuivi = {
   etat_initial?: { dr_mm: number; dmax_mm: number; incertitude_mm?: number | null } | null;
   /**
    * § 8 : la consommation apprise de l'unité (de 0,6 à 1,6) et l'instant du
-   * relevé qui l'a fixée ; 1 et null par défaut. Sans effet si le jeu ne
-   * l'apprend pas.
+   * relevé qui l'a fixée ; 1 et null par défaut. Elle vaut jusqu'au jour d'un
+   * relevé de l'appel qui apprend ; le kf appris sert dès le lendemain. Sans
+   * effet si le jeu ne l'apprend pas.
    */
   kf?: { valeur: number; depuis: string | null } | null;
   fuseau?: string;
@@ -183,7 +184,7 @@ export type JourSortie = {
   incertitude_mm: number | null;
   /** Journal des ancrages du jour, dans l'ordre (contrat Tlaloc § 3). */
   ancrages: Ancrage[];
-  /** § 8 : la consommation apprise après un relevé de ce jour, à garder par l'appelant ; null : pas apprise ce jour. */
+  /** § 8 : la consommation apprise après un relevé de ce jour, qui sert dès le lendemain dans l'appel, à garder par l'appelant ; null : pas apprise ce jour. */
   kf_apres: { valeur: number; depuis: string } | null;
 };
 
@@ -413,10 +414,11 @@ export function suivre(entree: EntreeSuivi, jeu: JeuDeReglages): JourSortie[] {
   const candidats = candidatsDAncrage(entree.observations ?? [], jeu);
   const sorties: JourSortie[] = [];
 
-  // § 8 : ETc utilisée = ETM × kf, le même kf sur tout l'appel (passé, aujourd'hui, projection).
+  // § 8 : ETc utilisée = ETM × kf. Le kf reçu vaut jusqu'au jour d'un relevé qui apprend ;
+  // le kf appris sert dès le lendemain, projection comprise, comme Tlaloc (la consommation
+  // d'un jour se calcule à son début).
   const apprend = jeu.consommation_apprise;
-  const kf = apprend ? entree.kf?.valeur ?? 1 : 1;
-  let kfAppris = kf;
+  let kfAppris = apprend ? entree.kf?.valeur ?? 1 : 1;
   let kfDepuis = apprend ? entree.kf?.depuis ?? null : null;
 
   const e0 = entree.etat_initial;
@@ -429,10 +431,12 @@ export function suivre(entree: EntreeSuivi, jeu: JeuDeReglages): JourSortie[] {
     }
     : null;
   let raison: RaisonInconnu = { code: 'pas_commence', date: null };
-  const etcConnues: number[] = [];
+  const etmConnues: number[] = [];
   let prochain = 0;
 
   for (const jour of entree.jours) {
+    // Le kf du jour : le kf reçu, ou le dernier appris avant ce jour.
+    const kf = kfAppris;
     const { debut, fin } = bornesDuJour(jour.date, fuseau);
     const duree = fin - debut;
     const nature: JourSortie['nature'] = jour.date < entree.aujourdhui ? 'estime' : 'prevu';
@@ -442,15 +446,15 @@ export function suivre(entree: EntreeSuivi, jeu: JeuDeReglages): JourSortie[] {
     const plancher = jour.sol ? jour.sol.plancher_mm : null;
     const dmax = ru === null ? null : plancher === null ? ru : Math.min(ru, plancher);
 
-    // La consommation : connue, moyenne des 3 dernières connues (MC-14), ou inconnue.
+    // La consommation : connue, moyenne des 3 dernières ETM connues (MC-14), ou inconnue ; × le kf du jour.
     let etc = jour.etc_mm === null ? null : jour.etc_mm * kf;
     let etc_estimee = false;
-    if (etc === null && jeu.jour_inconnu === 'moyenne_3_jours' && etcConnues.length > 0) {
-      const dernieres = etcConnues.slice(-JOURS_MOYENNE);
-      etc = dernieres.reduce((s, x) => s + x, 0) / dernieres.length;
+    if (etc === null && jeu.jour_inconnu === 'moyenne_3_jours' && etmConnues.length > 0) {
+      const dernieres = etmConnues.slice(-JOURS_MOYENNE);
+      etc = dernieres.reduce((s, x) => s + x, 0) / dernieres.length * kf;
       etc_estimee = true;
     }
-    if (jour.etc_mm !== null) etcConnues.push(jour.etc_mm * kf);
+    if (jour.etc_mm !== null) etmConnues.push(jour.etc_mm);
 
     const p = jour.sol?.p_tableau == null ? null : !jeu.p_ajuste_chaleur ? jour.sol.p_tableau : etc === null ? null : pAjuste(jour.sol.p_tableau, etc);
     const raw = p === null || ru === null ? null : p * ru;

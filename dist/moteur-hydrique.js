@@ -600,8 +600,7 @@ var MoteurHydrique = (() => {
     const candidats = candidatsDAncrage(entree.observations ?? [], jeu);
     const sorties = [];
     const apprend = jeu.consommation_apprise;
-    const kf = apprend ? entree.kf?.valeur ?? 1 : 1;
-    let kfAppris = kf;
+    let kfAppris = apprend ? entree.kf?.valeur ?? 1 : 1;
     let kfDepuis = apprend ? entree.kf?.depuis ?? null : null;
     const e0 = entree.etat_initial;
     const sol0 = entree.jours[0]?.sol ?? null;
@@ -614,9 +613,10 @@ var MoteurHydrique = (() => {
       ancre: false
     } : null;
     let raison = { code: "pas_commence", date: null };
-    const etcConnues = [];
+    const etmConnues = [];
     let prochain = 0;
     for (const jour of entree.jours) {
+      const kf = kfAppris;
       const { debut, fin } = bornesDuJour(jour.date, fuseau);
       const duree = fin - debut;
       const nature = jour.date < entree.aujourdhui ? "estime" : "prevu";
@@ -625,12 +625,12 @@ var MoteurHydrique = (() => {
       const dmax = ru === null ? null : plancher === null ? ru : Math.min(ru, plancher);
       let etc = jour.etc_mm === null ? null : jour.etc_mm * kf;
       let etc_estimee = false;
-      if (etc === null && jeu.jour_inconnu === "moyenne_3_jours" && etcConnues.length > 0) {
-        const dernieres = etcConnues.slice(-JOURS_MOYENNE);
-        etc = dernieres.reduce((s2, x) => s2 + x, 0) / dernieres.length;
+      if (etc === null && jeu.jour_inconnu === "moyenne_3_jours" && etmConnues.length > 0) {
+        const dernieres = etmConnues.slice(-JOURS_MOYENNE);
+        etc = dernieres.reduce((s2, x) => s2 + x, 0) / dernieres.length * kf;
         etc_estimee = true;
       }
-      if (jour.etc_mm !== null) etcConnues.push(jour.etc_mm * kf);
+      if (jour.etc_mm !== null) etmConnues.push(jour.etc_mm);
       const p = jour.sol?.p_tableau == null ? null : !jeu.p_ajuste_chaleur ? jour.sol.p_tableau : etc === null ? null : pAjuste(jour.sol.p_tableau, etc);
       const raw = p === null || ru === null ? null : p * ru;
       const avantObservation = etat !== null && dmax !== null ? conserver(etat.dr, etat.dmax, dmax, jeu.conservation) : null;

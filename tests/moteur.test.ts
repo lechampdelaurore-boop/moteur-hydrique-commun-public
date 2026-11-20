@@ -449,7 +449,7 @@ test('Consommation apprise (§ 8) : ETc = ETM × kf ; un relevé en fourchette a
   assert.ok(kf < 1, 'le relevé dit plus humide que le calcul : la consommation baisse');
   assert.deepEqual(s[4].kf_apres, { valeur: kf, depuis: m(date(4), 0) });
   assert.deepEqual(s.slice(0, 4).map((j) => j.kf_apres), [null, null, null, null]);
-  // ETc = ETM × kf, pour tout l'appel.
+  // ETc = ETM × kf reçu, jusqu'au jour du relevé qui apprend.
   const k = suivre({ jours, observations, kf: { valeur: 0.8, depuis: null } }, TLALOC);
   proche(k[1].etc_mm, 4, 'ETM 5 × 0,8');
   proche(k[3].dr_mm, 32, '16 + 4 × 4');
@@ -465,6 +465,29 @@ test('Consommation apprise (§ 8) : ETc = ETM × kf ; un relevé en fourchette a
   const o = suivre({ jours, observations, kf: { valeur: 0.8, depuis: null } }, OTF);
   proche(o[1].etc_mm, 5, 'kf sans effet');
   assert.ok(o.every((j) => j.kf_apres === null));
+});
+
+test('Consommation apprise (§ 8) : le kf appris à un relevé sert dès le lendemain, jour inconnu (MC-14) et projection compris, comme Tlaloc', () => {
+  // Manque observé 16 le jour 0 à minuit, ETM 5 mm/j, ETM inconnue le jour 7 ; poing « correct » le jour 5 à midi ; projection à partir du jour 10.
+  const jours = Array.from({ length: 15 }, (_, i) => jour(i, { sol: solRU(60), etc_mm: i === 7 ? null : 5 }));
+  const observations = [manque(m(date(0), 0), 16), poing(m(date(5), 720), 'correct')];
+  for (const recu of [1, 0.8]) {
+    const s = suivre({ aujourdhui: date(10), jours, observations, kf: { valeur: recu, depuis: null } }, TLALOC);
+    const appris = s[5].kf_apres;
+    assert.ok(appris !== null && appris.valeur !== recu, `kf ${recu} : le relevé du jour 5 apprend`);
+    const kf = appris.valeur;
+    for (let i = 1; i < 5; i += 1) proche(s[i].etc_mm, 5 * recu, `kf ${recu}, jour ${i} : le kf reçu`);
+    proche(s[5].etc_mm, 5 * recu * 0.5, `kf ${recu}, jour du relevé : le kf reçu, calculé au début du jour, après midi`);
+    proche(s[6].etc_mm, 5 * kf, `kf ${recu}, lendemain du relevé : le kf appris`);
+    proche(s[6].dr_mm, Math.min(60, (s[5].dr_mm as number) + 5 * kf), `kf ${recu}, manque du lendemain`);
+    assert.equal(s[7].etc_estimee, true);
+    proche(s[7].etc_mm, 5 * kf, `kf ${recu}, jour inconnu : moyenne des 3 dernières ETM × le kf appris`);
+    for (let i = 10; i < 15; i += 1) {
+      assert.equal(s[i].nature, 'prevu');
+      proche(s[i].etc_mm, 5 * kf, `kf ${recu}, projection, jour ${i}`);
+    }
+    assert.ok(s.every((j, i) => i === 5 || j.kf_apres === null), 'un seul relevé appris');
+  }
 });
 
 /* ------------------------------------------------------------------ */

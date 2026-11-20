@@ -109,19 +109,19 @@ Tlaloc charge `dist/moteur-hydrique.js` par une balise `<script>` (page ouverte 
 
 - Départ du calcul (14 jours avant aujourd'hui) : `etat_initial: { dr_mm: 0.5 × RAW, dmax_mm: RU }` ; l'incertitude de départ est alors 0,35 × RU (§ 7.4).
 - Relevés : les prises du poing, et les mesures du tensiomètre de moins de 12 h (cette règle reste à Tlaloc, qui choisit les mesures à passer).
-- Consommation apprise : `kf` gardé par jardin avec sa date ; le `kf_apres` du dernier jour qui en a un remplace le kf gardé. Le kf reçu vaut pour tout l'appel ; le nouveau sert au calcul suivant.
+- Consommation apprise : `kf` gardé par jardin avec sa date ; le `kf_apres` du dernier jour qui en a un remplace le kf gardé. Le kf reçu vaut jusqu'au jour d'un relevé qui apprend ; le kf appris sert dès le lendemain dans le même appel, projection comprise, comme Tlaloc aujourd'hui.
 - Relevés utiles (près du seuil, incertitude plus grande que l'écart au seuil) : côté décision, à partir de `incertitude_mm`.
 
 ## Contrôles
 
 ```text
 npm ci                       # esbuild, TypeScript, types de Node : versions figées, développement seulement
-npm run controles            # types, dist/ à jour, 60 tests
+npm run controles            # types, dist/ à jour, 61 tests
 npm run cas -- --dist        # rapport valeur par valeur des cas partagés, et les deux fichiers construits
 ```
 
 - `tests/pas-horaire.test.ts` (Nicolas, 18 tests) : le pas d'un jour.
-- `tests/moteur.test.ts` (38 tests) : les règles ci-dessus, le poing en fourchette (T08, T09) contre la référence de Tlaloc, la pluie utile et p ajusté aussi (`docs/ref-tlaloc/ref-tlaloc.mjs`), les entrées refusées.
+- `tests/moteur.test.ts` (39 tests) : les règles ci-dessus, le poing en fourchette (T08, T09) contre la référence de Tlaloc, la pluie utile et p ajusté aussi (`docs/ref-tlaloc/ref-tlaloc.mjs`), les entrées refusées.
 - `tests/cas.test.ts` (4 tests) : aucun cas en écart, plus rien à venir ; les deux fichiers construits donnent les mêmes résultats que `src/` ; le script classique ne pose que `MoteurHydrique` ; la version est la même partout.
 - Comparaison avec la jauge d'OTF, depuis une copie du module : `node --experimental-strip-types --no-warnings --import ./tests/support/register.mjs <dépôt commun>/scripts/comparer-jauge-otf.ts [graine] [suites]`.
 
@@ -152,5 +152,5 @@ npm run cas -- --dist        # rapport valeur par valeur des cas partagés, et l
 16. **Poing en fourchette sur un état inconnu : a priori plat** (la vraisemblance des prises seule). Sans fourchette : le centre de la classe de chaque prise, chacune seule, sans regroupement.
 17. **Tensiomètre** : « moins de 12 h » reste à l'appelant, qui ne passe que les mesures à prendre ; « relevé de terrain » = une prise du poing ou un manque observé, dans les 48 h avant la mesure (même instant compris) ; une mesure sans RAW connue (p inconnu) est ignorée.
 18. **Incertitude** : calculée dans les deux jeux (OTF ne l'affiche pas, MC-20) ; les erreurs de consommation s'additionnent, comme une erreur de Kc, qui ne se compense pas d'un jour à l'autre ; 0 après un redémarrage par remplissage (plein le soir, quel que soit le départ) ; inchangée quand Dmax change (MC-11) ; inconnue avec l'état. Une incertitude passée au départ vaut sdR ; l'erreur de consommation repart de 0.
-19. **Consommation apprise** : le kf reçu vaut pour tout l'appel (passé, aujourd'hui, projection, § 8) ; plusieurs relevés d'un appel s'enchaînent, chacun à partir du kf appris au précédent ; « un ancrage précède dans la fenêtre » = une observation ou un redémarrage par remplissage plus tôt dans l'appel, sans état inconnu entre les deux ; un relevé à 2 mm ou moins de l'ancrage précédent n'apprend rien et n'est pas compté comme appris. Un `kf` passé avec un jeu qui n'apprend pas (OTF) est ignoré.
+19. **Consommation apprise** : le kf reçu vaut jusqu'au jour d'un relevé qui apprend ; le kf appris sert **dès le lendemain**, jours passés, aujourd'hui et projection (§ 8), comme Tlaloc, dont la consommation d'un jour se calcule à son début (relecture de Nicolas, PR n° 12) ; un jour à ETM inconnue (MC-14) prend la moyenne des 3 dernières ETM connues × le kf du jour ; plusieurs relevés d'un appel s'enchaînent, chacun à partir du kf appris au précédent ; « un ancrage précède dans la fenêtre » = une observation ou un redémarrage par remplissage plus tôt dans l'appel, sans état inconnu entre les deux ; un relevé à 2 mm ou moins de l'ancrage précédent n'apprend rien et n'est pas compté comme appris. Un `kf` passé avec un jeu qui n'apprend pas (OTF) est ignoré.
 20. **Version 0.2.0** : l'interface change (`ancrages`, champs ajoutés), aucun résultat d'OTF ne change ; en 0.x, semver permet un changement d'interface dans une version mineure.

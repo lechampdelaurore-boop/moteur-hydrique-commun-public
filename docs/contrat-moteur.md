@@ -1,6 +1,6 @@
 # Contrat du moteur hydrique commun : ébauche côté Tlaloc
 
-Version 0.1.1, 8 novembre 2026 (0.1 du 7 novembre ; journal au § 12). Rédigée par Nicolas (Tlaloc) avec Claude, pour le dépôt commun.
+Version 0.1.2, 20 novembre 2026 (0.1 du 7 novembre, 0.1.1 du 8 novembre ; journal au § 12). Rédigée par Nicolas (Tlaloc) avec Claude, pour le dépôt commun.
 
 **Ce que couvre cette ébauche** :
 - le glossaire ;
@@ -250,6 +250,7 @@ Quand un relevé au poing corrige le calcul, la consommation de l'unité est aju
 
 ```
 ETc_utilisée = ETM × kf          (passé, aujourd'hui et projection)
+le kf appris à un relevé sert dès le lendemain du relevé (la consommation d'un jour se calcule à son début)
 après un relevé en fourchette, si un ancrage précède dans la fenêtre et que C > 2 mm :
   gain = 0,3 × max(0, 1 − (sd après / sd avant)²)
   kf ← clamp( kf × clamp(1 + gain × (Dr après − Dr avant) / C, 0,85, 1,18), 0,6, 1,6 )
@@ -324,3 +325,4 @@ Fichier : `cas/cas-tlaloc.json`. Chaque cas contient les entrées, la sortie att
 |---|---|---|---|
 | 0.1 | 2026-11-07 | Nicolas (Tlaloc), avec Claude | Ébauche. |
 | 0.1.1 | 2026-11-08 | Nicolas (Tlaloc), avec Claude | Vocabulaire de la partie OTF § 1 : RU, RFU de labo, RAW (« RFU » n'est plus employé pour p × RU) ; numérotation MC-xx ; § 4.4 jours voisins = avant seulement (MC-14) ; § 11 point 7 tranché (MC-15) ; chemin des cas de test. **Aucune valeur de cas ne change.** |
+| 0.1.2 | 2026-11-20 | François (OTF), avec Claude, sur la relecture de Nicolas (PR n° 12) | § 8 : le kf appris à un relevé sert dès le lendemain du relevé, comme dans le code de Tlaloc. **Aucune valeur de cas ne change.** |
