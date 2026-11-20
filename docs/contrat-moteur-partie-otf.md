@@ -38,7 +38,7 @@ ETM(culture, jour) = ET0 × K_abri × Kc × K_paillage × K_ombrage      [mm/j]
 
 | Facteur | Valeur | Notes |
 |---|---|---|
-| ET0 | donnée d'entrée avec sa nature ; **0 ≤ ET0 ≤ 12 mm/j**, hors bornes le jour est bloqué et la dernière valeur valide reste | une ET0 inconnue rend l'ETM inconnue, jamais 0 |
+| ET0 | donnée d'entrée avec sa nature ; **0 ≤ ET0 ≤ 15 mm/j** (MC-37, ancienne borne haute 12 mm/j), hors bornes le jour est bloqué et la dernière valeur valide reste | une ET0 inconnue rend l'ETM inconnue, jamais 0 |
 | K_abri | 1 en plein champ ; sous abri 0,8 par défaut, réglable de 0,6 à 1, **refus hors 0,5–1** | choix de François : on garde 0,8 [MC-06] ; Tlaloc garde 0,7 dans son jeu |
 | Kc | § 4 | un Kc de 0 est un arrêt d'irrigation avant récolte, pas une anomalie |
 | K_paillage | 0,9 si la planche porte un paillage plastique pour la saison civile, sinon 1 | multiplie le Kc, pour ne jamais donner un Kc négatif |

@@ -1,0 +1,52 @@
+# Contrôles du moteur, à chaque PR et sur main (dépôt public : minutes gratuites).
+name: Contrôles
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  moteur:
+    name: Types, fichiers construits, tests et cas
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # Types, dist/ à jour (MC-28), tests (règles, cas partagés, les deux fichiers construits).
+      - run: npm run controles
+      - run: npm run cas -- --dist
+
+  jauge-otf:
+    name: Jeu OTF contre la jauge d'OTF
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: moteur
+      # Le module d'OTF (dépôt public), figé à un commit : seul son code du domaine et ses aides de test sont lus.
+      - uses: actions/checkout@v4
+        with:
+          repository: lechampdelaurore-boop/module-irrigation-otf-public
+          ref: 96f8d9dcd673dd8e7ae99bf0fe93f141de28c293
+          path: otf
+          sparse-checkout: |
+            lib
+            tests/support
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      # 2 000 suites de jours tirées au hasard, sur src/ puis sur le module ES construit.
+      - working-directory: otf
+        run: node --experimental-strip-types --no-warnings --import ./tests/support/register.mjs ../moteur/scripts/comparer-jauge-otf.ts 1 2000
+      - working-directory: otf
+        env:
+          MOTEUR: ../moteur/dist/moteur-hydrique.mjs
+        run: node --experimental-strip-types --no-warnings --import ./tests/support/register.mjs ../moteur/scripts/comparer-jauge-otf.ts 2 2000

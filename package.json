@@ -1,0 +1,24 @@
+{
+  "name": "moteur-hydrique-commun",
+  "version": "0.3.0",
+  "private": true,
+  "description": "Moteur hydrique commun d'OTF et de Tlaloc : bilan de la réserve du sol jour par jour.",
+  "license": "SEE LICENSE IN LICENSE",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "build": "node scripts/construire.mjs",
+    "build:check": "node scripts/construire.mjs --verifier",
+    "typecheck": "tsc -p tsconfig.json",
+    "test": "node --test --experimental-strip-types tests/*.test.ts",
+    "cas": "node --experimental-strip-types scripts/cas.ts",
+    "controles": "npm run typecheck && npm run build:check && npm test"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "esbuild": "0.28.2",
+    "typescript": "6.0.3"
+  }
+}

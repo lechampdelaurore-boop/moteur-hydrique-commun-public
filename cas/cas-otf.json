@@ -376,24 +376,28 @@
   {
    "id": "L6",
    "titre": "ET0 hors bornes",
-   "decision": "ETM (partie OTF §3)",
-   "statut": "écrit pour le script des cas de test du module (contrat docs/shared-engine-cases-contract.md, D-116), exécuté sur le code OTF le 14 novembre 2026 (commit 360a73e), conforme",
+   "decision": "ETM (partie OTF §3) ; MC-37",
+   "statut": "bornes 0 à 15 mm/j proposées le 20 novembre 2026 (MC-37, décision de François du 19/11) ; à exécuter sur le code OTF une fois la borne changée dans le module (version précédente, bornes 0 à 12, exécutée le 14 novembre 2026, commit 360a73e, conforme)",
    "entrees": {
     "et0": [
-     12,
-     12.5,
+     11.9,
+     12.1,
+     14.9,
+     15.1,
      -0.1
     ],
     "kc": 1
    },
    "attendu": {
-    "et0_12": "calculée",
-    "et0_12_5": "jour bloqué, message qui nomme l'ET0",
+    "et0_11_9": "calculée",
+    "et0_12_1": "calculée",
+    "et0_14_9": "calculée",
+    "et0_15_1": "jour bloqué, message qui nomme l'ET0",
     "et0_moins_0_1": "jour bloqué, message qui nomme l'ET0",
     "jauge_etat": null,
     "jauge_raison": "bloqué"
    },
-   "note": "Bornes comprises : 0 ≤ ET0 ≤ 12 mm/j."
+   "note": "Bornes comprises : 0 ≤ ET0 ≤ 15 mm/j (MC-37). Avant MC-37 : 0 à 12 mm/j, avec les valeurs limites 12 (calculée) et 12,5 (bloquée)."
   },
   {
    "id": "L7",
