@@ -1,6 +1,6 @@
 # Contrat du moteur hydrique commun : ébauche côté Tlaloc
 
-Version 0.1.3, 20 novembre 2026 (0.1 du 7 novembre, 0.1.1 du 8 novembre, 0.1.2 du 20 novembre ; journal au § 12). Rédigée par Nicolas (Tlaloc) avec Claude, pour le dépôt commun.
+Version 0.1.4, 20 novembre 2026 (0.1 du 7 novembre, 0.1.1 du 8 novembre, 0.1.2 et 0.1.3 du 20 novembre ; journal au § 12). Rédigée par Nicolas (Tlaloc) avec Claude, pour le dépôt commun.
 
 **Ce que couvre cette ébauche** :
 - le glossaire ;
@@ -109,6 +109,8 @@ entre deux instants f1 < f2 :   Dr = min(Dmax, Dr + ETc × (f2 − f1))
 fin de journée :                Dr = min(Dmax, Dr + ETc × (1 − f_dernier))
 pluie du modèle sans heure : un seul apport à f = 15/24
 ```
+
+Un arrosage avec une durée (`debut`, `fin`) est un seul apport, compté en entier à son début (jeu Tlaloc, § 11 point 8 ; MC-13 ne s'applique pas ici).
 
 ### 4.2 Mode journalier (jeu OTF) [MC-04]
 
@@ -311,13 +313,14 @@ Fichier : `cas/cas-tlaloc.json`. Chaque cas contient les entrées, la sortie att
 
 ## 11. Points à trancher
 
-1. § 4.2 : sens exact de « résultats identiques » (proposition : le jeu OTF en journalier reproduit OTF à l'identique).
-2. § 4.4 : que devient l'état après un jour sans ET0 ou sans pluie connue (le jeu Tlaloc reste à valider ; « jours voisins » = avant seulement, MC-14).
-3. § 6 : p ajusté à la chaleur, en option ou non.
-4. § 7.2 : à quoi se rapporte « % du plein », et l'incertitude après cette observation.
-5. § 7.3 : calage du tensiomètre (Watermark) sur des relevés.
-6. Bassinages courts sous serre comptés en partie : dans le moteur (efficacité d'application) ou dans la décision.
+1. ~~§ 4.2 : sens exact de « résultats identiques »~~ : tranché, le jeu OTF en journalier reproduit OTF à 0,01 mm près (non-régression) ; le 1 % ne sert qu'à comparer les deux moteurs au banc **[MC-29, MC-30]**.
+2. ~~§ 4.4 : état après un jour sans ET0 ou sans pluie connue~~ : tranché, jeu OTF « inconnu » jusqu'au remplissage ou à une observation **[MC-23]** ; jeu Tlaloc : ETc inconnue → moyenne des 3 derniers jours connus avant, avec incertitude **[MC-14]** ; **pluie inconnue → jour inconnu**, jamais 0 mm, comme le moteur **[MC-09]** (choix 2 du moteur, tranché sur la PR n° 11) : l'adaptateur de Tlaloc passe la pluie de la météo (prévision ou archive) quand il l'a.
+3. ~~§ 6 : p ajusté à la chaleur~~ : tranché, option, activée dans le jeu Tlaloc, désactivée dans le jeu OTF **[MC-21]**.
+4. ~~§ 7.2 : « % du plein »~~ : tranché, capacité suivie, incertitude 0,05 × RU (jeu OTF) ; non utilisé dans le jeu Tlaloc **[MC-22]**.
+5. § 7.3 : calage du tensiomètre (Watermark) : **côté Tlaloc** (Nicolas, ticket n° 1, 15/11) ; l'option reste dans le moteur, désactivée dans le jeu OTF (MC-20) ; la conversion de Shock (1998) avec correction de température remplacera la conversion linéaire par une PR de Nicolas **[MC-35]**.
+6. Bassinages courts sous serre : **dans le moteur** (Nicolas, ticket n° 1, 15/11), type d'événement « bassinage » avec un coefficient d'efficacité : 0,25 pour 10 min ou moins (jeu Tlaloc), 1 (jeu OTF, aucun résultat ne change) ; la part non comptée n'entre pas dans la réserve et ne compte ni en drainage ni en eau perdue **[MC-34]**.
 7. ~~Ordre des apports à la même heure~~ : tranché, pluie d'abord puis arrosage **[MC-15]**.
+8. ~~Arrosage avec une durée, mode horaire~~ : tranché pour le jeu Tlaloc, compté en entier à son début, comme Tlaloc aujourd'hui et le pas de calcul fusionné (`docs/pas-horaire.md`, choix 2) ; le découpage en tranches horaires de **[MC-13]** (partie OTF § 8 point 1) ne s'applique pas au jeu Tlaloc (choix 8 du moteur, tranché sur la PR n° 11 ; cas T02 inchangé). Aucun chiffre d'OTF n'en dépend (journalier).
 
 ---
 
@@ -329,3 +332,4 @@ Fichier : `cas/cas-tlaloc.json`. Chaque cas contient les entrées, la sortie att
 | 0.1.1 | 2026-11-08 | Nicolas (Tlaloc), avec Claude | Vocabulaire de la partie OTF § 1 : RU, RFU de labo, RAW (« RFU » n'est plus employé pour p × RU) ; numérotation MC-xx ; § 4.4 jours voisins = avant seulement (MC-14) ; § 11 point 7 tranché (MC-15) ; chemin des cas de test. **Aucune valeur de cas ne change.** |
 | 0.1.2 | 2026-11-20 | François (OTF), avec Claude, sur la relecture de Nicolas (PR n° 12) | § 8 : le kf appris à un relevé sert dès le lendemain du relevé, comme dans le code de Tlaloc. **Aucune valeur de cas ne change.** |
 | 0.1.3 | 2026-11-20 | François (OTF), avec Claude, sur la décision de Nicolas (PR n° 11, choix 1) | § 5.1 : un total du jour sans heure se compte comme une seule heure de pluie, à 15 h, ruissellement compté, comme Tlaloc aujourd'hui (réglage du jeu). **Aucune valeur de cas ne change.** |
+| 0.1.4 | 2026-11-20 | Nicolas (Tlaloc), avec Claude (PR n° 5, ouverte le 17/11) | Cas T01 à T12 exécutés sur le vrai code de Tlaloc v458 (test `tests/moteur-commun/moteur-commun-T.mjs` du dépôt Tlaloc) : tous conformes à 0,01 près ; statut ajouté à chaque cas dans `cas/cas-tlaloc.json` (v0.2), avec les précisions sur T03, T10 et T11 ; § 11 mis à jour avec les décisions MC-14 à MC-30 et les réponses de Nicolas du 15/11 (bassinage MC-34, tensiomètre MC-35). § 11 point 2 complété : pluie inconnue dans le jeu Tlaloc = jour inconnu (MC-09, choix 2 du moteur, tranché sur la PR n° 11) ; § 4.1 et § 11 point 8 : arrosage avec une durée compté en entier à son début dans le jeu Tlaloc (MC-13, choix 8, tranché sur la PR n° 11). **Aucune valeur attendue ne change.** |

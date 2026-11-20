@@ -1,12 +1,14 @@
 {
- "version": "0.1.1",
- "date": "2026-11-08",
- "source": "Tlaloc v184, implémentation de référence ref-tlaloc.mjs",
+ "version": "0.2",
+ "date": "2026-11-17",
+ "source": "Valeurs attendues : implémentation de référence ref-tlaloc.mjs (formules de Tlaloc v184). Exécution : code de Tlaloc v458, voir le statut de chaque cas.",
+ "tolerance": 0.01,
  "cas": [
   {
    "id": "T01",
    "titre": "Journée sèche, aucun apport",
    "decision": "bilan",
+   "statut": "exécuté sur le code de Tlaloc v458 le 17 novembre 2026 (dépôt Tlaloc, commit 9ec95bd, test tests/moteur-commun/moteur-commun-T.mjs), conforme",
    "entrees": {
     "Dr0": 5,
     "etc": 4,
@@ -23,6 +25,7 @@
    "id": "T02",
    "titre": "Arrosage de 6 mm à 6 h, sol à 2 mm de manque",
    "decision": "pas de temps (MC-04)",
+   "statut": "exécuté sur le code de Tlaloc v458 le 17 novembre 2026 (dépôt Tlaloc, commit 9ec95bd, test tests/moteur-commun/moteur-commun-T.mjs), conforme",
    "entrees": {
     "Dr0": 2,
     "etc": 4.8,
@@ -47,6 +50,7 @@
    "id": "T03",
    "titre": "Pluie utile de 20 mm à 15 h, manque de 10 mm",
    "decision": "eau perdue",
+   "statut": "exécuté sur le code de Tlaloc v458 le 17 novembre 2026 (dépôt Tlaloc, commit 9ec95bd, test tests/moteur-commun/moteur-commun-T.mjs), conforme ; seuls le manque Dr et l'eau arrosée en trop sont vérifiés (le drainage de la pluie n'est pas une sortie du calcul de Tlaloc)",
    "entrees": {
     "Dr0": 10,
     "etc": 3,
@@ -70,6 +74,7 @@
    "id": "T04",
    "titre": "Averse : 2, 30 puis 3 mm en trois heures",
    "decision": "pluie utile (MC-05)",
+   "statut": "exécuté sur le code de Tlaloc v458 le 17 novembre 2026 (dépôt Tlaloc, commit 9ec95bd, test tests/moteur-commun/moteur-commun-T.mjs), conforme",
    "entrees": {
     "heures": [
      2,
@@ -88,6 +93,7 @@
    "id": "T05",
    "titre": "Pluie prévue de 8 mm, modèles en désaccord puis d'accord",
    "decision": "pluie utile (MC-05)",
+   "statut": "exécuté sur le code de Tlaloc v458 le 17 novembre 2026 (dépôt Tlaloc, commit 9ec95bd, test tests/moteur-commun/moteur-commun-T.mjs), conforme",
    "entrees": {
     "prevue": 8,
     "modeles_desaccord": [
@@ -112,6 +118,7 @@
    "id": "T06",
    "titre": "6 jours secs (ETc 5 mm), puis 15 mm de pluie ; RU 48 mm, RFU de labo 32 mm",
    "decision": "plancher (MC-02)",
+   "statut": "exécuté sur le code de Tlaloc v458 le 17 novembre 2026 (dépôt Tlaloc, commit 9ec95bd, test tests/moteur-commun/moteur-commun-T.mjs), conforme",
    "entrees": {
     "Dr0": 30,
     "etc": 5,
@@ -130,6 +137,7 @@
    "id": "T07",
    "titre": "Part facile p ajustée à la chaleur",
    "decision": "p (à trancher)",
+   "statut": "exécuté sur le code de Tlaloc v458 le 17 novembre 2026 (dépôt Tlaloc, commit 9ec95bd, test tests/moteur-commun/moteur-commun-T.mjs), conforme",
    "entrees": {
     "pTab": 0.4,
     "etc": [
@@ -151,6 +159,7 @@
    "id": "T08",
    "titre": "Test du poing « Correct » (50–75 % de RU)",
    "decision": "observation poing (option)",
+   "statut": "exécuté sur le code de Tlaloc v458 le 17 novembre 2026 (dépôt Tlaloc, commit 9ec95bd, test tests/moteur-commun/moteur-commun-T.mjs), conforme",
    "entrees": {
     "calcul_RU": [
      40,
@@ -171,6 +180,7 @@
    "id": "T09",
    "titre": "Trois prises notées dans l'heure : Correct, Correct, Sec",
    "decision": "observation poing (option)",
+   "statut": "exécuté sur le code de Tlaloc v458 le 17 novembre 2026 (dépôt Tlaloc, commit 9ec95bd, test tests/moteur-commun/moteur-commun-T.mjs), conforme",
    "entrees": {
     "calcul_RU": 40,
     "incertitude_RU": 15
@@ -185,6 +195,7 @@
    "id": "T10",
    "titre": "Consommation apprise après le relevé de T08 (calcul à 40 %)",
    "decision": "consommation apprise (option)",
+   "statut": "exécuté sur le code de Tlaloc v458 le 17 novembre 2026 (dépôt Tlaloc, commit 9ec95bd, test tests/moteur-commun/moteur-commun-T.mjs), conforme sur la formule : les entrées du cas ne se reproduisent pas telles quelles dans une ferme ; le test vérifie le code contre ref-tlaloc.mjs avec les entrées du banc (calcul 40 %, incertitude 8,33 points, 20 mm consommés)",
    "entrees": {
     "taw": 60,
     "DrAvant": 36,
@@ -201,6 +212,7 @@
    "id": "T11",
    "titre": "Tensiomètre à 30 kPa, seuils 10 et 60 kPa, RAW 20 mm",
    "decision": "observation tensiomètre",
+   "statut": "exécuté sur le code de Tlaloc v458 le 17 novembre 2026 (dépôt Tlaloc, commit 9ec95bd, test tests/moteur-commun/moteur-commun-T.mjs), conforme ; résultat ramené à une RAW de 20 mm",
    "entrees": {
     "T": 30,
     "bas": 10,
@@ -218,6 +230,7 @@
    "id": "T12",
    "titre": "Journée sans débordement : horaire et journalier égaux",
    "decision": "pas de temps (MC-04)",
+   "statut": "exécuté sur le code de Tlaloc v458 le 17 novembre 2026 (dépôt Tlaloc, commit 9ec95bd, test tests/moteur-commun/moteur-commun-T.mjs), conforme",
    "entrees": {
     "Dr0": 20,
     "etc": 4,

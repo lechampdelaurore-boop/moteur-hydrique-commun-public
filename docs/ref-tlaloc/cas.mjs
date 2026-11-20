@@ -4,7 +4,14 @@ import { writeFileSync } from 'fs';
 const r2 = x => typeof x === 'number' ? Math.round(x * 100) / 100 : x;
 const rnd = o => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, r2(v)]));
 const cas = [];
-const add = (id, titre, decision, entrees, attendu, note) => cas.push({ id, titre, decision, entrees, attendu: rnd(attendu), note });
+// Exécution sur le vrai code de Tlaloc : test tests/moteur-commun/moteur-commun-T.mjs du dépôt nicolasmieral-wq/tlaloc
+const EXEC = 'exécuté sur le code de Tlaloc v458 le 17 novembre 2026 (dépôt Tlaloc, commit 9ec95bd, test tests/moteur-commun/moteur-commun-T.mjs), conforme';
+const STATUT = {
+  T03: EXEC + ' ; seuls le manque Dr et l\'eau arrosée en trop sont vérifiés (le drainage de la pluie n\'est pas une sortie du calcul de Tlaloc)',
+  T10: EXEC + ' sur la formule : les entrées du cas ne se reproduisent pas telles quelles dans une ferme ; le test vérifie le code contre ref-tlaloc.mjs avec les entrées du banc (calcul 40 %, incertitude 8,33 points, 20 mm consommés)',
+  T11: EXEC + ' ; résultat ramené à une RAW de 20 mm',
+};
+const add = (id, titre, decision, entrees, attendu, note) => cas.push({ id, titre, decision, statut: STATUT[id] || EXEC, entrees, attendu: rnd(attendu), note });
 
 // T01 journée sèche
 add('T01', 'Journée sèche, aucun apport', 'bilan', { Dr0: 5, etc: 4, taw: 60 },
@@ -49,5 +56,5 @@ add('T11', 'Tensiomètre à 30 kPa, seuils 10 et 60 kPa, RAW 20 mm', 'observatio
 { const h = R.jourHoraire({ Dr0: 20, etc: 4, taw: 60, apports: [{ f: 0.25, mm: 5, type: 'irrigation' }, { f: 0.6, mm: 3, type: 'pluie' }] }), j = R.jourJournalier({ Dr0: 20, etc: 4, taw: 60, irrigation: 5, pluie: 3 });
   add('T12', 'Journée sans débordement : horaire et journalier égaux', 'pas de temps (MC-04)', { Dr0: 20, etc: 4, irrigation: 5, pluie: 3 }, { Dr_horaire: h.Dr, Dr_journalier: j.Dr },
     'Condition pour « résultats identiques » : aucun apport n\'arrive sur un sol plein dans la journée. Sinon, le contrat doit dire lequel des deux fait foi pour le jeu OTF (proposition : le journalier, ordre « tout le jour en une fois »).'); }
-writeFileSync(new URL('../../cas/cas-tlaloc.json', import.meta.url), JSON.stringify({ version: '0.1.1', date: '2026-11-08', source: 'Tlaloc v184, implémentation de référence ref-tlaloc.mjs', cas }, null, 1));
+writeFileSync(new URL('../../cas/cas-tlaloc.json', import.meta.url), JSON.stringify({ version: '0.2', date: '2026-11-17', source: 'Valeurs attendues : implémentation de référence ref-tlaloc.mjs (formules de Tlaloc v184). Exécution : code de Tlaloc v458, voir le statut de chaque cas.', tolerance: 0.01, cas }, null, 1));
 for (const c of cas) console.log(c.id, c.titre, JSON.stringify(c.attendu));
