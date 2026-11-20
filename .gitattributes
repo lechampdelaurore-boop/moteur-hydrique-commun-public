@@ -1,3 +1,5 @@
 # Les fichiers construits sont comparés octet par octet (npm run build:check) : fins de ligne LF partout, même sous Windows.
 dist/*.js text eol=lf
 dist/*.mjs text eol=lf
+dist/*.d.mts text eol=lf
+dist/types/*.d.ts text eol=lf

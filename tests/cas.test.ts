@@ -49,3 +49,18 @@ test('La version du moteur est celle de package.json, et chaque fichier construi
     assert.ok(lire(fichier).startsWith(`/* Moteur hydrique commun (OTF et Tlaloc) v${version}.`), `${fichier} : en-tête de version`);
   }
 });
+
+test('Les types de dist/ déclarent chaque valeur du module ES, à la même version (pour OTF)', async () => {
+  const { version } = JSON.parse(lire('../package.json'));
+  const { mjs } = await chargerDist();
+  const types = lire('../dist/types/moteur.d.ts');
+  const valeurs = new Set<string>();
+  for (const [, liste] of types.matchAll(/^export \{([^}]*)\} from/gm)) {
+    for (const nom of liste.split(',')) if (nom.trim() !== '') valeurs.add(nom.trim());
+  }
+  for (const [, nom] of types.matchAll(/^export declare (?:const|function) (\w+)/gm)) valeurs.add(nom);
+  assert.deepEqual([...valeurs].sort(), Object.keys(mjs).sort());
+  assert.match(types, new RegExp(`VERSION_MOTEUR = "${version.replaceAll('.', '\\.')}"`));
+  assert.ok(lire('../dist/moteur-hydrique.d.mts').startsWith(`/* Moteur hydrique commun (OTF et Tlaloc) v${version}.`), 'en-tête de version');
+  assert.doesNotMatch(types, /from '\.[^']*\.ts'/, 'des imports en .js, lisibles par tout projet TypeScript');
+});
