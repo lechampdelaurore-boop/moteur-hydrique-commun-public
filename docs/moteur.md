@@ -92,14 +92,15 @@ La projection n'est qu'un `suivre` sur des jours à venir, avec la pluie prévue
 
 ## Comment OTF s'en servira (adaptateur, PR à venir dans le module)
 
-Le module importe `dist/moteur-hydrique.mjs` à une version figée. L'adaptateur traduit sans rien calculer du bilan :
-- sol : θu = RFU du sol ÷ part de référence ; zr = profondeur de la planche (plafond compris) ; p = le plus petit p des cultures ; plancher = capacité (RFU du sol × profondeur), d'où Dmax = la capacité ;
+Le module copie `dist/moteur-hydrique.mjs` et ses types (`dist/moteur-hydrique.d.mts`, `dist/types/`) à une version figée, avec l'empreinte de chaque fichier. L'adaptateur (`docs/shared-engine-adapter-contract.md` du module) traduit sans rien calculer du bilan, en un appel par tronçon de jours consécutifs à un compartiment :
+- sol : θu = capacité ÷ profondeur ÷ part de référence (la RFU du sol ÷ part de référence) ; zr = profondeur de la planche (plafond compris) ; p = le plus petit p des cultures (0,5 pour un engrais vert, aucun pour une planche enherbée) ; plancher = capacité, d'où Dmax = la capacité ; un sol à 0 mm/m (une faute de saisie, le moteur refuse θu = 0) vaut un sol absent ;
 - ETM : `etmMm` si le jour est calculé ; sinon `null`, avec la raison d'OTF (`missing-et0`, `blocked`, `crop-without-etm`) dans `etc_raison` ;
 - pluie : pluviomètre, réanalyse et prévision enregistrée d'un jour passé en `jour` ; prévision en `prevue` ; R2 dans le jeu ; part sous paillage plastique dans `part_paillage` ; sous abri `abri: true` ;
 - observations de la planche (son jardin, ou sa parcelle en plein champ) converties en manque, triées par heure puis par enregistrement ;
+- couverts (engrais vert levé ou couvrant, planche enherbée) : leur consommation (ET0 × K_abri × Kc du couvert) est calculée par OTF, hors moteur (MC-18) ; leur bilan à un compartiment, comme une culture, passe au moteur (choix 21) ;
+- sol nu (nu, bâché, paillé, engrais vert détruit) : ses deux compartiments restent dans OTF (MC-18) ; le tronçon qui le suit part de son état (`etat_initial`), qui garde son % du plein ;
 - jours sans sol de la planche (« no-soil ») : le suivi est coupé et repart de zéro après eux, comme chez OTF ;
-- retour : état = capacité − Dr ; drainage d'un jour inconnu affiché 0 comme aujourd'hui ; raisons rendues dans les mots d'OTF (`sol_inconnu` → `crop-without-etm`) ; ni poing, ni tensiomètre, ni kf passés, incertitude pas affichée (MC-20) ;
-- sol nu et couverts : restent dans OTF (MC-18), avec le passage du % du plein entre les modes.
+- retour : état = capacité − Dr ; drainage d'un jour inconnu affiché 0 comme aujourd'hui ; raisons rendues dans les mots d'OTF (`sol_inconnu` → `crop-without-etm`, `pas_commence` → la raison d'avant le tronçon) ; ni poing, ni tensiomètre, ni kf passés, incertitude pas affichée (MC-20).
 
 Le script `scripts/comparer-jauge-otf.ts` joue cet adaptateur sur des suites de jours tirées au hasard et compare chaque jour au vrai code de la jauge d'OTF (`bedSoilReserve`, planche cultivée) : état, départ, capacité, drainage, eau arrosée en trop, pluie, arrosage et consommation comptés, fraction, redémarrage, raison, nature, % du plein. Il tourne à chaque PR sur un commit figé du module.
 
@@ -116,16 +117,16 @@ Tlaloc charge `dist/moteur-hydrique.js` par une balise `<script>` (page ouverte 
 
 ```text
 npm ci                       # esbuild, TypeScript, types de Node : versions figées, développement seulement
-npm run controles            # types, dist/ à jour, 61 tests
+npm run controles            # types, dist/ à jour, 62 tests
 npm run cas -- --dist        # rapport valeur par valeur des cas partagés, et les deux fichiers construits
 ```
 
 - `tests/pas-horaire.test.ts` (Nicolas, 18 tests) : le pas d'un jour.
 - `tests/moteur.test.ts` (39 tests) : les règles ci-dessus, le poing en fourchette (T08, T09) contre la référence de Tlaloc, la pluie utile et p ajusté aussi (`docs/ref-tlaloc/ref-tlaloc.mjs`), les entrées refusées.
-- `tests/cas.test.ts` (4 tests) : aucun cas en écart, plus rien à venir ; les deux fichiers construits donnent les mêmes résultats que `src/` ; le script classique ne pose que `MoteurHydrique` ; la version est la même partout.
+- `tests/cas.test.ts` (5 tests) : aucun cas en écart, plus rien à venir ; les deux fichiers construits donnent les mêmes résultats que `src/` ; le script classique ne pose que `MoteurHydrique` ; la version est la même partout ; les types de `dist/` déclarent chaque valeur du module ES.
 - Comparaison avec la jauge d'OTF, depuis une copie du module : `node --experimental-strip-types --no-warnings --import ./tests/support/register.mjs <dépôt commun>/scripts/comparer-jauge-otf.ts [graine] [suites]`.
 
-`npm run build` reconstruit `dist/` après un changement de `src/` ; `build:check` échoue si on l'a oublié.
+`npm run build` reconstruit `dist/` (les deux fichiers et les types) après un changement de `src/` ; `build:check` échoue si on l'a oublié.
 
 ## Choix à relire
 
@@ -154,3 +155,8 @@ npm run cas -- --dist        # rapport valeur par valeur des cas partagés, et l
 18. **Incertitude** : calculée dans les deux jeux (OTF ne l'affiche pas, MC-20) ; les erreurs de consommation s'additionnent, comme une erreur de Kc, qui ne se compense pas d'un jour à l'autre ; 0 après un redémarrage par remplissage (plein le soir, quel que soit le départ) ; inchangée quand Dmax change (MC-11) ; inconnue avec l'état. Une incertitude passée au départ vaut sdR ; l'erreur de consommation repart de 0.
 19. **Consommation apprise** : le kf reçu vaut jusqu'au jour d'un relevé qui apprend ; le kf appris sert **dès le lendemain**, jours passés, aujourd'hui et projection (§ 8), comme Tlaloc, dont la consommation d'un jour se calcule à son début (relecture de Nicolas, PR n° 12) ; un jour à ETM inconnue (MC-14) prend la moyenne des 3 dernières ETM connues × le kf du jour ; plusieurs relevés d'un appel s'enchaînent, chacun à partir du kf appris au précédent ; « un ancrage précède dans la fenêtre » = une observation ou un redémarrage par remplissage plus tôt dans l'appel, sans état inconnu entre les deux ; un relevé à 2 mm ou moins de l'ancrage précédent n'apprend rien et n'est pas compté comme appris. Un `kf` passé avec un jeu qui n'apprend pas (OTF) est ignoré.
 20. **Version 0.2.0** : l'interface change (`ancrages`, champs ajoutés), aucun résultat d'OTF ne change ; en 0.x, semver permet un changement d'interface dans une version mineure.
+
+**Adaptateur d'OTF**
+
+21. **Couverts : le bilan au moteur.** MC-18 range « sol nu et couverts » hors moteur : OTF y garde leurs modèles (les deux compartiments du sol nu, le Kc d'un couvert et sa consommation). Le bilan d'un couvert est celui d'une culture (un compartiment, D-053 d'OTF) : OTF le fait faire au moteur plutôt que d'en garder une seconde copie. Rien ne change dans le moteur ni dans le jeu Tlaloc ; chez OTF, aucun écart avec l'ancienne jauge sur 20 000 planches tirées au hasard (cultures, couverts et sol nu mêlés). Lu autrement, MC-18 laisserait ce bilan chez OTF.
+22. **Les types dans `dist/`** : `dist/moteur-hydrique.d.mts` et `dist/types/`, construits par le compilateur TypeScript du dépôt depuis `src/`, imports en `.js` ; `build:check` les vérifie comme les deux fichiers. OTF, en TypeScript, copie ainsi tout de `dist/` ; Tlaloc n'en a pas besoin.

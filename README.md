@@ -14,7 +14,7 @@ Dépôt commun à François (module d'irrigation OTF) et Nicolas (Tlaloc). Le bu
 - `docs/ref-tlaloc/` : implémentation de référence de Tlaloc (sert à calculer les sorties attendues ; `node docs/ref-tlaloc/cas.mjs` réécrit `cas/cas-tlaloc.json`).
 - `src/pas-horaire.ts`, `tests/pas-horaire.test.ts`, `docs/pas-horaire.md` : le pas de calcul d'un jour, en mode horaire (jeu Tlaloc) et journalier (jeu OTF), MC-29.
 - `src/moteur.ts` (point d'entrée), `src/bilan.ts` (le suivi jour par jour), `src/pluie.ts` (pluie utile), `src/observations.ts` (poing, tensiomètre, incertitude, consommation apprise), `src/reglages.ts` (jeux OTF et Tlaloc), `docs/moteur.md` (mode d'emploi, choix à relire) : le moteur v0.2.0.
-- `dist/moteur-hydrique.mjs` (module ES, pour OTF) et `dist/moteur-hydrique.js` (script classique, variable globale `MoteurHydrique`, pour Tlaloc) : construits depuis `src/` (MC-28), ne pas les modifier à la main.
+- `dist/moteur-hydrique.mjs` (module ES, pour OTF) et `dist/moteur-hydrique.js` (script classique, variable globale `MoteurHydrique`, pour Tlaloc), avec les types du module ES (`dist/moteur-hydrique.d.mts`, `dist/types/`) : construits depuis `src/` (MC-28), ne pas les modifier à la main.
 - `tests/` : les tests ; `scripts/cas.ts` exécute les cas partagés ; `scripts/comparer-jauge-otf.ts` compare le jeu OTF au vrai code de la jauge d'OTF ; `.github/workflows/controles.yml` lance tout à chaque PR.
 - `docs/sources/comparaison-kc-gel-tlaloc-otf.md` : comparaison des Kc (CRIIAM, FAO-56, Tlaloc) et des seuils de gel (fiche FRAB), document de travail côté Tlaloc.
 
