@@ -17,10 +17,10 @@ test('Cas O, L et T sur le moteur (src/) : aucune valeur en écart à 0,01 mm pr
     .map((v) => `${r.id} ${v.cle} : attendu ${String(v.attendu)}, moteur ${String(v.obtenu)}${v.note ? ` (${v.note})` : ''}`));
   assert.deepEqual(ecarts, []);
   const conformes = resultats.flatMap((r) => r.valeurs).filter((v) => v.verdict === 'conforme').length;
-  assert.ok(conformes >= 75, `${conformes} valeurs conformes`);
-  // Ce qui reste à venir : les options de Tlaloc seulement (poing en fourchette, consommation apprise, tensiomètre).
+  assert.ok(conformes >= 85, `${conformes} valeurs conformes`);
+  // Depuis la v0.2.0, plus rien à venir : les options de Tlaloc (T08 à T11) sont exécutées.
   const aVenir = resultats.filter((r) => r.valeurs.some((v) => v.verdict === 'à venir')).map((r) => r.id);
-  assert.deepEqual(aVenir, ['T08', 'T09', 'T10', 'T11']);
+  assert.deepEqual(aVenir, []);
 });
 
 test('Les deux fichiers construits donnent les mêmes résultats que src/ sur tous les cas (MC-28)', async () => {

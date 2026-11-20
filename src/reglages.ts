@@ -38,10 +38,28 @@ export type JeuDeReglages = Reglages & {
   conservation: 'pourcent' | 'manque';
   /** Partie OTF § 6 point 5 : OTF ne dit jamais « observé » ; Tlaloc oui, le jour d'une observation. */
   nature_observee: boolean;
+  /**
+   * Contrat Tlaloc § 7.1 : le test du poing lu en fourchette (σ, erreur de
+   * lecture en points de RU ; prises à moins de `regroupement_min` minutes de
+   * la première, groupées) ; sans fourchette, le centre de la classe.
+   */
+  poing: ReglagesPoing;
+  /** § 7.3 (MC-35) : le tensiomètre recale l'état, sauf s'il y a un relevé de terrain depuis moins de `releve_prioritaire_h` heures. */
+  tensiometre: ReglagesTensiometre;
+  /** § 8 : la consommation apprise (kf). */
+  consommation_apprise: boolean;
 };
+
+export type ReglagesPoing = { fourchette: boolean; sigma_lecture: number; regroupement_min: number };
+export type ReglagesTensiometre = { actif: boolean; releve_prioritaire_h: number };
 
 /** Pluie sans heure placée à 15 h en mode horaire (contrat Tlaloc § 4.1). */
 const QUINZE_HEURES = 15 / 24;
+/** § 7.1 : erreur de lecture du poing (points de RU) et regroupement des prises (minutes). */
+const SIGMA_POING = 8;
+const PRISES_MIN = 60;
+/** § 7.3 : le relevé de terrain a le dernier mot pendant 48 h. */
+const RELEVE_PRIORITAIRE_H = 48;
 
 /** Jeu OTF : reproduit la jauge d'OTF à l'identique (MC-18, MC-29). */
 export const JEU_OTF: JeuDeReglages = Object.freeze({
@@ -60,6 +78,10 @@ export const JEU_OTF: JeuDeReglages = Object.freeze({
   drainage_au_redemarrage: 'depuis_capacite',
   conservation: 'pourcent',
   nature_observee: false,
+  // MC-20 : aucune option de Tlaloc chez OTF.
+  poing: Object.freeze({ fourchette: false, sigma_lecture: SIGMA_POING, regroupement_min: PRISES_MIN }),
+  tensiometre: Object.freeze({ actif: false, releve_prioritaire_h: RELEVE_PRIORITAIRE_H }),
+  consommation_apprise: false,
 }) as JeuDeReglages;
 
 /** Jeu Tlaloc (contrat Tlaloc § 9, contrat fusionné § 3). */
@@ -79,6 +101,9 @@ export const JEU_TLALOC: JeuDeReglages = Object.freeze({
   drainage_au_redemarrage: 'inconnu',
   conservation: 'manque',
   nature_observee: true,
+  poing: Object.freeze({ fourchette: true, sigma_lecture: SIGMA_POING, regroupement_min: PRISES_MIN }),
+  tensiometre: Object.freeze({ actif: true, releve_prioritaire_h: RELEVE_PRIORITAIRE_H }),
+  consommation_apprise: true,
 }) as JeuDeReglages;
 
 const estNombre = (x: unknown): x is number => typeof x === 'number' && Number.isFinite(x);
@@ -108,4 +133,14 @@ export function verifierJeu(jeu: JeuDeReglages): void {
   if (jeu.conservation !== 'pourcent' && jeu.conservation !== 'manque') throw new RangeError('conservation : pourcent ou manque');
   if (typeof jeu.p_ajuste_chaleur !== 'boolean') throw new RangeError('p_ajuste_chaleur : vrai ou faux');
   if (typeof jeu.nature_observee !== 'boolean') throw new RangeError('nature_observee : vrai ou faux');
+  const q = jeu.poing;
+  if (!q) throw new RangeError('jeu.poing manquant');
+  if (typeof q.fourchette !== 'boolean') throw new RangeError('poing.fourchette : vrai ou faux');
+  if (!estNombre(q.sigma_lecture) || q.sigma_lecture <= 0) throw new RangeError('poing.sigma_lecture doit être > 0');
+  if (!estNombre(q.regroupement_min) || q.regroupement_min < 0) throw new RangeError('poing.regroupement_min doit être ≥ 0');
+  const t = jeu.tensiometre;
+  if (!t) throw new RangeError('jeu.tensiometre manquant');
+  if (typeof t.actif !== 'boolean') throw new RangeError('tensiometre.actif : vrai ou faux');
+  if (!estNombre(t.releve_prioritaire_h) || t.releve_prioritaire_h < 0) throw new RangeError('tensiometre.releve_prioritaire_h doit être ≥ 0');
+  if (typeof jeu.consommation_apprise !== 'boolean') throw new RangeError('consommation_apprise : vrai ou faux');
 }
