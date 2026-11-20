@@ -61,7 +61,7 @@ Partie qui change par rapport à Tlaloc § 9 ; le reste du tableau reste celui d
 | MC-34 | Bassinage dans le moteur : type d'événement « bassinage » avec un coefficient d'efficacité (0,25 pour 10 min ou moins dans le jeu Tlaloc, 1 dans le jeu OTF : aucun résultat OTF ne change) ; la part non comptée n'entre pas dans la réserve et ne compte ni en drainage ni en eau perdue (tranché par Nicolas le 15/11, accepté par François le 17/11) | § 5 point 3 |
 | MC-35 | Tensiomètre : côté Tlaloc ; l'option reste dans le moteur, désactivée dans le jeu OTF (MC-20) ; la conversion de Shock (1998) viendra par une PR de Nicolas (accepté par François le 17/11) | § 5 point 4 |
 | MC-36 | Banc d'essai allégé : 3 saisons représentatives au lieu de toutes ; **une saison = une année de maraîchage entière (environ de début janvier à fin décembre), pas seulement l'été** ; 3 saisons = 3 années complètes (une sèche, une humide, une moyenne), choisies ensemble avec les données disponibles ; le banc passe après la Tranche 4 d'OTF s'il traîne ; MC-30 et MC-33 inchangées (accepté par Nicolas le 18/11, issue n° 7 ; proposé par François le 17/11) | § 4 bis, § 5 point 5 |
-| MC-37 | **Borne haute de l'ET0 du jour portée de 12 à 15 mm/j, pour toutes les fermes** : 0 ≤ ET0 ≤ 15 mm/j, hors bornes le jour reste bloqué et la dernière valeur valide reste (comportement inchangé). Cas aux limites : 11,9 et 12,1 et 14,9 calculées, 15,1 bloquée. Le module d'OTF garde 12 jusqu'à l'accord, puis change sa constante dans une PR à part. MC-16 inchangée (l'ETP reste hors du moteur). Décision de François du 19/11 (contrat de la Tranche 4 d'OTF) ; **proposée à Nicolas, en attente d'accord** | partie OTF § 3, cas L6 |
+| MC-37 | **Borne haute de l'ET0 du jour portée de 12 à 15 mm/j, pour toutes les fermes** : 0 ≤ ET0 ≤ 15 mm/j, hors bornes le jour reste bloqué et la dernière valeur valide reste (comportement inchangé). Cas aux limites : 11,9 et 12,1 et 14,9 calculées, 15,1 bloquée. Le module d'OTF garde 12 jusqu'à l'accord, puis change sa constante dans une PR à part. MC-16 inchangée (l'ETP reste hors du moteur). Décision de François du 19/11 (contrat de la Tranche 4 d'OTF) ; **acceptée par Nicolas le 20/11** (approbation de la PR n° 10) | partie OTF § 3, cas L6 |
 
 MC-25 et MC-26 : **acceptées par Nicolas le 16/11** (« d'accord avec les points 1 à 5 »). MC-27 : aucune date promise.
 
@@ -109,10 +109,14 @@ MC-31 à MC-33 (numéros donnés par cette PR) : voir § 5 points 8 et 4 bis (ba
 
 8. [TRANCHÉ par François le 16/11 à 17 h 56 : les deux acceptées, **MC-31 (nature `borne_basse`) et MC-32 (paramètre `drainage_au_redemarrage`)** ; proposé par Nicolas le 16/11 en approuvant la PR n° 3 du dépôt commun] **Drainage au redémarrage (O07)** : les 0,7 mm sont un minimum que rien ne signale dans la sortie. Proposition : (a) une nature `borne_basse` sur ce drainage (MC-09 appliquée aux minimums) ; (b) un paramètre `drainage_au_redemarrage` : `depuis_capacite` (jeu OTF, comportement actuel, marqué borne basse) ou `inconnu` (jeu Tlaloc). Recommandation : accepter les deux ; rien ne change dans le chiffre affiché chez OTF.
 
+9. [À TRANCHER, Nicolas et OTF] **Arrosage en intervalle, mode horaire** : MC-13 (partie OTF § 8 point 1) le découpe en tranches horaires au prorata de la durée ; le pas de calcul fusionné (`docs/pas-horaire.md`, choix 2) le compte d'un coup, à son début, comme Tlaloc aujourd'hui (le cas T02 en dépend). Le moteur v0.1.0 suit le pas fusionné. Aucun chiffre d'OTF n'en dépend (journalier).
+10. [À RELIRE par Nicolas] Les choix du moteur v0.1.0 (`docs/moteur.md`, « Choix à relire »).
+
 ## 6. Journal
 
 | Version | Date | Ce qui change |
 |---|---|---|
+| 0.2.5 brouillon | 2026-11-20 | Moteur v0.1.0, le cœur du bilan (`src/`, `docs/moteur.md`), ses deux fichiers construits (MC-28) et ses contrôles ; MC-37 acceptée par Nicolas (PR n° 10) ; § 5 points 9 et 10 ajoutés. Aucune formule ni valeur de cas ne change. |
 | 0.2.4 brouillon | 2026-11-20 | MC-37 proposée : borne haute de l'ET0 de 12 à 15 mm/j (partie OTF § 3, cas L6 avec les limites 11,9 / 12,1 / 14,9 / 15,1). Aucune formule ne change ; une seule valeur de cas change (L6). |
 | 0.2.3 brouillon | 2026-11-18 | Côté Tlaloc : le pas de calcul MC-29 écrit en module autonome (`src/pas-horaire.ts`, `docs/pas-horaire.md`), avec 18 tests. Le jeu journalier reproduit OTF à 0,01 mm près. Aucune formule ni valeur de cas ne change. |
 | 0.2.2 | 2026-11-18 | MC-36 (banc allégé, définition de la saison) ; MC-34 et MC-35 remises après MC-27 au § 4 ; ancienne ligne « 0.2.1 brouillon » renommée « 0.1.9 brouillon ». Aucune formule ni valeur de cas ne change. |

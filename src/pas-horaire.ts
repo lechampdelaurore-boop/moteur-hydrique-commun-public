@@ -119,7 +119,7 @@ function verifier(entree: EntreePas, reglages: Reglages): void {
 }
 
 /** Les mm d'un apport qui entrent dans le calcul ; null : inconnu. */
-function mmCompte(a: Apport, reglages: Reglages): { mm: number } | { raison: RaisonInconnu } {
+export function mmCompte(a: Apport, reglages: Reglages): { mm: number } | { raison: RaisonInconnu } {
   if (a.mm === null) return { raison: 'apport_inconnu' };
   if (a.type !== 'bassinage') return { mm: a.mm };
   const { duree_max_s, part_comptee } = reglages.bassinage;
@@ -245,10 +245,22 @@ export type Arrosage = { debut: string; fin: string | null; mm: number | null; t
  *   compte à l'heure de début du bloc), ou à minuit s'il a commencé la veille.
  * - Sans fin, ou fin avant le début : tout l'apport à son début.
  * La durée (s) est transmise pour la règle du bassinage court (MC-34).
+ *
+ * `entre` (instants en ms, facultatif) restreint la part comptée à une
+ * partie du jour, par exemple après l'heure d'une observation (partie OTF
+ * § 6 point 1 ; OTF `irrigationBetween(…, heure d'observation, fin du jour)`) :
+ * même prorata, part placée à son début ou à `depuis`.
  */
-export function apportsDesArrosages(arrosages: readonly Arrosage[], date: string, fuseau: string = FUSEAU): Apport[] {
+export function apportsDesArrosages(
+  arrosages: readonly Arrosage[],
+  date: string,
+  fuseau: string = FUSEAU,
+  entre: { depuis?: number; jusqua?: number } = {},
+): Apport[] {
   const { debut, fin } = bornesDuJour(date, fuseau);
   const duree = fin - debut;
+  const de = Math.min(fin, Math.max(debut, entre.depuis ?? debut));
+  const jusqua = Math.min(fin, Math.max(de, entre.jusqua ?? fin));
   const sortie: Apport[] = [];
   for (const a of arrosages) {
     const t0 = Date.parse(a.debut);
@@ -256,14 +268,14 @@ export function apportsDesArrosages(arrosages: readonly Arrosage[], date: string
     const t1 = a.fin === null ? NaN : Date.parse(a.fin);
     const type = a.type ?? 'arrosage';
     if (!Number.isFinite(t1) || t1 <= t0) {
-      if (t0 >= debut && t0 < fin) sortie.push({ type, f: (t0 - debut) / duree, mm: a.mm, duree_s: null });
+      if (t0 >= de && t0 < jusqua) sortie.push({ type, f: (t0 - debut) / duree, mm: a.mm, duree_s: null });
       continue;
     }
-    const recouvre = Math.min(t1, fin) - Math.max(t0, debut);
+    const recouvre = Math.min(t1, jusqua) - Math.max(t0, de);
     if (recouvre <= 0) continue;
     sortie.push({
       type,
-      f: (Math.max(t0, debut) - debut) / duree,
+      f: (Math.max(t0, de) - debut) / duree,
       mm: a.mm === null ? null : a.mm * recouvre / (t1 - t0),
       duree_s: (t1 - t0) / 1000,
     });
