@@ -377,7 +377,7 @@
    "id": "L6",
    "titre": "ET0 hors bornes",
    "decision": "ETM (partie OTF §3) ; MC-37",
-   "statut": "bornes 0 à 15 mm/j proposées le 20 novembre 2026 (MC-37, décision de François du 19/11) ; à exécuter sur le code OTF une fois la borne changée dans le module (version précédente, bornes 0 à 12, exécutée le 14 novembre 2026, commit 360a73e, conforme)",
+   "statut": "exécuté sur le code OTF le 21 novembre 2026 (module, PR n° 156, fusionnée à 22 h 08, commit 1592695 ; migration D1 0042 appliquée), conforme : bornes 0 à 15 mm/j (MC-37, décision de François du 19/11). Version précédente, bornes 0 à 12, exécutée le 14 novembre 2026 (commit 360a73e), conforme",
    "entrees": {
     "et0": [
      11.9,
