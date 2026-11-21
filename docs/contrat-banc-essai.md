@@ -56,6 +56,8 @@ Aucun changement de réglage ni de moteur ; aucune donnée de la ferme réelle d
 
 ## 10. Points encore ouverts
 
+- **Classement des années** (remarque de Nicolas, PR n° 15) : classer sur toute la réanalyse (vraies années sèche et humide, passe 2 omise pour les années trop anciennes) ou seulement parmi les années couvertes par l'archive de prévisions (passe 2 partout, choix restreint). Recommandation côté OTF : **toute la réanalyse**, car la passe 1 est la comparaison de fond et la passe 2 un complément ; à confirmer par Nicolas.
+
 - Confirmer par Nicolas que son plan se rejoue tel quel avec les entrées du § 4.
 - Où mettre les données (dépôt commun ou local).
 - Registres du module (roadmap § 6 ter, ligne dédiée, décision) : à inscrire par PR après la fusion de #162.
