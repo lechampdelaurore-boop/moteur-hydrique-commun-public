@@ -21,7 +21,7 @@ Rejouer **3 années entières** (une sèche, une humide, une moyenne) dans les d
 
 ## 4. Données demandées à Nicolas (en commentaire de PR sur le dépôt commun)
 
-1. Le jeu de saisons de sa démonstration : JSON pour la structure (parcelles, surfaces, sol en mm, assolement avec dates d'implantation et de récolte, matériel) ; CSV par année pour la météo jour par jour (ET0, pluie, températures).
+1. L'assolement de la démonstration de Tlaloc (une année entière fictive, parcelles et planches) : JSON pour la structure (parcelles, surfaces, sol en mm, dates d'implantation et de récolte, matériel). **La météo ne vient pas de lui** : le script du banc (PR 1) va chercher lui-même l'ET0 FAO-56 et la pluie de la réanalyse Open-Meteo pour le lieu et les années choisis (MC-33), la même pour les deux côtés (proposition de Nicolas, PR n° 15).
 2. Le site (coordonnées) et les années réellement couvertes, pour que nous classions les années.
 3. Les Kc et durées de stade qu'il applique à chaque culture, pour calculer l'ETM des deux côtés de la même façon (hors moteur, MC-18).
 4. Le format de sortie de son plan : arrosages par parcelle et par jour, en mm.
@@ -35,7 +35,7 @@ Chaque lundi, l'objectif de la semaine rejouée côté OTF est l'**ETM proposée
 ## 6. Passes
 
 - **Passe 1 (obligatoire)** : prévisions parfaites (météo réalisée).
-- **Passe 2 (si les archives existent)** : prévisions réelles archivées J+1 à J+4. Si elles manquent pour une des 3 années, la passe 2 est omise pour cette année et le dit.
+- **Passe 2 (si les archives existent)** : prévisions réelles archivées J+1 à J+4. L'archive de Tlaloc ne remonte qu'à la mise en service de chaque ferme : **on utilise l'archive « historical forecast » d'Open-Meteo, la même pour les deux côtés**, si elle couvre les années choisies (couverture à vérifier par le script de la PR 1, non vérifiée à ce jour). Sinon, la passe 2 est omise pour l'année concernée et le dit.
 - **Variantes** (« exécution imparfaite », une vanne à la fois) : hors du premier lot.
 - Débit sans limite en passe 1 (D-065). Pluie utile écrite dans le fichier, règle commune ; rejeu ensuite avec la règle de chaque jeu.
 
