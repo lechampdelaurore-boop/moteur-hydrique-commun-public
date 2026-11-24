@@ -1,6 +1,6 @@
-# Contrat du banc d'essai du moteur commun (MC-36) : v0.3
+# Contrat du banc d'essai du moteur commun (MC-36) : v0.4 (brouillon)
 
-21 novembre 2026. Sans code. Rédigé côté OTF (Claude, pour François), à relire par François puis par Nicolas. v0.2 : réponses de Nicolas du 21 novembre inscrites (§ 3, § 4, § 7, § 10). v0.3 (24 novembre, PR 1 du banc) : données de Nicolas du 22 novembre reçues (§ 4), précisions du classement (§ 3 bis), de la météo rangée (§ 4 bis) et de la couverture de la passe 2 (§ 6), réglage confirmé par François (§ 8). Sources : contrat fusionné v0.2.9 (§ 4 MC-30, MC-33, MC-36 ; § 4 bis ; § 5 point 5), moteur v0.3.0 (`docs/moteur.md`), D-065, D-154 point 4, roadmap § 6 ter.
+21 novembre 2026. Sans code. Rédigé côté OTF (Claude, pour François), à relire par François puis par Nicolas. v0.2 : réponses de Nicolas du 21 novembre inscrites (§ 3, § 4, § 7, § 10). v0.3 (24 novembre, PR 1 du banc) : données de Nicolas du 22 novembre reçues (§ 4), précisions du classement (§ 3 bis), de la météo rangée (§ 4 bis) et de la couverture de la passe 2 (§ 6), réglage confirmé par François (§ 8). v0.4 (brouillon de la PR 2) : définitions des indicateurs (§ 7 bis), à relire par Nicolas. Sources : contrat fusionné v0.2.9 (§ 4 MC-30, MC-33, MC-36 ; § 4 bis ; § 5 point 5), moteur v0.3.0 (`docs/moteur.md`), D-065, D-154 point 4, roadmap § 6 ter.
 
 ## 1. Objet
 
@@ -65,6 +65,28 @@ Chaque lundi, l'objectif de la semaine rejouée côté OTF est l'**ETM proposée
 ## 7. Indicateurs et tolérances
 
 Eau apportée ; eau perdue ; jours sous le seuil (seuil propre à chaque côté, **doublé d'un seuil commun à 50 % de la réserve facile**, accord de Nicolas le 21/11) ; jours en stress (réserve à zéro) ; écart au besoin ; stabilité (somme des écarts en mm entre deux plans successifs) ; charge pour le maraîcher ; eau non placée. Tolérance : **1 % de l'eau totale de saison** et écart en jours sous le seuil (MC-30). La non-régression du module reste à 0,01 mm, hors banc.
+
+## 7 bis. Définitions des indicateurs (PR 2, proposition à relire par Nicolas)
+
+Proposées le 24/11 avec le code de la PR 2 ; rien n'est calculé tant qu'elles ne sont pas acceptées. Notations du moteur (`docs/moteur.md`), par unité (une parcelle de Tlaloc), par jour : Dr le manque au soir, RAW = p × RU la réserve facile, Dmax le manque maximal suivi. Un jour dont l'état est inconnu n'entre dans aucun compte de jours ; leur nombre est publié à côté.
+
+**Le juge.** Chaque côté est rejoué par `suivre` **deux fois**, avec `JEU_OTF` puis avec `JEU_TLALOC` (pluie utile, pas et bassinage de chaque jeu, § 6) ; les indicateurs sont publiés pour les deux juges. Mêmes jours, même sol, même ETM (Kc de Nicolas, `banc/src/etm.ts`), même pluie (la réanalyse, en total du jour, ou heure par heure pour le jeu Tlaloc), même état de départ : `{ dr_mm: 0,5 × RAW, dmax_mm: RU }` le 15 octobre de l'année d'avant (la mise en route de Tlaloc) ; seuls les jours du 1er janvier au 31 décembre sont comptés.
+
+| Indicateur | Définition proposée |
+|---|---|
+| Eau apportée (mm) | Σ des arrosages et bassinages de l'année (colonne `mm` de Tlaloc ; arrosages placés d'OTF). Publiée aussi sans les bassinages (limite signalée par Nicolas). |
+| Eau perdue (mm) | Σ `eau_perdue_mm` du juge : le drainage dû à l'arrosage. Les jours où il est inconnu sont comptés à part. |
+| Jours sous le seuil propre | Tlaloc : Dr au-dessus de son seuil de décision (définition à donner par Nicolas). OTF : Dr > RAW, ce qui est exactement « sous le seuil » de la jauge d'OTF (seuil = capacité × (1 − p ÷ part de référence), et RAW = p × capacité ÷ part de référence). |
+| Jours sous le seuil commun | **Dr > 0,5 × RAW** : il reste moins de la moitié de la réserve facile. Le même pour les deux côtés et les deux juges. |
+| Jours en stress | **Dr ≥ RAW** : la réserve facile est épuisée (au-delà, FAO-56 réduit la consommation). Publié aussi : jours à réserve vide, Dr ≥ Dmax. |
+| Écart au besoin (mm) | Chaque semaine (lundi à dimanche) : apport − max(0, ETM − pluie utile du juge) ; on publie la somme des écarts et la somme de leurs valeurs absolues. |
+| Stabilité (mm) | Pour chaque nouveau plan (OTF : chaque calcul ; Tlaloc : fond refait et plan du jour), Σ sur les jours à venir communs aux deux plans de \|mm du nouveau − mm de l'ancien\| ; somme sur l'année. |
+| Charge pour le maraîcher | Nombre de jours avec au moins un arrosage, et nombre d'arrosages (un arrosage = une mise en route d'une vanne ou d'un matériel). |
+| Eau non placée (mm) | Ce que chaque côté voulait apporter sans trouver de créneau : OTF « non placé » du planning ; Tlaloc « eau sans créneau » de ses événements. En passe 1 (débit sans limite), attendue nulle ou presque. |
+
+**À l'échelle de la ferme** : les mm se pondèrent par la surface, Σ(mm × m²) ÷ Σ(m²) ; les jours se donnent en moyenne pondérée par la surface et en nombre de parcelles touchées.
+
+**Tolérance (§ 7)** : deux côtés sont dits « d'accord » sur l'eau quand leurs écarts restent sous 1 % de l'eau totale de la saison ; sinon l'écart est montré, parcelle par parcelle, avec ce qui l'explique.
 
 ## 8. Réglage de code (à valider)
 
