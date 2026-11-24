@@ -1078,7 +1078,7 @@
       "controle_et0": "conforme",
       "passe2": "omise",
       "cible_mm": 1198.0625,
-      "raison": "19 années du quart sec peuvent être rejouées ; 19 passent le contrôle par l'ET0 (bilan ≤ médiane des bilans, 765,7 mm) ; 10 sont des 30 dernières années (1996 à 2025) ; aucune n'est couverte par l'archive des prévisions : passe 2 omise ; la plus proche du milieu du quart (percentile 12,5, 1198,1 mm) est 2009 (1194,2 mm)."
+      "raison": "19 années du quart sec peuvent être rejouées ; 19 passent le contrôle par l'ET0 (bilan ≤ médiane des bilans, 765,7 mm) ; 10 sont des 30 dernières années classées (1996 à 2025) ; aucune n'est couverte par l'archive des prévisions : passe 2 omise ; la plus proche du milieu du quart (percentile 12,5, 1198,1 mm) est 2009 (1194,2 mm)."
     },
     "humide": {
       "annee": 2013,
@@ -1145,7 +1145,7 @@
       "controle_et0": "conforme",
       "passe2": "omise",
       "cible_mm": 1643.85,
-      "raison": "19 années du quart humide peuvent être rejouées ; 19 passent le contrôle par l'ET0 (bilan ≥ médiane des bilans, 765,7 mm) ; 6 sont des 30 dernières années (1996 à 2025) ; aucune n'est couverte par l'archive des prévisions : passe 2 omise ; la plus proche du milieu du quart (percentile 87,5, 1643,8 mm) est 2013 (1637,0 mm)."
+      "raison": "19 années du quart humide peuvent être rejouées ; 19 passent le contrôle par l'ET0 (bilan ≥ médiane des bilans, 765,7 mm) ; 6 sont des 30 dernières années classées (1996 à 2025) ; aucune n'est couverte par l'archive des prévisions : passe 2 omise ; la plus proche du milieu du quart (percentile 87,5, 1643,8 mm) est 2013 (1637,0 mm)."
     },
     "moyenne": {
       "annee": 2019,

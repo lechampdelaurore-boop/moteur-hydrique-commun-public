@@ -101,24 +101,84 @@ test('une année dont la fenêtre de météo est incomplète est classée mais p
   assert.throws(() => classer(huitAnnees(), sansQuartSec, AUCUNE), /aucune année du quart sec/);
 });
 
-test('les 30 dernières années passent devant, le classement restant sur toutes les années', () => {
-  // Mêmes pluies 400…1100 (mêmes repères que le cas de base), années mêlées ; dernière = 2020, récentes = 1991 à 2020.
-  const pluies: [number, number][] = [[2010, 400], [1950, 500], [1995, 600], [1960, 700], [1970, 800], [2005, 900], [1980, 1000], [2020, 1100]];
-  const totaux = pluies.map(([annee, pluie]) => ({ annee, jours: 365, pluie_mm: pluie, et0_mm: 700, bilan_mm: pluie - 700 }));
-  const c = classer(totaux, new Set(pluies.map(([a]) => a)), AUCUNE);
+// Mêmes pluies 400…1100 que le cas de base (mêmes repères : P12,5 487,5 ; Q1 575 ; médiane 750 ; Q3 925 ; P87,5 1012,5), années mêlées.
+const MELEES: [number, number][] = [[2010, 400], [1950, 500], [1995, 600], [1960, 700], [1970, 800], [2005, 900], [1980, 1000], [2020, 1100]];
+const melees = (et0: Record<number, number> = {}): TotauxAnnee[] =>
+  MELEES.map(([annee, pluie]) => ({ annee, jours: 365, pluie_mm: pluie, et0_mm: et0[annee] ?? 700, bilan_mm: pluie - (et0[annee] ?? 700) }));
+const TOUTES_MELEES = new Set(MELEES.map(([a]) => a));
+
+test('les années récentes passent devant, le classement restant sur toutes les années', () => {
+  // 4 années récentes pour ce test : les 4 plus récentes du classement, 2020, 2010, 2005, 1995.
+  const c = classer(melees(), TOUTES_MELEES, AUCUNE, 4);
   proche(c.pluie.q1, 575); proche(c.pluie.mediane, 750);
   assert.deepEqual(c.tableau.filter((l) => l.recente).map((l) => l.annee).sort(), [1995, 2005, 2010, 2020]);
   // Sèche : quart sec 1950 (500) et 2010 (400) ; sans la règle, 1950 (plus proche de 487,5) ; avec, 2010.
   assert.equal(c.choix.seche.annee, 2010);
   assert.deepEqual(c.choix.seche.candidats.apres_controle, [1950, 2010]);
   assert.deepEqual(c.choix.seche.candidats.apres_recence, [2010]);
+  assert.match(c.choix.seche.raison, /dernières années classées \(1995 à 2020\)/);
   // Humide : 1980 (1000) et 2020 (1100) ; avec la règle, 2020.
   assert.equal(c.choix.humide.annee, 2020);
   // Moyenne : médiane 750 ; parmi les récentes, 1995 (600) et 2005 (900) à 150 mm : à égalité, la plus récente → 2005
   // (sans la règle : 1960 et 1970 à 50 mm → 1970). Bilan 200, entre −125 et 225 : conforme.
   assert.equal(c.choix.moyenne.annee, 2005);
   assert.equal(c.choix.moyenne.controle_et0, 'conforme');
-  assert.match(c.choix.moyenne.raison, /récentes \(1991 à 2020\)/);
+  assert.match(c.choix.moyenne.raison, /récentes \(1995 à 2020\)/);
+});
+
+test('aucune année récente dans le quart ou parmi les jouables : retour à toutes', () => {
+  // 1 année récente (2020) ; 2020 ne peut pas être rejouée. Sèche : quart sec sans récente → 1950 (500, plus proche de 487,5).
+  // Humide : 1980 seule jouable. Moyenne : aucune récente jouable → toutes : 1960 et 1970 à 50 mm → 1970.
+  const sans2020 = new Set([...TOUTES_MELEES].filter((a) => a !== 2020));
+  const c = classer(melees(), sans2020, AUCUNE, 1);
+  assert.equal(c.choix.seche.annee, 1950);
+  assert.deepEqual(c.choix.seche.candidats.apres_recence, [1950, 2010]);
+  assert.match(c.choix.seche.raison, /aucune n'est des 1 dernières années classées : toutes sont gardées/);
+  assert.equal(c.choix.humide.annee, 1980);
+  assert.equal(c.choix.moyenne.annee, 1970);
+  assert.deepEqual(c.choix.moyenne.candidats.apres_recence, [1950, 1960, 1970, 1980, 1995, 2005, 2010]);
+});
+
+test('le contrôle passe avant la récence', () => {
+  // 2010 (récente, quart sec) avec ET0 0 : bilan 400. Bilans triés −200, −100, 0, 100, 200, 300, 400, 400 : médiane 150.
+  // 2010 échoue, 1950 (bilan −200) passe : après contrôle [1950], aucune récente → 1950.
+  const c = classer(melees({ 2010: 0 }), TOUTES_MELEES, AUCUNE, 4);
+  proche(c.bilan.mediane, 150);
+  assert.deepEqual(c.choix.seche.candidats.apres_controle, [1950]);
+  assert.equal(c.choix.seche.annee, 1950);
+});
+
+test('les 30 dernières années classées : une année incomplète ne compte pas', () => {
+  // 31 années complètes, 1990 à 2020 : récentes 1991 à 2020 (1990 est la 31e).
+  const annees = Array.from({ length: 31 }, (_, i) => 1990 + i);
+  const totaux = annees.map((annee, i) => ({ annee, jours: 365, pluie_mm: 1000 + ((i * 7) % 31) * 10, et0_mm: 700, bilan_mm: 300 + ((i * 7) % 31) * 10 }));
+  const recentes = (t: TotauxAnnee[]) => classer(t, new Set(annees), AUCUNE).tableau.filter((l) => l.recente).map((l) => l.annee).sort((a, b) => a - b);
+  assert.deepEqual(recentes(totaux), annees.slice(1));
+  // 2015 incomplète (absente du classement) : les 30 dernières classées remontent jusqu'à 1990.
+  assert.deepEqual(recentes(totaux.filter((t) => t.annee !== 2015)), annees.filter((a) => a !== 2015));
+});
+
+test('une pluie égale au quartile est dans le quart ; égalité de distance : la plus récente', () => {
+  // 5 années : h = 4 × p ; Q1 = 200 exactement, Q3 = 400 exactement ; P12,5 = 150, P87,5 = 450.
+  const cinq = [[2001, 100], [2002, 200], [2003, 300], [2004, 400], [2005, 500]].map(([annee, pluie]) => ({ annee, jours: 365, pluie_mm: pluie, et0_mm: 0, bilan_mm: pluie }));
+  const c = classer(cinq, new Set([2001, 2002, 2003, 2004, 2005]), AUCUNE);
+  assert.deepEqual(c.tableau.map((l) => l.categorie), ['quart sec', 'quart sec', 'milieu', 'quart humide', 'quart humide']);
+  // Sèche : 100 et 200 à 50 mm de 150 → la plus récente, 2002 ; humide : 400 et 500 à 50 mm de 450 → 2005.
+  assert.equal(c.choix.seche.annee, 2002);
+  assert.equal(c.choix.humide.annee, 2005);
+  assert.equal(c.choix.moyenne.annee, 2003);
+  // Deux pluies égales au centième, l'une avec un bruit de calcul (comme 0,1 + 0,2 = 0,30000000000000004) :
+  // 9 années, Q1 = 3e valeur (h = 2) = 1286,5 ; sans l'arrondi, 1286,5000000000002 serait au milieu ; au centième, les deux sont dans le quart sec.
+  const pluiesBruit = [900, 1000, 1286.5, 1286.5000000000002, 1500, 1600, 1700, 1800, 1900];
+  const bruit = pluiesBruit.map((pluie, i) => ({ annee: 2001 + i, jours: 365, pluie_mm: pluie, et0_mm: 0, bilan_mm: pluie }));
+  const cb = classer(bruit, new Set(bruit.map((t) => t.annee)), AUCUNE);
+  assert.equal(cb.pluie.q1, 1286.5);
+  assert.equal(cb.tableau.find((l) => l.annee === 2004)!.categorie, 'quart sec');
+});
+
+test('3 années non distinctes : erreur', () => {
+  // 1 année récente, 2020, jouable : elle est l'humide et aussi la seule récente pour la moyenne.
+  assert.throws(() => classer(melees(), TOUTES_MELEES, AUCUNE, 1), /ne sont pas distinctes/);
 });
 
 test('moins de 4 années : pas de quarts', () => {

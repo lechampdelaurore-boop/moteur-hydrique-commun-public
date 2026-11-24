@@ -7,32 +7,37 @@
  * le plus sec ; humide : une année du quart le plus humide ; moyenne : l'année
  * la plus proche de la médiane.
  *
- * Précisions de la PR 1 (à relire par Nicolas), là où le contrat laisse le choix :
- *  1. Quartiles et médiane : percentiles par interpolation linéaire entre les
+ * Précisions de la PR 1 (à relire par Nicolas), là où le contrat laisse le choix ;
+ * numérotées comme au § 3 bis du contrat (le point 1, la réanalyse, est dans
+ * `open-meteo.ts`). Les comparaisons (quartiles, contrôle, distances à la cible)
+ * se font au centième de mm, la précision des données : une égalité au bruit de
+ * calcul près est une égalité.
+ *  2. Quartiles et médiane : percentiles par interpolation linéaire entre les
  *     années triées (méthode « type 7 », celle des tableurs). Le quart sec est
  *     l'ensemble des années dont la pluie est ≤ au 1er quartile ; le quart humide,
  *     ≥ au 3e quartile.
- *  2. Une année n'entre au classement que si ses 365 ou 366 jours ont pluie et
+ *  3. Une année n'entre au classement que si ses 365 ou 366 jours ont pluie et
  *     ET0 ; elle ne peut être choisie que si toute sa fenêtre de météo (15 octobre
  *     d'avant au 12 janvier d'après) est complète.
- *  3. Contrôle par l'ET0 : le bilan climatique de l'année (pluie − ET0, en mm).
+ *  4. Contrôle par l'ET0 : le bilan climatique de l'année (pluie − ET0, en mm).
  *     Une année sèche doit avoir un bilan dans la moitié la plus sèche des bilans
  *     (≤ médiane) ; une année humide, dans la moitié la plus humide (≥ médiane) ;
  *     l'année moyenne, entre le 1er et le 3e quartile des bilans.
- *  4. Années récentes d'abord : le classement et ses quarts portent sur toutes
+ *  5. Années récentes d'abord : le classement et ses quarts portent sur toutes
  *     les années, mais le choix se fait d'abord parmi les 30 dernières années
- *     classées (une normale climatique), s'il y en a. Sur ce lieu, l'ET0 moyenne
+ *     classées (les 30 plus récentes du classement, une normale climatique), s'il
+ *     y en a. Sur ce lieu, l'ET0 moyenne
  *     des 30 dernières années dépasse d'environ 10 % celle de 1950 à 1978, et la
  *     réanalyse d'avant 1979 (sans satellites) est moins sûre : une année ancienne
  *     rejouerait un climat qui n'est plus celui des fermes d'aujourd'hui.
- *  5. Dans le quart sec (ou humide), on garde d'abord les années qui passent le
+ *  6. Dans le quart sec (ou humide), on garde d'abord les années qui passent le
  *     contrôle (s'il n'y en a aucune, toutes, et le contrôle est dit « non
- *     conforme ») ; puis les années récentes (point 4) ; puis, s'il y en a,
+ *     conforme ») ; puis les années récentes (point 5) ; puis, s'il y en a,
  *     celles que couvre l'archive des prévisions (passe 2 possible, § 6) ; enfin
  *     l'année la plus proche du milieu du quart (percentile 12,5 pour la sèche,
  *     87,5 pour l'humide), pour ne pas prendre un extrême isolé. À égalité, la
  *     plus récente.
- *  6. L'année moyenne : la plus proche de la médiane de toutes les années, prise
+ *  7. L'année moyenne : la plus proche de la médiane de toutes les années, prise
  *     parmi les années récentes qui peuvent être choisies (à égalité, la plus
  *     récente) ; le contrôle par l'ET0 et la couverture de la passe 2 sont
  *     seulement dits.
@@ -40,7 +45,7 @@
 import { bornesAnnee, fenetreMeteo, joursEntre } from './dates.ts';
 import type { JourMeteo } from './meteo.ts';
 
-/** Le choix se fait d'abord parmi les 30 dernières années classées (point 4). */
+/** Le choix se fait d'abord parmi les 30 dernières années classées (point 5). */
 export const ANNEES_RECENTES = 30;
 
 export type TotauxAnnee = { annee: number; jours: number; pluie_mm: number; et0_mm: number; bilan_mm: number };
@@ -57,7 +62,7 @@ export type LigneClassement = TotauxAnnee & {
   eligible: boolean;
   /** Archive des prévisions complète sur l'année : passe 2 possible. */
   couverte: boolean;
-  /** Parmi les 30 dernières années classées (point 4). */
+  /** Parmi les 30 dernières années classées (point 5). */
   recente: boolean;
 };
 
@@ -130,7 +135,8 @@ function rangs(totaux: TotauxAnnee[], cle: (t: TotauxAnnee) => number): Map<numb
 
 /** L'année la plus proche de `cible` ; à égalité, la plus récente. */
 function plusProche(lignes: LigneClassement[], cible: number): LigneClassement {
-  return [...lignes].sort((a, b) => Math.abs(a.pluie_mm - cible) - Math.abs(b.pluie_mm - cible) || b.annee - a.annee)[0];
+  const distance = (l: LigneClassement) => auCentieme(Math.abs(l.pluie_mm - cible));
+  return [...lignes].sort((a, b) => distance(a) - distance(b) || b.annee - a.annee)[0];
 }
 
 /** Un nombre de mm à une décimale, à la française (virgule). */
@@ -139,7 +145,13 @@ const pluriel = (n: number, un: string, plusieurs: string) => `${n} ${n > 1 ? pl
 
 const annees = (l: LigneClassement[]) => l.map((x) => x.annee).sort((a, b) => a - b);
 
-export function classer(totaux: TotauxAnnee[], eligibles: ReadonlySet<number>, couvertes: ReadonlySet<number>): Classement {
+/** `nombreRecentes` : 30 au banc (point 5) ; un autre nombre ne sert qu'aux tests. */
+export function classer(
+  totaux: TotauxAnnee[],
+  eligibles: ReadonlySet<number>,
+  couvertes: ReadonlySet<number>,
+  nombreRecentes: number = ANNEES_RECENTES,
+): Classement {
   if (totaux.length < 4) throw new Error(`il faut au moins 4 années complètes pour former des quarts (${totaux.length})`);
   const pluies = totaux.map((t) => t.pluie_mm);
   const bilans = totaux.map((t) => t.bilan_mm);
@@ -151,26 +163,31 @@ export function classer(totaux: TotauxAnnee[], eligibles: ReadonlySet<number>, c
   const rangPluie = rangs(totaux, (t) => t.pluie_mm);
   const rangBilan = rangs(totaux, (t) => t.bilan_mm);
   const derniere = Math.max(...totaux.map((t) => t.annee));
+  // Les 30 années les plus récentes du classement (une année incomplète n'y est pas, donc n'en prend pas la place).
+  const anneesRecentes = new Set([...totaux].sort((a, b) => b.annee - a.annee).slice(0, nombreRecentes).map((t) => t.annee));
+  const premiereRecente = Math.min(...anneesRecentes);
+  // Comparaisons au centième (voir en tête).
+  const c = { q1: auCentieme(pluie.q1), q3: auCentieme(pluie.q3), bMed: auCentieme(bilan.mediane), bQ1: auCentieme(bilan.q1), bQ3: auCentieme(bilan.q3) };
 
   const tableau: LigneClassement[] = totaux
     .map((t) => ({
       ...t,
       rang_pluie: rangPluie.get(t.annee)!,
       rang_bilan: rangBilan.get(t.annee)!,
-      categorie: (t.pluie_mm <= pluie.q1 ? 'quart sec' : t.pluie_mm >= pluie.q3 ? 'quart humide' : 'milieu') as Categorie,
+      categorie: (auCentieme(t.pluie_mm) <= c.q1 ? 'quart sec' : auCentieme(t.pluie_mm) >= c.q3 ? 'quart humide' : 'milieu') as Categorie,
       eligible: eligibles.has(t.annee),
       couverte: couvertes.has(t.annee),
-      recente: t.annee > derniere - ANNEES_RECENTES,
+      recente: anneesRecentes.has(t.annee),
     }))
     .sort((a, b) => a.rang_pluie - b.rang_pluie);
 
   const controle = {
-    seche: (l: LigneClassement) => l.bilan_mm <= bilan.mediane,
-    humide: (l: LigneClassement) => l.bilan_mm >= bilan.mediane,
-    moyenne: (l: LigneClassement) => l.bilan_mm >= bilan.q1 && l.bilan_mm <= bilan.q3,
+    seche: (l: LigneClassement) => auCentieme(l.bilan_mm) <= c.bMed,
+    humide: (l: LigneClassement) => auCentieme(l.bilan_mm) >= c.bMed,
+    moyenne: (l: LigneClassement) => auCentieme(l.bilan_mm) >= c.bQ1 && auCentieme(l.bilan_mm) <= c.bQ3,
   };
 
-  const depuis = `${derniere - ANNEES_RECENTES + 1} à ${derniere}`;
+  const depuis = `${premiereRecente} à ${derniere}`;
 
   const choisirDansLeQuart = (sens: 'seche' | 'humide'): Choix => {
     const nom = sens === 'seche' ? 'quart sec' : 'quart humide';
@@ -190,8 +207,8 @@ export function classer(totaux: TotauxAnnee[], eligibles: ReadonlySet<number>, c
         ? `${pluriel(passent.length, 'passe', 'passent')} le contrôle par l'ET0 (bilan ${sens === 'seche' ? '≤' : '≥'} médiane des bilans, ${fr(bilan.mediane)} mm)`
         : `aucune ne passe le contrôle par l'ET0 : toutes sont gardées, contrôle non conforme`,
       recentes.length > 0
-        ? `${pluriel(recentes.length, 'est', 'sont')} des ${ANNEES_RECENTES} dernières années (${depuis})`
-        : `aucune n'est des ${ANNEES_RECENTES} dernières années : les plus anciennes sont gardées`,
+        ? `${pluriel(recentes.length, 'est', 'sont')} des ${nombreRecentes} dernières années classées (${depuis})`
+        : `aucune n'est des ${nombreRecentes} dernières années classées : toutes sont gardées`,
       couvertesDuQuart.length > 0
         ? `${pluriel(couvertesDuQuart.length, 'est couverte', 'sont couvertes')} par l'archive des prévisions`
         : `aucune n'est couverte par l'archive des prévisions : passe 2 omise`,

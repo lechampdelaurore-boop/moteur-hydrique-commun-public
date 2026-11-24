@@ -12,8 +12,8 @@ Réanalyse Open-Meteo, modèle `era5_seamless`, au lieu du banc (45.5 N, 5.75 E)
 | Humide | **2013** | 1637,0 | conforme | omise |
 | Moyenne | **2019** | 1504,1 | conforme | omise |
 
-- **Sèche** : 19 années du quart sec peuvent être rejouées ; 19 passent le contrôle par l'ET0 (bilan ≤ médiane des bilans, 765,7 mm) ; 10 sont des 30 dernières années (1996 à 2025) ; aucune n'est couverte par l'archive des prévisions : passe 2 omise ; la plus proche du milieu du quart (percentile 12,5, 1198,1 mm) est 2009 (1194,2 mm).
-- **Humide** : 19 années du quart humide peuvent être rejouées ; 19 passent le contrôle par l'ET0 (bilan ≥ médiane des bilans, 765,7 mm) ; 6 sont des 30 dernières années (1996 à 2025) ; aucune n'est couverte par l'archive des prévisions : passe 2 omise ; la plus proche du milieu du quart (percentile 87,5, 1643,8 mm) est 2013 (1637,0 mm).
+- **Sèche** : 19 années du quart sec peuvent être rejouées ; 19 passent le contrôle par l'ET0 (bilan ≤ médiane des bilans, 765,7 mm) ; 10 sont des 30 dernières années classées (1996 à 2025) ; aucune n'est couverte par l'archive des prévisions : passe 2 omise ; la plus proche du milieu du quart (percentile 12,5, 1198,1 mm) est 2009 (1194,2 mm).
+- **Humide** : 19 années du quart humide peuvent être rejouées ; 19 passent le contrôle par l'ET0 (bilan ≥ médiane des bilans, 765,7 mm) ; 6 sont des 30 dernières années classées (1996 à 2025) ; aucune n'est couverte par l'archive des prévisions : passe 2 omise ; la plus proche du milieu du quart (percentile 87,5, 1643,8 mm) est 2013 (1637,0 mm).
 - **Moyenne** : la plus proche de la médiane de toutes les années (1495,6 mm), parmi 30 années récentes (1996 à 2025) qui peuvent être rejouées, est 2019 (1504,1 mm) ; contrôle par l'ET0 conforme (bilan 660,1 mm, entre 490,1 et 838,2 mm attendu) ; passe 2 omise.
 
 ## Repères
