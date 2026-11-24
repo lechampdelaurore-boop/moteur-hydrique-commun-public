@@ -1,0 +1,61 @@
+# Banc d'essai (MC-36) : télécharge la météo d'Open-Meteo, classe les années et
+# range la météo des 3 années retenues (dépôt public : minutes gratuites).
+# Les fichiers produits sont joints au job (« banc-donnees ») pour être relus et
+# versionnés dans la PR ; le job dit si le choix des années a changé.
+name: Banc
+
+on:
+  pull_request:
+    paths:
+      - 'banc/src/**'
+      - 'banc/scripts/**'
+      - '.github/workflows/banc.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  meteo:
+    name: Météo Open-Meteo et classement des années
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # Le choix versionné, s'il existe, pour le comparer au nouveau.
+      - run: cp banc/rapport/classement-annees.json /tmp/choix-versionne.json || true
+      - run: npm run banc:telecharger
+      - run: npm run banc:classer
+      - run: npm run banc:annees
+      - run: node --test --experimental-strip-types banc/tests/fichiers.test.ts
+      - name: Comparer au choix versionné
+        run: |
+          {
+            echo '## Banc : classement des années'
+            sed -n '/## Les 3 années retenues/,/## Repères/p' banc/rapport/classement-annees.md | head -n -1
+            echo '### Fichiers changés par rapport à la branche'
+            echo '```'
+            git status --short banc/
+            git diff --stat banc/
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ -f /tmp/choix-versionne.json ]; then
+            avant=$(jq -c '[.choix.seche.annee, .choix.humide.annee, .choix.moyenne.annee]' /tmp/choix-versionne.json)
+            apres=$(jq -c '[.choix.seche.annee, .choix.humide.annee, .choix.moyenne.annee]' banc/rapport/classement-annees.json)
+            echo "Années versionnées $avant ; recalculées $apres"
+            [ "$avant" = "$apres" ] || { echo "::error::le choix des années a changé : $avant → $apres"; exit 1; }
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: banc-donnees
+          path: |
+            banc/donnees/
+            banc/rapport/
+            banc/meteo/
+          if-no-files-found: warn

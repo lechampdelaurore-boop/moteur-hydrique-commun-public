@@ -1,6 +1,6 @@
-# Contrat du banc d'essai du moteur commun (MC-36) : brouillon v0.2
+# Contrat du banc d'essai du moteur commun (MC-36) : v0.3
 
-21 novembre 2026. Sans code. Rédigé côté OTF (Claude, pour François), à relire par François puis par Nicolas. v0.2 : réponses de Nicolas du 21 novembre inscrites (§ 3, § 4, § 7, § 10). Sources : contrat fusionné v0.2.9 (§ 4 MC-30, MC-33, MC-36 ; § 4 bis ; § 5 point 5), moteur v0.3.0 (`docs/moteur.md`), D-065, D-154 point 4, roadmap § 6 ter.
+21 novembre 2026. Sans code. Rédigé côté OTF (Claude, pour François), à relire par François puis par Nicolas. v0.2 : réponses de Nicolas du 21 novembre inscrites (§ 3, § 4, § 7, § 10). v0.3 (24 novembre, PR 1 du banc) : données de Nicolas du 22 novembre reçues (§ 4), précisions du classement (§ 3 bis), de la météo rangée (§ 4 bis) et de la couverture de la passe 2 (§ 6), réglage confirmé par François (§ 8). Sources : contrat fusionné v0.2.9 (§ 4 MC-30, MC-33, MC-36 ; § 4 bis ; § 5 point 5), moteur v0.3.0 (`docs/moteur.md`), D-065, D-154 point 4, roadmap § 6 ter.
 
 ## 1. Objet
 
@@ -20,15 +20,34 @@ Rejouer **3 années entières** (une sèche, une humide, une moyenne) dans les d
 - **Choix des 3 années (accord de Nicolas, 21/11)** : on classe les années par pluie totale de l'année, avec l'ET0 Open-Meteo comme contrôle. Sèche : année dans le quart le plus sec ; humide : quart le plus humide ; moyenne : la plus proche de la médiane. **Le classement porte sur toute la réanalyse disponible** ; la passe 2 est omise pour les années hors de l'archive des prévisions (§ 6). Le tableau du classement est publié avec les résultats.
 - **ET0 des deux côtés** : FAO-56 de la réanalyse Open-Meteo (MC-33). La station Météo-France ne sert que de comparaison.
 
+## 3 bis. Précisions du classement (PR 1, à relire par Nicolas)
+
+Là où le § 3 laisse le choix, la PR 1 fixe (règle complète et commentée en tête de `banc/src/classement.ts`, tableau publié dans `banc/rapport/classement-annees.md`) :
+
+1. **Réanalyse** : modèle `era5_seamless` d'Open-Meteo (ERA5-Land à 0,1° complété par ERA5), **de 1950 à la dernière année entière**, le même pour toutes les années, pour que le classement compare des années calculées de la même façon. Jours de Paris.
+2. **Quartiles et médiane** : interpolation linéaire entre les années triées (méthode des tableurs). Quart sec : pluie ≤ 1er quartile ; quart humide : pluie ≥ 3e quartile.
+3. **Années classées, années jouables** : une année est classée si ses 365 ou 366 jours ont pluie et ET0 ; elle peut être choisie si toute sa fenêtre de météo (§ 4 bis) est complète.
+4. **Contrôle par l'ET0** : le bilan climatique de l'année (pluie − ET0). Sèche : bilan ≤ médiane des bilans ; humide : ≥ médiane ; moyenne : entre le 1er et le 3e quartile des bilans.
+5. **Sèche et humide** : dans le quart, d'abord les années qui passent le contrôle (aucune : toutes, contrôle dit « non conforme ») ; puis, s'il y en a, celles que couvre l'archive des prévisions (passe 2 possible) ; enfin la plus proche du milieu du quart (percentile 12,5 ou 87,5), pour ne pas prendre un extrême isolé. À égalité, la plus récente.
+6. **Moyenne** : à la lettre du § 3, la plus proche de la médiane (à égalité, la plus récente) ; le contrôle et la couverture sont seulement dits.
+
 ## 4. Données (en commentaire de PR sur le dépôt commun)
 
 1. **Assolement** de la démonstration de Tlaloc (une année entière fictive, parcelles et planches) : JSON pour la structure (parcelles, surfaces, sol en mm, dates d'implantation et de récolte, matériel). **La météo ne vient pas de Nicolas** : le script du banc (PR 1) va chercher lui-même l'ET0 FAO-56 et la pluie de la réanalyse Open-Meteo pour le lieu et les années choisis (MC-33), la même pour les deux côtés.
 2. **Site** : fixé au § 3. Les années sont classées par le script de la PR 1.
-3. **Kc et durées de stade** par culture (Nicolas les donne), pour calculer l'ETM des deux côtés de la même façon (hors moteur, MC-18). Côté Tlaloc, le Kc monte en ligne droite du Kc initial au Kc de pleine végétation, entre l'implantation et le début de la récolte. **En attente de Nicolas.**
-4. **Format de sortie du plan** : arrosages par parcelle et par jour, en mm. Nicolas ajoute côté Tlaloc un export de ce plan et donne le format dès qu'il est prêt. **En attente de Nicolas.**
+3. **Kc et durées de stade** par culture (Nicolas les donne), pour calculer l'ETM des deux côtés de la même façon (hors moteur, MC-18). Côté Tlaloc, le Kc monte en ligne droite du Kc initial au Kc de pleine végétation, entre l'implantation et le début de la récolte. **Reçus le 22 novembre** (28 cultures ; sous serre × 0,7 ; sol nu entre deux cultures : Kc 0,4) : `banc/donnees/kc-stades-tlaloc.json`, recopiés sans changement. Les dates de chaque culture viennent de l'export de la démonstration, que Nicolas produit pour chacune des 3 années retenues.
+4. **Format de sortie du plan** : arrosages par parcelle et par jour, en mm. **Reçu le 22 novembre** : CSV `date,parcelle,mm,mm_sol,mm_fond,mm_complement,mm_bassinage,mm_autre,reserve_facile_pct_opuntia,rfu_mm_opuntia,kc_opuntia` et un JSON d'accompagnement ; lu et vérifié par `banc/src/plan-tlaloc.ts` (`mm` = somme des quatre origines, `mm_sol` ≤ `mm`).
 5. **Prévisions archivées** : voir § 6.
 
 Données de la démonstration : rangées dans le dépôt commun (assolement fictif et météo publique d'Open-Meteo, donc sans problème de droits ; accord de Nicolas, 21/11).
+
+## 4 bis. Météo rangée pour chaque année retenue (demande de Nicolas du 22/11)
+
+Pour chaque année retenue, **du 15 octobre de l'année d'avant au 12 janvier de l'année d'après** (14 jours de mise en route de Tlaloc, 60 jours en arrière, 12 en avant) :
+- `banc/meteo/<année>/meteo-<année>.csv` : `date,et0_mm,pluie_mm`, la date à l'heure de Paris, sans trou ;
+- `banc/meteo/<année>/open-meteo-<année>.json` : la réponse d'Open-Meteo telle quelle, avec `daily.et0_fao_evapotranspiration`, `daily.precipitation_sum` et `hourly.precipitation` (`timezone=Europe/Paris`), dont les valeurs journalières sont celles du CSV (vérifié par les tests).
+
+Toute la réanalyse journalière est aussi rangée (`banc/donnees/reanalyse-journaliere.csv`), pour que le classement se recalcule sans réseau. Open-Meteo n'étant pas joignable de toutes les machines, le téléchargement tourne dans le job « Banc » de GitHub Actions (gratuit pour un dépôt public).
 
 ## 5. Origine de l'objectif rejoué : TRANCHÉ (François, 21/11, option A)
 
@@ -37,7 +56,8 @@ Chaque lundi, l'objectif de la semaine rejouée côté OTF est l'**ETM proposée
 ## 6. Passes
 
 - **Passe 1 (obligatoire)** : prévisions parfaites (météo réalisée).
-- **Passe 2 (si les archives existent)** : prévisions réelles archivées J+1 à J+4. L'archive de Tlaloc ne remonte qu'à la mise en service de chaque ferme : **on utilise l'archive « historical forecast » d'Open-Meteo, la même pour les deux côtés**, si elle couvre l'année (couverture à vérifier par le script de la PR 1, non vérifiée à ce jour). Sinon, la passe 2 est omise pour l'année concernée et le dit.
+- **Passe 2 (si les archives existent)** : prévisions réelles archivées J+1 à J+4. L'archive de Tlaloc ne remonte qu'à la mise en service de chaque ferme : **on utilise l'archive des prévisions d'Open-Meteo, la même pour les deux côtés**, si elle couvre l'année. Sinon, la passe 2 est omise pour l'année concernée et le dit.
+- **Couverture (PR 1)** : l'archive « historical forecast » d'Open-Meteo ne garde que le début de chaque prévision ; pour des échéances J+1 à J+4, la PR 1 sonde l'archive des **prévisions précédentes** (Previous Runs API : `precipitation_previous_day1` à `4`, `et0_fao_evapotranspiration_previous_day1` à `4`). Une année est couverte si chaque heure du 1er janvier au 4 janvier de l'année d'après a ces 8 valeurs, avec un même modèle (`best_match`, sinon `ecmwf_ifs025`). Résultat dans `banc/donnees/couverture-previsions.json`.
 - **Variantes** (« exécution imparfaite », une vanne à la fois) : hors du premier lot.
 - Débit sans limite en passe 1 (D-065). Pluie utile écrite dans le fichier, règle commune ; rejeu ensuite avec la règle de chaque jeu.
 
@@ -49,7 +69,7 @@ Eau apportée ; eau perdue ; jours sous le seuil (seuil propre à chaque côté,
 
 - **Où** : dépôt commun, dossier `banc/` (scripts, jeux de données, tests, rapport). Le module n'est pas touché ; l'adaptation de la logique OTF (besoin et placement) se fait par un script du banc qui l'appelle, sans modifier le module. Les deux dépôts étant distincts, le chantier peut avancer pendant un chantier du module (D-154 point 5).
 - **Découpage** : PR 1 chargement des données et classement des années ; PR 2 rejeu et indicateurs, passe 1 ; PR 3 passe 2 et rapport. Chaque PR est relue par Nicolas avant fusion.
-- **Réglage recommandé : Opus 5.5 · Élevé**, comme les lots du module : c'est du code de mesure, qui ne change pas le moteur. Opus 5.5 · Max seulement si une PR touche `src/` du moteur, ce que le banc n'a pas à faire. À confirmer par François et à inscrire à la roadmap avant le lancement. Fable interdit.
+- **Réglage : Opus 5.5 · Élevé**, comme les lots du module : c'est du code de mesure, qui ne change pas le moteur. Opus 5.5 · Max seulement si une PR touche `src/` du moteur, ce que le banc n'a pas à faire. **Confirmé par François le 22 novembre** (avec une relecture du calcul du classement et du seuil commun à 50 % par une conversation séparée). Fable interdit.
 - **Conditions de lancement** : Kc, durées de stade et format du plan reçus de Nicolas, ce contrat relu, ligne de roadmap inscrite. Rien d'autre n'est nécessaire.
 
 ## 9. Ce que le banc ne fait pas
@@ -58,8 +78,9 @@ Aucun changement de réglage ni de moteur ; aucune donnée de la ferme réelle d
 
 ## 10. Points encore ouverts
 
-- Kc et durées de stade par culture, et format de l'export du plan : à fournir par Nicolas (en cours côté Tlaloc).
-- Confirmation par François du réglage de code du § 8 et inscription de la ligne de roadmap.
-- Registres du module (roadmap § 6 ter, ligne dédiée, décision) : à inscrire par PR après la fusion de #162.
+- Exports de l'assolement de la démonstration pour les 3 années retenues, puis plans rejoués par Tlaloc : à fournir par Nicolas une fois la PR 1 fusionnée (PR « données seules »).
+- Registres du module (roadmap § 6 ter, ligne dédiée, décision) : à inscrire par une PR du module.
+
+Reçus de Nicolas le 22/11 : Kc et durées de stade, format du plan, question de la météo (§ 4 bis).
 
 Tranchés avec Nicolas le 21/11 : lieu, classement sur toute la réanalyse, seuil commun à 50 %, plan rejoué tel quel, données rangées dans le dépôt commun.
