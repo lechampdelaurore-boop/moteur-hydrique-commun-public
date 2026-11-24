@@ -1,0 +1,18 @@
+{
+  "source": "Open-Meteo, Historical Weather API (réanalyse)",
+  "url": "https://archive-api.open-meteo.com/v1/archive",
+  "modele": "era5_seamless",
+  "lieu": {
+    "latitude": 45.5,
+    "longitude": 5.75
+  },
+  "fuseau": "Europe/Paris",
+  "variables": {
+    "et0_mm": "daily.et0_fao_evapotranspiration (FAO-56)",
+    "pluie_mm": "daily.precipitation_sum"
+  },
+  "premier_jour": "1950-01-01",
+  "dernier_jour": "2026-01-12",
+  "derniere_annee_entiere": 2025,
+  "telecharge_le": "2026-11-24"
+}

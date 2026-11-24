@@ -1,0 +1,77 @@
+# Banc d'essai (MC-36) : télécharge la météo d'Open-Meteo, classe les années et
+# range la météo des 3 années retenues (dépôt public : minutes gratuites).
+# Les fichiers produits sont joints au job (« banc-donnees ») pour être relus et
+# versionnés dans la PR ; le job dit si le choix des années a changé.
+name: Banc
+
+on:
+  pull_request:
+    paths:
+      - 'banc/src/**'
+      - 'banc/scripts/**'
+      - '.github/workflows/banc.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  meteo:
+    name: Météo Open-Meteo et classement des années
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # Le choix versionné, s'il existe, pour le comparer au nouveau.
+      - run: cp banc/rapport/classement-annees.json /tmp/choix-versionne.json || true
+      # La dernière année versionnée, si elle existe, reste celle du classement : il ne bouge pas avec la date du jour (remarque de Nicolas, PR n° 17).
+      - name: Télécharger la réanalyse et sonder l'archive des prévisions
+        run: |
+          if [ -f banc/donnees/reanalyse-source.json ]; then
+            npm run banc:telecharger -- --derniere-annee "$(jq -r .derniere_annee_entiere banc/donnees/reanalyse-source.json)"
+          else
+            npm run banc:telecharger
+          fi
+      - run: npm run banc:classer
+      - run: npm run banc:annees
+      - run: node --test --experimental-strip-types banc/tests/fichiers.test.ts
+      - name: Comparer au choix versionné
+        run: |
+          {
+            echo '## Banc : classement des années'
+            sed -n '/## Les 3 années retenues/,/## Repères/p' banc/rapport/classement-annees.md | head -n -1
+            echo '### Fichiers changés par rapport à la branche'
+            echo '```'
+            git status --short banc/
+            git diff --stat banc/
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ -f /tmp/choix-versionne.json ]; then
+            avant=$(jq -c '[.choix.seche.annee, .choix.humide.annee, .choix.moyenne.annee]' /tmp/choix-versionne.json)
+            apres=$(jq -c '[.choix.seche.annee, .choix.humide.annee, .choix.moyenne.annee]' banc/rapport/classement-annees.json)
+            echo "Années versionnées $avant ; recalculées $apres"
+            [ "$avant" = "$apres" ] || { echo "::error::le choix des années a changé : $avant → $apres"; exit 1; }
+          fi
+      # Les mêmes fichiers dans le journal du job (archive tar.gz en base64, avec son empreinte SHA-256),
+      # pour une machine qui joint l'API de GitHub mais pas le stockage des fichiers joints.
+      - name: Fichiers produits, dans le journal
+        run: |
+          tar -czf /tmp/banc-donnees.tgz banc/donnees banc/rapport banc/meteo
+          echo "SHA256 $(sha256sum /tmp/banc-donnees.tgz | cut -d' ' -f1)"
+          echo '--- DEBUT banc-donnees.tgz ---'
+          base64 -w 76 /tmp/banc-donnees.tgz
+          echo '--- FIN banc-donnees.tgz ---'
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: banc-donnees
+          path: |
+            banc/donnees/
+            banc/rapport/
+            banc/meteo/
+          if-no-files-found: warn

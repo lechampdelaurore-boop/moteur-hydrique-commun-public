@@ -1,0 +1,403 @@
+{
+  "description": "Kc et durées de stade par culture, donnés par Nicolas (Tlaloc) pour calculer l'ETM des deux côtés de la même façon (contrat du banc, § 4 point 3 ; MC-18 : hors moteur). Recopiés sans changement du tableau de son commentaire.",
+  "source": "https://github.com/lechampdelaurore-boop/moteur-hydrique-commun-public/pull/15#issuecomment-7076544137",
+  "date_source": "2026-11-22",
+  "regle": {
+    "montee": "De l'implantation au début de la récolte, le Kc monte en ligne droite du Kc ini au Kc mid ; du début de la récolte à la fin, il reste au Kc mid.",
+    "facteur_serre": 0.7,
+    "kc_sol_nu": 0.4,
+    "sol_nu": "Entre deux cultures, sol nu : Kc 0,4 (multiplié par 0,7 sous serre)."
+  },
+  "durees": "Durées tirées de l'assolement fictif de la démonstration de Tlaloc, en semaines entières ; une culture qui revient plusieurs fois dans l'année a plusieurs durées. Les dates exactes de chaque culture viennent de l'export de la démonstration, produit par Nicolas pour chaque année retenue.",
+  "cultures": [
+    {
+      "culture": "Ail",
+      "kc_ini": 0.7,
+      "kc_mid": 1,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        245
+      ],
+      "recolte_j": [
+        21
+      ]
+    },
+    {
+      "culture": "Aubergine",
+      "kc_ini": 0.6,
+      "kc_mid": 1.05,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        77,
+        84
+      ],
+      "recolte_j": [
+        112,
+        119
+      ]
+    },
+    {
+      "culture": "Betterave",
+      "kc_ini": 0.5,
+      "kc_mid": 1.05,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        70
+      ],
+      "recolte_j": [
+        105
+      ]
+    },
+    {
+      "culture": "Blette",
+      "kc_ini": 0.7,
+      "kc_mid": 1,
+      "source": "Blette (assimilé épinard)",
+      "implantation_a_debut_recolte_j": [
+        49
+      ],
+      "recolte_j": [
+        140,
+        196
+      ]
+    },
+    {
+      "culture": "Carotte",
+      "kc_ini": 0.7,
+      "kc_mid": 1.05,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        77,
+        84
+      ],
+      "recolte_j": [
+        56
+      ]
+    },
+    {
+      "culture": "Céleri",
+      "kc_ini": 0.7,
+      "kc_mid": 1.05,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        98,
+        105
+      ],
+      "recolte_j": [
+        98
+      ]
+    },
+    {
+      "culture": "Chou",
+      "kc_ini": 0.7,
+      "kc_mid": 1.05,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        28,
+        77,
+        84,
+        98
+      ],
+      "recolte_j": [
+        14,
+        56,
+        98,
+        112
+      ]
+    },
+    {
+      "culture": "Concombre",
+      "kc_ini": 0.6,
+      "kc_mid": 1,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        42,
+        49
+      ],
+      "recolte_j": [
+        98,
+        112,
+        119,
+        126
+      ]
+    },
+    {
+      "culture": "Courge",
+      "kc_ini": 0.5,
+      "kc_mid": 1,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        112
+      ],
+      "recolte_j": [
+        35
+      ]
+    },
+    {
+      "culture": "Courgette",
+      "kc_ini": 0.5,
+      "kc_mid": 0.95,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        28,
+        42
+      ],
+      "recolte_j": [
+        14,
+        91,
+        98
+      ]
+    },
+    {
+      "culture": "Épinard",
+      "kc_ini": 0.7,
+      "kc_mid": 1,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        56
+      ],
+      "recolte_j": [
+        84,
+        91
+      ]
+    },
+    {
+      "culture": "Fenouil",
+      "kc_ini": 0.7,
+      "kc_mid": 1.05,
+      "source": "Fenouil (assimilé céleri)",
+      "implantation_a_debut_recolte_j": [
+        56,
+        70
+      ],
+      "recolte_j": [
+        28,
+        42
+      ]
+    },
+    {
+      "culture": "Fève",
+      "kc_ini": 0.5,
+      "kc_mid": 1.15,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        77
+      ],
+      "recolte_j": [
+        35
+      ]
+    },
+    {
+      "culture": "Fraise",
+      "kc_ini": 0.4,
+      "kc_mid": 0.85,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        224
+      ],
+      "recolte_j": [
+        84
+      ]
+    },
+    {
+      "culture": "Haricot",
+      "kc_ini": 0.5,
+      "kc_mid": 1.05,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        56
+      ],
+      "recolte_j": [
+        28,
+        42,
+        56
+      ]
+    },
+    {
+      "culture": "Laitue",
+      "kc_ini": 0.7,
+      "kc_mid": 1,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        28,
+        35,
+        42,
+        49
+      ],
+      "recolte_j": [
+        21,
+        28,
+        35,
+        42,
+        49,
+        56
+      ]
+    },
+    {
+      "culture": "Mâche",
+      "kc_ini": 0.7,
+      "kc_mid": 1,
+      "source": "Salades à couper (assimilé laitue)",
+      "implantation_a_debut_recolte_j": [
+        49,
+        56
+      ],
+      "recolte_j": [
+        28,
+        49,
+        56,
+        70,
+        84
+      ]
+    },
+    {
+      "culture": "Maïs doux",
+      "kc_ini": 0.3,
+      "kc_mid": 1.15,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        84
+      ],
+      "recolte_j": [
+        35
+      ]
+    },
+    {
+      "culture": "Melon",
+      "kc_ini": 0.5,
+      "kc_mid": 0.85,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        70,
+        77
+      ],
+      "recolte_j": [
+        35,
+        56
+      ]
+    },
+    {
+      "culture": "Mesclun",
+      "kc_ini": 0.7,
+      "kc_mid": 1,
+      "source": "Salades à couper (assimilé laitue)",
+      "implantation_a_debut_recolte_j": [
+        35,
+        49
+      ],
+      "recolte_j": [
+        35,
+        49,
+        56
+      ]
+    },
+    {
+      "culture": "Navet",
+      "kc_ini": 0.5,
+      "kc_mid": 1.1,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        56
+      ],
+      "recolte_j": [
+        63
+      ]
+    },
+    {
+      "culture": "Oignon",
+      "kc_ini": 0.7,
+      "kc_mid": 1.05,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        112
+      ],
+      "recolte_j": [
+        28
+      ]
+    },
+    {
+      "culture": "Petit pois",
+      "kc_ini": 0.5,
+      "kc_mid": 1.15,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        77
+      ],
+      "recolte_j": [
+        35
+      ]
+    },
+    {
+      "culture": "Poireau",
+      "kc_ini": 0.7,
+      "kc_mid": 1,
+      "source": "Poireau (assimilé oignon vert)",
+      "implantation_a_debut_recolte_j": [
+        35,
+        63,
+        70,
+        112
+      ],
+      "recolte_j": [
+        14,
+        98,
+        140,
+        168
+      ]
+    },
+    {
+      "culture": "Poivron",
+      "kc_ini": 0.6,
+      "kc_mid": 1.05,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        91
+      ],
+      "recolte_j": [
+        112
+      ]
+    },
+    {
+      "culture": "Pomme de terre",
+      "kc_ini": 0.5,
+      "kc_mid": 1.15,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        77
+      ],
+      "recolte_j": [
+        42
+      ]
+    },
+    {
+      "culture": "Radis",
+      "kc_ini": 0.7,
+      "kc_mid": 0.9,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        28,
+        42
+      ],
+      "recolte_j": [
+        14,
+        21
+      ]
+    },
+    {
+      "culture": "Tomate",
+      "kc_ini": 0.6,
+      "kc_mid": 1.15,
+      "source": "FAO-56",
+      "implantation_a_debut_recolte_j": [
+        42,
+        70,
+        84
+      ],
+      "recolte_j": [
+        14,
+        70,
+        133
+      ]
+    }
+  ]
+}
