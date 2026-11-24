@@ -81,6 +81,8 @@ export type JourJuge = JourSortie & {
   cultures: string[];
   /** La culture qui décide du sol ; null : aucune culture en place. */
   decisive: string | null;
+  /** p du tableau de la culture qui décide (avant tout ajustement à la chaleur). */
+  p_tableau: number;
   /** Jour de l'année rejouée (1er janvier → 31 décembre) : il entre dans les comptes. */
   compte: boolean;
   /** RAW connue : une culture en place et l'état du jour calculé (§ 7 bis, jours non comptés). */
@@ -128,6 +130,7 @@ export function juger(e: EntreeJuge, jeu: JeuDeReglages): JourJuge[] {
     etm_mm: etm[i].etm_mm,
     cultures: etm[i].cultures,
     decisive: sols[i].decisive,
+    p_tableau: sols[i].sol.p_tableau!,
     compte: s.date >= premier,
     raw_connue: sols[i].decisive !== null && s.connu && s.raw_mm !== null,
   }));
