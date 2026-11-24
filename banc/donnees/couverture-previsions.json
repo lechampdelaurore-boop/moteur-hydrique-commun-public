@@ -1,0 +1,81 @@
+{
+  "source": "Open-Meteo, Previous Runs API (prévisions archivées)",
+  "url": "https://previous-runs-api.open-meteo.com/v1/forecast",
+  "modeles_essayes": [
+    "best_match",
+    "ecmwf_ifs025"
+  ],
+  "variables": [
+    "precipitation_previous_day1",
+    "et0_fao_evapotranspiration_previous_day1",
+    "precipitation_previous_day2",
+    "et0_fao_evapotranspiration_previous_day2",
+    "precipitation_previous_day3",
+    "et0_fao_evapotranspiration_previous_day3",
+    "precipitation_previous_day4",
+    "et0_fao_evapotranspiration_previous_day4"
+  ],
+  "regle": "Année couverte : chaque heure du 1er janvier au 4 janvier de l'année d'après a sa pluie et son ET0 prévues 1, 2, 3 et 4 jours plus tôt, avec un même modèle.",
+  "sondage": "De 2025 en remontant le temps, arrêt après 2 années non couvertes de suite ; les années avant 2023 ne sont pas sondées et comptent comme non couvertes.",
+  "sonde_le": "2026-11-24",
+  "annees": [
+    {
+      "annee": 2023,
+      "couverte": false,
+      "modele": null,
+      "essais": {
+        "best_match": {
+          "complete": false,
+          "premier_manque": {
+            "variable": "precipitation_previous_day1",
+            "heure": "2023-01-01T00:00"
+          },
+          "erreur": null
+        },
+        "ecmwf_ifs025": {
+          "complete": false,
+          "premier_manque": {
+            "variable": "precipitation_previous_day1",
+            "heure": "2023-01-01T00:00"
+          },
+          "erreur": null
+        }
+      }
+    },
+    {
+      "annee": 2024,
+      "couverte": false,
+      "modele": null,
+      "essais": {
+        "best_match": {
+          "complete": false,
+          "premier_manque": {
+            "variable": "precipitation_previous_day1",
+            "heure": "2024-01-01T00:00"
+          },
+          "erreur": null
+        },
+        "ecmwf_ifs025": {
+          "complete": false,
+          "premier_manque": {
+            "variable": "precipitation_previous_day1",
+            "heure": "2024-01-01T00:00"
+          },
+          "erreur": null
+        }
+      }
+    },
+    {
+      "annee": 2025,
+      "couverte": true,
+      "modele": "best_match",
+      "essais": {
+        "best_match": {
+          "complete": true,
+          "premier_manque": null,
+          "erreur": null
+        }
+      }
+    }
+  ]
+}
