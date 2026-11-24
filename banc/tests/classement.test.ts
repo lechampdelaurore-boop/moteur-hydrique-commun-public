@@ -45,6 +45,7 @@ test('cas de base : repères, quarts et les 3 années', () => {
   // Sèche : quart sec = 2001 (400), 2002 (500) ; plus proche de 487,5 → 2002.
   assert.equal(c.choix.seche.annee, 2002);
   assert.deepEqual(c.choix.seche.candidats.quart, [2001, 2002]);
+  assert.deepEqual(c.choix.seche.candidats.apres_recence, [2001, 2002]); // toutes des 30 dernières années
   assert.equal(c.choix.seche.controle_et0, 'conforme'); // bilan −200 ≤ 50
   assert.equal(c.choix.seche.passe2, 'omise');
   // Humide : 2007 (1000), 2008 (1100) ; plus proche de 1012,5 → 2007.
@@ -98,6 +99,26 @@ test('une année dont la fenêtre de météo est incomplète est classée mais p
   assert.equal(c.nombre_annees, 8); // toujours classée
   const sansQuartSec = new Set([...TOUTES].filter((a) => a > 2002));
   assert.throws(() => classer(huitAnnees(), sansQuartSec, AUCUNE), /aucune année du quart sec/);
+});
+
+test('les 30 dernières années passent devant, le classement restant sur toutes les années', () => {
+  // Mêmes pluies 400…1100 (mêmes repères que le cas de base), années mêlées ; dernière = 2020, récentes = 1991 à 2020.
+  const pluies: [number, number][] = [[2010, 400], [1950, 500], [1995, 600], [1960, 700], [1970, 800], [2005, 900], [1980, 1000], [2020, 1100]];
+  const totaux = pluies.map(([annee, pluie]) => ({ annee, jours: 365, pluie_mm: pluie, et0_mm: 700, bilan_mm: pluie - 700 }));
+  const c = classer(totaux, new Set(pluies.map(([a]) => a)), AUCUNE);
+  proche(c.pluie.q1, 575); proche(c.pluie.mediane, 750);
+  assert.deepEqual(c.tableau.filter((l) => l.recente).map((l) => l.annee).sort(), [1995, 2005, 2010, 2020]);
+  // Sèche : quart sec 1950 (500) et 2010 (400) ; sans la règle, 1950 (plus proche de 487,5) ; avec, 2010.
+  assert.equal(c.choix.seche.annee, 2010);
+  assert.deepEqual(c.choix.seche.candidats.apres_controle, [1950, 2010]);
+  assert.deepEqual(c.choix.seche.candidats.apres_recence, [2010]);
+  // Humide : 1980 (1000) et 2020 (1100) ; avec la règle, 2020.
+  assert.equal(c.choix.humide.annee, 2020);
+  // Moyenne : médiane 750 ; parmi les récentes, 1995 (600) et 2005 (900) à 150 mm : à égalité, la plus récente → 2005
+  // (sans la règle : 1960 et 1970 à 50 mm → 1970). Bilan 200, entre −125 et 225 : conforme.
+  assert.equal(c.choix.moyenne.annee, 2005);
+  assert.equal(c.choix.moyenne.controle_et0, 'conforme');
+  assert.match(c.choix.moyenne.raison, /récentes \(1991 à 2020\)/);
 });
 
 test('moins de 4 années : pas de quarts', () => {

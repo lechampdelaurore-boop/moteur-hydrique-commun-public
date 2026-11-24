@@ -19,18 +19,29 @@
  *     Une année sèche doit avoir un bilan dans la moitié la plus sèche des bilans
  *     (≤ médiane) ; une année humide, dans la moitié la plus humide (≥ médiane) ;
  *     l'année moyenne, entre le 1er et le 3e quartile des bilans.
- *  4. Dans le quart sec (ou humide), on garde d'abord les années qui passent le
+ *  4. Années récentes d'abord : le classement et ses quarts portent sur toutes
+ *     les années, mais le choix se fait d'abord parmi les 30 dernières années
+ *     classées (une normale climatique), s'il y en a. Sur ce lieu, l'ET0 moyenne
+ *     des 30 dernières années dépasse d'environ 10 % celle de 1950 à 1978, et la
+ *     réanalyse d'avant 1979 (sans satellites) est moins sûre : une année ancienne
+ *     rejouerait un climat qui n'est plus celui des fermes d'aujourd'hui.
+ *  5. Dans le quart sec (ou humide), on garde d'abord les années qui passent le
  *     contrôle (s'il n'y en a aucune, toutes, et le contrôle est dit « non
- *     conforme ») ; puis, s'il y en a, celles que couvre l'archive des prévisions
- *     (passe 2 possible, § 6) ; enfin l'année la plus proche du milieu du quart
- *     (percentile 12,5 pour la sèche, 87,5 pour l'humide), pour ne pas prendre un
- *     extrême isolé. À égalité, la plus récente.
- *  5. L'année moyenne suit le contrat à la lettre : la plus proche de la médiane
- *     parmi les années qui peuvent être choisies (à égalité, la plus récente) ; le
- *     contrôle par l'ET0 et la couverture de la passe 2 sont seulement dits.
+ *     conforme ») ; puis les années récentes (point 4) ; puis, s'il y en a,
+ *     celles que couvre l'archive des prévisions (passe 2 possible, § 6) ; enfin
+ *     l'année la plus proche du milieu du quart (percentile 12,5 pour la sèche,
+ *     87,5 pour l'humide), pour ne pas prendre un extrême isolé. À égalité, la
+ *     plus récente.
+ *  6. L'année moyenne : la plus proche de la médiane de toutes les années, prise
+ *     parmi les années récentes qui peuvent être choisies (à égalité, la plus
+ *     récente) ; le contrôle par l'ET0 et la couverture de la passe 2 sont
+ *     seulement dits.
  */
 import { bornesAnnee, fenetreMeteo, joursEntre } from './dates.ts';
 import type { JourMeteo } from './meteo.ts';
+
+/** Le choix se fait d'abord parmi les 30 dernières années classées (point 4). */
+export const ANNEES_RECENTES = 30;
 
 export type TotauxAnnee = { annee: number; jours: number; pluie_mm: number; et0_mm: number; bilan_mm: number };
 
@@ -46,12 +57,14 @@ export type LigneClassement = TotauxAnnee & {
   eligible: boolean;
   /** Archive des prévisions complète sur l'année : passe 2 possible. */
   couverte: boolean;
+  /** Parmi les 30 dernières années classées (point 4). */
+  recente: boolean;
 };
 
 export type Choix = {
   annee: number;
   /** Années parmi lesquelles le choix s'est fait, après chaque filtre. */
-  candidats: { quart: number[]; apres_controle: number[]; apres_couverture: number[] };
+  candidats: { quart: number[]; apres_controle: number[]; apres_recence: number[]; apres_couverture: number[] };
   controle_et0: 'conforme' | 'non conforme';
   passe2: 'possible' | 'omise';
   cible_mm: number;
@@ -137,6 +150,7 @@ export function classer(totaux: TotauxAnnee[], eligibles: ReadonlySet<number>, c
   const bilan = { q1: percentile(bilans, 0.25), mediane: percentile(bilans, 0.5), q3: percentile(bilans, 0.75) };
   const rangPluie = rangs(totaux, (t) => t.pluie_mm);
   const rangBilan = rangs(totaux, (t) => t.bilan_mm);
+  const derniere = Math.max(...totaux.map((t) => t.annee));
 
   const tableau: LigneClassement[] = totaux
     .map((t) => ({
@@ -146,6 +160,7 @@ export function classer(totaux: TotauxAnnee[], eligibles: ReadonlySet<number>, c
       categorie: (t.pluie_mm <= pluie.q1 ? 'quart sec' : t.pluie_mm >= pluie.q3 ? 'quart humide' : 'milieu') as Categorie,
       eligible: eligibles.has(t.annee),
       couverte: couvertes.has(t.annee),
+      recente: t.annee > derniere - ANNEES_RECENTES,
     }))
     .sort((a, b) => a.rang_pluie - b.rang_pluie);
 
@@ -155,6 +170,8 @@ export function classer(totaux: TotauxAnnee[], eligibles: ReadonlySet<number>, c
     moyenne: (l: LigneClassement) => l.bilan_mm >= bilan.q1 && l.bilan_mm <= bilan.q3,
   };
 
+  const depuis = `${derniere - ANNEES_RECENTES + 1} à ${derniere}`;
+
   const choisirDansLeQuart = (sens: 'seche' | 'humide'): Choix => {
     const nom = sens === 'seche' ? 'quart sec' : 'quart humide';
     const cible = sens === 'seche' ? pluie.p12_5 : pluie.p87_5;
@@ -162,14 +179,19 @@ export function classer(totaux: TotauxAnnee[], eligibles: ReadonlySet<number>, c
     if (quart.length === 0) throw new Error(`aucune année du ${nom} ne peut être rejouée (fenêtre de météo incomplète)`);
     const passent = quart.filter(controle[sens]);
     const apresControle = passent.length > 0 ? passent : quart;
-    const couvertesDuQuart = apresControle.filter((l) => l.couverte);
-    const apresCouverture = couvertesDuQuart.length > 0 ? couvertesDuQuart : apresControle;
+    const recentes = apresControle.filter((l) => l.recente);
+    const apresRecence = recentes.length > 0 ? recentes : apresControle;
+    const couvertesDuQuart = apresRecence.filter((l) => l.couverte);
+    const apresCouverture = couvertesDuQuart.length > 0 ? couvertesDuQuart : apresRecence;
     const retenue = plusProche(apresCouverture, cible);
     const etapes = [
       quart.length > 1 ? `${quart.length} années du ${nom} peuvent être rejouées` : `1 année du ${nom} peut être rejouée`,
       passent.length > 0
         ? `${pluriel(passent.length, 'passe', 'passent')} le contrôle par l'ET0 (bilan ${sens === 'seche' ? '≤' : '≥'} médiane des bilans, ${fr(bilan.mediane)} mm)`
         : `aucune ne passe le contrôle par l'ET0 : toutes sont gardées, contrôle non conforme`,
+      recentes.length > 0
+        ? `${pluriel(recentes.length, 'est', 'sont')} des ${ANNEES_RECENTES} dernières années (${depuis})`
+        : `aucune n'est des ${ANNEES_RECENTES} dernières années : les plus anciennes sont gardées`,
       couvertesDuQuart.length > 0
         ? `${pluriel(couvertesDuQuart.length, 'est couverte', 'sont couvertes')} par l'archive des prévisions`
         : `aucune n'est couverte par l'archive des prévisions : passe 2 omise`,
@@ -177,7 +199,7 @@ export function classer(totaux: TotauxAnnee[], eligibles: ReadonlySet<number>, c
     ];
     return {
       annee: retenue.annee,
-      candidats: { quart: annees(quart), apres_controle: annees(apresControle), apres_couverture: annees(apresCouverture) },
+      candidats: { quart: annees(quart), apres_controle: annees(apresControle), apres_recence: annees(apresRecence), apres_couverture: annees(apresCouverture) },
       controle_et0: controle[sens](retenue) ? 'conforme' : 'non conforme',
       passe2: retenue.couverte ? 'possible' : 'omise',
       cible_mm: cible,
@@ -188,16 +210,19 @@ export function classer(totaux: TotauxAnnee[], eligibles: ReadonlySet<number>, c
   const choisirMoyenne = (): Choix => {
     const possibles = tableau.filter((l) => l.eligible);
     if (possibles.length === 0) throw new Error('aucune année ne peut être rejouée');
-    const retenue = plusProche(possibles, pluie.mediane);
+    const recentes = possibles.filter((l) => l.recente);
+    const parmi = recentes.length > 0 ? recentes : possibles;
+    const retenue = plusProche(parmi, pluie.mediane);
     const ok = controle.moyenne(retenue);
     return {
       annee: retenue.annee,
-      candidats: { quart: annees(possibles), apres_controle: annees(possibles), apres_couverture: annees(possibles) },
+      candidats: { quart: annees(possibles), apres_controle: annees(possibles), apres_recence: annees(parmi), apres_couverture: annees(parmi) },
       controle_et0: ok ? 'conforme' : 'non conforme',
       passe2: retenue.couverte ? 'possible' : 'omise',
       cible_mm: pluie.mediane,
       raison:
-        `la plus proche de la médiane (${fr(pluie.mediane)} mm) parmi ${possibles.length} années qui peuvent être rejouées est ` +
+        `la plus proche de la médiane de toutes les années (${fr(pluie.mediane)} mm), parmi ${parmi.length} années ` +
+        `${recentes.length > 0 ? `récentes (${depuis}) ` : ''}qui peuvent être rejouées, est ` +
         `${retenue.annee} (${fr(retenue.pluie_mm)} mm) ; contrôle par l'ET0 ${ok ? 'conforme' : 'non conforme'} ` +
         `(bilan ${fr(retenue.bilan_mm)} mm, entre ${fr(bilan.q1)} et ${fr(bilan.q3)} mm attendu) ; ` +
         `passe 2 ${retenue.couverte ? 'possible' : 'omise'}.`,

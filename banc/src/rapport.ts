@@ -35,9 +35,9 @@ export function rapportClassement(c: Classement, source: { modele: string; lieu:
     '',
     '## Toutes les années, de la moins pluvieuse à la plus pluvieuse',
     '',
-    '| Rang pluie | Année | Pluie (mm) | ET0 (mm) | Bilan (mm) | Rang bilan | Catégorie | Peut être rejouée | Passe 2 possible |',
-    '|---|---|---|---|---|---|---|---|---|',
-    ...c.tableau.map((l) => `| ${l.rang_pluie} | ${l.annee} | ${mm(l.pluie_mm)} | ${mm(l.et0_mm)} | ${mm(l.bilan_mm)} | ${l.rang_bilan} | ${l.categorie} | ${oui(l.eligible)} | ${oui(l.couverte)} |`),
+    '| Rang pluie | Année | Pluie (mm) | ET0 (mm) | Bilan (mm) | Rang bilan | Catégorie | Récente | Peut être rejouée | Passe 2 possible |',
+    '|---|---|---|---|---|---|---|---|---|---|',
+    ...c.tableau.map((l) => `| ${l.rang_pluie} | ${l.annee} | ${mm(l.pluie_mm)} | ${mm(l.et0_mm)} | ${mm(l.bilan_mm)} | ${l.rang_bilan} | ${l.categorie} | ${oui(l.recente)} | ${oui(l.eligible)} | ${oui(l.couverte)} |`),
     '',
   ].join('\n');
 }

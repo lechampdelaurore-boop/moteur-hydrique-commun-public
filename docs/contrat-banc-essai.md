@@ -28,8 +28,9 @@ Là où le § 3 laisse le choix, la PR 1 fixe (règle complète et commentée en
 2. **Quartiles et médiane** : interpolation linéaire entre les années triées (méthode des tableurs). Quart sec : pluie ≤ 1er quartile ; quart humide : pluie ≥ 3e quartile.
 3. **Années classées, années jouables** : une année est classée si ses 365 ou 366 jours ont pluie et ET0 ; elle peut être choisie si toute sa fenêtre de météo (§ 4 bis) est complète.
 4. **Contrôle par l'ET0** : le bilan climatique de l'année (pluie − ET0). Sèche : bilan ≤ médiane des bilans ; humide : ≥ médiane ; moyenne : entre le 1er et le 3e quartile des bilans.
-5. **Sèche et humide** : dans le quart, d'abord les années qui passent le contrôle (aucune : toutes, contrôle dit « non conforme ») ; puis, s'il y en a, celles que couvre l'archive des prévisions (passe 2 possible) ; enfin la plus proche du milieu du quart (percentile 12,5 ou 87,5), pour ne pas prendre un extrême isolé. À égalité, la plus récente.
-6. **Moyenne** : à la lettre du § 3, la plus proche de la médiane (à égalité, la plus récente) ; le contrôle et la couverture sont seulement dits.
+5. **Années récentes d'abord** (proposée le 24/11, à accepter par Nicolas) : le classement et ses quarts portent sur toutes les années, comme convenu, mais le choix se fait d'abord parmi les **30 dernières années classées** (une normale climatique). Sur ce lieu, l'ET0 moyenne de 1996 à 2025 (794 mm) dépasse d'environ 10 % celle de 1950 à 1978 (725 mm), et la réanalyse d'avant 1979 (sans satellites) est moins sûre : sans cette règle, le premier passage retenait 1959, 1974 et 1975, un climat qui n'est plus celui des fermes d'aujourd'hui.
+6. **Sèche et humide** : dans le quart, d'abord les années qui passent le contrôle (aucune : toutes, contrôle dit « non conforme ») ; puis les années récentes ; puis, s'il y en a, celles que couvre l'archive des prévisions (passe 2 possible) ; enfin la plus proche du milieu du quart (percentile 12,5 ou 87,5), pour ne pas prendre un extrême isolé. À égalité, la plus récente.
+7. **Moyenne** : la plus proche de la médiane de toutes les années, prise parmi les années récentes (à égalité, la plus récente) ; le contrôle et la couverture sont seulement dits.
 
 ## 4. Données (en commentaire de PR sur le dépôt commun)
 
