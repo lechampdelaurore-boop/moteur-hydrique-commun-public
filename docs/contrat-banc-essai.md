@@ -87,7 +87,7 @@ Proposées le 24/11 avec le code de la PR 2, relues côté OTF le même jour ; r
 | Écart au besoin (mm) | Chaque semaine (lundi à dimanche, coupée au 1er janvier et au 31 décembre) : arrosage compté par le juge − max(0, ETM − pluie utile du juge) ; on publie la somme des écarts et la somme de leurs valeurs absolues. Une semaine où un jour a son ETM ou sa pluie inconnue est sautée. |
 | Stabilité (mm) | Pour chaque nouveau plan (OTF : chaque calcul ; Tlaloc : fond refait et plan du jour), Σ sur les jours à venir communs aux deux plans de \|mm du nouveau − mm de l'ancien\| ; somme sur l'année. |
 | Charge pour le maraîcher | Nombre de jours avec au moins un arrosage, et nombre d'arrosages (un arrosage = une mise en route d'une vanne ou d'un matériel). |
-| Eau non placée (mm) | Ce que chaque côté voulait apporter sans trouver de créneau : OTF « non placé » du planning ; Tlaloc « eau sans créneau » de ses événements. En passe 1 (débit sans limite), attendue nulle ou presque. |
+| Eau non placée (mm) | Ce que chaque côté voulait apporter sans trouver de créneau : OTF « non placé » du planning (semaines dont le lundi est dans l'année) ; Tlaloc « eau sans créneau » de ses événements (absente du plan rejoué, § 10). En passe 1 (débit sans limite), elle ne vient chez OTF que des restes sous la dose minimale (3 mm au goutte-à-goutte, 5 mm en aspersion), qui ne sont pas reportés (R10). |
 
 **À l'échelle de la ferme** : les mm se pondèrent par la surface, Σ(mm × m²) ÷ Σ(m²) ; les jours se donnent en moyenne pondérée par la surface et en nombre de parcelles touchées.
 
@@ -95,7 +95,7 @@ Proposées le 24/11 avec le code de la PR 2, relues côté OTF le même jour ; r
 
 ## 7 ter. Côté OTF rejoué (PR 2, proposition à relire par Nicolas)
 
-- **Objectif** : chaque lundi, pour chaque parcelle, l'ETM de la semaine (§ 5), calculée avec **la même ETM que le juge** (Kc de Nicolas, `banc/src/etm.ts`), pour que l'écart ne vienne pas d'un autre Kc.
+- **Objectif** : chaque lundi, pour chaque parcelle, l'ETM de la semaine (§ 5), calculée avec **la même ETM que le juge** (Kc de Nicolas, `banc/src/etm.ts`), pour que l'écart ne vienne pas d'un autre Kc. Comme l'objectif proposé d'OTF (D-045), un jour sans culture compte 0 : le sol nu n'est pas arrosé. Une parcelle à plusieurs cultures garde la moyenne pondérée par la surface : chez OTF, chaque culture serait sur ses propres planches, et la moyenne de la parcelle est celle de ses planches.
 - **Besoin puis placement** : ceux du module, appelés tels quels depuis un clone de son dépôt public à un commit fixé et noté dans le rapport (`banc/src/cote-otf.ts` : `buildIrrigationNeedsDashboard` puis `buildWeeklyPlan`, réglages par défaut du module : goutte-à-goutte de 3 à 10 mm par jour entre 6 h et 22 h, aspersion de 5 à 15 mm entre 21 h et 8 h, un arrosage par jour, attente après une pluie prévue de plus de 5 mm). Seuil de besoin : 0 (valeur par défaut). Le module n'est pas modifié.
 - **Ferme rejouée** : une parcelle de la démo devient une planche d'OTF de même surface, dans un jardin « serre » ou « plein champ », avec **un seul matériel** (la vanne de la parcelle) ; une pompe et une ressource sans limite pratique, aucune limite par jour (débit sans limite, § 6).
 - **Passe 1** : pluie prévue = pluie réalisée (réanalyse, total du jour) ; chaque proposition est validée et faite telle quelle. Un nouveau calcul en cours de semaine ne trouverait rien de nouveau : **un calcul par semaine, le lundi à minuit**, et la stabilité d'OTF vaut 0 par construction en passe 1 (elle prendra sens en passe 2).
@@ -117,6 +117,7 @@ Aucun changement de réglage ni de moteur ; aucune donnée de la ferme réelle d
 
 - Exports de l'assolement de la démonstration pour les 3 années retenues, puis plans rejoués par Tlaloc : à fournir par Nicolas une fois la PR 1 fusionnée (PR « données seules »).
 - Registres du module (roadmap § 6 ter, ligne dédiée, décision) : à inscrire par une PR du module.
+- Plan rejoué de Tlaloc (§ 7 ter) : heure de l'arrosage du jour, heure et durée des bassinages (le juge horaire en dépend ; d'ici là, 6 h et 13 h pendant 5 minutes, `banc/src/rejeu.ts`), nombre de mises en route par jour (charge), « eau sans créneau » : à donner par Nicolas.
 - Export de la démo (§ 7 bis, § 7 ter) : type et débit (mm/h) de chaque vanne ; lecture de `ou.planches` (plage [première, dernière] ou liste de numéros), « pépinière » sous abri ou non (× 0,7), profondeur maxi des racines des 28 cultures : à confirmer par Nicolas.
 - p de la mâche et du melon (OTF et Tlaloc diffèrent) : à trancher par François.
 
