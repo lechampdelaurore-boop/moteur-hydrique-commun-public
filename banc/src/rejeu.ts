@@ -169,6 +169,6 @@ export function rapportAnnee(r: RapportAnnee): string {
     const t = p.tlaloc.juge_otf;
     l.push(`| ${p.id} | ${nombre(p.surface_m2)} | ${p.serre ? 'oui' : 'non'} | ${nombre(o.eau_apportee_mm)} | ${nombre(t.eau_apportee_mm)} | ${nombre(o.eau_perdue_mm)} | ${nombre(t.eau_perdue_mm)} | ${o.jours_stress} | ${t.jours_stress} | ${nombre(p.otf.eau_non_placee_mm ?? 0)} |`);
   }
-  l.push('', 'Jours sans culture et jours à état inconnu : hors des comptes de jours, publiés dans le JSON. Stabilité : 0 côté OTF en passe 1 par construction (§ 7 ter) ; côté Tlaloc, elle demande l\'historique de ses plans (passe 2).', '');
+  l.push('', 'Jours sans culture et jours à état inconnu : hors des comptes de jours, publiés dans le JSON. Stabilité : 0 côté OTF en passe 1 par construction (§ 7 ter) ; côté Tlaloc, elle demande l\'historique de ses plans (passe 2).', '', 'p du juge : ceux d\'OTF (FAO-56). Deux écarts avec Tlaloc, tranchés par François le 24/11 : mâche 0,20 (Tlaloc 0,30), melon 0,40 (Tlaloc 0,45).', '');
   return l.join('\n');
 }
