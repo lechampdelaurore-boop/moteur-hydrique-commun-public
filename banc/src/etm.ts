@@ -4,13 +4,19 @@
  *  - de l'implantation au début de la récolte, le Kc monte en ligne droite du
  *    Kc ini au Kc mid ; du début de la récolte à la fin, il reste au Kc mid ;
  *  - sous serre, il est multiplié par 0,7 ;
- *  - entre deux cultures, sol nu : Kc 0,4 (× 0,7 sous serre).
+ *  - plusieurs cultures en place sur une parcelle (sur des planches différentes) :
+ *    Kc de la parcelle = moyenne des Kc des cultures en place, pondérée par leur
+ *    surface ; les planches vides à côté sont hors de la moyenne (Tlaloc
+ *    `plotNeed`, `dayKc`, réponse de Nicolas du 24/11) ;
+ *  - sol nu (Kc 0,4, × 0,7 sous serre) seulement quand aucune culture n'est en
+ *    place sur toute la parcelle.
  * ETM du jour = ET0 du jour × Kc du jour ; une ET0 inconnue donne une ETM
  * inconnue (D-003), jamais 0.
  *
- * Conventions de jour (à confirmer par Nicolas) : le jour de l'implantation vaut
- * Kc ini ; le jour du début de la récolte vaut Kc mid ; le jour de la fin de la
- * récolte est encore cultivé ; le lendemain est en sol nu.
+ * Conventions de jour (celles de Tlaloc, `kcAt`, confirmées par Nicolas le 24/11) :
+ * le jour de l'implantation vaut Kc ini ; le jour du début de la récolte vaut
+ * Kc mid ; le dernier jour de récolte est encore cultivé ; le lendemain, la
+ * culture ne compte plus.
  */
 import { jourSuivant } from './dates.ts';
 import type { TableKc } from './kc.ts';
@@ -21,6 +27,8 @@ export type CultureEnPlace = {
   implantation: string;
   debut_recolte: string;
   fin_recolte: string;
+  /** Surface de la culture sur la parcelle (m²), pour la moyenne des Kc. */
+  surface_m2: number;
 };
 
 /** Nombre de jours de `a` à `b` (positif si b est après a). */
@@ -32,6 +40,7 @@ export function joursDe(a: string, b: string): number {
 /** Vérifie l'ordre des dates d'une culture et que son nom est dans la table. */
 export function verifierCulture(c: CultureEnPlace, table: TableKc): void {
   if (!table.cultures.some((k) => k.culture === c.culture)) throw new Error(`culture absente de la table des Kc : ${c.culture}`);
+  if (!(c.surface_m2 > 0)) throw new Error(`${c.culture} : surface nulle ou illisible (${c.surface_m2})`);
   if (!(c.implantation < c.debut_recolte && c.debut_recolte <= c.fin_recolte)) {
     throw new Error(`${c.culture} : dates dans le désordre (${c.implantation}, ${c.debut_recolte}, ${c.fin_recolte})`);
   }
@@ -47,16 +56,21 @@ export function kcCulture(c: CultureEnPlace, date: string, table: TableKc): numb
 }
 
 /**
- * Kc du jour d'une unité (parcelle ou planche) : la culture en place, sinon le
- * sol nu ; × facteur de serre sous abri. Deux cultures en place le même jour
- * sur la même unité : erreur (l'export doit les séparer).
+ * Kc du jour d'une parcelle : la moyenne des Kc des cultures en place, pondérée
+ * par leur surface, sinon le sol nu ; × facteur de serre sous abri. `cultures`
+ * liste les noms en place (vide : sol nu).
  */
-export function kcDuJour(cultures: readonly CultureEnPlace[], date: string, serre: boolean, table: TableKc): { kc: number; culture: string | null } {
+export function kcDuJour(cultures: readonly CultureEnPlace[], date: string, serre: boolean, table: TableKc): { kc: number; cultures: string[] } {
   const enPlace = cultures.filter((c) => c.implantation <= date && date <= c.fin_recolte);
-  if (enPlace.length > 1) throw new Error(`${date} : plusieurs cultures en place (${enPlace.map((c) => c.culture).join(', ')})`);
   const facteur = serre ? table.regle.facteur_serre : 1;
-  if (enPlace.length === 0) return { kc: table.regle.kc_sol_nu * facteur, culture: null };
-  return { kc: kcCulture(enPlace[0], date, table) * facteur, culture: enPlace[0].culture };
+  if (enPlace.length === 0) return { kc: table.regle.kc_sol_nu * facteur, cultures: [] };
+  let somme = 0;
+  let surface = 0;
+  for (const c of enPlace) {
+    somme += kcCulture(c, date, table) * c.surface_m2;
+    surface += c.surface_m2;
+  }
+  return { kc: (somme / surface) * facteur, cultures: enPlace.map((c) => c.culture) };
 }
 
 /** ETM de chaque jour de `debut` à `fin`, à partir de l'ET0 du jour (null : inconnue). */
@@ -67,13 +81,13 @@ export function etmSerie(
   debut: string,
   fin: string,
   table: TableKc,
-): { date: string; kc: number; culture: string | null; etm_mm: number | null }[] {
+): { date: string; kc: number; cultures: string[]; etm_mm: number | null }[] {
   for (const c of cultures) verifierCulture(c, table);
-  const sortie: { date: string; kc: number; culture: string | null; etm_mm: number | null }[] = [];
+  const sortie: { date: string; kc: number; cultures: string[]; etm_mm: number | null }[] = [];
   for (let d = debut; d <= fin; d = jourSuivant(d)) {
-    const { kc, culture } = kcDuJour(cultures, d, serre, table);
+    const { kc, cultures: noms } = kcDuJour(cultures, d, serre, table);
     const e = et0.get(d);
-    sortie.push({ date: d, kc, culture, etm_mm: e === undefined || e === null ? null : e * kc });
+    sortie.push({ date: d, kc, cultures: noms, etm_mm: e === undefined || e === null ? null : e * kc });
   }
   return sortie;
 }
