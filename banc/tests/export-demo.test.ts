@@ -20,7 +20,7 @@ const exemple = () => ({
     },
     {
       id: 'pa62', nom: 'Serre 62', categorie: 'serre', surface_m2: 140, planches: null,
-      cultures: [{ cycle: 2019, culture: 'Laitue', ou: { surface_m2: 70 }, implantation: '2019-03-04', debut_recolte: '2019-04-15', fin: '2019-05-13' }],
+      cultures: [{ cycle: 2019, culture: 'Laitue', ou: { surface_m2: 70 }, implantation: '2019-03-04', debut_recolte: '2019-04-15', fin: '2019-05-13', plant: true }],
     },
   ],
 });
@@ -32,7 +32,7 @@ test('l\'exemple de Nicolas : surfaces par planches (plage) ou en m², serre', (
   // Mâche : planches 1 à 5 → 5 × 25 × 1,2 = 150 m² ; laitue : 6 à 7 → 2 × 25 × 1,2 = 60 m² ; 150 + 60 = 210 = la serre.
   assert.deepEqual(parcelles[0].cultures.map((c) => [c.culture, c.surface_m2]), [['Mâche', 150], ['Laitue', 60]]);
   assert.equal(parcelles[0].serre, true);
-  assert.deepEqual(parcelles[0].cultures[0], { culture: 'Mâche', implantation: '2018-11-12', debut_recolte: '2018-12-31', fin_recolte: '2019-02-25', surface_m2: 150 });
+  assert.deepEqual(parcelles[0].cultures[0], { culture: 'Mâche', implantation: '2018-11-12', debut_recolte: '2018-12-31', fin_recolte: '2019-02-25', surface_m2: 150, plant: false });
   assert.equal(parcelles[1].cultures[0].surface_m2, 70);
 });
 
@@ -46,4 +46,5 @@ test('exports refusés', () => {
   assert.throws(() => lireExportDemo(avec((e) => { e.parcelles[1].cultures[0].ou = { surface_m2: 200 }; }), TABLE), /hors de la parcelle/);
   assert.throws(() => lireExportDemo(avec((e) => { e.parcelles[1].cultures[0].fin = '2019-04-01'; }), TABLE), /désordre/);
   assert.throws(() => lireExportDemo(avec((e) => { e.parcelles[0].categorie = 'tunnel'; }), TABLE), /catégorie inconnue/);
+  assert.throws(() => lireExportDemo(avec((e) => { delete (e.parcelles[1].cultures[0] as { plant?: boolean }).plant; }), TABLE), /plant ou semis/);
 });

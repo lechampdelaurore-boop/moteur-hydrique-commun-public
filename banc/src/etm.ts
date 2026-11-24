@@ -29,6 +29,8 @@ export type CultureEnPlace = {
   fin_recolte: string;
   /** Surface de la culture sur la parcelle (m²), pour la moyenne des Kc. */
   surface_m2: number;
+  /** Plant (vrai) ou semis (faux) : profondeur des racines au départ (`sol.ts`). */
+  plant?: boolean;
 };
 
 /** Nombre de jours de `a` à `b` (positif si b est après a). */
