@@ -4,8 +4,8 @@ Contrat : `docs/contrat-banc-essai.md`. Le banc rejoue 3 années entières (une 
 
 ## Où en est le banc
 
-- **PR 1 (celle-ci) : chargement des données et classement des années.** Kc et durées de stade de Nicolas, lecture du plan de Tlaloc, réanalyse d'Open-Meteo, classement, météo des 3 années retenues.
-- PR 2 : rejeu et indicateurs, passe 1 (prévisions parfaites).
+- PR 1 : chargement des données et classement des années. Kc et durées de stade de Nicolas, lecture du plan de Tlaloc, réanalyse d'Open-Meteo, classement, météo des 3 années retenues.
+- **PR 2 (en cours) : rejeu et indicateurs, passe 1 (prévisions parfaites).** ETM (`etm.ts`), lecture de l'export de la démo (`export-demo.ts`), sol du juge (`sol.ts`), juge (`juge.ts`), côté OTF (`cote-otf.ts`), indicateurs (`indicateurs.ts`).
 - PR 3 : passe 2 (prévisions archivées) et rapport.
 
 ## Contenu
@@ -32,5 +32,7 @@ npm run banc:telecharger   # réseau : réanalyse de toutes les années, couvert
 npm run banc:classer       # sans réseau : classement, rapport, CSV des 3 années
 npm run banc:annees        # réseau : réponse d'Open-Meteo avec la pluie horaire des 3 années
 ```
+
+Le côté OTF appelle la logique du module (besoin et placement) depuis un clone de son dépôt public : `MODULE_OTF=<chemin>`, sinon `../module-irrigation-otf-public` à côté de ce dépôt. Sans clone, ses tests sont sautés ; le job « Banc côté OTF » (`.github/workflows/banc-otf.yml`) les passe avec le module au commit qu'il fixe.
 
 `npm test` vérifie sans réseau que le classement et les CSV se recalculent à l'identique depuis les fichiers rangés.

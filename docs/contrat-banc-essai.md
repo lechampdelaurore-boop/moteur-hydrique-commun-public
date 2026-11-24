@@ -1,6 +1,6 @@
 # Contrat du banc d'essai du moteur commun (MC-36) : v0.4 (brouillon)
 
-21 novembre 2026. Sans code. Rédigé côté OTF (Claude, pour François), à relire par François puis par Nicolas. v0.2 : réponses de Nicolas du 21 novembre inscrites (§ 3, § 4, § 7, § 10). v0.3 (24 novembre, PR 1 du banc) : données de Nicolas du 22 novembre reçues (§ 4), précisions du classement (§ 3 bis), de la météo rangée (§ 4 bis) et de la couverture de la passe 2 (§ 6), réglage confirmé par François (§ 8). v0.4 (brouillon de la PR 2) : définitions des indicateurs (§ 7 bis), à relire par Nicolas. Sources : contrat fusionné v0.2.9 (§ 4 MC-30, MC-33, MC-36 ; § 4 bis ; § 5 point 5), moteur v0.3.0 (`docs/moteur.md`), D-065, D-154 point 4, roadmap § 6 ter.
+21 novembre 2026. Sans code. Rédigé côté OTF (Claude, pour François), à relire par François puis par Nicolas. v0.2 : réponses de Nicolas du 21 novembre inscrites (§ 3, § 4, § 7, § 10). v0.3 (24 novembre, PR 1 du banc) : données de Nicolas du 22 novembre reçues (§ 4), précisions du classement (§ 3 bis), de la météo rangée (§ 4 bis) et de la couverture de la passe 2 (§ 6), réglage confirmé par François (§ 8). v0.4 (brouillon de la PR 2) : définitions des indicateurs (§ 7 bis) et côté OTF rejoué (§ 7 ter), à relire par Nicolas. Sources : contrat fusionné v0.2.9 (§ 4 MC-30, MC-33, MC-36 ; § 4 bis ; § 5 point 5), moteur v0.3.0 (`docs/moteur.md`), D-065, D-154 point 4, roadmap § 6 ter.
 
 ## 1. Objet
 
@@ -93,6 +93,15 @@ Proposées le 24/11 avec le code de la PR 2, relues côté OTF le même jour ; r
 
 **Tolérance (§ 7)** : deux côtés sont dits « d'accord » sur l'eau quand leurs écarts restent sous 1 % de l'eau totale de la saison ; sinon l'écart est montré, parcelle par parcelle, avec ce qui l'explique.
 
+## 7 ter. Côté OTF rejoué (PR 2, proposition à relire par Nicolas)
+
+- **Objectif** : chaque lundi, pour chaque parcelle, l'ETM de la semaine (§ 5), calculée avec **la même ETM que le juge** (Kc de Nicolas, `banc/src/etm.ts`), pour que l'écart ne vienne pas d'un autre Kc.
+- **Besoin puis placement** : ceux du module, appelés tels quels depuis un clone de son dépôt public à un commit fixé et noté dans le rapport (`banc/src/cote-otf.ts` : `buildIrrigationNeedsDashboard` puis `buildWeeklyPlan`, réglages par défaut du module : goutte-à-goutte de 3 à 10 mm par jour entre 6 h et 22 h, aspersion de 5 à 15 mm entre 21 h et 8 h, un arrosage par jour, attente après une pluie prévue de plus de 5 mm). Seuil de besoin : 0 (valeur par défaut). Le module n'est pas modifié.
+- **Ferme rejouée** : une parcelle de la démo devient une planche d'OTF de même surface, dans un jardin « serre » ou « plein champ », avec **un seul matériel** (la vanne de la parcelle) ; une pompe et une ressource sans limite pratique, aucune limite par jour (débit sans limite, § 6).
+- **Passe 1** : pluie prévue = pluie réalisée (réanalyse, total du jour) ; chaque proposition est validée et faite telle quelle. Un nouveau calcul en cours de semaine ne trouverait rien de nouveau : **un calcul par semaine, le lundi à minuit**, et la stabilité d'OTF vaut 0 par construction en passe 1 (elle prendra sens en passe 2).
+- **Démarrage** : le premier lundi à partir du 15 octobre de l'année d'avant ; les jours d'avant, sans arrosage, ne sont pas dans les comptes.
+- **À donner par Nicolas** : pour chaque vanne de l'export, le type de matériel (goutte-à-goutte ou aspersion) et son débit en mm/h sur la parcelle ; ils fixent la durée et l'heure des arrosages d'OTF.
+
 ## 8. Réglage de code (à valider)
 
 - **Où** : dépôt commun, dossier `banc/` (scripts, jeux de données, tests, rapport). Le module n'est pas touché ; l'adaptation de la logique OTF (besoin et placement) se fait par un script du banc qui l'appelle, sans modifier le module. Les deux dépôts étant distincts, le chantier peut avancer pendant un chantier du module (D-154 point 5).
@@ -108,7 +117,7 @@ Aucun changement de réglage ni de moteur ; aucune donnée de la ferme réelle d
 
 - Exports de l'assolement de la démonstration pour les 3 années retenues, puis plans rejoués par Tlaloc : à fournir par Nicolas une fois la PR 1 fusionnée (PR « données seules »).
 - Registres du module (roadmap § 6 ter, ligne dédiée, décision) : à inscrire par une PR du module.
-- Export de la démo (§ 7 bis) : lecture de `ou.planches` (plage [première, dernière] ou liste de numéros), « pépinière » sous abri ou non (× 0,7), profondeur maxi des racines des 28 cultures : à confirmer par Nicolas.
+- Export de la démo (§ 7 bis, § 7 ter) : type et débit (mm/h) de chaque vanne ; lecture de `ou.planches` (plage [première, dernière] ou liste de numéros), « pépinière » sous abri ou non (× 0,7), profondeur maxi des racines des 28 cultures : à confirmer par Nicolas.
 - p de la mâche et du melon (OTF et Tlaloc diffèrent) : à trancher par François.
 
 Reçus de Nicolas le 22/11 : Kc et durées de stade, format du plan, question de la météo (§ 4 bis). Le 24/11 : format de l'export de la démo, p des 28 cultures, modèle de sol et seuil propre de Tlaloc, Kc d'une parcelle à plusieurs cultures (moyenne pondérée par la surface).
