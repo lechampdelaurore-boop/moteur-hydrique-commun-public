@@ -29,7 +29,11 @@ const ARRET_APRES_NON_COUVERTES = 2;
 
 function derniereAnnee(): number {
   const i = process.argv.indexOf('--derniere-annee');
-  if (i >= 0) return Number(process.argv[i + 1]);
+  if (i >= 0) {
+    const annee = Number(process.argv[i + 1]);
+    if (!Number.isInteger(annee) || annee <= PREMIERE_ANNEE) throw new Error(`--derniere-annee illisible : ${process.argv[i + 1]}`);
+    return annee;
+  }
   // La dernière année dont la fenêtre (jusqu'au 12 janvier d'après) est passée depuis au moins 8 jours (délai de la réanalyse).
   const aujourdhui = new Date().toISOString().slice(0, 10);
   const annee = Number(aujourdhui.slice(0, 4));

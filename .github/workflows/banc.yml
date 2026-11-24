@@ -29,7 +29,14 @@ jobs:
       - run: npm ci
       # Le choix versionné, s'il existe, pour le comparer au nouveau.
       - run: cp banc/rapport/classement-annees.json /tmp/choix-versionne.json || true
-      - run: npm run banc:telecharger
+      # La dernière année versionnée, si elle existe, reste celle du classement : il ne bouge pas avec la date du jour (remarque de Nicolas, PR n° 17).
+      - name: Télécharger la réanalyse et sonder l'archive des prévisions
+        run: |
+          if [ -f banc/donnees/reanalyse-source.json ]; then
+            npm run banc:telecharger -- --derniere-annee "$(jq -r .derniere_annee_entiere banc/donnees/reanalyse-source.json)"
+          else
+            npm run banc:telecharger
+          fi
       - run: npm run banc:classer
       - run: npm run banc:annees
       - run: node --test --experimental-strip-types banc/tests/fichiers.test.ts
@@ -50,6 +57,15 @@ jobs:
             echo "Années versionnées $avant ; recalculées $apres"
             [ "$avant" = "$apres" ] || { echo "::error::le choix des années a changé : $avant → $apres"; exit 1; }
           fi
+      # Les mêmes fichiers dans le journal du job (archive tar.gz en base64, avec son empreinte SHA-256),
+      # pour une machine qui joint l'API de GitHub mais pas le stockage des fichiers joints.
+      - name: Fichiers produits, dans le journal
+        run: |
+          tar -czf /tmp/banc-donnees.tgz banc/donnees banc/rapport banc/meteo
+          echo "SHA256 $(sha256sum /tmp/banc-donnees.tgz | cut -d' ' -f1)"
+          echo '--- DEBUT banc-donnees.tgz ---'
+          base64 -w 76 /tmp/banc-donnees.tgz
+          echo '--- FIN banc-donnees.tgz ---'
       - uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -25,7 +25,7 @@ Contrat : `docs/contrat-banc-essai.md`. Le banc rejoue 3 années entières (une 
 
 ## Refaire les fichiers
 
-Open-Meteo n'est pas joignable de toutes les machines : le job « Banc » de GitHub Actions (`.github/workflows/banc.yml`) fait les trois étapes à chaque PR qui touche `banc/src/` ou `banc/scripts/`, et joint les fichiers produits (« banc-donnees »). Il échoue si le choix des années change par rapport aux fichiers versionnés.
+Open-Meteo n'est pas joignable de toutes les machines : le job « Banc » de GitHub Actions (`.github/workflows/banc.yml`) fait les trois étapes à chaque PR qui touche `banc/src/` ou `banc/scripts/`, et joint les fichiers produits (« banc-donnees »). Quand les fichiers sont versionnés, il garde leur dernière année (`derniere_annee_entiere` de `donnees/reanalyse-source.json`), pour que le classement ne bouge pas avec la date du jour, et il échoue si le choix des années change ; les petites retouches d'ERA5 ne le font pas échouer.
 
 ```text
 npm run banc:telecharger   # réseau : réanalyse de toutes les années, couverture de l'archive des prévisions (une dizaine de minutes, appels espacés)
