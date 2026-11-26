@@ -1,0 +1,5012 @@
+{
+ "format": "banc-opuntia-plan",
+ "version": 1,
+ "opuntia": "v723 · 26/11/2026 18:50",
+ "annee": 2013,
+ "du": "2013-01-01",
+ "au": "2013-12-31",
+ "note": "Ce que le plan d’Opuntia arrose, rejoué jour par jour sur la ferme de démonstration (assolement fictif). Passe 1 : prévisions parfaites. Aucune donnée de ferme réelle.",
+ "regles": {
+  "mise_en_route": "rejeu commencé le 2012-12-18 (14 jours non exportés)",
+  "fond": "mode Opuntia refait le lundi et le jeudi (et le premier jour)",
+  "plan_du_jour": "chaque matin à 07:30, appliqué quand Opuntia propose un changement",
+  "profil": "equ",
+  "debit_ferme_vannes": 23,
+  "debit": "sans limite (passe 1, contrat du banc § 6)",
+  "seuil_pct_RFU": 50,
+  "kc": "Kc des cultures (ini → mid de l’implantation au début de la récolte, puis mid), × 0,7 sous serre ; sol nu hors culture",
+  "releves": "aucun (ni relevé au poing, ni tensiomètre)",
+  "pluie": "pluie horaire du fichier, sinon la pluie du jour en une heure à 15 h"
+ },
+ "colonnes": {
+  "mm": "eau apportée par toutes les vannes de la parcelle (mm sur la surface de la parcelle)",
+  "mm_sol": "part comptée dans la réserve du sol par Opuntia (un bassinage court de serre ne compte qu’en partie)",
+  "mm_fond": "programme de fond du mode Opuntia",
+  "mm_complement": "complément du plan du jour",
+  "mm_bassinage": "bassinage de serre (gardé tel quel)",
+  "mm_autre": "autre programme gardé tel quel",
+  "reserve_facile_pct_opuntia": "réserve facile vue par Opuntia au matin, après le plan (son calcul à lui, pour comparaison)",
+  "rfu_mm_opuntia": "taille de la réserve facile ce jour-là pour Opuntia",
+  "kc_opuntia": "Kc du jour pour Opuntia (cultures en place, × 0,7 sous serre)"
+ },
+ "sans_creneau_par_parcelle": "evenements[].sans_creneau_par_parcelle : complément qu’Opuntia voudrait ajouter ce jour-là mais sans créneau libre (non arrosé, non compté dans mm), en mm sur la surface de la parcelle",
+ "arrosages_colonnes": {
+  "date": "jour (heure de Paris)",
+  "parcelle": "parcelle",
+  "vanne": "vanne",
+  "debut": "heure de début HH:MM (heure de Paris)",
+  "fin": "heure de fin HH:MM",
+  "mm": "eau apportée par ce passage, en mm sur la surface de la parcelle",
+  "mm_sol": "part comptée dans la réserve du sol par Opuntia",
+  "origine": "fond, complement, bassinage ou autre"
+ },
+ "parcelles": [
+  {
+   "id": "pa1",
+   "nom": "Serre 1",
+   "categorie": "serre",
+   "surface_m2": 210
+  },
+  {
+   "id": "pa2",
+   "nom": "Serre 2",
+   "categorie": "serre",
+   "surface_m2": 210
+  },
+  {
+   "id": "pa3",
+   "nom": "Serre 3",
+   "categorie": "serre",
+   "surface_m2": 210
+  },
+  {
+   "id": "pa4",
+   "nom": "Serre 4",
+   "categorie": "serre",
+   "surface_m2": 210
+  },
+  {
+   "id": "pa5",
+   "nom": "Serre 5",
+   "categorie": "serre",
+   "surface_m2": 137.5
+  },
+  {
+   "id": "pa61",
+   "nom": "Serre 61",
+   "categorie": "serre",
+   "surface_m2": 137.5
+  },
+  {
+   "id": "pa62",
+   "nom": "Serre 62",
+   "categorie": "serre",
+   "surface_m2": 140
+  },
+  {
+   "id": "pj1",
+   "nom": "Jardin 1",
+   "categorie": "jardin",
+   "surface_m2": 300
+  },
+  {
+   "id": "pj2",
+   "nom": "Jardin 2",
+   "categorie": "jardin",
+   "surface_m2": 300
+  },
+  {
+   "id": "pj3",
+   "nom": "Jardin 3",
+   "categorie": "jardin",
+   "surface_m2": 300
+  },
+  {
+   "id": "pj4",
+   "nom": "Jardin 4",
+   "categorie": "jardin",
+   "surface_m2": 300
+  },
+  {
+   "id": "pj5",
+   "nom": "Jardin 5",
+   "categorie": "jardin",
+   "surface_m2": 300
+  },
+  {
+   "id": "pj6",
+   "nom": "Jardin 6",
+   "categorie": "jardin",
+   "surface_m2": 300
+  },
+  {
+   "id": "pj7",
+   "nom": "Jardin 7",
+   "categorie": "jardin",
+   "surface_m2": 300
+  },
+  {
+   "id": "pj8",
+   "nom": "Jardin 8",
+   "categorie": "jardin",
+   "surface_m2": 300
+  },
+  {
+   "id": "ppep",
+   "nom": "Pépinière",
+   "categorie": "pepiniere",
+   "surface_m2": 120
+  }
+ ],
+ "vannes": [
+  {
+   "id": "v1",
+   "nom": "Serre 1 · GAG",
+   "parcelle": "pa1",
+   "module": "p1",
+   "famille": "gag",
+   "debit_mm_h": 8.333,
+   "bassinage": false
+  },
+  {
+   "id": "v2",
+   "nom": "Serre 1 · Aspersion",
+   "parcelle": "pa1",
+   "module": "p1",
+   "famille": "asp",
+   "debit_mm_h": 3.429,
+   "bassinage": true
+  },
+  {
+   "id": "v3",
+   "nom": "Serre 2 · GAG",
+   "parcelle": "pa2",
+   "module": "p1",
+   "famille": "gag",
+   "debit_mm_h": 8.333,
+   "bassinage": false
+  },
+  {
+   "id": "v4",
+   "nom": "Serre 2 · Aspersion",
+   "parcelle": "pa2",
+   "module": "p1",
+   "famille": "asp",
+   "debit_mm_h": 3.429,
+   "bassinage": true
+  },
+  {
+   "id": "v5",
+   "nom": "Serre 3 · GAG",
+   "parcelle": "pa3",
+   "module": "p1",
+   "famille": "gag",
+   "debit_mm_h": 8.333,
+   "bassinage": false
+  },
+  {
+   "id": "v6",
+   "nom": "Serre 3 · Aspersion",
+   "parcelle": "pa3",
+   "module": "p1",
+   "famille": "asp",
+   "debit_mm_h": 3.429,
+   "bassinage": true
+  },
+  {
+   "id": "v7",
+   "nom": "Serre 4 · GAG",
+   "parcelle": "pa4",
+   "module": "p2",
+   "famille": "gag",
+   "debit_mm_h": 8.333,
+   "bassinage": false
+  },
+  {
+   "id": "v8",
+   "nom": "Serre 4 · Aspersion",
+   "parcelle": "pa4",
+   "module": "p2",
+   "famille": "asp",
+   "debit_mm_h": 2.286,
+   "bassinage": true
+  },
+  {
+   "id": "v9",
+   "nom": "Serre 5 · GAG",
+   "parcelle": "pa5",
+   "module": "p2",
+   "famille": "gag",
+   "debit_mm_h": 9.091,
+   "bassinage": false
+  },
+  {
+   "id": "v10",
+   "nom": "Serre 5 · Aspersion",
+   "parcelle": "pa5",
+   "module": "p2",
+   "famille": "asp",
+   "debit_mm_h": 2.618,
+   "bassinage": true
+  },
+  {
+   "id": "v11",
+   "nom": "Serre 61 · GAG",
+   "parcelle": "pa61",
+   "module": "p3",
+   "famille": "gag",
+   "debit_mm_h": 9.091,
+   "bassinage": false
+  },
+  {
+   "id": "v12",
+   "nom": "Serre 61 · Aspersion",
+   "parcelle": "pa61",
+   "module": "p3",
+   "famille": "asp",
+   "debit_mm_h": 2.618,
+   "bassinage": true
+  },
+  {
+   "id": "v13",
+   "nom": "Serre 62 · GAG",
+   "parcelle": "pa62",
+   "module": "p3",
+   "famille": "gag",
+   "debit_mm_h": null,
+   "bassinage": false
+  },
+  {
+   "id": "v14",
+   "nom": "Serre 62 · Aspersion",
+   "parcelle": "pa62",
+   "module": "p3",
+   "famille": "asp",
+   "debit_mm_h": 2.571,
+   "bassinage": true
+  },
+  {
+   "id": "v15",
+   "nom": "Jardin 1 · Aspersion",
+   "parcelle": "pj1",
+   "module": "p4",
+   "famille": "asp",
+   "debit_mm_h": 5.333,
+   "bassinage": false
+  },
+  {
+   "id": "v16",
+   "nom": "Jardin 2 · GAG",
+   "parcelle": "pj2",
+   "module": "p4",
+   "famille": "gag",
+   "debit_mm_h": 8.333,
+   "bassinage": false
+  },
+  {
+   "id": "v17",
+   "nom": "Jardin 3 · GAG",
+   "parcelle": "pj3",
+   "module": "p5",
+   "famille": "gag",
+   "debit_mm_h": 8.333,
+   "bassinage": false
+  },
+  {
+   "id": "v18",
+   "nom": "Jardin 4 · GAG",
+   "parcelle": "pj4",
+   "module": "p5",
+   "famille": "gag",
+   "debit_mm_h": 8.333,
+   "bassinage": false
+  },
+  {
+   "id": "v19",
+   "nom": "Jardin 5 · GAG",
+   "parcelle": "pj5",
+   "module": "p6",
+   "famille": "gag",
+   "debit_mm_h": 8.333,
+   "bassinage": false
+  },
+  {
+   "id": "v20",
+   "nom": "Jardin 6 · GAG",
+   "parcelle": "pj6",
+   "module": "p6",
+   "famille": "gag",
+   "debit_mm_h": 8.333,
+   "bassinage": false
+  },
+  {
+   "id": "v21",
+   "nom": "Jardin 7 · GAG",
+   "parcelle": "pj7",
+   "module": "p7",
+   "famille": "gag",
+   "debit_mm_h": 8.333,
+   "bassinage": false
+  },
+  {
+   "id": "v22",
+   "nom": "Jardin 8 · GAG",
+   "parcelle": "pj8",
+   "module": "p7",
+   "famille": "gag",
+   "debit_mm_h": 8.333,
+   "bassinage": false
+  },
+  {
+   "id": "v23",
+   "nom": "Pépinière · Aspersion",
+   "parcelle": "ppep",
+   "module": "p8",
+   "famille": "asp",
+   "debit_mm_h": 5,
+   "bassinage": false
+  }
+ ],
+ "totaux": {
+  "pa1": {
+   "mm": 1003.69,
+   "m3": 210.78
+  },
+  "pa2": {
+   "mm": 992.44,
+   "m3": 208.41
+  },
+  "pa3": {
+   "mm": 928.27,
+   "m3": 194.94
+  },
+  "pa4": {
+   "mm": 705.19,
+   "m3": 148.09
+  },
+  "pa5": {
+   "mm": 930.15,
+   "m3": 127.9
+  },
+  "pa61": {
+   "mm": 723.38,
+   "m3": 99.46
+  },
+  "pa62": {
+   "mm": 0,
+   "m3": 0
+  },
+  "pj1": {
+   "mm": 481.69,
+   "m3": 144.51
+  },
+  "pj2": {
+   "mm": 515.42,
+   "m3": 154.63
+  },
+  "pj3": {
+   "mm": 487.5,
+   "m3": 146.25
+  },
+  "pj4": {
+   "mm": 433.33,
+   "m3": 130
+  },
+  "pj5": {
+   "mm": 481.11,
+   "m3": 144.33
+  },
+  "pj6": {
+   "mm": 364.03,
+   "m3": 109.21
+  },
+  "pj7": {
+   "mm": 549.31,
+   "m3": 164.79
+  },
+  "pj8": {
+   "mm": 431.25,
+   "m3": 129.37
+  },
+  "ppep": {
+   "mm": 423.5,
+   "m3": 50.82
+  }
+ },
+ "m3_total": 2163.49,
+ "evenements": [
+  {
+   "date": "2013-01-01",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-02",
+   "fond": false,
+   "plan": true,
+   "complements": 5,
+   "suspensions": [
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-03",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-04",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-05",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-06",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-07",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-08",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-09",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-10",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-11",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-12",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-13",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-14",
+   "fond": true,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-15",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-16",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-17",
+   "fond": true,
+   "plan": true,
+   "complements": 5,
+   "suspensions": [
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-18",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-19",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-20",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-21",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-22",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-23",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-24",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-25",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-26",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-27",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-28",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-29",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-30",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-01-31",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-01",
+   "fond": false,
+   "plan": true,
+   "complements": 5,
+   "suspensions": [
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-02",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-03",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-04",
+   "fond": true,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-05",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-06",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-07",
+   "fond": true,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-08",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-09",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-10",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-11",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-12",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-13",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-14",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-15",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-16",
+   "fond": false,
+   "plan": true,
+   "complements": 5,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-17",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-18",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-19",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-20",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-21",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-22",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 2
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-23",
+   "fond": false,
+   "plan": true,
+   "complements": 3,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-24",
+   "fond": false,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-25",
+   "fond": true,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-26",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-27",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-02-28",
+   "fond": true,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 2
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-01",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-02",
+   "fond": false,
+   "plan": true,
+   "complements": 8,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-03",
+   "fond": false,
+   "plan": true,
+   "complements": 6,
+   "suspensions": [
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-04",
+   "fond": true,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-05",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-06",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-07",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-08",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-09",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-10",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-11",
+   "fond": true,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-12",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-13",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-14",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-15",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-16",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-17",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-18",
+   "fond": true,
+   "plan": true,
+   "complements": 3,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-19",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-20",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-21",
+   "fond": true,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    },
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-22",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-23",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-24",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    },
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-25",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-26",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-27",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-28",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-29",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-30",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-03-31",
+   "fond": false,
+   "plan": true,
+   "complements": 6,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-01",
+   "fond": true,
+   "plan": true,
+   "complements": 4,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-02",
+   "fond": false,
+   "plan": true,
+   "complements": 6,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-03",
+   "fond": false,
+   "plan": true,
+   "complements": 3,
+   "suspensions": [
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-04",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-05",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-06",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    },
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-07",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-08",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-09",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    },
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-10",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-11",
+   "fond": true,
+   "plan": true,
+   "complements": 3,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-12",
+   "fond": false,
+   "plan": true,
+   "complements": 3,
+   "suspensions": [
+    {
+     "module": "p5",
+     "jours": 2
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-13",
+   "fond": false,
+   "plan": true,
+   "complements": 6,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-14",
+   "fond": false,
+   "plan": true,
+   "complements": 12,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-15",
+   "fond": true,
+   "plan": true,
+   "complements": 16,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-16",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-17",
+   "fond": false,
+   "plan": true,
+   "complements": 9,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-18",
+   "fond": true,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-19",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-20",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-21",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 2
+    },
+    {
+     "module": "p7",
+     "jours": 2
+    },
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-22",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-23",
+   "fond": false,
+   "plan": true,
+   "complements": 8,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-24",
+   "fond": false,
+   "plan": true,
+   "complements": 6,
+   "suspensions": [
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-25",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-26",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-27",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    },
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-28",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-29",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-04-30",
+   "fond": false,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    },
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-01",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-02",
+   "fond": true,
+   "plan": true,
+   "complements": 3,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-03",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 2
+    },
+    {
+     "module": "p5",
+     "jours": 2
+    },
+    {
+     "module": "p6",
+     "jours": 2
+    },
+    {
+     "module": "p7",
+     "jours": 2
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-04",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-05",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 2
+    },
+    {
+     "module": "p6",
+     "jours": 2
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-06",
+   "fond": true,
+   "plan": true,
+   "complements": 5,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-07",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [
+    {
+     "module": "p5",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-08",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-09",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-10",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    },
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-11",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-12",
+   "fond": false,
+   "plan": true,
+   "complements": 6,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-13",
+   "fond": true,
+   "plan": true,
+   "complements": 5,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-14",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-15",
+   "fond": false,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-16",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-17",
+   "fond": false,
+   "plan": true,
+   "complements": 3,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-18",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    },
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-19",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-20",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-21",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    },
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-22",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-23",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-24",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    },
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-25",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-26",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-27",
+   "fond": true,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-28",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-29",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-30",
+   "fond": true,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    },
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-05-31",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-01",
+   "fond": false,
+   "plan": true,
+   "complements": 9,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-02",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [
+    {
+     "module": "p6",
+     "jours": 2
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-03",
+   "fond": true,
+   "plan": true,
+   "complements": 3,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-04",
+   "fond": false,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [
+    {
+     "module": "p8",
+     "jours": 2
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-05",
+   "fond": false,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-06",
+   "fond": true,
+   "plan": true,
+   "complements": 6,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-07",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    },
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-08",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-09",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-10",
+   "fond": true,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [
+    {
+     "module": "p6",
+     "jours": 2
+    },
+    {
+     "module": "p8",
+     "jours": 2
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-11",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-12",
+   "fond": false,
+   "plan": true,
+   "complements": 3,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-13",
+   "fond": true,
+   "plan": true,
+   "complements": 12,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-14",
+   "fond": false,
+   "plan": true,
+   "complements": 15,
+   "suspensions": [
+    {
+     "module": "p6",
+     "jours": 2
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-15",
+   "fond": false,
+   "plan": true,
+   "complements": 14,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-16",
+   "fond": false,
+   "plan": true,
+   "complements": 17,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-17",
+   "fond": true,
+   "plan": true,
+   "complements": 9,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-18",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-19",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-20",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-21",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-22",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-23",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-24",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-25",
+   "fond": false,
+   "plan": true,
+   "complements": 6,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-26",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-27",
+   "fond": true,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-28",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-29",
+   "fond": false,
+   "plan": true,
+   "complements": 11,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-06-30",
+   "fond": false,
+   "plan": true,
+   "complements": 6,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-01",
+   "fond": true,
+   "plan": true,
+   "complements": 8,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-02",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-03",
+   "fond": false,
+   "plan": true,
+   "complements": 4,
+   "suspensions": [
+    {
+     "module": "p5",
+     "jours": 2
+    },
+    {
+     "module": "p6",
+     "jours": 2
+    },
+    {
+     "module": "p7",
+     "jours": 2
+    },
+    {
+     "module": "p8",
+     "jours": 2
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-04",
+   "fond": true,
+   "plan": true,
+   "complements": 16,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-05",
+   "fond": false,
+   "plan": true,
+   "complements": 13,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-06",
+   "fond": false,
+   "plan": true,
+   "complements": 11,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-07",
+   "fond": false,
+   "plan": true,
+   "complements": 7,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-08",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-09",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-10",
+   "fond": false,
+   "plan": true,
+   "complements": 16,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-11",
+   "fond": true,
+   "plan": true,
+   "complements": 18,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-12",
+   "fond": false,
+   "plan": true,
+   "complements": 13,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-13",
+   "fond": false,
+   "plan": true,
+   "complements": 11,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-14",
+   "fond": false,
+   "plan": true,
+   "complements": 15,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-15",
+   "fond": true,
+   "plan": true,
+   "complements": 6,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-16",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-17",
+   "fond": false,
+   "plan": true,
+   "complements": 7,
+   "suspensions": [
+    {
+     "module": "p5",
+     "jours": 2
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-18",
+   "fond": true,
+   "plan": true,
+   "complements": 12,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-19",
+   "fond": false,
+   "plan": true,
+   "complements": 11,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-20",
+   "fond": false,
+   "plan": true,
+   "complements": 12,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-21",
+   "fond": false,
+   "plan": true,
+   "complements": 11,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-22",
+   "fond": true,
+   "plan": true,
+   "complements": 17,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-23",
+   "fond": false,
+   "plan": true,
+   "complements": 13,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-24",
+   "fond": false,
+   "plan": true,
+   "complements": 10,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-25",
+   "fond": true,
+   "plan": true,
+   "complements": 13,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-26",
+   "fond": false,
+   "plan": true,
+   "complements": 7,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-27",
+   "fond": false,
+   "plan": true,
+   "complements": 5,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-28",
+   "fond": false,
+   "plan": true,
+   "complements": 5,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-29",
+   "fond": true,
+   "plan": true,
+   "complements": 12,
+   "suspensions": [
+    {
+     "module": "p5",
+     "jours": 2
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-30",
+   "fond": false,
+   "plan": true,
+   "complements": 17,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-07-31",
+   "fond": false,
+   "plan": true,
+   "complements": 18,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-01",
+   "fond": true,
+   "plan": true,
+   "complements": 23,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-02",
+   "fond": false,
+   "plan": true,
+   "complements": 18,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-03",
+   "fond": false,
+   "plan": true,
+   "complements": 13,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-04",
+   "fond": false,
+   "plan": true,
+   "complements": 11,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-05",
+   "fond": true,
+   "plan": true,
+   "complements": 10,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-06",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-07",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-08",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-09",
+   "fond": false,
+   "plan": true,
+   "complements": 13,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-10",
+   "fond": false,
+   "plan": true,
+   "complements": 6,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-11",
+   "fond": false,
+   "plan": true,
+   "complements": 14,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-12",
+   "fond": true,
+   "plan": true,
+   "complements": 16,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-13",
+   "fond": false,
+   "plan": true,
+   "complements": 10,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-14",
+   "fond": false,
+   "plan": true,
+   "complements": 12,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-15",
+   "fond": true,
+   "plan": true,
+   "complements": 10,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-16",
+   "fond": false,
+   "plan": true,
+   "complements": 7,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-17",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-18",
+   "fond": false,
+   "plan": true,
+   "complements": 9,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-19",
+   "fond": true,
+   "plan": true,
+   "complements": 20,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-20",
+   "fond": false,
+   "plan": true,
+   "complements": 8,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-21",
+   "fond": false,
+   "plan": true,
+   "complements": 12,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-22",
+   "fond": true,
+   "plan": true,
+   "complements": 5,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-23",
+   "fond": false,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-24",
+   "fond": false,
+   "plan": true,
+   "complements": 3,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-25",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p8",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-26",
+   "fond": true,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-27",
+   "fond": false,
+   "plan": true,
+   "complements": 9,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-28",
+   "fond": false,
+   "plan": true,
+   "complements": 7,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-29",
+   "fond": true,
+   "plan": true,
+   "complements": 4,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-30",
+   "fond": false,
+   "plan": true,
+   "complements": 3,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-08-31",
+   "fond": false,
+   "plan": true,
+   "complements": 9,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-01",
+   "fond": false,
+   "plan": true,
+   "complements": 7,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-02",
+   "fond": true,
+   "plan": true,
+   "complements": 15,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-03",
+   "fond": false,
+   "plan": true,
+   "complements": 4,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-04",
+   "fond": false,
+   "plan": true,
+   "complements": 7,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-05",
+   "fond": true,
+   "plan": true,
+   "complements": 3,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-06",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-07",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-08",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 2
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-09",
+   "fond": true,
+   "plan": true,
+   "complements": 3,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-10",
+   "fond": false,
+   "plan": true,
+   "complements": 8,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-11",
+   "fond": false,
+   "plan": true,
+   "complements": 5,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-12",
+   "fond": true,
+   "plan": true,
+   "complements": 8,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-13",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [
+    {
+     "module": "p6",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-14",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-15",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-16",
+   "fond": true,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-17",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-18",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-19",
+   "fond": true,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 2
+    },
+    {
+     "module": "p7",
+     "jours": 2
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-20",
+   "fond": false,
+   "plan": true,
+   "complements": 6,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-21",
+   "fond": false,
+   "plan": true,
+   "complements": 9,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-22",
+   "fond": false,
+   "plan": true,
+   "complements": 7,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-23",
+   "fond": true,
+   "plan": true,
+   "complements": 11,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-24",
+   "fond": false,
+   "plan": true,
+   "complements": 9,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-25",
+   "fond": false,
+   "plan": true,
+   "complements": 5,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-26",
+   "fond": true,
+   "plan": true,
+   "complements": 10,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-27",
+   "fond": false,
+   "plan": true,
+   "complements": 3,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-28",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-29",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 2
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-09-30",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-01",
+   "fond": false,
+   "plan": true,
+   "complements": 6,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-02",
+   "fond": false,
+   "plan": true,
+   "complements": 5,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-03",
+   "fond": true,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-04",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-05",
+   "fond": false,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-06",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-07",
+   "fond": true,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-08",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-09",
+   "fond": false,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-10",
+   "fond": true,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-11",
+   "fond": false,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-12",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-13",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-14",
+   "fond": true,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-15",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-16",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-17",
+   "fond": true,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 2
+    },
+    {
+     "module": "p7",
+     "jours": 2
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-18",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-19",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-20",
+   "fond": false,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-21",
+   "fond": true,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-22",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-23",
+   "fond": false,
+   "plan": true,
+   "complements": 4,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-24",
+   "fond": true,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 2
+    },
+    {
+     "module": "p6",
+     "jours": 2
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-25",
+   "fond": false,
+   "plan": true,
+   "complements": 3,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-26",
+   "fond": false,
+   "plan": true,
+   "complements": 3,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-27",
+   "fond": false,
+   "plan": true,
+   "complements": 3,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-28",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-29",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-30",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-10-31",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-01",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-02",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-03",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-04",
+   "fond": true,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-05",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-06",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-07",
+   "fond": true,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-08",
+   "fond": false,
+   "plan": true,
+   "complements": 4,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-09",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-10",
+   "fond": false,
+   "plan": true,
+   "complements": 3,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-11",
+   "fond": true,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-12",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-13",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-14",
+   "fond": true,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-15",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-16",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-17",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-18",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-19",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-20",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-21",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-22",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-23",
+   "fond": false,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-24",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-25",
+   "fond": true,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-26",
+   "fond": false,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-27",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-28",
+   "fond": true,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-29",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-11-30",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-01",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-02",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-03",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-04",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-05",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-06",
+   "fond": false,
+   "plan": true,
+   "complements": 9,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-07",
+   "fond": false,
+   "plan": true,
+   "complements": 9,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-08",
+   "fond": false,
+   "plan": true,
+   "complements": 4,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-09",
+   "fond": true,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-10",
+   "fond": false,
+   "plan": true,
+   "complements": 3,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-11",
+   "fond": false,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 2
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-12",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-13",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-14",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 2
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-15",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-16",
+   "fond": true,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-17",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-18",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-19",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-20",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-21",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-22",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-23",
+   "fond": true,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-24",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-25",
+   "fond": false,
+   "plan": true,
+   "complements": 2,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-26",
+   "fond": true,
+   "plan": true,
+   "complements": 1,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-27",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-28",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-29",
+   "fond": false,
+   "plan": true,
+   "complements": 0,
+   "suspensions": [
+    {
+     "module": "p4",
+     "jours": 3
+    },
+    {
+     "module": "p5",
+     "jours": 3
+    },
+    {
+     "module": "p6",
+     "jours": 3
+    },
+    {
+     "module": "p7",
+     "jours": 3
+    }
+   ],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-30",
+   "fond": true,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  },
+  {
+   "date": "2013-12-31",
+   "fond": false,
+   "plan": false,
+   "complements": 0,
+   "suspensions": [],
+   "sans_creneau": 0,
+   "sans_creneau_mm": 0
+  }
+ ],
+ "csv": "plan-tlaloc-2013.csv",
+ "arrosages": "plan-tlaloc-2013-arrosages.csv"
+}
