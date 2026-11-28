@@ -10,13 +10,13 @@ Surface : 3 635 m² ; mm pondérés par la surface, jours en moyenne pondéré
 |---|---|---|
 | Eau apportée (mm) | 235,46 | 595,17 |
 | Eau apportée sans bassinage (mm) | 235,46 | 509,36 |
-| Eau perdue (mm) | 12,53 | 189,99 |
-| Écart au besoin, somme (mm) | -20,51 | 339,2 |
-| Écart au besoin, valeurs absolues (mm) | 20,52 | 358,74 |
-| Jours sous le seuil propre | 142,13 (15) | 9,25 (9) |
-| Jours sous le seuil commun (Dr > 0,5 × RAW) | 170,62 (15) | 14,68 (14) |
-| Jours en stress (Dr > RAW) | 142,04 (15) | 8,71 (6) |
-| Jours à réserve vide (Dr ≥ RU) | 18,96 (10) | 0,06 (1) |
+| Eau perdue (mm) | 12,53 | 135,59 |
+| Écart au besoin, somme (mm) | -20,51 | 285,25 |
+| Écart au besoin, valeurs absolues (mm) | 20,52 | 318,42 |
+| Jours sous le seuil propre | 142,13 (15) | 17,63 (9) |
+| Jours sous le seuil commun (Dr > 0,5 × RAW) | 170,62 (15) | 24,89 (14) |
+| Jours en stress (Dr > RAW) | 142,04 (15) | 16,46 (6) |
+| Jours à réserve vide (Dr ≥ RU) | 18,96 (10) | 0,23 (4) |
 | Nombre d'arrosages | 485 | 4944 |
 
 Eau apportée : **écart** de 359,71 mm (au-delà de 1 % de l'eau de la saison) ; voir les parcelles.
@@ -29,13 +29,13 @@ Surface : 3 635 m² ; mm pondérés par la surface, jours en moyenne pondéré
 |---|---|---|
 | Eau apportée (mm) | 235,46 | 595,17 |
 | Eau apportée sans bassinage (mm) | 235,46 | 509,36 |
-| Eau perdue (mm) | 4,67 | 118,86 |
-| Écart au besoin, somme (mm) | -49,95 | 245,4 |
-| Écart au besoin, valeurs absolues (mm) | 49,96 | 298,95 |
-| Jours sous le seuil propre | 131,9 (15) | 33,74 (13) |
-| Jours sous le seuil commun (Dr > 0,5 × RAW) | 171,31 (15) | 33,74 (13) |
-| Jours en stress (Dr > RAW) | 109,67 (15) | 17,76 (7) |
-| Jours à réserve vide (Dr ≥ RU) | 10,82 (14) | 0,23 (1) |
+| Eau perdue (mm) | 4,67 | 105,66 |
+| Écart au besoin, somme (mm) | -49,95 | 231,91 |
+| Écart au besoin, valeurs absolues (mm) | 49,96 | 296,51 |
+| Jours sous le seuil propre | 131,9 (15) | 43,8 (13) |
+| Jours sous le seuil commun (Dr > 0,5 × RAW) | 171,31 (15) | 43,8 (13) |
+| Jours en stress (Dr > RAW) | 109,67 (15) | 25,12 (7) |
+| Jours à réserve vide (Dr ≥ RU) | 10,82 (14) | 0,33 (3) |
 | Nombre d'arrosages | 485 | 4944 |
 
 Eau apportée : **écart** de 359,71 mm (au-delà de 1 % de l'eau de la saison) ; voir les parcelles.
@@ -46,12 +46,12 @@ Hors des comparaisons de la ferme (sans débit de vanne chez Tlaloc, d'accord av
 
 | Parcelle | Surface (m²) | Serre | Eau OTF (mm) | Eau Tlaloc (mm) | Perdue OTF | Perdue Tlaloc | Stress OTF (j) | Stress Tlaloc (j) | Non placée OTF |
 |---|---|---|---|---|---|---|---|---|---|
-| pa1 | 210 | oui | 480,87 | 1 003,69 | 0 | 456,97 | 365 | 18 | 34,07 |
-| pa2 | 210 | oui | 472,29 | 992,4 | 0 | 452,9 | 365 | 18 | 35,76 |
-| pa3 | 210 | oui | 433,1 | 928,13 | 0 | 422,18 | 353 | 16 | 33,92 |
+| pa1 | 210 | oui | 480,87 | 1 003,69 | 0 | 221,2 | 365 | 45 | 34,07 |
+| pa2 | 210 | oui | 472,29 | 992,4 | 0 | 216,34 | 365 | 46 | 35,76 |
+| pa3 | 210 | oui | 433,1 | 928,13 | 0 | 185,23 | 353 | 46 | 33,92 |
 | pa4 | 210 | oui | 414,32 | 705,03 | 0 | 217,39 | 359 | 68 | 33,06 |
-| pa5 | 137,5 | oui | 450,89 | 930,07 | 0 | 408,19 | 365 | 16 | 42,66 |
-| pa61 | 137,5 | oui | 394,52 | 723,22 | 0 | 242,97 | 336 | 31 | 40,65 |
+| pa5 | 137,5 | oui | 450,89 | 930,07 | 0 | 107,45 | 365 | 76 | 42,66 |
+| pa61 | 137,5 | oui | 394,52 | 723,22 | 0 | 188,88 | 336 | 46 | 40,65 |
 | pa62 (hors comparaison) | 140 | oui | 445,6 | 0 | 0 | 0 | 359 | 359 | 41,5 |
 | pj1 | 300 | non | 152,65 | 481,68 | 35,94 | 105,25 | 42 | 0 | 17,48 |
 | pj2 | 300 | non | 139,7 | 515,45 | 10,24 | 146,77 | 70 | 0 | 10,3 |
@@ -62,6 +62,10 @@ Hors des comparaisons de la ferme (sans débit de vanne chez Tlaloc, d'accord av
 | pj7 | 300 | non | 148,25 | 549,34 | 17,66 | 158,19 | 69 | 0 | 6,11 |
 | pj8 | 300 | non | 134,56 | 431,26 | 16,5 | 91,32 | 17 | 0 | 6,06 |
 | ppep | 120 | non | 114,7 | 423,32 | 13,94 | 103,49 | 41 | 0 | 17,04 |
+
+Les bassinages de Tlaloc entrent au sol pour la part que son plan compte (`mm_sol`) ; « eau apportée » les garde en entier.
+
+Les jours de stress du côté OTF, surtout sous serre, viennent de la règle du rejeu (§ 7 ter) : l'objectif de la semaine est l'ETM de la semaine, sans rattrapage du manque, et l'eau non placée n'est pas rendue. Ils ne disent rien du module lui-même.
 
 Jours sans culture et jours à état inconnu : hors des comptes de jours, publiés dans le JSON. Stabilité : 0 côté OTF en passe 1 par construction (§ 7 ter) ; côté Tlaloc, elle demande l'historique de ses plans (passe 2).
 

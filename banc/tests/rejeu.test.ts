@@ -44,6 +44,18 @@ test('plan de Tlaloc en arrosages : l\'arrosage du jour à son heure, le bassina
   assert.deepEqual(apports, [{ date: '2019-07-01', mm: 6, bassinage: false }, { date: '2019-07-01', mm: 0.5, bassinage: true }]);
 });
 
+test('le bassinage entre au sol pour sa part `mm_sol`, et reste entier dans l\'eau apportée (Nicolas, 28/11)', () => {
+  const l = { ...ligne('2019-07-01', 'pa1', 6.5, 0.5), mm_sol: 6.12 }; // 6 mm d'arrosage, 0,5 mm bassinés dont 0,12 mm au sol
+  const heures = { arrosage: '06:00', bassinage: { heure: '13:00', duree_s: 300 } };
+  const { arrosages, apports } = arrosagesTlaloc([l], 'pa1', heures);
+  assert.deepEqual(arrosages.map((a) => [a.type, a.mm]), [['arrosage', 6], ['bassinage', 0.12]]);
+  assert.deepEqual(apports.map((a) => [a.bassinage, a.mm]), [[false, 6], [true, 0.5]]);
+  // Un bassinage qui n'arrive pas au sol n'est pas un arrosage du juge, mais reste dans l'eau apportée.
+  const r = arrosagesTlaloc([{ ...l, mm_sol: 6 }], 'pa1', heures);
+  assert.deepEqual(r.arrosages.map((a) => a.type), ['arrosage']);
+  assert.equal(r.apports.length, 2);
+});
+
 test('une année rejouée de bout en bout : deux côtés, deux juges, la ferme et le rapport', { skip: ABSENT && 'clone du module absent' }, async () => {
   const tableKc = lireTableKc(JSON.parse(lire('donnees/kc-stades-tlaloc.json')));
   const tableSol = lireTableSol({

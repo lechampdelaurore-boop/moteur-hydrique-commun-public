@@ -45,7 +45,7 @@ export function instantParis(date: string, heure: string): string {
   return new Date(t).toISOString();
 }
 
-/** Les arrosages du plan de Tlaloc pour une parcelle, et ses apports pour les indicateurs. */
+/** Les arrosages du plan de Tlaloc pour une parcelle (ce qui arrive au sol), et ses apports pour les indicateurs (toute l'eau sortie du tuyau). */
 export function arrosagesTlaloc(lignes: readonly LignePlan[], parcelle: string, heures: HeuresPlanTlaloc): { arrosages: ArrosageDuJour[]; apports: ApportPlan[] } {
   const arrosages: ArrosageDuJour[] = [];
   const apports: ApportPlan[] = [];
@@ -58,9 +58,14 @@ export function arrosagesTlaloc(lignes: readonly LignePlan[], parcelle: string, 
       apports.push({ date: l.date, mm: eau, bassinage: false });
     }
     if (l.mm_bassinage > 0) {
-      const debut = instantParis(l.date, heures.bassinage.heure);
-      const fin = new Date(Date.parse(debut) + heures.bassinage.duree_s * 1000).toISOString();
-      arrosages.push({ debut, fin, mm: l.mm_bassinage, type: 'bassinage', nature: 'banc-tlaloc' });
+      // Au sol : la part que Tlaloc compte (`mm_sol`, moins l'eau d'arrosage qui y va tout entière) ; « eau apportée » garde `mm_bassinage`
+      // en entier, c'est de l'eau sortie du tuyau (Nicolas, 28/11).
+      const auSol = auCentieme(Math.max(0, l.mm_sol - eau));
+      if (auSol > 0) {
+        const debut = instantParis(l.date, heures.bassinage.heure);
+        const fin = new Date(Date.parse(debut) + heures.bassinage.duree_s * 1000).toISOString();
+        arrosages.push({ debut, fin, mm: auSol, type: 'bassinage', nature: 'banc-tlaloc' });
+      }
       apports.push({ date: l.date, mm: l.mm_bassinage, bassinage: true });
     }
   }
@@ -174,6 +179,6 @@ export function rapportAnnee(r: RapportAnnee): string {
     const t = p.tlaloc.juge_otf;
     l.push(`| ${p.id}${p.sans_debit ? ' (hors comparaison)' : ''} | ${nombre(p.surface_m2)} | ${p.serre ? 'oui' : 'non'} | ${nombre(o.eau_apportee_mm)} | ${nombre(t.eau_apportee_mm)} | ${nombre(o.eau_perdue_mm)} | ${nombre(t.eau_perdue_mm)} | ${o.jours_stress} | ${t.jours_stress} | ${nombre(p.otf.eau_non_placee_mm ?? 0)} |`);
   }
-  l.push('', 'Jours sans culture et jours à état inconnu : hors des comptes de jours, publiés dans le JSON. Stabilité : 0 côté OTF en passe 1 par construction (§ 7 ter) ; côté Tlaloc, elle demande l\'historique de ses plans (passe 2).', '', 'p du juge : ceux d\'OTF (FAO-56). Deux écarts avec Tlaloc, tranchés par François le 24/11 : mâche 0,20 (Tlaloc 0,30), melon 0,40 (Tlaloc 0,45).', '');
+  l.push('', 'Les bassinages de Tlaloc entrent au sol pour la part que son plan compte (`mm_sol`) ; « eau apportée » les garde en entier.', '', 'Les jours de stress du côté OTF, surtout sous serre, viennent de la règle du rejeu (§ 7 ter) : l\'objectif de la semaine est l\'ETM de la semaine, sans rattrapage du manque, et l\'eau non placée n\'est pas rendue. Ils ne disent rien du module lui-même.', '', 'Jours sans culture et jours à état inconnu : hors des comptes de jours, publiés dans le JSON. Stabilité : 0 côté OTF en passe 1 par construction (§ 7 ter) ; côté Tlaloc, elle demande l\'historique de ses plans (passe 2).', '', 'p du juge : ceux d\'OTF (FAO-56). Deux écarts avec Tlaloc, tranchés par François le 24/11 : mâche 0,20 (Tlaloc 0,30), melon 0,40 (Tlaloc 0,45).', '');
   return l.join('\n');
 }
