@@ -119,10 +119,22 @@ test('une année rejouée de bout en bout : deux côtés, deux juges, la ferme e
   // Une parcelle sans débit chez Tlaloc sort des indicateurs de la ferme, mais reste rapportée à part.
   const r2 = rejouerAnnee({
     annee: 2019, parcelles: parcelles.map((p) => ({ ...p, sans_debit: p.id === 'pa2' })), planTlaloc, meteo, heures, tableKc, tableSol, materiels,
+    detail: ['pa1'],
     heuresTlaloc: { arrosage: '06:00', bassinage: { heure: '13:00', duree_s: 300 } },
     module: await chargerModuleOtf(RACINE),
   });
   assert.deepEqual(r2.hors_comparaison, ['pa2']);
+  // Le sol du juge jour par jour, à la demande : RU, RAW et profondeur des racines pour chaque côté et chaque juge.
+  assert.equal(r.detail, undefined);
+  assert.deepEqual(Object.keys(r2.detail!), ['pa1']);
+  const jours = r2.detail!.pa1.otf.juge_otf;
+  assert.equal(jours.length, 365);
+  const juillet = jours.find((j) => j.date === '2019-07-01')!;
+  assert.equal(juillet.decisive, 'Tomate');
+  assert.equal(juillet.zr_m, 0.6);
+  assert.equal(juillet.ru_mm, 96); // 160 mm/m × 0,6 m
+  assert.ok(juillet.raw_mm! > 0 && juillet.raw_mm! < juillet.ru_mm!);
+  assert.equal(r2.detail!.pa1.tlaloc.juge_tlaloc.length, 365);
   assert.equal(r2.ferme.tlaloc.juge_otf.surface_m2, 200);
   assert.equal(r2.ferme.tlaloc.juge_otf.mm.eau_apportee_mm, 1095);
   assert.match(rapportAnnee(r2), /Hors des comparaisons de la ferme .* : pa2\./);

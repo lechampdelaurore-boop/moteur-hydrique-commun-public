@@ -48,6 +48,8 @@ for (const annee of annees) {
   const { parcelles } = lireExportDemo(JSON.parse(lire(`demo/${annee}/export-demo-${annee}.json`)), tableKc);
   const rapport = rejouerAnnee({
     annee, parcelles, tableKc, tableSol, materiels, module, heuresTlaloc: HEURES_TLALOC,
+    // Le sol du juge jour par jour pour une serre de 2019 (demande de Nicolas, 28/11).
+    detail: annee === 2019 ? ['pa1'] : undefined,
     planTlaloc: lirePlanTlaloc(lire(`demo/${annee}/plan-tlaloc-${annee}.csv`)),
     meteo: lireCsv(lire(`meteo/${annee}/meteo-${annee}.csv`)),
     heures: pluieHoraire(JSON.parse(lire(`meteo/${annee}/open-meteo-${annee}.json`))),

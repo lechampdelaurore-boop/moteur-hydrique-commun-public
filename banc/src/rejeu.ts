@@ -88,6 +88,25 @@ export type EntreeRejeu = {
   materiels: ReadonlyMap<string, MaterielOtf>;
   heuresTlaloc: HeuresPlanTlaloc;
   module: ModuleOtf;
+  /** Parcelles dont le sol du juge est publié jour par jour (RU, RAW, manque, eau) dans le JSON du rapport. */
+  detail?: readonly string[];
+};
+
+const centieme = (x: number | null) => (x === null ? null : auCentieme(x));
+
+/** Le sol du juge un jour donné : de quoi comparer avec ce que Tlaloc compte de son côté (Nicolas, 28/11). */
+export type JourDetail = {
+  date: string;
+  /** Profondeur des racines retenue (m) : RU ÷ eau utile de la texture. */
+  zr_m: number | null;
+  ru_mm: number | null;
+  raw_mm: number | null;
+  p: number | null;
+  dr_mm: number | null;
+  arrosage_mm: number;
+  eau_perdue_mm: number | null;
+  /** La culture qui décide du sol ; null : aucune culture en place. */
+  decisive: string | null;
 };
 
 export type CoteRejoue = Record<Juge, IndicateursParcelle> & { eau_non_placee_mm: number | null };
@@ -98,6 +117,8 @@ export type RapportAnnee = {
   parcelles: ParcelleRejouee[];
   /** Parcelles sorties des indicateurs de la ferme (sans débit chez Tlaloc), rapportées à part. */
   hors_comparaison: string[];
+  /** Pour les parcelles demandées (`detail`) : le sol du juge jour par jour, pour chaque côté et chaque juge. */
+  detail?: Record<string, Record<Cote, Record<Juge, JourDetail[]>>>;
   ferme: Record<Cote, Record<Juge, IndicateursFerme>>;
 };
 
@@ -141,6 +162,7 @@ export function rejouerAnnee(e: EntreeRejeu): RapportAnnee {
     (parcelle, lundi, arrosagesFaits) => rattrapageDuLundi(e, parcelle, lundi, arrosagesFaits),
   );
 
+  const detailParcelles: NonNullable<RapportAnnee['detail']> = {};
   const parcelles: ParcelleRejouee[] = e.parcelles.map((p) => {
     const o = otf.get(p.id)!;
     const t = arrosagesTlaloc(e.planTlaloc, p.id, e.heuresTlaloc);
@@ -148,17 +170,28 @@ export function rejouerAnnee(e: EntreeRejeu): RapportAnnee {
       otf: { arrosages: o.arrosages, apports: o.arrosages.map((a) => ({ date: jourParis(a.debut), mm: a.mm!, bassinage: false })) },
       tlaloc: t,
     };
-    const juge = (cote: Cote) => Object.fromEntries(JUGES.map(({ cle, jeu }) => [cle, indicateurs(juger({
-      annee: e.annee, serre: p.serre, cultures: p.cultures, meteo: e.meteo, heures: e.heures,
-      arrosages: cotes[cote].arrosages, tableKc: e.tableKc, tableSol: e.tableSol,
-    }, jeu), cotes[cote].apports, cote)])) as Record<Juge, IndicateursParcelle>;
+    const detail: Record<Cote, Record<Juge, JourDetail[]>> | null = e.detail?.includes(p.id) ? { otf: {} as Record<Juge, JourDetail[]>, tlaloc: {} as Record<Juge, JourDetail[]> } : null;
+    if (detail) detailParcelles[p.id] = detail;
+    const juge = (cote: Cote) => Object.fromEntries(JUGES.map(({ cle, jeu }) => {
+      const jours = juger({
+        annee: e.annee, serre: p.serre, cultures: p.cultures, meteo: e.meteo, heures: e.heures,
+        arrosages: cotes[cote].arrosages, tableKc: e.tableKc, tableSol: e.tableSol,
+      }, jeu);
+      if (detail) {
+        detail[cote][cle] = jours.filter((j) => j.compte).map((j) => ({
+          date: j.date, zr_m: j.ru_mm === null ? null : auCentieme(j.ru_mm / e.tableSol.theta_u_mm_m), ru_mm: centieme(j.ru_mm), raw_mm: centieme(j.raw_mm), p: j.p === null ? null : Math.round(j.p * 1000) / 1000,
+          dr_mm: centieme(j.dr_mm), arrosage_mm: auCentieme(j.arrosage_mm), eau_perdue_mm: centieme(j.eau_perdue_mm), decisive: j.decisive,
+        }));
+      }
+      return [cle, indicateurs(jours, cotes[cote].apports, cote)];
+    })) as Record<Juge, IndicateursParcelle>;
     // Eau non placée d'OTF : les semaines dont le lundi est dans l'année. Celle de Tlaloc n'est pas dans son plan (§ 10).
     const nonPlace = auCentieme(o.semaines.filter((s) => s.lundi.startsWith(`${e.annee}-`)).reduce((s, x) => s + x.non_place_mm, 0));
     return { id: p.id, serre: p.serre, surface_m2: p.surface_m2, sans_debit: p.sans_debit, otf: { ...juge('otf'), eau_non_placee_mm: nonPlace }, tlaloc: { ...juge('tlaloc'), eau_non_placee_mm: null } };
   });
 
   const ferme = (cote: Cote) => Object.fromEntries(JUGES.map(({ cle }) => [cle, indicateursFerme(parcelles.filter((p) => !p.sans_debit).map((p) => ({ surface_m2: p.surface_m2, ind: p[cote][cle] })))])) as Record<Juge, IndicateursFerme>;
-  return { annee: e.annee, module_otf_commit: e.module.commit, parcelles, hors_comparaison: parcelles.filter((p) => p.sans_debit).map((p) => p.id), ferme: { otf: ferme('otf'), tlaloc: ferme('tlaloc') } };
+  return { annee: e.annee, module_otf_commit: e.module.commit, parcelles, hors_comparaison: parcelles.filter((p) => p.sans_debit).map((p) => p.id), ...(e.detail ? { detail: detailParcelles } : {}), ferme: { otf: ferme('otf'), tlaloc: ferme('tlaloc') } };
 }
 
 /** Tolérance du § 7 : 1 % de l'eau totale de la saison (moyenne des deux côtés). */
