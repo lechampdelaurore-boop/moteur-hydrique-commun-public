@@ -1,0 +1,156 @@
+{
+  "description": "Sol et p du juge commun du banc (contrat § 7 bis). Racines maxi et p de Tlaloc (ROOT_CAT, FAO-56 tableau 22, bornés à 0,60 m), recopiés des commentaires de Nicolas du 24/11 (pull/18#issuecomment-7136662508 pour les p, #issuecomment-7138731895 pour les racines). Écarts : le juge commun prend les p d'OTF pour la mâche (0,20, Tlaloc 0,30) et le melon (0,40, Tlaloc 0,45), tranché par François le 24/11 (§ 7 bis).",
+  "source": "Nicolas (Tlaloc v700), commentaires de la PR 18 du 24/11/2026 ; p de la mâche et du melon : OTF",
+  "theta_u_mm_m": 160,
+  "racines_depart_m": {
+    "semis": 0.1,
+    "plant": 0.15
+  },
+  "racines_borne_m": 0.6,
+  "sans_culture": {
+    "zr_m": 0.3,
+    "p": 0.4
+  },
+  "cultures": [
+    {
+      "culture": "Ail",
+      "p": 0.3,
+      "racines_max_m": 0.3
+    },
+    {
+      "culture": "Aubergine",
+      "p": 0.45,
+      "racines_max_m": 0.6
+    },
+    {
+      "culture": "Betterave",
+      "p": 0.5,
+      "racines_max_m": 0.6
+    },
+    {
+      "culture": "Blette",
+      "p": 0.2,
+      "racines_max_m": 0.3
+    },
+    {
+      "culture": "Carotte",
+      "p": 0.35,
+      "racines_max_m": 0.5
+    },
+    {
+      "culture": "Chou",
+      "p": 0.45,
+      "racines_max_m": 0.5
+    },
+    {
+      "culture": "Concombre",
+      "p": 0.5,
+      "racines_max_m": 0.6
+    },
+    {
+      "culture": "Courge",
+      "p": 0.35,
+      "racines_max_m": 0.6
+    },
+    {
+      "culture": "Courgette",
+      "p": 0.5,
+      "racines_max_m": 0.6
+    },
+    {
+      "culture": "Céleri",
+      "p": 0.2,
+      "racines_max_m": 0.3
+    },
+    {
+      "culture": "Fenouil",
+      "p": 0.2,
+      "racines_max_m": 0.3
+    },
+    {
+      "culture": "Fraise",
+      "p": 0.2,
+      "racines_max_m": 0.2
+    },
+    {
+      "culture": "Fève",
+      "p": 0.45,
+      "racines_max_m": 0.5
+    },
+    {
+      "culture": "Haricot",
+      "p": 0.45,
+      "racines_max_m": 0.5
+    },
+    {
+      "culture": "Laitue",
+      "p": 0.3,
+      "racines_max_m": 0.3
+    },
+    {
+      "culture": "Maïs doux",
+      "p": 0.5,
+      "racines_max_m": 0.6
+    },
+    {
+      "culture": "Melon",
+      "p": 0.4,
+      "racines_max_m": 0.6
+    },
+    {
+      "culture": "Mesclun",
+      "p": 0.3,
+      "racines_max_m": 0.2
+    },
+    {
+      "culture": "Mâche",
+      "p": 0.2,
+      "racines_max_m": 0.2
+    },
+    {
+      "culture": "Navet",
+      "p": 0.5,
+      "racines_max_m": 0.5
+    },
+    {
+      "culture": "Oignon",
+      "p": 0.3,
+      "racines_max_m": 0.3
+    },
+    {
+      "culture": "Petit pois",
+      "p": 0.35,
+      "racines_max_m": 0.6
+    },
+    {
+      "culture": "Poireau",
+      "p": 0.3,
+      "racines_max_m": 0.3
+    },
+    {
+      "culture": "Poivron",
+      "p": 0.3,
+      "racines_max_m": 0.5
+    },
+    {
+      "culture": "Pomme de terre",
+      "p": 0.35,
+      "racines_max_m": 0.4
+    },
+    {
+      "culture": "Radis",
+      "p": 0.3,
+      "racines_max_m": 0.3
+    },
+    {
+      "culture": "Tomate",
+      "p": 0.4,
+      "racines_max_m": 0.6
+    },
+    {
+      "culture": "Épinard",
+      "p": 0.2,
+      "racines_max_m": 0.3
+    }
+  ]
+}

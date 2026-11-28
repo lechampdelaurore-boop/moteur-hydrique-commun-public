@@ -36,6 +36,16 @@ test('l\'exemple de Nicolas : surfaces par planches (plage) ou en m², serre', (
   assert.equal(parcelles[1].cultures[0].surface_m2, 70);
 });
 
+test('une parcelle sans vanne d\'arrosage avec un débit est « sans débit » (la serre 62 de la démo)', () => {
+  const e = exemple();
+  const vannes = (gag: number | null) => [{ id: 'v1', famille: 'gag', debit_mm_h: gag, bassinage: false }, { id: 'v2', famille: 'asp', debit_mm_h: 2.5, bassinage: true }];
+  (e.parcelles[0] as { vannes?: unknown }).vannes = vannes(8.3);
+  (e.parcelles[1] as { vannes?: unknown }).vannes = vannes(null);
+  const { parcelles } = lireExportDemo(e, TABLE);
+  assert.deepEqual(parcelles.map((p) => p.sans_debit), [false, true]); // la vanne de bassinage ne compte pas
+  assert.equal(lireExportDemo(exemple(), TABLE).parcelles[1].sans_debit, false); // pas de vannes dans l'export : on ne devine rien
+});
+
 test('exports refusés', () => {
   const avec = (f: (e: ReturnType<typeof exemple>) => void) => { const e = exemple(); f(e); return e; };
   assert.throws(() => lireExportDemo(avec((e) => { (e as { version: number }).version = 2; }), TABLE), /format d'export/);

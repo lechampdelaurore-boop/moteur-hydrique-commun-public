@@ -86,11 +86,13 @@ export type EntreeRejeu = {
 };
 
 export type CoteRejoue = Record<Juge, IndicateursParcelle> & { eau_non_placee_mm: number | null };
-export type ParcelleRejouee = { id: string; serre: boolean; surface_m2: number; otf: CoteRejoue; tlaloc: CoteRejoue };
+export type ParcelleRejouee = { id: string; serre: boolean; surface_m2: number; sans_debit: boolean; otf: CoteRejoue; tlaloc: CoteRejoue };
 export type RapportAnnee = {
   annee: number;
   module_otf_commit: string | null;
   parcelles: ParcelleRejouee[];
+  /** Parcelles sorties des indicateurs de la ferme (sans débit chez Tlaloc), rapportées à part. */
+  hors_comparaison: string[];
   ferme: Record<Cote, Record<Juge, IndicateursFerme>>;
 };
 
@@ -127,11 +129,11 @@ export function rejouerAnnee(e: EntreeRejeu): RapportAnnee {
     }, jeu), cotes[cote].apports, cote)])) as Record<Juge, IndicateursParcelle>;
     // Eau non placée d'OTF : les semaines dont le lundi est dans l'année. Celle de Tlaloc n'est pas dans son plan (§ 10).
     const nonPlace = auCentieme(o.semaines.filter((s) => s.lundi.startsWith(`${e.annee}-`)).reduce((s, x) => s + x.non_place_mm, 0));
-    return { id: p.id, serre: p.serre, surface_m2: p.surface_m2, otf: { ...juge('otf'), eau_non_placee_mm: nonPlace }, tlaloc: { ...juge('tlaloc'), eau_non_placee_mm: null } };
+    return { id: p.id, serre: p.serre, surface_m2: p.surface_m2, sans_debit: p.sans_debit, otf: { ...juge('otf'), eau_non_placee_mm: nonPlace }, tlaloc: { ...juge('tlaloc'), eau_non_placee_mm: null } };
   });
 
-  const ferme = (cote: Cote) => Object.fromEntries(JUGES.map(({ cle }) => [cle, indicateursFerme(parcelles.map((p) => ({ surface_m2: p.surface_m2, ind: p[cote][cle] })))])) as Record<Juge, IndicateursFerme>;
-  return { annee: e.annee, module_otf_commit: e.module.commit, parcelles, ferme: { otf: ferme('otf'), tlaloc: ferme('tlaloc') } };
+  const ferme = (cote: Cote) => Object.fromEntries(JUGES.map(({ cle }) => [cle, indicateursFerme(parcelles.filter((p) => !p.sans_debit).map((p) => ({ surface_m2: p.surface_m2, ind: p[cote][cle] })))])) as Record<Juge, IndicateursFerme>;
+  return { annee: e.annee, module_otf_commit: e.module.commit, parcelles, hors_comparaison: parcelles.filter((p) => p.sans_debit).map((p) => p.id), ferme: { otf: ferme('otf'), tlaloc: ferme('tlaloc') } };
 }
 
 /** Tolérance du § 7 : 1 % de l'eau totale de la saison (moyenne des deux côtés). */
@@ -163,11 +165,14 @@ export function rapportAnnee(r: RapportAnnee): string {
       ? `Eau apportée : **d'accord** (écart de ${nombre(ecart)} mm, sous 1 % de l'eau de la saison).`
       : `Eau apportée : **écart** de ${nombre(ecart)} mm (au-delà de 1 % de l'eau de la saison) ; voir les parcelles.`, '');
   }
+  if (r.hors_comparaison.length > 0) {
+    l.push(`Hors des comparaisons de la ferme (sans débit de vanne chez Tlaloc, d'accord avec Nicolas sur la PR n° 19) : ${r.hors_comparaison.join(', ')}. Leur eau est rapportée à part, dans le tableau des parcelles.`, '');
+  }
   l.push('## Parcelles (juge OTF)', '', '| Parcelle | Surface (m²) | Serre | Eau OTF (mm) | Eau Tlaloc (mm) | Perdue OTF | Perdue Tlaloc | Stress OTF (j) | Stress Tlaloc (j) | Non placée OTF |', '|---|---|---|---|---|---|---|---|---|---|');
   for (const p of r.parcelles) {
     const o = p.otf.juge_otf;
     const t = p.tlaloc.juge_otf;
-    l.push(`| ${p.id} | ${nombre(p.surface_m2)} | ${p.serre ? 'oui' : 'non'} | ${nombre(o.eau_apportee_mm)} | ${nombre(t.eau_apportee_mm)} | ${nombre(o.eau_perdue_mm)} | ${nombre(t.eau_perdue_mm)} | ${o.jours_stress} | ${t.jours_stress} | ${nombre(p.otf.eau_non_placee_mm ?? 0)} |`);
+    l.push(`| ${p.id}${p.sans_debit ? ' (hors comparaison)' : ''} | ${nombre(p.surface_m2)} | ${p.serre ? 'oui' : 'non'} | ${nombre(o.eau_apportee_mm)} | ${nombre(t.eau_apportee_mm)} | ${nombre(o.eau_perdue_mm)} | ${nombre(t.eau_perdue_mm)} | ${o.jours_stress} | ${t.jours_stress} | ${nombre(p.otf.eau_non_placee_mm ?? 0)} |`);
   }
   l.push('', 'Jours sans culture et jours à état inconnu : hors des comptes de jours, publiés dans le JSON. Stabilité : 0 côté OTF en passe 1 par construction (§ 7 ter) ; côté Tlaloc, elle demande l\'historique de ses plans (passe 2).', '', 'p du juge : ceux d\'OTF (FAO-56). Deux écarts avec Tlaloc, tranchés par François le 24/11 : mâche 0,20 (Tlaloc 0,30), melon 0,40 (Tlaloc 0,45).', '');
   return l.join('\n');

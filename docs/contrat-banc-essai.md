@@ -100,7 +100,9 @@ Proposées le 24/11 avec le code de la PR 2, relues côté OTF le même jour ; r
 - **Ferme rejouée** : une parcelle de la démo devient une planche d'OTF de même surface, dans un jardin « serre » ou « plein champ », avec **un seul matériel** (la vanne de la parcelle) ; une pompe et une ressource sans limite pratique, aucune limite par jour (débit sans limite, § 6).
 - **Passe 1** : pluie prévue = pluie réalisée (réanalyse, total du jour) ; chaque proposition est validée et faite telle quelle. Un nouveau calcul en cours de semaine ne trouverait rien de nouveau : **un calcul par semaine, le lundi à minuit**, et la stabilité d'OTF vaut 0 par construction en passe 1 (elle prendra sens en passe 2).
 - **Démarrage** : le premier lundi à partir du 15 octobre de l'année d'avant ; les jours d'avant, sans arrosage, ne sont pas dans les comptes.
-- **À donner par Nicolas** : pour chaque vanne de l'export, le type de matériel (goutte-à-goutte ou aspersion) et son débit en mm/h sur la parcelle ; ils fixent la durée et l'heure des arrosages d'OTF.
+- **Matériel (reçu de Nicolas le 24/11)** : `vannes[]` de l'export porte la famille (`gag` = goutte-à-goutte, `asp` = aspersion) et le débit en mm/h. La vanne retenue pour une parcelle est celle que Tlaloc utilise d'habitude : la première qui n'est pas un bassinage et en goutte-à-goutte, sinon la première qui n'est pas un bassinage (`banc/demo/materiel-otf.json`, tiré des exports des 3 années). Ils fixent la durée et l'heure des arrosages d'OTF.
+- **Parcelle sans débit (serre 62, `v13` à `debit_mm_h: null`)** : Tlaloc ne l'arrose pas (0 mm toute l'année dans ses plans, les 3 années). Côté OTF elle est rejouée avec le débit des autres serres de la même famille (8,333 mm/h), mais elle **sort des indicateurs de la ferme** (eau apportée, écart au besoin, jours) et est rapportée à part (`hors_comparaison` dans le JSON, mention dans le rapport). Convenu avec Nicolas sur la PR n° 19.
+- **Pluie prévue sous serre** : le module n'applique pas l'attente après une pluie prévue de plus de 5 mm à un besoin « sous abri » (`lib/domain/planning/demand.ts`, `need.sheltered`), et la pluie prévue y est comptée à zéro : les serres ne sont pas retardées les jours de pluie.
 
 ## 8. Réglage de code (à valider)
 
@@ -117,8 +119,8 @@ Aucun changement de réglage ni de moteur ; aucune donnée de la ferme réelle d
 
 - Exports de l'assolement de la démonstration pour les 3 années retenues, puis plans rejoués par Tlaloc : à fournir par Nicolas une fois la PR 1 fusionnée (PR « données seules »).
 - Registres du module (roadmap § 6 ter, ligne dédiée, décision) : à inscrire par une PR du module.
-- Plan rejoué de Tlaloc (§ 7 ter) : heure de l'arrosage du jour, heure et durée des bassinages (le juge horaire en dépend ; d'ici là, 6 h et 13 h pendant 5 minutes, `banc/src/rejeu.ts`), nombre de mises en route par jour (charge), « eau sans créneau » : à donner par Nicolas.
-- Export de la démo (§ 7 bis, § 7 ter) : type et débit (mm/h) de chaque vanne ; lecture de `ou.planches` (plage [première, dernière] ou liste de numéros), « pépinière » sous abri ou non (× 0,7), profondeur maxi des racines des 28 cultures : à confirmer par Nicolas.
+- Plan rejoué de Tlaloc (§ 7 ter) : **reçu** le 26/11 (PR n° 19) : fichiers des arrosages un par un (`plan-tlaloc-<année>-arrosages.csv`, heures de début et de fin, bassinages compris) ; « eau sans créneau » gardée dans le `.json` du plan, pas de colonne dans le CSV (accord du 27/11). **Reste à faire** : lire ces heures dans le juge horaire (d'ici là, le rejeu place l'arrosage à 6 h et le bassinage à 13 h pendant 5 minutes, `banc/src/rejeu.ts`).
+- Export de la démo (§ 7 bis, § 7 ter) : **reçu** (24/11 et 26/11) : type et débit de chaque vanne, `ou.planches` = plage [première, dernière], « pépinière » en plein air (seule la serre prend × 0,7), profondeur maxi des racines des 28 cultures (`banc/donnees/sol-tlaloc.json`).
 
 Reçus de Nicolas le 22/11 : Kc et durées de stade, format du plan, question de la météo (§ 4 bis). Le 24/11 : format de l'export de la démo, p des 28 cultures, modèle de sol et seuil propre de Tlaloc, Kc d'une parcelle à plusieurs cultures (moyenne pondérée par la surface).
 

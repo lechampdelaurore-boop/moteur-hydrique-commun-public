@@ -91,6 +91,18 @@ test('une année rejouée de bout en bout : deux côtés, deux juges, la ferme e
   }
   assert.equal(r.ferme.otf.juge_otf.surface_m2, 300);
   assert.equal(r.ferme.tlaloc.juge_otf.mm.eau_apportee_mm, Math.round(((1095 * 200 + 730 * 100) / 300) * 100) / 100);
+  assert.deepEqual(r.hors_comparaison, []);
+  // Une parcelle sans débit chez Tlaloc sort des indicateurs de la ferme, mais reste rapportée à part.
+  const r2 = rejouerAnnee({
+    annee: 2019, parcelles: parcelles.map((p) => ({ ...p, sans_debit: p.id === 'pa2' })), planTlaloc, meteo, heures, tableKc, tableSol, materiels,
+    heuresTlaloc: { arrosage: '06:00', bassinage: { heure: '13:00', duree_s: 300 } },
+    module: await chargerModuleOtf(RACINE),
+  });
+  assert.deepEqual(r2.hors_comparaison, ['pa2']);
+  assert.equal(r2.ferme.tlaloc.juge_otf.surface_m2, 200);
+  assert.equal(r2.ferme.tlaloc.juge_otf.mm.eau_apportee_mm, 1095);
+  assert.match(rapportAnnee(r2), /Hors des comparaisons de la ferme .* : pa2\./);
+  assert.match(rapportAnnee(r2), /\| pa2 \(hors comparaison\) \| 100 \|/);
   const md = rapportAnnee(r);
   assert.match(md, /^# Banc d'essai, passe 1 : 2019/);
   assert.match(md, /## Ferme, juge OTF/);

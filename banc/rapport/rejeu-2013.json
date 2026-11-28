@@ -1,0 +1,1411 @@
+{
+  "annee": 2013,
+  "module_otf_commit": "4b8b33b1875aa8a77c15ba8b6c9232fcc980f0f4",
+  "parcelles": [
+    {
+      "id": "pa1",
+      "serre": true,
+      "surface_m2": 210,
+      "sans_debit": false,
+      "otf": {
+        "juge_otf": {
+          "jours_comptes": 365,
+          "jours_sans_culture": 0,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 480.87,
+          "eau_apportee_sans_bassinage_mm": 480.87,
+          "eau_perdue_mm": 0,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 365,
+          "jours_seuil_commun": 365,
+          "jours_stress": 365,
+          "jours_reserve_vide": 54,
+          "ecart_besoin_somme_mm": -34.21,
+          "ecart_besoin_absolu_mm": 34.23,
+          "jours_avec_arrosage": 60,
+          "nombre_arrosages": 60
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 365,
+          "jours_sans_culture": 0,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 480.87,
+          "eau_apportee_sans_bassinage_mm": 480.87,
+          "eau_perdue_mm": 0,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 229,
+          "jours_seuil_commun": 329,
+          "jours_stress": 206,
+          "jours_reserve_vide": 21,
+          "ecart_besoin_somme_mm": -34.21,
+          "ecart_besoin_absolu_mm": 34.23,
+          "jours_avec_arrosage": 60,
+          "nombre_arrosages": 60
+        },
+        "eau_non_placee_mm": 34.07
+      },
+      "tlaloc": {
+        "juge_otf": {
+          "jours_comptes": 365,
+          "jours_sans_culture": 0,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 1003.69,
+          "eau_apportee_sans_bassinage_mm": 689.79,
+          "eau_perdue_mm": 456.97,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 18,
+          "jours_seuil_commun": 25,
+          "jours_stress": 18,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 488.61,
+          "ecart_besoin_absolu_mm": 490.13,
+          "jours_avec_arrosage": 365,
+          "nombre_arrosages": 646
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 365,
+          "jours_sans_culture": 0,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 1003.69,
+          "eau_apportee_sans_bassinage_mm": 689.79,
+          "eau_perdue_mm": 223.36,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 54,
+          "jours_seuil_commun": 54,
+          "jours_stress": 31,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 253.18,
+          "ecart_besoin_absolu_mm": 315.89,
+          "jours_avec_arrosage": 365,
+          "nombre_arrosages": 646
+        },
+        "eau_non_placee_mm": null
+      }
+    },
+    {
+      "id": "pa2",
+      "serre": true,
+      "surface_m2": 210,
+      "sans_debit": false,
+      "otf": {
+        "juge_otf": {
+          "jours_comptes": 365,
+          "jours_sans_culture": 0,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 472.29,
+          "eau_apportee_sans_bassinage_mm": 472.29,
+          "eau_perdue_mm": 0,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 365,
+          "jours_seuil_commun": 365,
+          "jours_stress": 365,
+          "jours_reserve_vide": 50,
+          "ecart_besoin_somme_mm": -35.91,
+          "ecart_besoin_absolu_mm": 35.93,
+          "jours_avec_arrosage": 59,
+          "nombre_arrosages": 59
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 365,
+          "jours_sans_culture": 0,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 472.29,
+          "eau_apportee_sans_bassinage_mm": 472.29,
+          "eau_perdue_mm": 0,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 236,
+          "jours_seuil_commun": 338,
+          "jours_stress": 212,
+          "jours_reserve_vide": 21,
+          "ecart_besoin_somme_mm": -35.91,
+          "ecart_besoin_absolu_mm": 35.93,
+          "jours_avec_arrosage": 59,
+          "nombre_arrosages": 59
+        },
+        "eau_non_placee_mm": 35.76
+      },
+      "tlaloc": {
+        "juge_otf": {
+          "jours_comptes": 365,
+          "jours_sans_culture": 0,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 992.4,
+          "eau_apportee_sans_bassinage_mm": 678.5,
+          "eau_perdue_mm": 452.9,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 18,
+          "jours_seuil_commun": 25,
+          "jours_stress": 18,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 484.2,
+          "ecart_besoin_absolu_mm": 485.75,
+          "jours_avec_arrosage": 365,
+          "nombre_arrosages": 648
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 365,
+          "jours_sans_culture": 0,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 992.4,
+          "eau_apportee_sans_bassinage_mm": 678.5,
+          "eau_perdue_mm": 221.33,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 46,
+          "jours_seuil_commun": 46,
+          "jours_stress": 31,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 248.78,
+          "ecart_besoin_absolu_mm": 310.6,
+          "jours_avec_arrosage": 365,
+          "nombre_arrosages": 648
+        },
+        "eau_non_placee_mm": null
+      }
+    },
+    {
+      "id": "pa3",
+      "serre": true,
+      "surface_m2": 210,
+      "sans_debit": false,
+      "otf": {
+        "juge_otf": {
+          "jours_comptes": 353,
+          "jours_sans_culture": 12,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 433.1,
+          "eau_apportee_sans_bassinage_mm": 433.1,
+          "eau_perdue_mm": 0,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 353,
+          "jours_seuil_commun": 353,
+          "jours_stress": 353,
+          "jours_reserve_vide": 60,
+          "ecart_besoin_somme_mm": -40.71,
+          "ecart_besoin_absolu_mm": 40.74,
+          "jours_avec_arrosage": 56,
+          "nombre_arrosages": 56
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 353,
+          "jours_sans_culture": 12,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 433.1,
+          "eau_apportee_sans_bassinage_mm": 433.1,
+          "eau_perdue_mm": 0,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 272,
+          "jours_seuil_commun": 341,
+          "jours_stress": 148,
+          "jours_reserve_vide": 13,
+          "ecart_besoin_somme_mm": -40.71,
+          "ecart_besoin_absolu_mm": 40.74,
+          "jours_avec_arrosage": 56,
+          "nombre_arrosages": 56
+        },
+        "eau_non_placee_mm": 33.92
+      },
+      "tlaloc": {
+        "juge_otf": {
+          "jours_comptes": 353,
+          "jours_sans_culture": 12,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 928.13,
+          "eau_apportee_sans_bassinage_mm": 614.23,
+          "eau_perdue_mm": 422.18,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 16,
+          "jours_seuil_commun": 22,
+          "jours_stress": 16,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 454.32,
+          "ecart_besoin_absolu_mm": 454.32,
+          "jours_avec_arrosage": 365,
+          "nombre_arrosages": 644
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 353,
+          "jours_sans_culture": 12,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 928.13,
+          "eau_apportee_sans_bassinage_mm": 614.23,
+          "eau_perdue_mm": 189.31,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 46,
+          "jours_seuil_commun": 46,
+          "jours_stress": 42,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 218.89,
+          "ecart_besoin_absolu_mm": 279.97,
+          "jours_avec_arrosage": 365,
+          "nombre_arrosages": 644
+        },
+        "eau_non_placee_mm": null
+      }
+    },
+    {
+      "id": "pa4",
+      "serre": true,
+      "surface_m2": 210,
+      "sans_debit": false,
+      "otf": {
+        "juge_otf": {
+          "jours_comptes": 359,
+          "jours_sans_culture": 6,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 414.32,
+          "eau_apportee_sans_bassinage_mm": 414.32,
+          "eau_perdue_mm": 0,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 359,
+          "jours_seuil_commun": 359,
+          "jours_stress": 359,
+          "jours_reserve_vide": 47,
+          "ecart_besoin_somme_mm": -36.77,
+          "ecart_besoin_absolu_mm": 36.8,
+          "jours_avec_arrosage": 55,
+          "nombre_arrosages": 55
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 359,
+          "jours_sans_culture": 6,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 414.32,
+          "eau_apportee_sans_bassinage_mm": 414.32,
+          "eau_perdue_mm": 0,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 252,
+          "jours_seuil_commun": 320,
+          "jours_stress": 223,
+          "jours_reserve_vide": 20,
+          "ecart_besoin_somme_mm": -36.77,
+          "ecart_besoin_absolu_mm": 36.8,
+          "jours_avec_arrosage": 55,
+          "nombre_arrosages": 55
+        },
+        "eau_non_placee_mm": 33.06
+      },
+      "tlaloc": {
+        "juge_otf": {
+          "jours_comptes": 359,
+          "jours_sans_culture": 6,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 705.03,
+          "eau_apportee_sans_bassinage_mm": 466.96,
+          "eau_perdue_mm": 217.39,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 72,
+          "jours_seuil_commun": 82,
+          "jours_stress": 68,
+          "jours_reserve_vide": 1,
+          "ecart_besoin_somme_mm": 253.94,
+          "ecart_besoin_absolu_mm": 326.66,
+          "jours_avec_arrosage": 279,
+          "nombre_arrosages": 377
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 359,
+          "jours_sans_culture": 6,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 705.03,
+          "eau_apportee_sans_bassinage_mm": 466.96,
+          "eau_perdue_mm": 77.67,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 239,
+          "jours_seuil_commun": 239,
+          "jours_stress": 151,
+          "jours_reserve_vide": 4,
+          "ecart_besoin_somme_mm": 75.39,
+          "ecart_besoin_absolu_mm": 300.05,
+          "jours_avec_arrosage": 279,
+          "nombre_arrosages": 377
+        },
+        "eau_non_placee_mm": null
+      }
+    },
+    {
+      "id": "pa5",
+      "serre": true,
+      "surface_m2": 137.5,
+      "sans_debit": false,
+      "otf": {
+        "juge_otf": {
+          "jours_comptes": 365,
+          "jours_sans_culture": 0,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 450.89,
+          "eau_apportee_sans_bassinage_mm": 450.89,
+          "eau_perdue_mm": 0,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 365,
+          "jours_seuil_commun": 365,
+          "jours_stress": 365,
+          "jours_reserve_vide": 108,
+          "ecart_besoin_somme_mm": -42.59,
+          "ecart_besoin_absolu_mm": 42.61,
+          "jours_avec_arrosage": 55,
+          "nombre_arrosages": 55
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 365,
+          "jours_sans_culture": 0,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 450.89,
+          "eau_apportee_sans_bassinage_mm": 450.89,
+          "eau_perdue_mm": 0,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 346,
+          "jours_seuil_commun": 355,
+          "jours_stress": 333,
+          "jours_reserve_vide": 69,
+          "ecart_besoin_somme_mm": -42.59,
+          "ecart_besoin_absolu_mm": 42.61,
+          "jours_avec_arrosage": 55,
+          "nombre_arrosages": 55
+        },
+        "eau_non_placee_mm": 42.66
+      },
+      "tlaloc": {
+        "juge_otf": {
+          "jours_comptes": 365,
+          "jours_sans_culture": 0,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 930.07,
+          "eau_apportee_sans_bassinage_mm": 532.22,
+          "eau_perdue_mm": 408.19,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 16,
+          "jours_seuil_commun": 20,
+          "jours_stress": 16,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 436.59,
+          "ecart_besoin_absolu_mm": 441.41,
+          "jours_avec_arrosage": 365,
+          "nombre_arrosages": 635
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 365,
+          "jours_sans_culture": 0,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 930.07,
+          "eau_apportee_sans_bassinage_mm": 532.22,
+          "eau_perdue_mm": 111.33,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 75,
+          "jours_seuil_commun": 75,
+          "jours_stress": 51,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 138.21,
+          "ecart_besoin_absolu_mm": 186.02,
+          "jours_avec_arrosage": 365,
+          "nombre_arrosages": 635
+        },
+        "eau_non_placee_mm": null
+      }
+    },
+    {
+      "id": "pa61",
+      "serre": true,
+      "surface_m2": 137.5,
+      "sans_debit": false,
+      "otf": {
+        "juge_otf": {
+          "jours_comptes": 336,
+          "jours_sans_culture": 29,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 394.52,
+          "eau_apportee_sans_bassinage_mm": 394.52,
+          "eau_perdue_mm": 0,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 336,
+          "jours_seuil_commun": 336,
+          "jours_stress": 336,
+          "jours_reserve_vide": 58,
+          "ecart_besoin_somme_mm": -52.05,
+          "ecart_besoin_absolu_mm": 52.06,
+          "jours_avec_arrosage": 49,
+          "nombre_arrosages": 49
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 336,
+          "jours_sans_culture": 29,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 394.52,
+          "eau_apportee_sans_bassinage_mm": 394.52,
+          "eau_perdue_mm": 0,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 235,
+          "jours_seuil_commun": 271,
+          "jours_stress": 211,
+          "jours_reserve_vide": 24,
+          "ecart_besoin_somme_mm": -52.05,
+          "ecart_besoin_absolu_mm": 52.06,
+          "jours_avec_arrosage": 49,
+          "nombre_arrosages": 49
+        },
+        "eau_non_placee_mm": 40.65
+      },
+      "tlaloc": {
+        "juge_otf": {
+          "jours_comptes": 336,
+          "jours_sans_culture": 29,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 723.22,
+          "eau_apportee_sans_bassinage_mm": 654.58,
+          "eau_perdue_mm": 242.97,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 34,
+          "jours_seuil_commun": 46,
+          "jours_stress": 31,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 276.65,
+          "ecart_besoin_absolu_mm": 328.02,
+          "jours_avec_arrosage": 355,
+          "nombre_arrosages": 503
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 336,
+          "jours_sans_culture": 29,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 723.22,
+          "eau_apportee_sans_bassinage_mm": 654.58,
+          "eau_perdue_mm": 197.06,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 47,
+          "jours_seuil_commun": 47,
+          "jours_stress": 27,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 225.17,
+          "ecart_besoin_absolu_mm": 316.65,
+          "jours_avec_arrosage": 355,
+          "nombre_arrosages": 503
+        },
+        "eau_non_placee_mm": null
+      }
+    },
+    {
+      "id": "pa62",
+      "serre": true,
+      "surface_m2": 140,
+      "sans_debit": true,
+      "otf": {
+        "juge_otf": {
+          "jours_comptes": 359,
+          "jours_sans_culture": 6,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 445.6,
+          "eau_apportee_sans_bassinage_mm": 445.6,
+          "eau_perdue_mm": 0,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 359,
+          "jours_seuil_commun": 359,
+          "jours_stress": 359,
+          "jours_reserve_vide": 83,
+          "ecart_besoin_somme_mm": -43.14,
+          "ecart_besoin_absolu_mm": 43.16,
+          "jours_avec_arrosage": 56,
+          "nombre_arrosages": 56
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 359,
+          "jours_sans_culture": 6,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 445.6,
+          "eau_apportee_sans_bassinage_mm": 445.6,
+          "eau_perdue_mm": 0,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 182,
+          "jours_seuil_commun": 211,
+          "jours_stress": 161,
+          "jours_reserve_vide": 50,
+          "ecart_besoin_somme_mm": -43.14,
+          "ecart_besoin_absolu_mm": 43.16,
+          "jours_avec_arrosage": 56,
+          "nombre_arrosages": 56
+        },
+        "eau_non_placee_mm": 41.5
+      },
+      "tlaloc": {
+        "juge_otf": {
+          "jours_comptes": 359,
+          "jours_sans_culture": 6,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 0,
+          "eau_apportee_sans_bassinage_mm": 0,
+          "eau_perdue_mm": 0,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 359,
+          "jours_seuil_commun": 359,
+          "jours_stress": 359,
+          "jours_reserve_vide": 359,
+          "ecart_besoin_somme_mm": -488.74,
+          "ecart_besoin_absolu_mm": 488.74,
+          "jours_avec_arrosage": 0,
+          "nombre_arrosages": 0
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 359,
+          "jours_sans_culture": 6,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 0,
+          "eau_apportee_sans_bassinage_mm": 0,
+          "eau_perdue_mm": 0,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 359,
+          "jours_seuil_commun": 359,
+          "jours_stress": 359,
+          "jours_reserve_vide": 309,
+          "ecart_besoin_somme_mm": -488.74,
+          "ecart_besoin_absolu_mm": 488.74,
+          "jours_avec_arrosage": 0,
+          "nombre_arrosages": 0
+        },
+        "eau_non_placee_mm": null
+      }
+    },
+    {
+      "id": "pj1",
+      "serre": false,
+      "surface_m2": 300,
+      "sans_debit": false,
+      "otf": {
+        "juge_otf": {
+          "jours_comptes": 364,
+          "jours_sans_culture": 1,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 152.65,
+          "eau_apportee_sans_bassinage_mm": 152.65,
+          "eau_perdue_mm": 35.94,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 42,
+          "jours_seuil_commun": 95,
+          "jours_stress": 42,
+          "jours_reserve_vide": 1,
+          "ecart_besoin_somme_mm": -19.22,
+          "ecart_besoin_absolu_mm": 19.22,
+          "jours_avec_arrosage": 15,
+          "nombre_arrosages": 15
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 364,
+          "jours_sans_culture": 1,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 152.65,
+          "eau_apportee_sans_bassinage_mm": 152.65,
+          "eau_perdue_mm": 15.76,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 66,
+          "jours_seuil_commun": 108,
+          "jours_stress": 52,
+          "jours_reserve_vide": 3,
+          "ecart_besoin_somme_mm": -70.99,
+          "ecart_besoin_absolu_mm": 70.99,
+          "jours_avec_arrosage": 15,
+          "nombre_arrosages": 15
+        },
+        "eau_non_placee_mm": 17.48
+      },
+      "tlaloc": {
+        "juge_otf": {
+          "jours_comptes": 364,
+          "jours_sans_culture": 1,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 481.68,
+          "eau_apportee_sans_bassinage_mm": 481.68,
+          "eau_perdue_mm": 105.25,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 0,
+          "jours_seuil_commun": 3,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 309.81,
+          "ecart_besoin_absolu_mm": 333.28,
+          "jours_avec_arrosage": 192,
+          "nombre_arrosages": 192
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 364,
+          "jours_sans_culture": 1,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 481.68,
+          "eau_apportee_sans_bassinage_mm": 481.68,
+          "eau_perdue_mm": 93.48,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 3,
+          "jours_seuil_commun": 3,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 258.04,
+          "ecart_besoin_absolu_mm": 291.91,
+          "jours_avec_arrosage": 192,
+          "nombre_arrosages": 192
+        },
+        "eau_non_placee_mm": null
+      }
+    },
+    {
+      "id": "pj2",
+      "serre": false,
+      "surface_m2": 300,
+      "sans_debit": false,
+      "otf": {
+        "juge_otf": {
+          "jours_comptes": 281,
+          "jours_sans_culture": 84,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 139.7,
+          "eau_apportee_sans_bassinage_mm": 139.7,
+          "eau_perdue_mm": 10.24,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 70,
+          "jours_seuil_commun": 101,
+          "jours_stress": 70,
+          "jours_reserve_vide": 1,
+          "ecart_besoin_somme_mm": -16.22,
+          "ecart_besoin_absolu_mm": 16.23,
+          "jours_avec_arrosage": 17,
+          "nombre_arrosages": 17
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 281,
+          "jours_sans_culture": 84,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 139.7,
+          "eau_apportee_sans_bassinage_mm": 139.7,
+          "eau_perdue_mm": 2.9,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 95,
+          "jours_seuil_commun": 111,
+          "jours_stress": 86,
+          "jours_reserve_vide": 8,
+          "ecart_besoin_somme_mm": -57.81,
+          "ecart_besoin_absolu_mm": 57.82,
+          "jours_avec_arrosage": 17,
+          "nombre_arrosages": 17
+        },
+        "eau_non_placee_mm": 10.3
+      },
+      "tlaloc": {
+        "juge_otf": {
+          "jours_comptes": 281,
+          "jours_sans_culture": 84,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 515.45,
+          "eau_apportee_sans_bassinage_mm": 515.45,
+          "eau_perdue_mm": 146.77,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 0,
+          "jours_seuil_commun": 6,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 359.53,
+          "ecart_besoin_absolu_mm": 375.58,
+          "jours_avec_arrosage": 160,
+          "nombre_arrosages": 160
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 281,
+          "jours_sans_culture": 84,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 515.45,
+          "eau_apportee_sans_bassinage_mm": 515.45,
+          "eau_perdue_mm": 136.63,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 20,
+          "jours_seuil_commun": 20,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 317.94,
+          "ecart_besoin_absolu_mm": 342.19,
+          "jours_avec_arrosage": 160,
+          "nombre_arrosages": 160
+        },
+        "eau_non_placee_mm": null
+      }
+    },
+    {
+      "id": "pj3",
+      "serre": false,
+      "surface_m2": 300,
+      "sans_debit": false,
+      "otf": {
+        "juge_otf": {
+          "jours_comptes": 365,
+          "jours_sans_culture": 0,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 173.41,
+          "eau_apportee_sans_bassinage_mm": 173.41,
+          "eau_perdue_mm": 29.91,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 45,
+          "jours_seuil_commun": 96,
+          "jours_stress": 45,
+          "jours_reserve_vide": 1,
+          "ecart_besoin_somme_mm": -3.42,
+          "ecart_besoin_absolu_mm": 3.43,
+          "jours_avec_arrosage": 23,
+          "nombre_arrosages": 23
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 365,
+          "jours_sans_culture": 0,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 173.41,
+          "eau_apportee_sans_bassinage_mm": 173.41,
+          "eau_perdue_mm": 10.93,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 88,
+          "jours_seuil_commun": 114,
+          "jours_stress": 68,
+          "jours_reserve_vide": 7,
+          "ecart_besoin_somme_mm": -52.65,
+          "ecart_besoin_absolu_mm": 52.65,
+          "jours_avec_arrosage": 23,
+          "nombre_arrosages": 23
+        },
+        "eau_non_placee_mm": 2.13
+      },
+      "tlaloc": {
+        "juge_otf": {
+          "jours_comptes": 365,
+          "jours_sans_culture": 0,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 487.52,
+          "eau_apportee_sans_bassinage_mm": 487.52,
+          "eau_perdue_mm": 99.75,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 1,
+          "jours_seuil_commun": 12,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 310.69,
+          "ecart_besoin_absolu_mm": 331.66,
+          "jours_avec_arrosage": 162,
+          "nombre_arrosages": 162
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 365,
+          "jours_sans_culture": 0,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 487.52,
+          "eau_apportee_sans_bassinage_mm": 487.52,
+          "eau_perdue_mm": 84.6,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 14,
+          "jours_seuil_commun": 14,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 261.46,
+          "ecart_besoin_absolu_mm": 308.63,
+          "jours_avec_arrosage": 162,
+          "nombre_arrosages": 162
+        },
+        "eau_non_placee_mm": null
+      }
+    },
+    {
+      "id": "pj4",
+      "serre": false,
+      "surface_m2": 300,
+      "sans_debit": false,
+      "otf": {
+        "juge_otf": {
+          "jours_comptes": 322,
+          "jours_sans_culture": 43,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 144.84,
+          "eau_apportee_sans_bassinage_mm": 144.84,
+          "eau_perdue_mm": 12.59,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 51,
+          "jours_seuil_commun": 92,
+          "jours_stress": 51,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": -11.58,
+          "ecart_besoin_absolu_mm": 11.58,
+          "jours_avec_arrosage": 18,
+          "nombre_arrosages": 18
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 322,
+          "jours_sans_culture": 43,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 144.84,
+          "eau_apportee_sans_bassinage_mm": 144.84,
+          "eau_perdue_mm": 4.17,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 94,
+          "jours_seuil_commun": 109,
+          "jours_stress": 79,
+          "jours_reserve_vide": 4,
+          "ecart_besoin_somme_mm": -51.59,
+          "ecart_besoin_absolu_mm": 51.59,
+          "jours_avec_arrosage": 18,
+          "nombre_arrosages": 18
+        },
+        "eau_non_placee_mm": 6.63
+      },
+      "tlaloc": {
+        "juge_otf": {
+          "jours_comptes": 322,
+          "jours_sans_culture": 43,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 433.44,
+          "eau_apportee_sans_bassinage_mm": 433.44,
+          "eau_perdue_mm": 82.27,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 0,
+          "jours_seuil_commun": 6,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 277.02,
+          "ecart_besoin_absolu_mm": 306.4,
+          "jours_avec_arrosage": 155,
+          "nombre_arrosages": 155
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 322,
+          "jours_sans_culture": 43,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 433.44,
+          "eau_apportee_sans_bassinage_mm": 433.44,
+          "eau_perdue_mm": 69.15,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 7,
+          "jours_seuil_commun": 7,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 237.01,
+          "ecart_besoin_absolu_mm": 279.99,
+          "jours_avec_arrosage": 155,
+          "nombre_arrosages": 155
+        },
+        "eau_non_placee_mm": null
+      }
+    },
+    {
+      "id": "pj5",
+      "serre": false,
+      "surface_m2": 300,
+      "sans_debit": false,
+      "otf": {
+        "juge_otf": {
+          "jours_comptes": 287,
+          "jours_sans_culture": 78,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 143.54,
+          "eau_apportee_sans_bassinage_mm": 143.54,
+          "eau_perdue_mm": 10.35,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 66,
+          "jours_seuil_commun": 108,
+          "jours_stress": 65,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": -11.28,
+          "ecart_besoin_absolu_mm": 11.28,
+          "jours_avec_arrosage": 18,
+          "nombre_arrosages": 18
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 287,
+          "jours_sans_culture": 78,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 143.54,
+          "eau_apportee_sans_bassinage_mm": 143.54,
+          "eau_perdue_mm": 3.07,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 100,
+          "jours_seuil_commun": 113,
+          "jours_stress": 85,
+          "jours_reserve_vide": 1,
+          "ecart_besoin_somme_mm": -51.5,
+          "ecart_besoin_absolu_mm": 51.5,
+          "jours_avec_arrosage": 18,
+          "nombre_arrosages": 18
+        },
+        "eau_non_placee_mm": 5.48
+      },
+      "tlaloc": {
+        "juge_otf": {
+          "jours_comptes": 287,
+          "jours_sans_culture": 78,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 481.13,
+          "eau_apportee_sans_bassinage_mm": 481.13,
+          "eau_perdue_mm": 114.55,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 0,
+          "jours_seuil_commun": 8,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 326.31,
+          "ecart_besoin_absolu_mm": 336.46,
+          "jours_avec_arrosage": 151,
+          "nombre_arrosages": 151
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 287,
+          "jours_sans_culture": 78,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 481.13,
+          "eau_apportee_sans_bassinage_mm": 481.13,
+          "eau_perdue_mm": 103.16,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 10,
+          "jours_seuil_commun": 10,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 286.09,
+          "ecart_besoin_absolu_mm": 319.11,
+          "jours_avec_arrosage": 151,
+          "nombre_arrosages": 151
+        },
+        "eau_non_placee_mm": null
+      }
+    },
+    {
+      "id": "pj6",
+      "serre": false,
+      "surface_m2": 300,
+      "sans_debit": false,
+      "otf": {
+        "juge_otf": {
+          "jours_comptes": 273,
+          "jours_sans_culture": 92,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 122.25,
+          "eau_apportee_sans_bassinage_mm": 122.25,
+          "eau_perdue_mm": 13.09,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 15,
+          "jours_seuil_commun": 58,
+          "jours_stress": 15,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": -6.42,
+          "ecart_besoin_absolu_mm": 6.42,
+          "jours_avec_arrosage": 16,
+          "nombre_arrosages": 16
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 273,
+          "jours_sans_culture": 92,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 122.25,
+          "eau_apportee_sans_bassinage_mm": 122.25,
+          "eau_perdue_mm": 5.96,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 31,
+          "jours_seuil_commun": 68,
+          "jours_stress": 25,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": -40.61,
+          "ecart_besoin_absolu_mm": 40.61,
+          "jours_avec_arrosage": 16,
+          "nombre_arrosages": 16
+        },
+        "eau_non_placee_mm": 0.62
+      },
+      "tlaloc": {
+        "juge_otf": {
+          "jours_comptes": 273,
+          "jours_sans_culture": 92,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 364.07,
+          "eau_apportee_sans_bassinage_mm": 364.07,
+          "eau_perdue_mm": 79.51,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 0,
+          "jours_seuil_commun": 1,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 235.4,
+          "ecart_besoin_absolu_mm": 253.07,
+          "jours_avec_arrosage": 150,
+          "nombre_arrosages": 150
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 273,
+          "jours_sans_culture": 92,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 364.07,
+          "eau_apportee_sans_bassinage_mm": 364.07,
+          "eau_perdue_mm": 56.51,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 0,
+          "jours_seuil_commun": 0,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 201.2,
+          "ecart_besoin_absolu_mm": 239.74,
+          "jours_avec_arrosage": 150,
+          "nombre_arrosages": 150
+        },
+        "eau_non_placee_mm": null
+      }
+    },
+    {
+      "id": "pj7",
+      "serre": false,
+      "surface_m2": 300,
+      "sans_debit": false,
+      "otf": {
+        "juge_otf": {
+          "jours_comptes": 308,
+          "jours_sans_culture": 57,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 148.25,
+          "eau_apportee_sans_bassinage_mm": 148.25,
+          "eau_perdue_mm": 17.66,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 69,
+          "jours_seuil_commun": 103,
+          "jours_stress": 69,
+          "jours_reserve_vide": 3,
+          "ecart_besoin_somme_mm": -12.03,
+          "ecart_besoin_absolu_mm": 12.04,
+          "jours_avec_arrosage": 18,
+          "nombre_arrosages": 18
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 308,
+          "jours_sans_culture": 57,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 148.25,
+          "eau_apportee_sans_bassinage_mm": 148.25,
+          "eau_perdue_mm": 3.07,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 108,
+          "jours_seuil_commun": 115,
+          "jours_stress": 89,
+          "jours_reserve_vide": 7,
+          "ecart_besoin_somme_mm": -52.66,
+          "ecart_besoin_absolu_mm": 52.66,
+          "jours_avec_arrosage": 18,
+          "nombre_arrosages": 18
+        },
+        "eau_non_placee_mm": 6.11
+      },
+      "tlaloc": {
+        "juge_otf": {
+          "jours_comptes": 308,
+          "jours_sans_culture": 57,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 549.34,
+          "eau_apportee_sans_bassinage_mm": 549.34,
+          "eau_perdue_mm": 158.19,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 1,
+          "jours_seuil_commun": 3,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 389.05,
+          "ecart_besoin_absolu_mm": 401.47,
+          "jours_avec_arrosage": 157,
+          "nombre_arrosages": 157
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 308,
+          "jours_sans_culture": 57,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 549.34,
+          "eau_apportee_sans_bassinage_mm": 549.34,
+          "eau_perdue_mm": 145.21,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 27,
+          "jours_seuil_commun": 27,
+          "jours_stress": 1,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 348.43,
+          "ecart_besoin_absolu_mm": 370.21,
+          "jours_avec_arrosage": 157,
+          "nombre_arrosages": 157
+        },
+        "eau_non_placee_mm": null
+      }
+    },
+    {
+      "id": "pj8",
+      "serre": false,
+      "surface_m2": 300,
+      "sans_debit": false,
+      "otf": {
+        "juge_otf": {
+          "jours_comptes": 322,
+          "jours_sans_culture": 43,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 134.56,
+          "eau_apportee_sans_bassinage_mm": 134.56,
+          "eau_perdue_mm": 16.5,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 17,
+          "jours_seuil_commun": 58,
+          "jours_stress": 17,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": -11.93,
+          "ecart_besoin_absolu_mm": 11.93,
+          "jours_avec_arrosage": 17,
+          "nombre_arrosages": 17
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 322,
+          "jours_sans_culture": 43,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 134.56,
+          "eau_apportee_sans_bassinage_mm": 134.56,
+          "eau_perdue_mm": 10.74,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 30,
+          "jours_seuil_commun": 88,
+          "jours_stress": 20,
+          "jours_reserve_vide": 4,
+          "ecart_besoin_somme_mm": -53.52,
+          "ecart_besoin_absolu_mm": 53.52,
+          "jours_avec_arrosage": 17,
+          "nombre_arrosages": 17
+        },
+        "eau_non_placee_mm": 6.06
+      },
+      "tlaloc": {
+        "juge_otf": {
+          "jours_comptes": 322,
+          "jours_sans_culture": 43,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 431.26,
+          "eau_apportee_sans_bassinage_mm": 431.26,
+          "eau_perdue_mm": 91.32,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 0,
+          "jours_seuil_commun": 0,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 284.77,
+          "ecart_besoin_absolu_mm": 307.31,
+          "jours_avec_arrosage": 154,
+          "nombre_arrosages": 154
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 322,
+          "jours_sans_culture": 43,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 431.26,
+          "eau_apportee_sans_bassinage_mm": 431.26,
+          "eau_perdue_mm": 78.01,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 0,
+          "jours_seuil_commun": 0,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 243.17,
+          "ecart_besoin_absolu_mm": 286.32,
+          "jours_avec_arrosage": 154,
+          "nombre_arrosages": 154
+        },
+        "eau_non_placee_mm": null
+      }
+    },
+    {
+      "id": "ppep",
+      "serre": false,
+      "surface_m2": 120,
+      "sans_debit": false,
+      "otf": {
+        "juge_otf": {
+          "jours_comptes": 197,
+          "jours_sans_culture": 168,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 114.7,
+          "eau_apportee_sans_bassinage_mm": 114.7,
+          "eau_perdue_mm": 13.94,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 41,
+          "jours_seuil_commun": 64,
+          "jours_stress": 41,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": -24.37,
+          "ecart_besoin_absolu_mm": 24.37,
+          "jours_avec_arrosage": 9,
+          "nombre_arrosages": 9
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 197,
+          "jours_sans_culture": 168,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 114.7,
+          "eau_apportee_sans_bassinage_mm": 114.7,
+          "eau_perdue_mm": 0,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 69,
+          "jours_seuil_commun": 83,
+          "jours_stress": 58,
+          "jours_reserve_vide": 5,
+          "ecart_besoin_somme_mm": -68.12,
+          "ecart_besoin_absolu_mm": 68.12,
+          "jours_avec_arrosage": 9,
+          "nombre_arrosages": 9
+        },
+        "eau_non_placee_mm": 17.04
+      },
+      "tlaloc": {
+        "juge_otf": {
+          "jours_comptes": 197,
+          "jours_sans_culture": 168,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 423.32,
+          "eau_apportee_sans_bassinage_mm": 423.32,
+          "eau_perdue_mm": 103.49,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 1,
+          "jours_seuil_commun": 2,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 284.25,
+          "ecart_besoin_absolu_mm": 297.73,
+          "jours_avec_arrosage": 210,
+          "nombre_arrosages": 210
+        },
+        "juge_tlaloc": {
+          "jours_comptes": 197,
+          "jours_sans_culture": 168,
+          "jours_etat_inconnu": 0,
+          "eau_apportee_mm": 423.32,
+          "eau_apportee_sans_bassinage_mm": 423.32,
+          "eau_perdue_mm": 84.78,
+          "jours_eau_perdue_inconnue": 0,
+          "jours_seuil_propre": 6,
+          "jours_seuil_commun": 6,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
+          "ecart_besoin_somme_mm": 240.5,
+          "ecart_besoin_absolu_mm": 273.17,
+          "jours_avec_arrosage": 210,
+          "nombre_arrosages": 210
+        },
+        "eau_non_placee_mm": null
+      }
+    }
+  ],
+  "hors_comparaison": [
+    "pa62"
+  ],
+  "ferme": {
+    "otf": {
+      "juge_otf": {
+        "surface_m2": 3635,
+        "mm": {
+          "eau_apportee_mm": 235.46,
+          "eau_apportee_sans_bassinage_mm": 235.46,
+          "eau_perdue_mm": 12.53,
+          "ecart_besoin_somme_mm": -20.51,
+          "ecart_besoin_absolu_mm": 20.52
+        },
+        "jours": {
+          "jours_seuil_propre": {
+            "moyenne": 142.13,
+            "parcelles": 15
+          },
+          "jours_seuil_commun": {
+            "moyenne": 170.62,
+            "parcelles": 15
+          },
+          "jours_stress": {
+            "moyenne": 142.04,
+            "parcelles": 15
+          },
+          "jours_reserve_vide": {
+            "moyenne": 18.96,
+            "parcelles": 10
+          }
+        },
+        "nombre_arrosages": 485
+      },
+      "juge_tlaloc": {
+        "surface_m2": 3635,
+        "mm": {
+          "eau_apportee_mm": 235.46,
+          "eau_apportee_sans_bassinage_mm": 235.46,
+          "eau_perdue_mm": 4.67,
+          "ecart_besoin_somme_mm": -49.95,
+          "ecart_besoin_absolu_mm": 49.96
+        },
+        "jours": {
+          "jours_seuil_propre": {
+            "moyenne": 131.9,
+            "parcelles": 15
+          },
+          "jours_seuil_commun": {
+            "moyenne": 171.31,
+            "parcelles": 15
+          },
+          "jours_stress": {
+            "moyenne": 109.67,
+            "parcelles": 15
+          },
+          "jours_reserve_vide": {
+            "moyenne": 10.82,
+            "parcelles": 14
+          }
+        },
+        "nombre_arrosages": 485
+      }
+    },
+    "tlaloc": {
+      "juge_otf": {
+        "surface_m2": 3635,
+        "mm": {
+          "eau_apportee_mm": 595.17,
+          "eau_apportee_sans_bassinage_mm": 509.36,
+          "eau_perdue_mm": 189.99,
+          "ecart_besoin_somme_mm": 339.2,
+          "ecart_besoin_absolu_mm": 358.74
+        },
+        "jours": {
+          "jours_seuil_propre": {
+            "moyenne": 9.25,
+            "parcelles": 9
+          },
+          "jours_seuil_commun": {
+            "moyenne": 14.68,
+            "parcelles": 14
+          },
+          "jours_stress": {
+            "moyenne": 8.71,
+            "parcelles": 6
+          },
+          "jours_reserve_vide": {
+            "moyenne": 0.06,
+            "parcelles": 1
+          }
+        },
+        "nombre_arrosages": 4944
+      },
+      "juge_tlaloc": {
+        "surface_m2": 3635,
+        "mm": {
+          "eau_apportee_mm": 595.17,
+          "eau_apportee_sans_bassinage_mm": 509.36,
+          "eau_perdue_mm": 118.86,
+          "ecart_besoin_somme_mm": 245.4,
+          "ecart_besoin_absolu_mm": 298.95
+        },
+        "jours": {
+          "jours_seuil_propre": {
+            "moyenne": 33.74,
+            "parcelles": 13
+          },
+          "jours_seuil_commun": {
+            "moyenne": 33.74,
+            "parcelles": 13
+          },
+          "jours_stress": {
+            "moyenne": 17.76,
+            "parcelles": 7
+          },
+          "jours_reserve_vide": {
+            "moyenne": 0.23,
+            "parcelles": 1
+          }
+        },
+        "nombre_arrosages": 4944
+      }
+    }
+  }
+}

@@ -33,12 +33,21 @@ export type ParcelleExport = {
   planches: { nombre: number; longueur_m: number; largeur_m: number } | null;
   seuil_bas_pct_RFU?: number;
   haut_de_bande_pct_RFU?: number;
+  vannes?: { id: string; famille: string; debit_mm_h: number | null; bassinage: boolean }[];
   cultures: CultureExport[];
 };
 
 export type ExportDemo = { format: 'banc-opuntia-demo'; version: 1; annee: number; parcelles: ParcelleExport[] };
 
-export type ParcelleBanc = { id: string; categorie: ParcelleExport['categorie']; serre: boolean; surface_m2: number; cultures: CultureEnPlace[] };
+export type ParcelleBanc = {
+  id: string;
+  categorie: ParcelleExport['categorie'];
+  serre: boolean;
+  surface_m2: number;
+  cultures: CultureEnPlace[];
+  /** Aucune vanne d'arrosage avec un débit dans l'export (la serre 62 de la démo) : Tlaloc ne peut pas l'arroser, elle sort des comparaisons (PR n° 19). */
+  sans_debit: boolean;
+};
 
 /** Surface d'une culture sur sa parcelle (m²). */
 export function surfaceCulture(p: ParcelleExport, c: CultureExport): number {
@@ -77,7 +86,8 @@ export function lireExportDemo(brut: unknown, table: TableKc): { annee: number; 
       if (typeof c.plant !== 'boolean') throw new Error(`${p.id}, ${c.culture} : plant ou semis non dit`);
       return { culture: c.culture, implantation: c.implantation, debut_recolte: c.debut_recolte, fin_recolte: c.fin, surface_m2: surfaceCulture(p, c), plant: c.plant };
     });
-    return { id: p.id, categorie: p.categorie, serre: p.categorie === 'serre', surface_m2: p.surface_m2, cultures };
+    const sansDebit = Array.isArray(p.vannes) && !p.vannes.some((v) => !v.bassinage && typeof v.debit_mm_h === 'number' && v.debit_mm_h > 0);
+    return { id: p.id, categorie: p.categorie, serre: p.categorie === 'serre', surface_m2: p.surface_m2, cultures, sans_debit: sansDebit };
   });
   return { annee: e.annee!, parcelles };
 }
