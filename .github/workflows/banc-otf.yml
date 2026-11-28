@@ -1,0 +1,41 @@
+# Banc d'essai (MC-36), côté OTF : les tests du banc avec la logique du module
+# OTF (besoin et placement), lue dans un clone de son dépôt public à un commit
+# fixé. Le module n'est pas modifié. Sans réseau vers Open-Meteo.
+name: Banc côté OTF
+
+on:
+  pull_request:
+    paths:
+      - 'banc/**'
+      - '.github/workflows/banc-otf.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  # Le commit du module rejoué ; il est noté dans le rapport du banc.
+  MODULE_OTF_COMMIT: 4b8b33b1875aa8a77c15ba8b6c9232fcc980f0f4
+
+jobs:
+  tests:
+    name: Tests du banc avec le module OTF
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: lechampdelaurore-boop/module-irrigation-otf-public
+          ref: ${{ env.MODULE_OTF_COMMIT }}
+          path: module-otf
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Tests du banc, côté OTF compris (aucun test sauté)
+        run: |
+          set -o pipefail
+          MODULE_OTF="$PWD/module-otf" node --test --experimental-strip-types banc/tests/*.test.ts | tee /tmp/banc.tap
+          grep -q '^# skipped 0$' /tmp/banc.tap || { echo "::error::un test du banc a été sauté"; exit 1; }

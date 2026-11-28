@@ -1,0 +1,66 @@
+{
+  "pa1": {
+    "kind": "drip",
+    "debit_mm_h": 8.333
+  },
+  "pa2": {
+    "kind": "drip",
+    "debit_mm_h": 8.333
+  },
+  "pa3": {
+    "kind": "drip",
+    "debit_mm_h": 8.333
+  },
+  "pa4": {
+    "kind": "drip",
+    "debit_mm_h": 8.333
+  },
+  "pa5": {
+    "kind": "drip",
+    "debit_mm_h": 9.091
+  },
+  "pa61": {
+    "kind": "drip",
+    "debit_mm_h": 9.091
+  },
+  "pa62": {
+    "kind": "drip",
+    "debit_mm_h": 8.333
+  },
+  "pj1": {
+    "kind": "sprinkler",
+    "debit_mm_h": 5.333
+  },
+  "pj2": {
+    "kind": "drip",
+    "debit_mm_h": 8.333
+  },
+  "pj3": {
+    "kind": "drip",
+    "debit_mm_h": 8.333
+  },
+  "pj4": {
+    "kind": "drip",
+    "debit_mm_h": 8.333
+  },
+  "pj5": {
+    "kind": "drip",
+    "debit_mm_h": 8.333
+  },
+  "pj6": {
+    "kind": "drip",
+    "debit_mm_h": 8.333
+  },
+  "pj7": {
+    "kind": "drip",
+    "debit_mm_h": 8.333
+  },
+  "pj8": {
+    "kind": "drip",
+    "debit_mm_h": 8.333
+  },
+  "ppep": {
+    "kind": "sprinkler",
+    "debit_mm_h": 5
+  }
+}
