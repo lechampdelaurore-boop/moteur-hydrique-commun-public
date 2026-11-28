@@ -61,7 +61,7 @@ test('eau apportée, bassinages, charge, eau perdue', () => {
   assert.equal(r.jours_eau_perdue_inconnue, 1);
 });
 
-test('une année rejouée sans arrosage : réserve vide toute l\'année, écart au besoin = − ETM', () => {
+test('une année rejouée sans arrosage : la serre se vide,  écart au besoin = − ETM', () => {
   const SOL = lireTableSol({
     source: 'test', theta_u_mm_m: 160, racines_depart_m: { semis: 0.1, plant: 0.15 }, racines_borne_m: 0.6,
     sans_culture: { zr_m: 0.3, p: 0.4 }, cultures: [{ culture: 'X', p: 0.5, racines_max_m: 0.1 }],
@@ -78,7 +78,12 @@ test('une année rejouée sans arrosage : réserve vide toute l\'année, écart 
   for (const [jeu, cote] of [[JEU_OTF, 'otf'], [JEU_TLALOC, 'tlaloc']] as const) {
     const r = indicateurs(juger(entree, jeu), [], cote);
     assert.equal(r.jours_comptes, 365);
-    for (const k of ['jours_seuil_propre', 'jours_seuil_commun', 'jours_stress', 'jours_reserve_vide'] as const) assert.equal(r[k], 365, `${jeu.nom} ${k}`);
+    // Sous abri le juge part le 1er janvier à Dr = ½ × RAW (Nicolas, 28/11) ; ETM de 1,4 mm par jour, sans eau. RU 16 mm.
+    // OTF : RAW 8, départ 4 ; Tlaloc : p ajusté 0,644, RAW 10,3, départ 5,15.
+    const attendu = cote === 'otf'
+      ? { jours_seuil_propre: 363, jours_seuil_commun: 365, jours_stress: 363, jours_reserve_vide: 357 }
+      : { jours_seuil_propre: 365, jours_seuil_commun: 365, jours_stress: 362, jours_reserve_vide: 358 };
+    for (const [k, v] of Object.entries(attendu)) assert.equal(r[k as keyof typeof r], v, `${jeu.nom} ${k}`);
     // 365 jours × 1,4 mm d'ETM, sans pluie sous serre ni arrosage.
     assert.equal(r.ecart_besoin_somme_mm, -511);
     assert.equal(r.ecart_besoin_absolu_mm, 511);

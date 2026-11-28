@@ -72,21 +72,22 @@ test('juge sous serre : départ à la moitié de la réserve facile, arrosage, d
   const meteo = JOURS.map((date) => ({ date, et0_mm: 2, pluie_mm: 50 })); // sous serre, la pluie n'est pas lue
   const entree = {
     annee: 2019, serre: true, cultures: [X], meteo, tableKc: KC, tableSol: SOL,
-    arrosages: [{ debut: '2018-10-20T08:00:00Z', fin: '2018-10-20T09:00:00Z', mm: 10 }],
+    arrosages: [{ debut: '2019-01-06T08:00:00Z', fin: '2019-01-06T09:00:00Z', mm: 10 }],
   };
   const otf = juger(entree, JEU_OTF);
-  assert.equal(otf.length, 443);
-  assert.equal(otf[0].date, '2018-10-15');
-  // ETM = 2 × 1 × 0,7 = 1,4 mm ; départ 0,5 × 0,5 × 16 = 4 mm ; le soir du 15 : 5,4 mm.
+  // Sous abri, le juge part le 1er janvier (Nicolas, 28/11) ; en plein champ, le 15 octobre (test suivant).
+  assert.equal(otf.length, 365);
+  assert.equal(otf[0].date, '2019-01-01');
+  // ETM = 2 × 1 × 0,7 = 1,4 mm ; départ 0,5 × 0,5 × 16 = 4 mm ; le soir du 1er : 5,4 mm.
   proche(otf[0].etm_mm, 1.4);
   proche(otf[0].dr_mm, 5.4);
   proche(otf[0].raw_mm, 8);
   proche(otf[0].dmax_mm, 16);
-  // Le 20 : 4 + 5 × 1,4 = 11 la veille au soir, − 10 + 1,4 = 2,4.
+  // Le 6 : 4 + 5 × 1,4 = 11 la veille au soir, − 10 + 1,4 = 2,4.
   proche(otf[5].dr_mm, 2.4);
   assert.equal(otf[5].arrosage_mm, 10);
   assert.equal(otf[5].pluie_mm, 0);
-  assert.equal(otf.find((j) => j.date === '2018-12-31')!.compte, false);
+  assert.equal(otf.find((j) => j.date === '2018-12-31'), undefined);
   assert.equal(otf.find((j) => j.date === '2019-01-01')!.compte, true);
   assert.ok(otf.every((j) => j.nature === 'estime' && j.decisive === 'X'));
 

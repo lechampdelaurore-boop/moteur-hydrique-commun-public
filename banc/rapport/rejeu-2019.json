@@ -12,16 +12,16 @@
           "jours_comptes": 365,
           "jours_sans_culture": 0,
           "jours_etat_inconnu": 0,
-          "eau_apportee_mm": 611.08,
-          "eau_apportee_sans_bassinage_mm": 611.08,
-          "eau_perdue_mm": 15.08,
+          "eau_apportee_mm": 611.22,
+          "eau_apportee_sans_bassinage_mm": 611.22,
+          "eau_perdue_mm": 18.72,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 51,
-          "jours_seuil_commun": 245,
-          "jours_stress": 51,
+          "jours_seuil_propre": 30,
+          "jours_seuil_commun": 225,
+          "jours_stress": 30,
           "jours_reserve_vide": 0,
-          "ecart_besoin_somme_mm": 15.38,
-          "ecart_besoin_absolu_mm": 79.13,
+          "ecart_besoin_somme_mm": 15.52,
+          "ecart_besoin_absolu_mm": 79.27,
           "jours_avec_arrosage": 74,
           "nombre_arrosages": 74
         },
@@ -29,16 +29,16 @@
           "jours_comptes": 365,
           "jours_sans_culture": 0,
           "jours_etat_inconnu": 0,
-          "eau_apportee_mm": 611.08,
-          "eau_apportee_sans_bassinage_mm": 611.08,
+          "eau_apportee_mm": 611.22,
+          "eau_apportee_sans_bassinage_mm": 611.22,
           "eau_perdue_mm": 13.37,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 48,
+          "jours_seuil_propre": 49,
           "jours_seuil_commun": 65,
           "jours_stress": 13,
           "jours_reserve_vide": 0,
-          "ecart_besoin_somme_mm": 15.38,
-          "ecart_besoin_absolu_mm": 79.13,
+          "ecart_besoin_somme_mm": 15.52,
+          "ecart_besoin_absolu_mm": 79.27,
           "jours_avec_arrosage": 74,
           "nombre_arrosages": 74
         },
@@ -51,12 +51,12 @@
           "jours_etat_inconnu": 0,
           "eau_apportee_mm": 1096.94,
           "eau_apportee_sans_bassinage_mm": 783.04,
-          "eau_perdue_mm": 231.7,
+          "eau_perdue_mm": 260.44,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 58,
-          "jours_seuil_commun": 65,
-          "jours_stress": 55,
-          "jours_reserve_vide": 1,
+          "jours_seuil_propre": 0,
+          "jours_seuil_commun": 5,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
           "ecart_besoin_somme_mm": 266.29,
           "ecart_besoin_absolu_mm": 338.07,
           "jours_avec_arrosage": 365,
@@ -68,12 +68,12 @@
           "jours_etat_inconnu": 0,
           "eau_apportee_mm": 1096.94,
           "eau_apportee_sans_bassinage_mm": 783.04,
-          "eau_perdue_mm": 178.12,
+          "eau_perdue_mm": 201.6,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 80,
-          "jours_seuil_commun": 80,
-          "jours_stress": 57,
-          "jours_reserve_vide": 1,
+          "jours_seuil_propre": 5,
+          "jours_seuil_commun": 5,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
           "ecart_besoin_somme_mm": 207.08,
           "ecart_besoin_absolu_mm": 326.51,
           "jours_avec_arrosage": 365,
@@ -92,16 +92,16 @@
           "jours_comptes": 365,
           "jours_sans_culture": 0,
           "jours_etat_inconnu": 0,
-          "eau_apportee_mm": 604.92,
-          "eau_apportee_sans_bassinage_mm": 604.92,
-          "eau_perdue_mm": 23.58,
+          "eau_apportee_mm": 607.39,
+          "eau_apportee_sans_bassinage_mm": 607.39,
+          "eau_perdue_mm": 26.48,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 34,
-          "jours_seuil_commun": 170,
-          "jours_stress": 34,
+          "jours_seuil_propre": 24,
+          "jours_seuil_commun": 154,
+          "jours_stress": 24,
           "jours_reserve_vide": 0,
-          "ecart_besoin_somme_mm": 16.41,
-          "ecart_besoin_absolu_mm": 80.85,
+          "ecart_besoin_somme_mm": 18.88,
+          "ecart_besoin_absolu_mm": 85.55,
           "jours_avec_arrosage": 74,
           "nombre_arrosages": 74
         },
@@ -109,20 +109,20 @@
           "jours_comptes": 365,
           "jours_sans_culture": 0,
           "jours_etat_inconnu": 0,
-          "eau_apportee_mm": 604.92,
-          "eau_apportee_sans_bassinage_mm": 604.92,
+          "eau_apportee_mm": 607.39,
+          "eau_apportee_sans_bassinage_mm": 607.39,
           "eau_perdue_mm": 23.62,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 42,
-          "jours_seuil_commun": 63,
+          "jours_seuil_propre": 51,
+          "jours_seuil_commun": 71,
           "jours_stress": 12,
           "jours_reserve_vide": 5,
-          "ecart_besoin_somme_mm": 16.41,
-          "ecart_besoin_absolu_mm": 80.85,
+          "ecart_besoin_somme_mm": 18.88,
+          "ecart_besoin_absolu_mm": 85.55,
           "jours_avec_arrosage": 74,
           "nombre_arrosages": 74
         },
-        "eau_non_placee_mm": 33.56
+        "eau_non_placee_mm": 34.67
       },
       "tlaloc": {
         "juge_otf": {
@@ -131,12 +131,12 @@
           "jours_etat_inconnu": 0,
           "eau_apportee_mm": 1066.97,
           "eau_apportee_sans_bassinage_mm": 753.07,
-          "eau_perdue_mm": 207.95,
+          "eau_perdue_mm": 236.83,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 58,
-          "jours_seuil_commun": 62,
-          "jours_stress": 56,
-          "jours_reserve_vide": 1,
+          "jours_seuil_propre": 0,
+          "jours_seuil_commun": 2,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
           "ecart_besoin_somme_mm": 243.44,
           "ecart_besoin_absolu_mm": 359.02,
           "jours_avec_arrosage": 365,
@@ -148,11 +148,11 @@
           "jours_etat_inconnu": 0,
           "eau_apportee_mm": 1066.97,
           "eau_apportee_sans_bassinage_mm": 753.07,
-          "eau_perdue_mm": 157.24,
+          "eau_perdue_mm": 179.97,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 82,
-          "jours_seuil_commun": 82,
-          "jours_stress": 57,
+          "jours_seuil_propre": 6,
+          "jours_seuil_commun": 6,
+          "jours_stress": 0,
           "jours_reserve_vide": 0,
           "ecart_besoin_somme_mm": 184.28,
           "ecart_besoin_absolu_mm": 355.85,
@@ -172,16 +172,16 @@
           "jours_comptes": 353,
           "jours_sans_culture": 12,
           "jours_etat_inconnu": 0,
-          "eau_apportee_mm": 589.36,
-          "eau_apportee_sans_bassinage_mm": 589.36,
-          "eau_perdue_mm": 44.52,
+          "eau_apportee_mm": 589.63,
+          "eau_apportee_sans_bassinage_mm": 589.63,
+          "eau_perdue_mm": 45.91,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 7,
-          "jours_seuil_commun": 162,
-          "jours_stress": 7,
+          "jours_seuil_propre": 6,
+          "jours_seuil_commun": 147,
+          "jours_stress": 6,
           "jours_reserve_vide": 0,
-          "ecart_besoin_somme_mm": 40.8,
-          "ecart_besoin_absolu_mm": 104.61,
+          "ecart_besoin_somme_mm": 41.07,
+          "ecart_besoin_absolu_mm": 104.89,
           "jours_avec_arrosage": 71,
           "nombre_arrosages": 71
         },
@@ -189,16 +189,16 @@
           "jours_comptes": 353,
           "jours_sans_culture": 12,
           "jours_etat_inconnu": 0,
-          "eau_apportee_mm": 589.36,
-          "eau_apportee_sans_bassinage_mm": 589.36,
-          "eau_perdue_mm": 41.77,
+          "eau_apportee_mm": 589.63,
+          "eau_apportee_sans_bassinage_mm": 589.63,
+          "eau_perdue_mm": 41.78,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 26,
+          "jours_seuil_propre": 27,
           "jours_seuil_commun": 83,
           "jours_stress": 9,
           "jours_reserve_vide": 3,
-          "ecart_besoin_somme_mm": 40.8,
-          "ecart_besoin_absolu_mm": 104.61,
+          "ecart_besoin_somme_mm": 41.07,
+          "ecart_besoin_absolu_mm": 104.89,
           "jours_avec_arrosage": 71,
           "nombre_arrosages": 71
         },
@@ -211,12 +211,12 @@
           "jours_etat_inconnu": 0,
           "eau_apportee_mm": 1007.49,
           "eau_apportee_sans_bassinage_mm": 693.59,
-          "eau_perdue_mm": 191.47,
+          "eau_perdue_mm": 217.83,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 47,
-          "jours_seuil_commun": 61,
-          "jours_stress": 46,
-          "jours_reserve_vide": 1,
+          "jours_seuil_propre": 0,
+          "jours_seuil_commun": 1,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
           "ecart_besoin_somme_mm": 224.06,
           "ecart_besoin_absolu_mm": 293.42,
           "jours_avec_arrosage": 365,
@@ -228,12 +228,12 @@
           "jours_etat_inconnu": 0,
           "eau_apportee_mm": 1007.49,
           "eau_apportee_sans_bassinage_mm": 693.59,
-          "eau_perdue_mm": 140.9,
+          "eau_perdue_mm": 161.35,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 77,
-          "jours_seuil_commun": 77,
-          "jours_stress": 46,
-          "jours_reserve_vide": 1,
+          "jours_seuil_propre": 1,
+          "jours_seuil_commun": 1,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
           "ecart_besoin_somme_mm": 164.79,
           "ecart_besoin_absolu_mm": 288.75,
           "jours_avec_arrosage": 365,
@@ -252,16 +252,16 @@
           "jours_comptes": 359,
           "jours_sans_culture": 6,
           "jours_etat_inconnu": 0,
-          "eau_apportee_mm": 538.02,
-          "eau_apportee_sans_bassinage_mm": 538.02,
-          "eau_perdue_mm": 23.62,
+          "eau_apportee_mm": 540.2,
+          "eau_apportee_sans_bassinage_mm": 540.2,
+          "eau_perdue_mm": 24.28,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 35,
-          "jours_seuil_commun": 143,
-          "jours_stress": 35,
+          "jours_seuil_propre": 36,
+          "jours_seuil_commun": 140,
+          "jours_stress": 36,
           "jours_reserve_vide": 0,
-          "ecart_besoin_somme_mm": 18.5,
-          "ecart_besoin_absolu_mm": 85.17,
+          "ecart_besoin_somme_mm": 20.68,
+          "ecart_besoin_absolu_mm": 89.41,
           "jours_avec_arrosage": 68,
           "nombre_arrosages": 68
         },
@@ -269,20 +269,20 @@
           "jours_comptes": 359,
           "jours_sans_culture": 6,
           "jours_etat_inconnu": 0,
-          "eau_apportee_mm": 538.02,
-          "eau_apportee_sans_bassinage_mm": 538.02,
-          "eau_perdue_mm": 19.07,
+          "eau_apportee_mm": 540.2,
+          "eau_apportee_sans_bassinage_mm": 540.2,
+          "eau_perdue_mm": 18.92,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 44,
-          "jours_seuil_commun": 54,
+          "jours_seuil_propre": 52,
+          "jours_seuil_commun": 61,
           "jours_stress": 15,
           "jours_reserve_vide": 1,
-          "ecart_besoin_somme_mm": 18.5,
-          "ecart_besoin_absolu_mm": 85.17,
+          "ecart_besoin_somme_mm": 20.68,
+          "ecart_besoin_absolu_mm": 89.41,
           "jours_avec_arrosage": 68,
           "nombre_arrosages": 68
         },
-        "eau_non_placee_mm": 28.73
+        "eau_non_placee_mm": 29.77
       },
       "tlaloc": {
         "juge_otf": {
@@ -291,12 +291,12 @@
           "jours_etat_inconnu": 0,
           "eau_apportee_mm": 766.84,
           "eau_apportee_sans_bassinage_mm": 528.77,
-          "eau_perdue_mm": 210.67,
+          "eau_perdue_mm": 241.06,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 77,
-          "jours_seuil_commun": 87,
-          "jours_stress": 69,
-          "jours_reserve_vide": 1,
+          "jours_seuil_propre": 0,
+          "jours_seuil_commun": 1,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
           "ecart_besoin_somme_mm": 247.32,
           "ecart_besoin_absolu_mm": 305.73,
           "jours_avec_arrosage": 296,
@@ -308,11 +308,11 @@
           "jours_etat_inconnu": 0,
           "eau_apportee_mm": 766.84,
           "eau_apportee_sans_bassinage_mm": 528.77,
-          "eau_perdue_mm": 71.86,
+          "eau_perdue_mm": 83.9,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 255,
-          "jours_seuil_commun": 255,
-          "jours_stress": 161,
+          "jours_seuil_propre": 202,
+          "jours_seuil_commun": 202,
+          "jours_stress": 62,
           "jours_reserve_vide": 0,
           "ecart_besoin_somme_mm": 68.77,
           "ecart_besoin_absolu_mm": 289.66,
@@ -332,16 +332,16 @@
           "jours_comptes": 365,
           "jours_sans_culture": 0,
           "jours_etat_inconnu": 0,
-          "eau_apportee_mm": 714.86,
-          "eau_apportee_sans_bassinage_mm": 714.86,
-          "eau_perdue_mm": 146.75,
+          "eau_apportee_mm": 716.87,
+          "eau_apportee_sans_bassinage_mm": 716.87,
+          "eau_perdue_mm": 149.83,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 94,
-          "jours_seuil_commun": 210,
-          "jours_stress": 94,
+          "jours_seuil_propre": 73,
+          "jours_seuil_commun": 193,
+          "jours_stress": 73,
           "jours_reserve_vide": 0,
-          "ecart_besoin_somme_mm": 144.97,
-          "ecart_besoin_absolu_mm": 181.49,
+          "ecart_besoin_somme_mm": 146.98,
+          "ecart_besoin_absolu_mm": 185.34,
           "jours_avec_arrosage": 85,
           "nombre_arrosages": 85
         },
@@ -349,20 +349,20 @@
           "jours_comptes": 365,
           "jours_sans_culture": 0,
           "jours_etat_inconnu": 0,
-          "eau_apportee_mm": 714.86,
-          "eau_apportee_sans_bassinage_mm": 714.86,
-          "eau_perdue_mm": 145.83,
+          "eau_apportee_mm": 716.87,
+          "eau_apportee_sans_bassinage_mm": 716.87,
+          "eau_perdue_mm": 145.71,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 101,
-          "jours_seuil_commun": 133,
+          "jours_seuil_propre": 108,
+          "jours_seuil_commun": 138,
           "jours_stress": 33,
           "jours_reserve_vide": 0,
-          "ecart_besoin_somme_mm": 144.97,
-          "ecart_besoin_absolu_mm": 181.49,
+          "ecart_besoin_somme_mm": 146.98,
+          "ecart_besoin_absolu_mm": 185.34,
           "jours_avec_arrosage": 85,
           "nombre_arrosages": 85
         },
-        "eau_non_placee_mm": 30.27
+        "eau_non_placee_mm": 31.09
       },
       "tlaloc": {
         "juge_otf": {
@@ -371,11 +371,11 @@
           "jours_etat_inconnu": 0,
           "eau_apportee_mm": 1011.93,
           "eau_apportee_sans_bassinage_mm": 614.08,
-          "eau_perdue_mm": 115.13,
+          "eau_perdue_mm": 141.31,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 78,
-          "jours_seuil_commun": 85,
-          "jours_stress": 77,
+          "jours_seuil_propre": 0,
+          "jours_seuil_commun": 2,
+          "jours_stress": 0,
           "jours_reserve_vide": 0,
           "ecart_besoin_somme_mm": 143.25,
           "ecart_besoin_absolu_mm": 188.35,
@@ -388,12 +388,12 @@
           "jours_etat_inconnu": 0,
           "eau_apportee_mm": 1011.93,
           "eau_apportee_sans_bassinage_mm": 614.08,
-          "eau_perdue_mm": 44.96,
+          "eau_perdue_mm": 67.25,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 181,
-          "jours_seuil_commun": 181,
-          "jours_stress": 140,
-          "jours_reserve_vide": 1,
+          "jours_seuil_propre": 16,
+          "jours_seuil_commun": 16,
+          "jours_stress": 0,
+          "jours_reserve_vide": 0,
           "ecart_besoin_somme_mm": 68.96,
           "ecart_besoin_absolu_mm": 170.71,
           "jours_avec_arrosage": 365,
@@ -412,16 +412,16 @@
           "jours_comptes": 337,
           "jours_sans_culture": 28,
           "jours_etat_inconnu": 0,
-          "eau_apportee_mm": 542.79,
-          "eau_apportee_sans_bassinage_mm": 542.79,
-          "eau_perdue_mm": 25.49,
+          "eau_apportee_mm": 545.3,
+          "eau_apportee_sans_bassinage_mm": 545.3,
+          "eau_perdue_mm": 27.77,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 19,
-          "jours_seuil_commun": 163,
-          "jours_stress": 19,
+          "jours_seuil_propre": 16,
+          "jours_seuil_commun": 150,
+          "jours_stress": 16,
           "jours_reserve_vide": 0,
-          "ecart_besoin_somme_mm": 26.74,
-          "ecart_besoin_absolu_mm": 102.41,
+          "ecart_besoin_somme_mm": 29.25,
+          "ecart_besoin_absolu_mm": 107.15,
           "jours_avec_arrosage": 67,
           "nombre_arrosages": 67
         },
@@ -429,20 +429,20 @@
           "jours_comptes": 337,
           "jours_sans_culture": 28,
           "jours_etat_inconnu": 0,
-          "eau_apportee_mm": 542.79,
-          "eau_apportee_sans_bassinage_mm": 542.79,
+          "eau_apportee_mm": 545.3,
+          "eau_apportee_sans_bassinage_mm": 545.3,
           "eau_perdue_mm": 29.42,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 36,
-          "jours_seuil_commun": 73,
+          "jours_seuil_propre": 40,
+          "jours_seuil_commun": 81,
           "jours_stress": 14,
           "jours_reserve_vide": 0,
-          "ecart_besoin_somme_mm": 26.74,
-          "ecart_besoin_absolu_mm": 102.41,
+          "ecart_besoin_somme_mm": 29.25,
+          "ecart_besoin_absolu_mm": 107.15,
           "jours_avec_arrosage": 67,
           "nombre_arrosages": 67
         },
-        "eau_non_placee_mm": 30.72
+        "eau_non_placee_mm": 31.83
       },
       "tlaloc": {
         "juge_otf": {
@@ -451,11 +451,11 @@
           "jours_etat_inconnu": 0,
           "eau_apportee_mm": 797.84,
           "eau_apportee_sans_bassinage_mm": 729.2,
-          "eau_perdue_mm": 189.12,
+          "eau_perdue_mm": 220.33,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 56,
-          "jours_seuil_commun": 56,
-          "jours_stress": 46,
+          "jours_seuil_propre": 0,
+          "jours_seuil_commun": 0,
+          "jours_stress": 0,
           "jours_reserve_vide": 0,
           "ecart_besoin_somme_mm": 230.69,
           "ecart_besoin_absolu_mm": 333.77,
@@ -468,11 +468,11 @@
           "jours_etat_inconnu": 0,
           "eau_apportee_mm": 797.84,
           "eau_apportee_sans_bassinage_mm": 729.2,
-          "eau_perdue_mm": 191.42,
+          "eau_perdue_mm": 212.88,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 53,
-          "jours_seuil_commun": 53,
-          "jours_stress": 31,
+          "jours_seuil_propre": 0,
+          "jours_seuil_commun": 0,
+          "jours_stress": 0,
           "jours_reserve_vide": 0,
           "ecart_besoin_somme_mm": 217.53,
           "ecart_besoin_absolu_mm": 333.89,
@@ -492,16 +492,16 @@
           "jours_comptes": 359,
           "jours_sans_culture": 6,
           "jours_etat_inconnu": 0,
-          "eau_apportee_mm": 583.28,
-          "eau_apportee_sans_bassinage_mm": 583.28,
-          "eau_perdue_mm": 29.94,
+          "eau_apportee_mm": 583.35,
+          "eau_apportee_sans_bassinage_mm": 583.35,
+          "eau_perdue_mm": 33.55,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 57,
-          "jours_seuil_commun": 165,
-          "jours_stress": 57,
+          "jours_seuil_propre": 24,
+          "jours_seuil_commun": 145,
+          "jours_stress": 24,
           "jours_reserve_vide": 0,
-          "ecart_besoin_somme_mm": 17.65,
-          "ecart_besoin_absolu_mm": 89.41,
+          "ecart_besoin_somme_mm": 17.72,
+          "ecart_besoin_absolu_mm": 89.49,
           "jours_avec_arrosage": 70,
           "nombre_arrosages": 70
         },
@@ -509,16 +509,16 @@
           "jours_comptes": 359,
           "jours_sans_culture": 6,
           "jours_etat_inconnu": 0,
-          "eau_apportee_mm": 583.28,
-          "eau_apportee_sans_bassinage_mm": 583.28,
+          "eau_apportee_mm": 583.35,
+          "eau_apportee_sans_bassinage_mm": 583.35,
           "eau_perdue_mm": 32.24,
           "jours_eau_perdue_inconnue": 0,
           "jours_seuil_propre": 52,
           "jours_seuil_commun": 70,
           "jours_stress": 7,
           "jours_reserve_vide": 4,
-          "ecart_besoin_somme_mm": 17.65,
-          "ecart_besoin_absolu_mm": 89.41,
+          "ecart_besoin_somme_mm": 17.72,
+          "ecart_besoin_absolu_mm": 89.49,
           "jours_avec_arrosage": 70,
           "nombre_arrosages": 70
         },
@@ -533,10 +533,10 @@
           "eau_apportee_sans_bassinage_mm": 0,
           "eau_perdue_mm": 0,
           "jours_eau_perdue_inconnue": 0,
-          "jours_seuil_propre": 359,
+          "jours_seuil_propre": 350,
           "jours_seuil_commun": 359,
-          "jours_stress": 359,
-          "jours_reserve_vide": 359,
+          "jours_stress": 350,
+          "jours_reserve_vide": 311,
           "ecart_besoin_somme_mm": -565.63,
           "ecart_besoin_absolu_mm": 565.63,
           "jours_avec_arrosage": 0,
@@ -552,8 +552,8 @@
           "jours_eau_perdue_inconnue": 0,
           "jours_seuil_propre": 359,
           "jours_seuil_commun": 359,
-          "jours_stress": 359,
-          "jours_reserve_vide": 315,
+          "jours_stress": 341,
+          "jours_reserve_vide": 273,
           "ecart_besoin_somme_mm": -565.63,
           "ecart_besoin_absolu_mm": 565.63,
           "jours_avec_arrosage": 0,
@@ -1296,7 +1296,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 7.14,
+            "dr_mm": 3.49,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1307,7 +1307,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 7.58,
+            "dr_mm": 3.93,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1318,7 +1318,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 8.09,
+            "dr_mm": 4.44,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1329,7 +1329,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 8.56,
+            "dr_mm": 4.92,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1340,7 +1340,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 8.89,
+            "dr_mm": 5.24,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1351,7 +1351,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 9.14,
+            "dr_mm": 5.49,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1362,8 +1362,8 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 5.45,
-            "arrosage_mm": 3.95,
+            "dr_mm": 1.66,
+            "arrosage_mm": 4.09,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
           },
@@ -1373,7 +1373,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 5.6,
+            "dr_mm": 1.81,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1384,7 +1384,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 5.81,
+            "dr_mm": 2.02,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1395,7 +1395,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 6.2,
+            "dr_mm": 2.41,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1406,7 +1406,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 6.55,
+            "dr_mm": 2.76,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1417,7 +1417,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 6.83,
+            "dr_mm": 3.04,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1428,7 +1428,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 7.02,
+            "dr_mm": 3.23,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1439,7 +1439,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 7.32,
+            "dr_mm": 3.53,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1450,7 +1450,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 7.8,
+            "dr_mm": 4.01,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1461,7 +1461,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 8.45,
+            "dr_mm": 4.66,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1472,7 +1472,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 8.67,
+            "dr_mm": 4.88,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1483,7 +1483,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 8.95,
+            "dr_mm": 5.16,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1494,7 +1494,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 9.49,
+            "dr_mm": 5.7,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1505,7 +1505,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 9.96,
+            "dr_mm": 6.17,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1516,7 +1516,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 4.52,
+            "dr_mm": 0.73,
             "arrosage_mm": 5.93,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1527,7 +1527,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 4.95,
+            "dr_mm": 1.16,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1538,7 +1538,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 5.22,
+            "dr_mm": 1.43,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1549,7 +1549,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 5.53,
+            "dr_mm": 1.74,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1560,7 +1560,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 6.11,
+            "dr_mm": 2.32,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1571,7 +1571,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 6.45,
+            "dr_mm": 2.66,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1582,7 +1582,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 6.88,
+            "dr_mm": 3.09,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1593,7 +1593,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 7.34,
+            "dr_mm": 3.55,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1604,7 +1604,7 @@
             "ru_mm": 24,
             "raw_mm": 7.2,
             "p": 0.3,
-            "dr_mm": 5.96,
+            "dr_mm": 3.12,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -1615,7 +1615,7 @@
             "ru_mm": 24.49,
             "raw_mm": 7.35,
             "p": 0.3,
-            "dr_mm": 6.49,
+            "dr_mm": 3.59,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -1626,7 +1626,7 @@
             "ru_mm": 24.98,
             "raw_mm": 7.49,
             "p": 0.3,
-            "dr_mm": 6.97,
+            "dr_mm": 4.01,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -1637,7 +1637,7 @@
             "ru_mm": 25.47,
             "raw_mm": 7.64,
             "p": 0.3,
-            "dr_mm": 7.27,
+            "dr_mm": 4.26,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -1648,7 +1648,7 @@
             "ru_mm": 25.96,
             "raw_mm": 7.79,
             "p": 0.3,
-            "dr_mm": 7.73,
+            "dr_mm": 4.66,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -1659,7 +1659,7 @@
             "ru_mm": 26.45,
             "raw_mm": 7.93,
             "p": 0.3,
-            "dr_mm": 8.13,
+            "dr_mm": 5,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -1670,9 +1670,9 @@
             "ru_mm": 26.94,
             "raw_mm": 8.08,
             "p": 0.3,
-            "dr_mm": 2.97,
+            "dr_mm": 0,
             "arrosage_mm": 5.87,
-            "eau_perdue_mm": 0,
+            "eau_perdue_mm": 0.22,
             "decisive": "Laitue"
           },
           {
@@ -1681,7 +1681,7 @@
             "ru_mm": 27.43,
             "raw_mm": 8.23,
             "p": 0.3,
-            "dr_mm": 3.67,
+            "dr_mm": 0.65,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -1692,7 +1692,7 @@
             "ru_mm": 27.92,
             "raw_mm": 8.38,
             "p": 0.3,
-            "dr_mm": 4.46,
+            "dr_mm": 1.38,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -1703,7 +1703,7 @@
             "ru_mm": 28.41,
             "raw_mm": 8.52,
             "p": 0.3,
-            "dr_mm": 4.81,
+            "dr_mm": 1.68,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -1714,7 +1714,7 @@
             "ru_mm": 28.9,
             "raw_mm": 8.67,
             "p": 0.3,
-            "dr_mm": 5.62,
+            "dr_mm": 2.43,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -1725,7 +1725,7 @@
             "ru_mm": 29.39,
             "raw_mm": 8.82,
             "p": 0.3,
-            "dr_mm": 6.35,
+            "dr_mm": 3.11,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -1736,7 +1736,7 @@
             "ru_mm": 29.88,
             "raw_mm": 8.96,
             "p": 0.3,
-            "dr_mm": 6.73,
+            "dr_mm": 3.43,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -1747,9 +1747,9 @@
             "ru_mm": 30.37,
             "raw_mm": 9.11,
             "p": 0.3,
-            "dr_mm": 1.23,
+            "dr_mm": 0,
             "arrosage_mm": 5.88,
-            "eau_perdue_mm": 0,
+            "eau_perdue_mm": 2.11,
             "decisive": "Laitue"
           },
           {
@@ -1758,7 +1758,7 @@
             "ru_mm": 30.86,
             "raw_mm": 9.26,
             "p": 0.3,
-            "dr_mm": 1.85,
+            "dr_mm": 0.6,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -1769,7 +1769,7 @@
             "ru_mm": 31.35,
             "raw_mm": 9.4,
             "p": 0.3,
-            "dr_mm": 2.74,
+            "dr_mm": 1.47,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -1780,7 +1780,7 @@
             "ru_mm": 31.84,
             "raw_mm": 9.55,
             "p": 0.3,
-            "dr_mm": 3.74,
+            "dr_mm": 2.44,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -1791,7 +1791,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 4.77,
+            "dr_mm": 3.46,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1802,7 +1802,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 5.86,
+            "dr_mm": 4.55,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1813,7 +1813,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 6.95,
+            "dr_mm": 5.65,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -1826,7 +1826,7 @@
             "p": 0.2,
             "dr_mm": 0,
             "arrosage_mm": 8.28,
-            "eau_perdue_mm": 0.37,
+            "eau_perdue_mm": 1.67,
             "decisive": "Mâche"
           },
           {
@@ -5313,7 +5313,7 @@
             "ru_mm": 32,
             "raw_mm": 12.42,
             "p": 0.388,
-            "dr_mm": 6.37,
+            "dr_mm": 6.51,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -5324,7 +5324,7 @@
             "ru_mm": 32,
             "raw_mm": 12.24,
             "p": 0.383,
-            "dr_mm": 6.8,
+            "dr_mm": 6.94,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -5335,7 +5335,7 @@
             "ru_mm": 32,
             "raw_mm": 12.15,
             "p": 0.38,
-            "dr_mm": 7.31,
+            "dr_mm": 7.45,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -5346,7 +5346,7 @@
             "ru_mm": 32,
             "raw_mm": 12.19,
             "p": 0.381,
-            "dr_mm": 7.79,
+            "dr_mm": 7.93,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -5357,7 +5357,7 @@
             "ru_mm": 32,
             "raw_mm": 12.39,
             "p": 0.387,
-            "dr_mm": 8.11,
+            "dr_mm": 8.25,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -5368,7 +5368,7 @@
             "ru_mm": 32,
             "raw_mm": 12.48,
             "p": 0.39,
-            "dr_mm": 8.36,
+            "dr_mm": 8.5,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -5379,8 +5379,8 @@
             "ru_mm": 32,
             "raw_mm": 12.47,
             "p": 0.39,
-            "dr_mm": 4.68,
-            "arrosage_mm": 3.95,
+            "dr_mm": 4.67,
+            "arrosage_mm": 4.09,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
           },
@@ -5467,7 +5467,7 @@
             "ru_mm": 32,
             "raw_mm": 12.18,
             "p": 0.381,
-            "dr_mm": 7.03,
+            "dr_mm": 7.02,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -5489,7 +5489,7 @@
             "ru_mm": 32,
             "raw_mm": 12.51,
             "p": 0.391,
-            "dr_mm": 7.9,
+            "dr_mm": 7.89,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -5500,7 +5500,7 @@
             "ru_mm": 32,
             "raw_mm": 12.44,
             "p": 0.389,
-            "dr_mm": 8.18,
+            "dr_mm": 8.17,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -5533,7 +5533,7 @@
             "ru_mm": 32,
             "raw_mm": 12.16,
             "p": 0.38,
-            "dr_mm": 3.75,
+            "dr_mm": 3.74,
             "arrosage_mm": 5.93,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -5555,7 +5555,7 @@
             "ru_mm": 32,
             "raw_mm": 12.45,
             "p": 0.389,
-            "dr_mm": 4.45,
+            "dr_mm": 4.44,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -5610,7 +5610,7 @@
             "ru_mm": 32,
             "raw_mm": 12.21,
             "p": 0.382,
-            "dr_mm": 6.57,
+            "dr_mm": 6.56,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -5643,7 +5643,7 @@
             "ru_mm": 24.98,
             "raw_mm": 12.14,
             "p": 0.486,
-            "dr_mm": 7.78,
+            "dr_mm": 7.77,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -5654,7 +5654,7 @@
             "ru_mm": 25.47,
             "raw_mm": 12.56,
             "p": 0.493,
-            "dr_mm": 7.95,
+            "dr_mm": 7.94,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -5665,7 +5665,7 @@
             "ru_mm": 25.96,
             "raw_mm": 12.65,
             "p": 0.487,
-            "dr_mm": 8.27,
+            "dr_mm": 8.26,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -5742,7 +5742,7 @@
             "ru_mm": 29.39,
             "raw_mm": 13.94,
             "p": 0.475,
-            "dr_mm": 6.21,
+            "dr_mm": 6.2,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -5764,7 +5764,7 @@
             "ru_mm": 30.37,
             "raw_mm": 14.85,
             "p": 0.489,
-            "dr_mm": 0.88,
+            "dr_mm": 0.87,
             "arrosage_mm": 5.88,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -5775,7 +5775,7 @@
             "ru_mm": 30.86,
             "raw_mm": 14.69,
             "p": 0.476,
-            "dr_mm": 1.48,
+            "dr_mm": 1.47,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -5786,7 +5786,7 @@
             "ru_mm": 31.35,
             "raw_mm": 14.6,
             "p": 0.466,
-            "dr_mm": 2.34,
+            "dr_mm": 2.33,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -5797,7 +5797,7 @@
             "ru_mm": 31.84,
             "raw_mm": 14.71,
             "p": 0.462,
-            "dr_mm": 3.29,
+            "dr_mm": 3.28,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -5808,7 +5808,7 @@
             "ru_mm": 32,
             "raw_mm": 11.51,
             "p": 0.36,
-            "dr_mm": 4.3,
+            "dr_mm": 4.29,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -5819,7 +5819,7 @@
             "ru_mm": 32,
             "raw_mm": 11.41,
             "p": 0.356,
-            "dr_mm": 5.39,
+            "dr_mm": 5.38,
             "arrosage_mm": 0,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9332,7 +9332,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 32,
+            "dr_mm": 3.28,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9343,9 +9343,9 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 25.13,
+            "dr_mm": 0,
             "arrosage_mm": 7.3,
-            "eau_perdue_mm": 0,
+            "eau_perdue_mm": 3.58,
             "decisive": "Mâche"
           },
           {
@@ -9354,7 +9354,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 25.43,
+            "dr_mm": 0.3,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9365,7 +9365,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 25.7,
+            "dr_mm": 0.57,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9376,7 +9376,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 25.81,
+            "dr_mm": 0.68,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9387,7 +9387,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 25.85,
+            "dr_mm": 0.72,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9398,7 +9398,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 25.9,
+            "dr_mm": 0.77,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9409,7 +9409,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 25.85,
+            "dr_mm": 0.71,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9420,7 +9420,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 25.84,
+            "dr_mm": 0.71,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9431,7 +9431,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 26.02,
+            "dr_mm": 0.89,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9442,7 +9442,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 26.16,
+            "dr_mm": 1.03,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9453,7 +9453,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 26.23,
+            "dr_mm": 1.1,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9464,7 +9464,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 26.21,
+            "dr_mm": 1.08,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9475,7 +9475,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 26.3,
+            "dr_mm": 1.17,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9486,7 +9486,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 26.58,
+            "dr_mm": 1.44,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9497,7 +9497,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 27.01,
+            "dr_mm": 1.88,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9508,9 +9508,9 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 19.1,
+            "dr_mm": 0,
             "arrosage_mm": 8.13,
-            "eau_perdue_mm": 0,
+            "eau_perdue_mm": 6.03,
             "decisive": "Mâche"
           },
           {
@@ -9519,7 +9519,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 19.17,
+            "dr_mm": 0.07,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9530,7 +9530,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 19.5,
+            "dr_mm": 0.4,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9541,7 +9541,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 19.76,
+            "dr_mm": 0.66,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9552,7 +9552,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 20.05,
+            "dr_mm": 0.94,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9563,7 +9563,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 20.27,
+            "dr_mm": 1.16,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9574,7 +9574,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 20.33,
+            "dr_mm": 1.22,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9585,7 +9585,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 20.43,
+            "dr_mm": 1.32,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9596,7 +9596,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 20.8,
+            "dr_mm": 1.69,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9607,7 +9607,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 20.92,
+            "dr_mm": 1.82,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9618,7 +9618,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 21.15,
+            "dr_mm": 2.04,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9629,7 +9629,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 21.4,
+            "dr_mm": 2.3,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9640,7 +9640,7 @@
             "ru_mm": 24,
             "raw_mm": 7.2,
             "p": 0.3,
-            "dr_mm": 16.29,
+            "dr_mm": 1.96,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -9651,7 +9651,7 @@
             "ru_mm": 24.49,
             "raw_mm": 7.35,
             "p": 0.3,
-            "dr_mm": 16.83,
+            "dr_mm": 2.21,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -9662,7 +9662,7 @@
             "ru_mm": 24.98,
             "raw_mm": 7.49,
             "p": 0.3,
-            "dr_mm": 17.3,
+            "dr_mm": 2.39,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -9673,9 +9673,9 @@
             "ru_mm": 25.47,
             "raw_mm": 7.64,
             "p": 0.3,
-            "dr_mm": 8.29,
+            "dr_mm": 0,
             "arrosage_mm": 9.52,
-            "eau_perdue_mm": 0,
+            "eau_perdue_mm": 6.92,
             "decisive": "Laitue"
           },
           {
@@ -9684,7 +9684,7 @@
             "ru_mm": 25.96,
             "raw_mm": 7.79,
             "p": 0.3,
-            "dr_mm": 8.56,
+            "dr_mm": 0.11,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -9695,7 +9695,7 @@
             "ru_mm": 26.45,
             "raw_mm": 7.93,
             "p": 0.3,
-            "dr_mm": 8.76,
+            "dr_mm": 0.16,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -9706,7 +9706,7 @@
             "ru_mm": 26.94,
             "raw_mm": 8.08,
             "p": 0.3,
-            "dr_mm": 9.27,
+            "dr_mm": 0.5,
             "arrosage_mm": 0.21,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -9717,7 +9717,7 @@
             "ru_mm": 27.43,
             "raw_mm": 8.23,
             "p": 0.3,
-            "dr_mm": 9.59,
+            "dr_mm": 0.67,
             "arrosage_mm": 0.49,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -9728,7 +9728,7 @@
             "ru_mm": 27.92,
             "raw_mm": 8.38,
             "p": 0.3,
-            "dr_mm": 10,
+            "dr_mm": 0.91,
             "arrosage_mm": 0.49,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -9739,7 +9739,7 @@
             "ru_mm": 28.41,
             "raw_mm": 8.52,
             "p": 0.3,
-            "dr_mm": 9.96,
+            "dr_mm": 0.71,
             "arrosage_mm": 0.49,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -9750,7 +9750,7 @@
             "ru_mm": 28.9,
             "raw_mm": 8.67,
             "p": 0.3,
-            "dr_mm": 10.36,
+            "dr_mm": 0.96,
             "arrosage_mm": 0.49,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -9761,7 +9761,7 @@
             "ru_mm": 29.39,
             "raw_mm": 8.82,
             "p": 0.3,
-            "dr_mm": 10.69,
+            "dr_mm": 1.12,
             "arrosage_mm": 0.49,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -9772,7 +9772,7 @@
             "ru_mm": 29.88,
             "raw_mm": 8.96,
             "p": 0.3,
-            "dr_mm": 10.65,
+            "dr_mm": 0.92,
             "arrosage_mm": 0.49,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -9783,7 +9783,7 @@
             "ru_mm": 30.37,
             "raw_mm": 9.11,
             "p": 0.3,
-            "dr_mm": 10.61,
+            "dr_mm": 0.72,
             "arrosage_mm": 0.49,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -9794,7 +9794,7 @@
             "ru_mm": 30.86,
             "raw_mm": 9.26,
             "p": 0.3,
-            "dr_mm": 10.61,
+            "dr_mm": 0.56,
             "arrosage_mm": 0.77,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -9805,7 +9805,7 @@
             "ru_mm": 31.35,
             "raw_mm": 9.4,
             "p": 0.3,
-            "dr_mm": 10.86,
+            "dr_mm": 0.66,
             "arrosage_mm": 0.77,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -9816,7 +9816,7 @@
             "ru_mm": 31.84,
             "raw_mm": 9.55,
             "p": 0.3,
-            "dr_mm": 11.21,
+            "dr_mm": 0.85,
             "arrosage_mm": 0.77,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -9827,7 +9827,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 11.37,
+            "dr_mm": 0.96,
             "arrosage_mm": 0.91,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9838,9 +9838,9 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 6.27,
+            "dr_mm": 0,
             "arrosage_mm": 6.19,
-            "eau_perdue_mm": 0,
+            "eau_perdue_mm": 4.14,
             "decisive": "Mâche"
           },
           {
@@ -9849,7 +9849,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 6.45,
+            "dr_mm": 0.18,
             "arrosage_mm": 0.91,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9860,7 +9860,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 6.5,
+            "dr_mm": 0.23,
             "arrosage_mm": 0.91,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9871,7 +9871,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 6.59,
+            "dr_mm": 0.32,
             "arrosage_mm": 0.91,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9882,7 +9882,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 6.73,
+            "dr_mm": 0.46,
             "arrosage_mm": 0.91,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9893,7 +9893,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 6.92,
+            "dr_mm": 0.65,
             "arrosage_mm": 0.91,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9904,7 +9904,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 6.94,
+            "dr_mm": 0.67,
             "arrosage_mm": 1.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9915,7 +9915,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 7.01,
+            "dr_mm": 0.74,
             "arrosage_mm": 1.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9926,7 +9926,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 7.16,
+            "dr_mm": 0.89,
             "arrosage_mm": 1.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9937,7 +9937,7 @@
             "ru_mm": 32,
             "raw_mm": 6.4,
             "p": 0.2,
-            "dr_mm": 7.34,
+            "dr_mm": 1.07,
             "arrosage_mm": 1.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -9948,7 +9948,7 @@
             "ru_mm": 37.71,
             "raw_mm": 11.31,
             "p": 0.3,
-            "dr_mm": 9.03,
+            "dr_mm": 1.64,
             "arrosage_mm": 0.91,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -9959,7 +9959,7 @@
             "ru_mm": 38.2,
             "raw_mm": 11.46,
             "p": 0.3,
-            "dr_mm": 9.49,
+            "dr_mm": 2.01,
             "arrosage_mm": 0.91,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -9970,9 +9970,9 @@
             "ru_mm": 38.69,
             "raw_mm": 11.61,
             "p": 0.3,
-            "dr_mm": 6.39,
+            "dr_mm": 0,
             "arrosage_mm": 4.52,
-            "eau_perdue_mm": 0,
+            "eau_perdue_mm": 1.19,
             "decisive": "Laitue"
           },
           {
@@ -9981,9 +9981,9 @@
             "ru_mm": 39.18,
             "raw_mm": 11.76,
             "p": 0.3,
-            "dr_mm": 6.12,
+            "dr_mm": 0,
             "arrosage_mm": 0.77,
-            "eau_perdue_mm": 0,
+            "eau_perdue_mm": 0.35,
             "decisive": "Laitue"
           },
           {
@@ -9992,9 +9992,9 @@
             "ru_mm": 39.67,
             "raw_mm": 11.9,
             "p": 0.3,
-            "dr_mm": 5.98,
+            "dr_mm": 0,
             "arrosage_mm": 0.77,
-            "eau_perdue_mm": 0,
+            "eau_perdue_mm": 0.22,
             "decisive": "Laitue"
           },
           {
@@ -10003,9 +10003,9 @@
             "ru_mm": 40.16,
             "raw_mm": 12.05,
             "p": 0.3,
-            "dr_mm": 1.65,
+            "dr_mm": 0,
             "arrosage_mm": 5.63,
-            "eau_perdue_mm": 0,
+            "eau_perdue_mm": 4.41,
             "decisive": "Laitue"
           },
           {
@@ -10014,9 +10014,9 @@
             "ru_mm": 40.65,
             "raw_mm": 12.2,
             "p": 0.3,
-            "dr_mm": 1.36,
+            "dr_mm": 0,
             "arrosage_mm": 0.77,
-            "eau_perdue_mm": 0,
+            "eau_perdue_mm": 0.31,
             "decisive": "Laitue"
           },
           {
@@ -10025,7 +10025,7 @@
             "ru_mm": 41.14,
             "raw_mm": 12.34,
             "p": 0.3,
-            "dr_mm": 1.8,
+            "dr_mm": 0.42,
             "arrosage_mm": 0.63,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -10036,7 +10036,7 @@
             "ru_mm": 41.63,
             "raw_mm": 12.49,
             "p": 0.3,
-            "dr_mm": 2.69,
+            "dr_mm": 1.29,
             "arrosage_mm": 0.63,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -10047,7 +10047,7 @@
             "ru_mm": 42.12,
             "raw_mm": 12.64,
             "p": 0.3,
-            "dr_mm": 3.02,
+            "dr_mm": 1.61,
             "arrosage_mm": 0.63,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -10058,7 +10058,7 @@
             "ru_mm": 42.61,
             "raw_mm": 12.78,
             "p": 0.3,
-            "dr_mm": 3.24,
+            "dr_mm": 1.81,
             "arrosage_mm": 0.63,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -10069,7 +10069,7 @@
             "ru_mm": 43.1,
             "raw_mm": 12.93,
             "p": 0.3,
-            "dr_mm": 3.01,
+            "dr_mm": 1.56,
             "arrosage_mm": 0.63,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -10080,7 +10080,7 @@
             "ru_mm": 43.59,
             "raw_mm": 13.08,
             "p": 0.3,
-            "dr_mm": 2.93,
+            "dr_mm": 1.47,
             "arrosage_mm": 0.63,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -10091,7 +10091,7 @@
             "ru_mm": 44.08,
             "raw_mm": 13.22,
             "p": 0.3,
-            "dr_mm": 3.01,
+            "dr_mm": 1.53,
             "arrosage_mm": 0.63,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -10102,7 +10102,7 @@
             "ru_mm": 44.57,
             "raw_mm": 13.37,
             "p": 0.3,
-            "dr_mm": 3.58,
+            "dr_mm": 2.09,
             "arrosage_mm": 0.91,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -10113,7 +10113,7 @@
             "ru_mm": 45.06,
             "raw_mm": 13.52,
             "p": 0.3,
-            "dr_mm": 3.75,
+            "dr_mm": 2.23,
             "arrosage_mm": 0.91,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -10124,7 +10124,7 @@
             "ru_mm": 45.55,
             "raw_mm": 13.67,
             "p": 0.3,
-            "dr_mm": 3.31,
+            "dr_mm": 1.78,
             "arrosage_mm": 0.91,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -10135,7 +10135,7 @@
             "ru_mm": 46.04,
             "raw_mm": 13.81,
             "p": 0.3,
-            "dr_mm": 2.65,
+            "dr_mm": 1.11,
             "arrosage_mm": 1.05,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -10146,7 +10146,7 @@
             "ru_mm": 46.53,
             "raw_mm": 13.96,
             "p": 0.3,
-            "dr_mm": 3.25,
+            "dr_mm": 1.69,
             "arrosage_mm": 1.05,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -10157,7 +10157,7 @@
             "ru_mm": 47.02,
             "raw_mm": 14.11,
             "p": 0.3,
-            "dr_mm": 3.73,
+            "dr_mm": 2.15,
             "arrosage_mm": 1.05,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -10170,7 +10170,7 @@
             "p": 0.3,
             "dr_mm": 0,
             "arrosage_mm": 9.8,
-            "eau_perdue_mm": 4.96,
+            "eau_perdue_mm": 6.56,
             "decisive": "Laitue"
           },
           {
@@ -13349,7 +13349,7 @@
             "ru_mm": 32,
             "raw_mm": 12.42,
             "p": 0.388,
-            "dr_mm": 31.15,
+            "dr_mm": 6.45,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13360,9 +13360,9 @@
             "ru_mm": 32,
             "raw_mm": 12.24,
             "p": 0.383,
-            "dr_mm": 24.45,
+            "dr_mm": 0.27,
             "arrosage_mm": 7.14,
-            "eau_perdue_mm": 0,
+            "eau_perdue_mm": 0.52,
             "decisive": "Mâche"
           },
           {
@@ -13371,7 +13371,7 @@
             "ru_mm": 32,
             "raw_mm": 12.15,
             "p": 0.38,
-            "dr_mm": 24.91,
+            "dr_mm": 0.73,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13382,7 +13382,7 @@
             "ru_mm": 32,
             "raw_mm": 12.19,
             "p": 0.381,
-            "dr_mm": 25.33,
+            "dr_mm": 1.15,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13393,7 +13393,7 @@
             "ru_mm": 32,
             "raw_mm": 12.39,
             "p": 0.387,
-            "dr_mm": 25.6,
+            "dr_mm": 1.42,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13404,7 +13404,7 @@
             "ru_mm": 32,
             "raw_mm": 12.48,
             "p": 0.39,
-            "dr_mm": 25.8,
+            "dr_mm": 1.62,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13415,7 +13415,7 @@
             "ru_mm": 32,
             "raw_mm": 12.47,
             "p": 0.39,
-            "dr_mm": 26.01,
+            "dr_mm": 1.83,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13426,7 +13426,7 @@
             "ru_mm": 32,
             "raw_mm": 12.6,
             "p": 0.394,
-            "dr_mm": 26.11,
+            "dr_mm": 1.93,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13437,7 +13437,7 @@
             "ru_mm": 32,
             "raw_mm": 12.54,
             "p": 0.392,
-            "dr_mm": 26.26,
+            "dr_mm": 2.08,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13448,7 +13448,7 @@
             "ru_mm": 32,
             "raw_mm": 12.3,
             "p": 0.384,
-            "dr_mm": 26.6,
+            "dr_mm": 2.42,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13459,7 +13459,7 @@
             "ru_mm": 32,
             "raw_mm": 12.35,
             "p": 0.386,
-            "dr_mm": 26.89,
+            "dr_mm": 2.72,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13470,7 +13470,7 @@
             "ru_mm": 32,
             "raw_mm": 12.44,
             "p": 0.389,
-            "dr_mm": 27.12,
+            "dr_mm": 2.94,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13481,7 +13481,7 @@
             "ru_mm": 32,
             "raw_mm": 12.56,
             "p": 0.392,
-            "dr_mm": 27.26,
+            "dr_mm": 3.08,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13492,7 +13492,7 @@
             "ru_mm": 32,
             "raw_mm": 12.41,
             "p": 0.388,
-            "dr_mm": 27.51,
+            "dr_mm": 3.33,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13503,7 +13503,7 @@
             "ru_mm": 32,
             "raw_mm": 12.18,
             "p": 0.381,
-            "dr_mm": 27.94,
+            "dr_mm": 3.76,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13514,7 +13514,7 @@
             "ru_mm": 32,
             "raw_mm": 11.98,
             "p": 0.374,
-            "dr_mm": 28.53,
+            "dr_mm": 4.35,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13525,9 +13525,9 @@
             "ru_mm": 32,
             "raw_mm": 12.51,
             "p": 0.391,
-            "dr_mm": 20.79,
+            "dr_mm": 0.11,
             "arrosage_mm": 7.97,
-            "eau_perdue_mm": 0,
+            "eau_perdue_mm": 3.5,
             "decisive": "Mâche"
           },
           {
@@ -13536,7 +13536,7 @@
             "ru_mm": 32,
             "raw_mm": 12.44,
             "p": 0.389,
-            "dr_mm": 21.02,
+            "dr_mm": 0.34,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13547,7 +13547,7 @@
             "ru_mm": 32,
             "raw_mm": 12.11,
             "p": 0.378,
-            "dr_mm": 21.5,
+            "dr_mm": 0.83,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13558,7 +13558,7 @@
             "ru_mm": 32,
             "raw_mm": 12.2,
             "p": 0.381,
-            "dr_mm": 21.92,
+            "dr_mm": 1.24,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13569,7 +13569,7 @@
             "ru_mm": 32,
             "raw_mm": 12.16,
             "p": 0.38,
-            "dr_mm": 22.36,
+            "dr_mm": 1.69,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13580,7 +13580,7 @@
             "ru_mm": 32,
             "raw_mm": 12.25,
             "p": 0.383,
-            "dr_mm": 22.74,
+            "dr_mm": 2.06,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13591,7 +13591,7 @@
             "ru_mm": 32,
             "raw_mm": 12.45,
             "p": 0.389,
-            "dr_mm": 22.96,
+            "dr_mm": 2.28,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13602,7 +13602,7 @@
             "ru_mm": 32,
             "raw_mm": 12.41,
             "p": 0.388,
-            "dr_mm": 23.21,
+            "dr_mm": 2.54,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13613,7 +13613,7 @@
             "ru_mm": 32,
             "raw_mm": 12.06,
             "p": 0.377,
-            "dr_mm": 23.74,
+            "dr_mm": 3.07,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13624,7 +13624,7 @@
             "ru_mm": 32,
             "raw_mm": 12.37,
             "p": 0.387,
-            "dr_mm": 24.03,
+            "dr_mm": 3.35,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13635,7 +13635,7 @@
             "ru_mm": 32,
             "raw_mm": 12.24,
             "p": 0.383,
-            "dr_mm": 24.41,
+            "dr_mm": 3.73,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13646,7 +13646,7 @@
             "ru_mm": 32,
             "raw_mm": 12.21,
             "p": 0.382,
-            "dr_mm": 24.82,
+            "dr_mm": 4.14,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13657,7 +13657,7 @@
             "ru_mm": 24,
             "raw_mm": 11.57,
             "p": 0.482,
-            "dr_mm": 24,
+            "dr_mm": 4.54,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -13668,7 +13668,7 @@
             "ru_mm": 24.49,
             "raw_mm": 11.84,
             "p": 0.484,
-            "dr_mm": 24.36,
+            "dr_mm": 4.9,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -13679,7 +13679,7 @@
             "ru_mm": 24.98,
             "raw_mm": 12.14,
             "p": 0.486,
-            "dr_mm": 24.65,
+            "dr_mm": 5.2,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -13690,9 +13690,9 @@
             "ru_mm": 25.47,
             "raw_mm": 12.56,
             "p": 0.493,
-            "dr_mm": 15.47,
+            "dr_mm": 0.08,
             "arrosage_mm": 9.36,
-            "eau_perdue_mm": 0,
+            "eau_perdue_mm": 4.07,
             "decisive": "Laitue"
           },
           {
@@ -13701,7 +13701,7 @@
             "ru_mm": 25.96,
             "raw_mm": 12.65,
             "p": 0.487,
-            "dr_mm": 15.74,
+            "dr_mm": 0.34,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -13712,7 +13712,7 @@
             "ru_mm": 26.45,
             "raw_mm": 12.96,
             "p": 0.49,
-            "dr_mm": 15.94,
+            "dr_mm": 0.55,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -13723,7 +13723,7 @@
             "ru_mm": 26.94,
             "raw_mm": 12.87,
             "p": 0.478,
-            "dr_mm": 16.44,
+            "dr_mm": 1.05,
             "arrosage_mm": 0.05,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -13734,7 +13734,7 @@
             "ru_mm": 27.43,
             "raw_mm": 13,
             "p": 0.474,
-            "dr_mm": 16.76,
+            "dr_mm": 1.37,
             "arrosage_mm": 0.33,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -13745,7 +13745,7 @@
             "ru_mm": 27.92,
             "raw_mm": 13.15,
             "p": 0.471,
-            "dr_mm": 17.16,
+            "dr_mm": 1.77,
             "arrosage_mm": 0.33,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -13756,7 +13756,7 @@
             "ru_mm": 28.41,
             "raw_mm": 13.89,
             "p": 0.489,
-            "dr_mm": 17.11,
+            "dr_mm": 1.72,
             "arrosage_mm": 0.33,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -13767,7 +13767,7 @@
             "ru_mm": 28.9,
             "raw_mm": 13.62,
             "p": 0.471,
-            "dr_mm": 17.5,
+            "dr_mm": 2.11,
             "arrosage_mm": 0.33,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -13778,7 +13778,7 @@
             "ru_mm": 29.39,
             "raw_mm": 13.94,
             "p": 0.475,
-            "dr_mm": 17.82,
+            "dr_mm": 2.43,
             "arrosage_mm": 0.33,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -13789,7 +13789,7 @@
             "ru_mm": 29.88,
             "raw_mm": 14.61,
             "p": 0.489,
-            "dr_mm": 17.76,
+            "dr_mm": 2.37,
             "arrosage_mm": 0.33,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -13800,7 +13800,7 @@
             "ru_mm": 30.37,
             "raw_mm": 14.85,
             "p": 0.489,
-            "dr_mm": 17.71,
+            "dr_mm": 2.32,
             "arrosage_mm": 0.33,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -13811,7 +13811,7 @@
             "ru_mm": 30.86,
             "raw_mm": 14.69,
             "p": 0.476,
-            "dr_mm": 17.71,
+            "dr_mm": 2.32,
             "arrosage_mm": 0.61,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -13822,7 +13822,7 @@
             "ru_mm": 31.35,
             "raw_mm": 14.6,
             "p": 0.466,
-            "dr_mm": 17.96,
+            "dr_mm": 2.57,
             "arrosage_mm": 0.61,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -13833,7 +13833,7 @@
             "ru_mm": 31.84,
             "raw_mm": 14.71,
             "p": 0.462,
-            "dr_mm": 18.31,
+            "dr_mm": 2.92,
             "arrosage_mm": 0.61,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -13844,7 +13844,7 @@
             "ru_mm": 32,
             "raw_mm": 11.51,
             "p": 0.36,
-            "dr_mm": 18.57,
+            "dr_mm": 3.18,
             "arrosage_mm": 0.75,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13855,9 +13855,9 @@
             "ru_mm": 32,
             "raw_mm": 11.41,
             "p": 0.356,
-            "dr_mm": 13.64,
+            "dr_mm": 0.76,
             "arrosage_mm": 6.03,
-            "eau_perdue_mm": 0,
+            "eau_perdue_mm": 2.51,
             "decisive": "Mâche"
           },
           {
@@ -13866,7 +13866,7 @@
             "ru_mm": 32,
             "raw_mm": 11.4,
             "p": 0.356,
-            "dr_mm": 13.99,
+            "dr_mm": 1.11,
             "arrosage_mm": 0.75,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13877,7 +13877,7 @@
             "ru_mm": 32,
             "raw_mm": 11.58,
             "p": 0.362,
-            "dr_mm": 14.2,
+            "dr_mm": 1.32,
             "arrosage_mm": 0.75,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13888,7 +13888,7 @@
             "ru_mm": 32,
             "raw_mm": 11.52,
             "p": 0.36,
-            "dr_mm": 14.45,
+            "dr_mm": 1.58,
             "arrosage_mm": 0.75,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13899,7 +13899,7 @@
             "ru_mm": 32,
             "raw_mm": 11.45,
             "p": 0.358,
-            "dr_mm": 14.76,
+            "dr_mm": 1.88,
             "arrosage_mm": 0.75,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13910,7 +13910,7 @@
             "ru_mm": 32,
             "raw_mm": 11.39,
             "p": 0.356,
-            "dr_mm": 15.12,
+            "dr_mm": 2.24,
             "arrosage_mm": 0.75,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13921,7 +13921,7 @@
             "ru_mm": 32,
             "raw_mm": 11.43,
             "p": 0.357,
-            "dr_mm": 15.3,
+            "dr_mm": 2.42,
             "arrosage_mm": 0.89,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13932,7 +13932,7 @@
             "ru_mm": 32,
             "raw_mm": 11.37,
             "p": 0.355,
-            "dr_mm": 15.53,
+            "dr_mm": 2.65,
             "arrosage_mm": 0.89,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13943,7 +13943,7 @@
             "ru_mm": 32,
             "raw_mm": 11.26,
             "p": 0.352,
-            "dr_mm": 15.85,
+            "dr_mm": 2.97,
             "arrosage_mm": 0.89,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13954,7 +13954,7 @@
             "ru_mm": 32,
             "raw_mm": 11.22,
             "p": 0.351,
-            "dr_mm": 16.2,
+            "dr_mm": 3.32,
             "arrosage_mm": 0.89,
             "eau_perdue_mm": 0,
             "decisive": "Mâche"
@@ -13965,7 +13965,7 @@
             "ru_mm": 37.71,
             "raw_mm": 16.92,
             "p": 0.449,
-            "dr_mm": 16.74,
+            "dr_mm": 3.86,
             "arrosage_mm": 0.75,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -13976,7 +13976,7 @@
             "ru_mm": 38.2,
             "raw_mm": 17.19,
             "p": 0.45,
-            "dr_mm": 17.25,
+            "dr_mm": 4.37,
             "arrosage_mm": 0.75,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -13987,7 +13987,7 @@
             "ru_mm": 38.69,
             "raw_mm": 17.35,
             "p": 0.448,
-            "dr_mm": 14.18,
+            "dr_mm": 1.31,
             "arrosage_mm": 4.35,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -13998,7 +13998,7 @@
             "ru_mm": 39.18,
             "raw_mm": 18.93,
             "p": 0.483,
-            "dr_mm": 14,
+            "dr_mm": 1.13,
             "arrosage_mm": 0.61,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14009,7 +14009,7 @@
             "ru_mm": 39.67,
             "raw_mm": 18.96,
             "p": 0.478,
-            "dr_mm": 13.95,
+            "dr_mm": 1.07,
             "arrosage_mm": 0.61,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14020,9 +14020,9 @@
             "ru_mm": 40.16,
             "raw_mm": 18.11,
             "p": 0.451,
-            "dr_mm": 9.71,
+            "dr_mm": 0.86,
             "arrosage_mm": 5.47,
-            "eau_perdue_mm": 0,
+            "eau_perdue_mm": 4.03,
             "decisive": "Laitue"
           },
           {
@@ -14031,7 +14031,7 @@
             "ru_mm": 40.65,
             "raw_mm": 19.57,
             "p": 0.481,
-            "dr_mm": 9.57,
+            "dr_mm": 0.72,
             "arrosage_mm": 0.61,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14042,7 +14042,7 @@
             "ru_mm": 41.14,
             "raw_mm": 18.84,
             "p": 0.458,
-            "dr_mm": 10.15,
+            "dr_mm": 1.31,
             "arrosage_mm": 0.47,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14053,7 +14053,7 @@
             "ru_mm": 41.63,
             "raw_mm": 18.33,
             "p": 0.44,
-            "dr_mm": 11.18,
+            "dr_mm": 2.34,
             "arrosage_mm": 0.47,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14064,7 +14064,7 @@
             "ru_mm": 42.12,
             "raw_mm": 19.49,
             "p": 0.463,
-            "dr_mm": 11.65,
+            "dr_mm": 2.81,
             "arrosage_mm": 0.47,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14075,7 +14075,7 @@
             "ru_mm": 42.61,
             "raw_mm": 19.92,
             "p": 0.467,
-            "dr_mm": 12,
+            "dr_mm": 3.16,
             "arrosage_mm": 0.47,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14086,7 +14086,7 @@
             "ru_mm": 43.1,
             "raw_mm": 20.94,
             "p": 0.486,
-            "dr_mm": 11.89,
+            "dr_mm": 3.05,
             "arrosage_mm": 0.47,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14097,7 +14097,7 @@
             "ru_mm": 43.59,
             "raw_mm": 20.88,
             "p": 0.479,
-            "dr_mm": 11.95,
+            "dr_mm": 3.1,
             "arrosage_mm": 0.47,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14108,7 +14108,7 @@
             "ru_mm": 44.08,
             "raw_mm": 20.86,
             "p": 0.473,
-            "dr_mm": 12.16,
+            "dr_mm": 3.31,
             "arrosage_mm": 0.47,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14119,7 +14119,7 @@
             "ru_mm": 44.57,
             "raw_mm": 19.69,
             "p": 0.442,
-            "dr_mm": 12.87,
+            "dr_mm": 4.02,
             "arrosage_mm": 0.75,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14130,7 +14130,7 @@
             "ru_mm": 45.06,
             "raw_mm": 20.67,
             "p": 0.459,
-            "dr_mm": 13.15,
+            "dr_mm": 4.31,
             "arrosage_mm": 0.75,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14141,7 +14141,7 @@
             "ru_mm": 45.55,
             "raw_mm": 21.98,
             "p": 0.483,
-            "dr_mm": 12.84,
+            "dr_mm": 4,
             "arrosage_mm": 0.75,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14152,7 +14152,7 @@
             "ru_mm": 46.04,
             "raw_mm": 22.37,
             "p": 0.486,
-            "dr_mm": 12.31,
+            "dr_mm": 3.47,
             "arrosage_mm": 0.89,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14163,7 +14163,7 @@
             "ru_mm": 46.53,
             "raw_mm": 20.25,
             "p": 0.435,
-            "dr_mm": 13.05,
+            "dr_mm": 4.2,
             "arrosage_mm": 0.89,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14174,7 +14174,7 @@
             "ru_mm": 47.02,
             "raw_mm": 20.7,
             "p": 0.44,
-            "dr_mm": 13.66,
+            "dr_mm": 4.81,
             "arrosage_mm": 0.89,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14185,9 +14185,9 @@
             "ru_mm": 47.51,
             "raw_mm": 21.72,
             "p": 0.457,
-            "dr_mm": 5.09,
+            "dr_mm": 0.75,
             "arrosage_mm": 9.64,
-            "eau_perdue_mm": 0,
+            "eau_perdue_mm": 4.5,
             "decisive": "Laitue"
           },
           {
@@ -14196,9 +14196,9 @@
             "ru_mm": 48,
             "raw_mm": 21.11,
             "p": 0.44,
-            "dr_mm": 5.3,
+            "dr_mm": 1.08,
             "arrosage_mm": 1.3,
-            "eau_perdue_mm": 0,
+            "eau_perdue_mm": 0.13,
             "decisive": "Laitue"
           },
           {
@@ -14207,7 +14207,7 @@
             "ru_mm": 48,
             "raw_mm": 20.68,
             "p": 0.431,
-            "dr_mm": 5.72,
+            "dr_mm": 1.5,
             "arrosage_mm": 1.3,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14218,7 +14218,7 @@
             "ru_mm": 48,
             "raw_mm": 20.59,
             "p": 0.429,
-            "dr_mm": 6.2,
+            "dr_mm": 1.98,
             "arrosage_mm": 1.3,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14229,7 +14229,7 @@
             "ru_mm": 48,
             "raw_mm": 19.97,
             "p": 0.416,
-            "dr_mm": 7,
+            "dr_mm": 2.78,
             "arrosage_mm": 1.3,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14240,7 +14240,7 @@
             "ru_mm": 48,
             "raw_mm": 19.86,
             "p": 0.414,
-            "dr_mm": 7.85,
+            "dr_mm": 3.63,
             "arrosage_mm": 1.3,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14251,7 +14251,7 @@
             "ru_mm": 48,
             "raw_mm": 20.02,
             "p": 0.417,
-            "dr_mm": 8.62,
+            "dr_mm": 4.4,
             "arrosage_mm": 1.3,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14262,7 +14262,7 @@
             "ru_mm": 48,
             "raw_mm": 21.45,
             "p": 0.447,
-            "dr_mm": 8.65,
+            "dr_mm": 4.43,
             "arrosage_mm": 1.3,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14273,7 +14273,7 @@
             "ru_mm": 48,
             "raw_mm": 20.76,
             "p": 0.433,
-            "dr_mm": 8.89,
+            "dr_mm": 4.67,
             "arrosage_mm": 1.44,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14284,7 +14284,7 @@
             "ru_mm": 48,
             "raw_mm": 20.36,
             "p": 0.424,
-            "dr_mm": 9.35,
+            "dr_mm": 5.13,
             "arrosage_mm": 1.44,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14295,7 +14295,7 @@
             "ru_mm": 48,
             "raw_mm": 20.51,
             "p": 0.427,
-            "dr_mm": 9.72,
+            "dr_mm": 5.5,
             "arrosage_mm": 1.44,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14306,7 +14306,7 @@
             "ru_mm": 48,
             "raw_mm": 20.1,
             "p": 0.419,
-            "dr_mm": 10.59,
+            "dr_mm": 6.37,
             "arrosage_mm": 1.17,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14317,7 +14317,7 @@
             "ru_mm": 48,
             "raw_mm": 19.87,
             "p": 0.414,
-            "dr_mm": 6.44,
+            "dr_mm": 2.21,
             "arrosage_mm": 6.3,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14328,7 +14328,7 @@
             "ru_mm": 48,
             "raw_mm": 19.7,
             "p": 0.41,
-            "dr_mm": 7.51,
+            "dr_mm": 3.29,
             "arrosage_mm": 1.17,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14339,7 +14339,7 @@
             "ru_mm": 48,
             "raw_mm": 20.08,
             "p": 0.418,
-            "dr_mm": 8.39,
+            "dr_mm": 4.17,
             "arrosage_mm": 1.17,
             "eau_perdue_mm": 0,
             "decisive": "Laitue"
@@ -14352,7 +14352,7 @@
             "p": 0.625,
             "dr_mm": 1.36,
             "arrosage_mm": 11.72,
-            "eau_perdue_mm": 2.8,
+            "eau_perdue_mm": 7.02,
             "decisive": "Concombre"
           },
           {
@@ -17367,23 +17367,23 @@
       "juge_otf": {
         "surface_m2": 3635,
         "mm": {
-          "eau_apportee_mm": 415.92,
-          "eau_apportee_sans_bassinage_mm": 415.92,
-          "eau_perdue_mm": 86.03,
-          "ecart_besoin_somme_mm": 51.65,
-          "ecart_besoin_absolu_mm": 100.59
+          "eau_apportee_mm": 416.38,
+          "eau_apportee_sans_bassinage_mm": 416.38,
+          "eau_perdue_mm": 86.73,
+          "ecart_besoin_somme_mm": 52.12,
+          "ecart_besoin_absolu_mm": 101.46
         },
         "jours": {
           "jours_seuil_propre": {
-            "moyenne": 43.78,
+            "moyenne": 41.08,
             "parcelles": 15
           },
           "jours_seuil_commun": {
-            "moyenne": 120.11,
+            "moyenne": 115.86,
             "parcelles": 15
           },
           "jours_stress": {
-            "moyenne": 43.7,
+            "moyenne": 41,
             "parcelles": 15
           },
           "jours_reserve_vide": {
@@ -17396,19 +17396,19 @@
       "juge_tlaloc": {
         "surface_m2": 3635,
         "mm": {
-          "eau_apportee_mm": 415.92,
-          "eau_apportee_sans_bassinage_mm": 415.92,
-          "eau_perdue_mm": 72.39,
-          "ecart_besoin_somme_mm": 14.51,
-          "ecart_besoin_absolu_mm": 90.89
+          "eau_apportee_mm": 416.38,
+          "eau_apportee_sans_bassinage_mm": 416.38,
+          "eau_perdue_mm": 72.38,
+          "ecart_besoin_somme_mm": 14.98,
+          "ecart_besoin_absolu_mm": 91.76
         },
         "jours": {
           "jours_seuil_propre": {
-            "moyenne": 61.62,
+            "moyenne": 63.13,
             "parcelles": 15
           },
           "jours_seuil_commun": {
-            "moyenne": 97.2,
+            "moyenne": 98.56,
             "parcelles": 15
           },
           "jours_stress": {
@@ -17429,26 +17429,26 @@
         "mm": {
           "eau_apportee_mm": 737.67,
           "eau_apportee_sans_bassinage_mm": 651.87,
-          "eau_perdue_mm": 169.45,
+          "eau_perdue_mm": 178.23,
           "ecart_besoin_somme_mm": 319.45,
           "ecart_besoin_absolu_mm": 363.74
         },
         "jours": {
           "jours_seuil_propre": {
-            "moyenne": 20.67,
-            "parcelles": 12
-          },
-          "jours_seuil_commun": {
-            "moyenne": 27.43,
-            "parcelles": 15
-          },
-          "jours_stress": {
-            "moyenne": 17.71,
+            "moyenne": 1.73,
             "parcelles": 6
           },
+          "jours_seuil_commun": {
+            "moyenne": 6.8,
+            "parcelles": 14
+          },
+          "jours_stress": {
+            "moyenne": 0,
+            "parcelles": 0
+          },
           "jours_reserve_vide": {
-            "moyenne": 0.23,
-            "parcelles": 4
+            "moyenne": 0,
+            "parcelles": 0
           }
         },
         "nombre_arrosages": 5192
@@ -17458,26 +17458,26 @@
         "mm": {
           "eau_apportee_mm": 737.67,
           "eau_apportee_sans_bassinage_mm": 651.87,
-          "eau_perdue_mm": 131.13,
+          "eau_perdue_mm": 137.33,
           "ecart_besoin_somme_mm": 258.42,
           "ecart_besoin_absolu_mm": 336.26
         },
         "jours": {
           "jours_seuil_propre": {
-            "moyenne": 47.2,
-            "parcelles": 15
+            "moyenne": 22.77,
+            "parcelles": 14
           },
           "jours_seuil_commun": {
-            "moyenne": 47.2,
-            "parcelles": 15
+            "moyenne": 22.77,
+            "parcelles": 14
           },
           "jours_stress": {
-            "moyenne": 25.1,
-            "parcelles": 7
+            "moyenne": 3.66,
+            "parcelles": 2
           },
           "jours_reserve_vide": {
-            "moyenne": 0.15,
-            "parcelles": 3
+            "moyenne": 0,
+            "parcelles": 0
           }
         },
         "nombre_arrosages": 5192

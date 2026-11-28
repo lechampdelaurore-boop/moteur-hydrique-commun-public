@@ -100,7 +100,10 @@ function pluieDuJour(m: JourMeteo, heures: EntreeJuge['heures'], jeu: JeuDeRegla
 
 /** Rejoue une parcelle et ses arrosages avec un jeu de réglages. */
 export function juger(e: EntreeJuge, jeu: JeuDeReglages): JourJuge[] {
-  const debut = fenetreMeteo(e.annee).debut;
+  // Sous abri, le juge démarre le 1er janvier à Dr = ½ × RAW de ce juge, comme Tlaloc démarre une serre au seuil d'arrosage
+  // (`st.Dr = serre ? thr : 0`, Nicolas, 28/11) : sans plan avant le 1er janvier, un départ le 15 octobre laisserait la serre se vider
+  // sans pluie. Plein champ : départ le 15 octobre, inchangé.
+  const debut = e.serre ? `${e.annee}-01-01` : fenetreMeteo(e.annee).debut;
   const fin = `${e.annee}-12-31`;
   const meteo = new Map(e.meteo.map((m) => [m.date, m]));
   const et0 = new Map(e.meteo.map((m) => [m.date, m.et0_mm]));
