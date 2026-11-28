@@ -6,7 +6,7 @@
  */
 import { JEU_OTF, JEU_TLALOC, type ArrosageDuJour, type JeuDeReglages } from '../../src/moteur.ts';
 import { auCentieme } from './classement.ts';
-import { fenetreMeteo } from './dates.ts';
+import { fenetreMeteo, jourSuivant } from './dates.ts';
 import { etmSerie } from './etm.ts';
 import type { ParcelleBanc } from './export-demo.ts';
 import { indicateurs, indicateursFerme, type ApportPlan, type Cote, type IndicateursFerme, type IndicateursParcelle } from './indicateurs.ts';
@@ -101,6 +101,25 @@ export type RapportAnnee = {
   ferme: Record<Cote, Record<Juge, IndicateursFerme>>;
 };
 
+/**
+ * Le rattrapage du lundi (§ 7 ter, décidé par François le 28/11) : le manque au-delà du
+ * seuil propre de Tlaloc, Dr − 0,5 × RAW, lu au soir de la veille par le juge Tlaloc
+ * sur les arrosages d'OTF déjà faits ; 0 si la réserve facile est connue et pas entamée
+ * au-delà de la moitié, ou si aucune culture n'est en place (RAW inconnue).
+ */
+export function rattrapageDuLundi(e: EntreeRejeu, parcelle: string, lundi: string, arrosagesFaits: readonly ArrosageDuJour[]): number {
+  const p = e.parcelles.find((x) => x.id === parcelle);
+  if (!p) throw new Error(`${parcelle} : parcelle inconnue`);
+  const veille = jourSuivant(lundi, -1);
+  const jours = juger({
+    annee: e.annee, serre: p.serre, cultures: p.cultures, meteo: e.meteo, heures: e.heures,
+    arrosages: arrosagesFaits, tableKc: e.tableKc, tableSol: e.tableSol,
+  }, JEU_TLALOC);
+  const j = jours.find((x) => x.date === veille);
+  if (!j || !j.raw_connue || j.dr_mm === null || j.raw_mm === null) return 0;
+  return auCentieme(Math.max(0, j.dr_mm - 0.5 * j.raw_mm));
+}
+
 export function rejouerAnnee(e: EntreeRejeu): RapportAnnee {
   const { debut } = fenetreMeteo(e.annee);
   const finPlans = fenetreMeteo(e.annee).fin;
@@ -119,6 +138,7 @@ export function rejouerAnnee(e: EntreeRejeu): RapportAnnee {
     e.module,
     e.parcelles.map((p) => ({ id: p.id, serre: p.serre, surface_m2: p.surface_m2, materiel: e.materiels.get(p.id)! })),
     etm, e.meteo, debut, `${e.annee}-12-31`, e.annee,
+    (parcelle, lundi, arrosagesFaits) => rattrapageDuLundi(e, parcelle, lundi, arrosagesFaits),
   );
 
   const parcelles: ParcelleRejouee[] = e.parcelles.map((p) => {
@@ -179,6 +199,6 @@ export function rapportAnnee(r: RapportAnnee): string {
     const t = p.tlaloc.juge_otf;
     l.push(`| ${p.id}${p.sans_debit ? ' (hors comparaison)' : ''} | ${nombre(p.surface_m2)} | ${p.serre ? 'oui' : 'non'} | ${nombre(o.eau_apportee_mm)} | ${nombre(t.eau_apportee_mm)} | ${nombre(o.eau_perdue_mm)} | ${nombre(t.eau_perdue_mm)} | ${o.jours_stress} | ${t.jours_stress} | ${nombre(p.otf.eau_non_placee_mm ?? 0)} |`);
   }
-  l.push('', 'Les bassinages de Tlaloc entrent au sol pour la part que son plan compte (`mm_sol`) ; « eau apportée » les garde en entier.', '', 'Les jours de stress du côté OTF, surtout sous serre, viennent de la règle du rejeu (§ 7 ter) : l\'objectif de la semaine est l\'ETM de la semaine, sans rattrapage du manque, et l\'eau non placée n\'est pas rendue. Ils ne disent rien du module lui-même.', '', 'Jours sans culture et jours à état inconnu : hors des comptes de jours, publiés dans le JSON. Stabilité : 0 côté OTF en passe 1 par construction (§ 7 ter) ; côté Tlaloc, elle demande l\'historique de ses plans (passe 2).', '', 'p du juge : ceux d\'OTF (FAO-56). Deux écarts avec Tlaloc, tranchés par François le 24/11 : mâche 0,20 (Tlaloc 0,30), melon 0,40 (Tlaloc 0,45).', '');
+  l.push('', 'Les bassinages de Tlaloc entrent au sol pour la part que son plan compte (`mm_sol`) ; « eau apportée » les garde en entier.', '', 'Côté OTF, l\'objectif du lundi est l\'ETM de la semaine plus le rattrapage du manque du lundi au-delà de 0,5 × RAW (§ 7 ter, décidé par François le 28/11) : le manque est lu au soir de la veille par le juge Tlaloc sur les arrosages d\'OTF déjà faits. Les jours de stress qui restent viennent de cette règle hebdomadaire (un seul calcul le lundi) et de l\'eau non placée, pas du module lui-même.', '', 'Jours sans culture et jours à état inconnu : hors des comptes de jours, publiés dans le JSON. Stabilité : 0 côté OTF en passe 1 par construction (§ 7 ter) ; côté Tlaloc, elle demande l\'historique de ses plans (passe 2).', '', 'p du juge : ceux d\'OTF (FAO-56). Deux écarts avec Tlaloc, tranchés par François le 24/11 : mâche 0,20 (Tlaloc 0,30), melon 0,40 (Tlaloc 0,45).', '');
   return l.join('\n');
 }

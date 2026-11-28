@@ -13,7 +13,7 @@ import { pluieHoraire } from '../src/juge.ts';
 import { lireTableKc } from '../src/kc.ts';
 import { lireCsv } from '../src/meteo.ts';
 import type { LignePlan } from '../src/plan-tlaloc.ts';
-import { arrosagesTlaloc, instantParis, rapportAnnee, rejouerAnnee } from '../src/rejeu.ts';
+import { arrosagesTlaloc, instantParis, rapportAnnee, rattrapageDuLundi, rejouerAnnee } from '../src/rejeu.ts';
 import { lireTableSol } from '../src/sol.ts';
 
 const ICI = path.dirname(fileURLToPath(import.meta.url));
@@ -104,6 +104,18 @@ test('une année rejouée de bout en bout : deux côtés, deux juges, la ferme e
   assert.equal(r.ferme.otf.juge_otf.surface_m2, 300);
   assert.equal(r.ferme.tlaloc.juge_otf.mm.eau_apportee_mm, Math.round(((1095 * 200 + 730 * 100) / 300) * 100) / 100);
   assert.deepEqual(r.hors_comparaison, []);
+  // Rattrapage du lundi (§ 7 ter) : sans culture en place, rien à rattraper ; sous serre sans eau, la tomate a un manque à rattraper.
+  const entree = {
+    annee: 2019, parcelles, planTlaloc, meteo, heures, tableKc, tableSol, materiels,
+    heuresTlaloc: { arrosage: '06:00', bassinage: { heure: '13:00', duree_s: 300 } },
+    module: await chargerModuleOtf(RACINE),
+  };
+  assert.equal(rattrapageDuLundi(entree, 'pa1', '2019-03-04', []), 0);
+  const manque = rattrapageDuLundi(entree, 'pa1', '2019-07-01', []);
+  assert.ok(manque > 0, `manque ${manque}`);
+  // Un arrosage copieux avant le lundi supprime le manque.
+  const gros = [{ debut: '2019-06-29T04:00:00.000Z', fin: null, mm: 300, type: 'arrosage' as const, nature: 'banc-otf' }];
+  assert.ok(rattrapageDuLundi(entree, 'pa1', '2019-07-01', gros) < manque);
   // Une parcelle sans débit chez Tlaloc sort des indicateurs de la ferme, mais reste rapportée à part.
   const r2 = rejouerAnnee({
     annee: 2019, parcelles: parcelles.map((p) => ({ ...p, sans_debit: p.id === 'pa2' })), planTlaloc, meteo, heures, tableKc, tableSol, materiels,

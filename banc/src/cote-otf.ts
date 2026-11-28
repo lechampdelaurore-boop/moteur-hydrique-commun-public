@@ -61,6 +61,8 @@ export type ParcelleOtf = { id: string; serre: boolean; surface_m2: number; mate
 export type SemaineOtf = {
   lundi: string;
   objectif_mm: number;
+  /** Part de l'objectif qui rattrape le manque du lundi (§ 7 ter) ; 0 sans rattrapage. */
+  rattrapage_mm: number;
   besoin_mm: number;
   place_mm: number;
   non_place_mm: number;
@@ -129,6 +131,11 @@ export function rejouerOtf(
   debut: string,
   fin: string,
   saison: number,
+  /**
+   * Le manque du lundi au-delà du seuil (§ 7 ter, rattrapage) pour une parcelle :
+   * calculé par le juge sur les arrosages d'OTF déjà faits. Absent : pas de rattrapage.
+   */
+  rattrapage?: (parcelle: string, lundi: string, arrosagesFaits: readonly ArrosageDuJour[]) => number,
 ): Map<string, ResultatOtf> {
   const pluie = new Map(meteo.map((m) => [m.date, m.pluie_mm]));
   const et0 = new Map(meteo.map((m) => [m.date, m.et0_mm]));
@@ -144,11 +151,13 @@ export function rejouerOtf(
       if (!serie) throw new Error(`${p.id} : pas d'ETM`);
       const valeurs = jours.map((d) => serie.get(d));
       if (valeurs.some((v) => v === undefined || v === null)) throw new Error(`${p.id} : ETM inconnue dans la semaine du ${lundi}`);
-      return [p.id, (valeurs as number[]).reduce((s, v) => s + v, 0)];
+      const etmSemaine = (valeurs as number[]).reduce((s, v) => s + v, 0);
+      const rattrape = rattrapage ? rattrapage(p.id, lundi, resultats.get(p.id)!.arrosages) : 0;
+      return [p.id, { etm: etmSemaine, rattrapage: rattrape, total: etmSemaine + rattrape }];
     }));
     const goalRevisions = parcelles.map((p) => ({
       id: `objectif-${p.id}-${lundi}`, weekStart: lundi, scopeType: 'bed', otfZoneId: ZONE, otfPlotId: p.id, otfBedId: p.id,
-      amountMm: objectifs.get(p.id)!, action: 'set', createdAt: now.toISOString(), copiedFromGoalId: null,
+      amountMm: objectifs.get(p.id)!.total, action: 'set', createdAt: now.toISOString(), copiedFromGoalId: null,
     }));
     // Passe 1 : la pluie prévue est la pluie réalisée.
     const days = jours.map((date) => {
@@ -179,7 +188,8 @@ export function rejouerOtf(
       const issue = plan.beds.find((b: any) => b.bedId === p.id);
       r.semaines.push({
         lundi,
-        objectif_mm: objectifs.get(p.id)!,
+        objectif_mm: objectifs.get(p.id)!.total,
+        rattrapage_mm: objectifs.get(p.id)!.rattrapage,
         besoin_mm: besoin?.effectiveNeedMm ?? 0,
         place_mm: issue?.placedMm ?? 0,
         non_place_mm: issue?.deficitMm ?? 0,
